@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.adapter.NoticeBoardAdapter;
@@ -30,6 +31,9 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 		//		mExecutorService.execute(new loadRWAs());
 		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		titleTV.setText(getResources().getString(R.string.notice_board));
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_noticeboard_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.noticecolor);
 

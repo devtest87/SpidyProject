@@ -8,6 +8,7 @@ import com.utils.NetworkRequestName;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class GroupsActivity extends BaseActivity{
@@ -19,6 +20,9 @@ public class GroupsActivity extends BaseActivity{
 //		mExecutorService = Executors.newFixedThreadPool(1);
 //		mExecutorService.execute(new loadRWAs());
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		titleTV.setText(getResources().getString(R.string.groups));
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_groups_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.gray));
 		titleTV.setBackgroundResource(R.color.groupcolor);
 		

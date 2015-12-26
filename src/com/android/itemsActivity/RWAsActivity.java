@@ -1,6 +1,7 @@
 package com.android.itemsActivity;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ public class RWAsActivity extends BaseActivity{
 //		mExecutorService.execute(new loadRWAs());
 		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.rwacolor);
 		

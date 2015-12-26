@@ -8,7 +8,9 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.android.adapter.ServicesAdapter;
 import com.android.spideycity.R;
@@ -29,6 +31,14 @@ public class RequestServicesActivity extends BaseActivity{
 		//		mExecutorService = Executors.newFixedThreadPool(1);
 		//		mExecutorService.execute(new loadRWAs());
 		serviceGridView = (GridView)findViewById(R.id.recyclerview_service);
+		
+		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		titleTV.setText(getResources().getString(R.string.servvices));
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
+		titleTV.setTextColor(getResources().getColor(R.color.white));
+		titleTV.setBackgroundResource(R.color.servicecolor);
+		
 		loadRWAs();
 	}
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.adapter.ServicesAdapter;
@@ -30,7 +31,11 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 		//		mExecutorService = Executors.newFixedThreadPool(1);
 		//		mExecutorService.execute(new loadRWAs());
 		
+		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_services_request_hint));
+		titleTV.setText(getResources().getString(R.string.servvices));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.servicecolor);
 		

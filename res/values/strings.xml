@@ -72,5 +72,15 @@
     <string name="search_opinionpolls_hint">Search in Opinion Poll</string>
     <string name="eastend_apartments">EASTEND APARTMENTS</string>
     <string name="change_rwa">CHANGE RWA</string>
+    <string name="rwas">RWAs</string>
+    <string name="groups">GROUPS</string>
+    <string name="servvices">SERVVICES</string>
+    <string name="bookings">BOOKINGS</string>
+    <string name="directory">DIRECTORY</string>
+    <string name="openion_polls">OPENION POLLS</string>
+    <string name="spidey_pick">SPIDEY PICK</string>
+    <string name="notice_board">NOTICE BOARD</string>
+    
+    
     
 </resources>

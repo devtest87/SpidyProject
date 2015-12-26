@@ -31,7 +31,7 @@
                 android:layout_height="@dimen/option_height"
                 android:layout_weight="1"
                 android:background="@color/rwacolor"
-                android:text="RWAs"
+                android:text="@string/rwas"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
 
@@ -42,7 +42,7 @@
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/groupcolor"
-                android:text="GROUPS"
+                android:text="@string/groups"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
 
@@ -53,7 +53,7 @@
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/servicecolor"
-                android:text="SERVVICES"
+                android:text="@string/servvices"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
 
@@ -64,7 +64,7 @@
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/bookingcolor"
-                android:text="BOOKINGS"
+                android:text="@string/bookings"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
         </LinearLayout>
@@ -82,7 +82,7 @@
                 android:layout_height="@dimen/option_height"
                 android:layout_weight="1"
                 android:background="@color/noticecolor"
-                android:text="NOTICE BOARD"
+                android:text="@string/notice_board"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
 
@@ -93,7 +93,7 @@
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/directorycolor"
-                android:text="DIRECTORY"
+                android:text="@string/directory"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
 
@@ -104,7 +104,7 @@
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/spideycolor"
-                android:text="SPIDEY PICK"
+                android:text="@string/spidey_pick"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
 
@@ -115,7 +115,7 @@
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/opinioncolor"
-                android:text="OPENION POLLS"
+                android:text="@string/openion_polls"
                 android:textColor="@color/white"
                 android:textSize="@dimen/hometextsize" />
         </LinearLayout>

@@ -8,6 +8,8 @@ import com.utils.NetworkRequestName;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class SpidyPickActivity extends BaseActivity{
 	//private ExecutorService mExecutorService;
@@ -17,6 +19,13 @@ public class SpidyPickActivity extends BaseActivity{
 		setContentView(R.layout.activity_service_layout);
 //		mExecutorService = Executors.newFixedThreadPool(1);
 //		mExecutorService.execute(new loadRWAs());
+		
+		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
+		titleTV.setText(getResources().getString(R.string.spidey_pick));
+		titleTV.setTextColor(getResources().getColor(R.color.white));
+		titleTV.setBackgroundResource(R.color.spideycolor);
 		
 		loadRWAs();
 	}

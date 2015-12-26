@@ -8,6 +8,8 @@ import com.utils.NetworkRequestName;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class BookingActivity extends BaseActivity{
 	//private ExecutorService mExecutorService;
@@ -18,6 +20,12 @@ public class BookingActivity extends BaseActivity{
 //		mExecutorService = Executors.newFixedThreadPool(1);
 //		mExecutorService.execute(new loadRWAs());
 		
+		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
+		titleTV.setText(getResources().getString(R.string.bookings));
+		titleTV.setTextColor(getResources().getColor(R.color.white));
+		titleTV.setBackgroundResource(R.color.bookingcolor);
 		
 		loadRWAs();
 	}

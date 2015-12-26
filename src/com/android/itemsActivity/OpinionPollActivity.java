@@ -8,6 +8,7 @@ import com.utils.NetworkRequestName;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class OpinionPollActivity extends BaseActivity{
@@ -20,6 +21,9 @@ public class OpinionPollActivity extends BaseActivity{
 //		mExecutorService.execute(new loadRWAs());
 		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		titleTV.setText(getResources().getString(R.string.openion_polls));
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_opinionpolls_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.opinioncolor);
 		
