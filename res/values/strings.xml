@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SpideyCity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+        <string name="youremail">YOUR EMAIL</string>
+        <string name="password">PASSWORD</string>
+        <string name="login">Submit</string>
+        <string name="register">Sign Up</string>
+        
+         <string name="dname">DISPLAY NAME</string>
+          <string name="fname">FIRST NAME*</string>
+           <string name="lname">LAST NAME*</string>
+           <string name="mnumber">MOBILE NUMBER*</string>
+            <string name="edirectory">USE IN RWA E-DIRECTORY **</string>
+        
+            
+            <string name="empaty_fname">Please fill first name.</string>
+            <string name="empaty_lname">Please fill last name.</string>
+            <string name="empaty_mnumber">Please fill mobile number</string>
+            <string name="empaty_youremail">Please fill your email.</string>
+            <string name="empaty_hnumber">Please fill house number.</string>
+            <string name="empaty_address">Please fill address.</string>
+            
+           
+           <string name="lnumber">LANDLINE NUMBER</string>
+           <string name="candp">CONFIRMATION AND PASSWORD WILL BE SENT TO YOUR EMAIL</string>
+           <string name="yourhouseno">YOUR HOUSE NO.*</string>
+           <string name="youraddress">YOUR ADDRESS*</string>
+           <string name="uploadprofilepic">UPLOAD PROFILE PHOTO</string>
+           <string name="headoffamily1">ARE YOU THE HEAD OF YOUR FAMILY?</string>
+           <string name="headoffamily2">CERTAIN OPINION POLLS ARE LIMITED TO ONE VOTE PER FAMILY.</string>
+           <string name="termscondition">I AGREE TO THE CITY SPIDEY TERMS AND CONDITIONS AND PRIVACY POLICY</string>
+           <string name="submit">SUBMIT</string>
+           <string name="reset">RESET</string>
+           
+        <string name="confirmation">Are you sure, you want to log out from app?</string>
+        <string name="yes">YES</string>
+        <string name="no">NO</string>
+        
+        <string name="parents">Parents</string>
+        <string name="schoolname">GYAN BHARTI SCHOOL</string>
+            <string name="powerby">powered by DATAMAN GROUP</string>
+    
+            
+            <string name="emptyusername">Please fill the username.</string>
+            <string name="namelengthmin">Username should have atleast 4 charectors</string>
+            <string name="namelengthmax">Username can have maximum 20 charectors only</string>
+            <string name="emptypassword">Please fill the password</string>
+            
+            <string name="home">Home</string>
+                    <string name="yourprofile">YOUR PROFILE</string>
+                    <string name="yourbooking">YOUR BOOKINGS</string>
+                    <string name="yourgroups">YOUR GROUPS</string>
+                    <string name="youralerts">YOUR ALERTS</string>
+                    <string name="yorservices">YOUR SERVICES</string>
+                    <string name="yourcomments">YOUR COMMENTS</string>
+                    <string name="yoursettings">YOUR SETTINGS</string>
+                    
+                    <string name="Internet_connection">Please check internet conenction</string>
+                    <string name="parser_exception">parser exception</string>
+                    
+    <!-- search hint text -->
+    <string name="search_home_hint">Search for electrician, Cycling groups,Yoga classes...</string>
+    <string name="search_rwas_hint">Search in Name</string>
+    <string name="search_groups_hint">Weekend activities</string>
+    <string name="search_add_groups_hint">Search in Groups</string>
+    <string name="search_services_request_hint">Search in Request</string>
+    <string name="search_noticeboard_hint">Search in Noticeboard</string>
+    <string name="search_opinionpolls_hint">Search in Opinion Poll</string>
+    <string name="eastend_apartments">EASTEND APARTMENTS</string>
+    <string name="change_rwa">CHANGE RWA</string>
+    
+</resources>

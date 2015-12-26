@@ -1,0 +1,367 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/loginbg" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/headerheight"
+        android:background="@color/loginbtn" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headertextsize" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:layout_marginTop="@dimen/regbtmmargin"
+                android:orientation="horizontal" >
+
+                <!-- android:background="@color/loginbg" -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/dname"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/dnamebox"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/fname"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/fnamebox"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" 
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/lname"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/lnamebox"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/mnumber"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/mnumrbox"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/rwa1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="@dimen/regtextsize"
+                android:text="@string/edirectory" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/lnumber"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/landlinenumber"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/rwa2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="@dimen/regtextsize"
+                android:text="@string/edirectory" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/youremail"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/youremail"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="@dimen/regtextsize"
+                android:text="@string/confirmation" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/yourhouseno"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/yourhouseno"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" 
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/youraddress"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/youraddress"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/youremail"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/headfamily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/regtextsize"
+                android:text="@string/headoffamily1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="@dimen/regtextsize"
+                android:text="@string/headoffamily1" 
+                android:paddingLeft="25dp"/>
+
+            <CheckBox
+                android:id="@+id/termscondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:text="@string/termscondition" 
+                android:textSize="@dimen/regtextsize"/>
+            
+            
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal" >
+            
+                 <Button android:id="@+id/reset"
+                     android:layout_width="100dp"
+                     android:layout_height="45dp"
+                     android:text="@string/reset"
+                     android:textColor="@color/white"
+                     android:background="@drawable/custom_rectangle"/>
+                 
+                 <Button android:id="@+id/submit"
+                     android:layout_width="100dp"
+                     android:layout_height="45dp"
+                     android:text="@string/submit"
+                     android:textColor="@color/white"
+                     android:background="@drawable/custom_rectangle"
+                     android:layout_marginLeft="15dp"/>
+                 
+            </LinearLayout>
+            
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
