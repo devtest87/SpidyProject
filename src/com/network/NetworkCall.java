@@ -3,6 +3,7 @@ package com.network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -33,6 +34,7 @@ import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
 import com.android.itemsActivity.OpinionPollActivity;
 import com.android.itemsActivity.RWAsActivity;
+import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.itemsActivity.RequestServicesActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
@@ -45,7 +47,10 @@ import com.bean.GroupsData;
 import com.bean.LoginData;
 import com.bean.NoticeBoardData;
 import com.bean.OpinionPollsData;
+import com.bean.RWADetailData;
+import com.bean.RWAFacilityData;
 import com.bean.RWAsData;
+import com.bean.RWAsDetailItemData;
 import com.bean.RegisterData;
 import com.bean.RequestBean;
 import com.bean.RequestServicesData;
@@ -69,6 +74,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String registerURL = "http://top-story.in/api/register.php";
 	private static final String sliderTopURL = "http://top-story.in/api/news_slider.json";
 	private static final String rwasURL = "http://top-story.in/api/rwa_list.json";
+	private static final String rwasDetailURL = "http://top-story.in/api/";
 	private static final String groupsURL = "http://top-story.in/api/group-slider.php";
 	private static final String servicesURL = "http://top-story.in/api/service_list.json";
 	private static final String bookingsURL = "http://top-story.in/api/booking_list.php";
@@ -114,6 +120,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			break;
 		case RWAS:
 			object = RWAs();
+			break;
+		case RWAS_DTEAIL:
+			RWADetailData rwaDetailData = new RWADetailData();
+			rwaDetailData.setRwAsDetailItemData(RWAsDetail(namePairList));
+			rwaDetailData.setRWAFacilityDataList(RWAsFacility(namePairList));
+			object = rwaDetailData;
 			break;
 		case GROUPS:
 			object = group();
@@ -265,6 +277,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			RWAsData rwAsData = (RWAsData)result;
 			if(activity instanceof RWAsActivity){
 				((RWAsActivity) activity).response(rwAsData);	
+			}
+			break;
+		case RWAS_DTEAIL:
+			RWADetailData rwaDetailData = (RWADetailData)result;
+			if(activity instanceof RWAsDetailActivity){
+				((RWAsDetailActivity) activity).response(rwaDetailData);	
 			}
 			break;
 		case GROUPS:
@@ -566,6 +584,41 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			rwAsData = myParser.parseRWAs(response);
 		}
 		return rwAsData;
+		
+	}
+	
+	public RWAsDetailItemData RWAsDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		RWAsDetailItemData rwasDetailData;
+		PrintLog.show(Log.ERROR, TAG, "" + rwasDetailURL + namePair.get(0).getValue());
+		String response = NetworkConnection.networkHit(pair,rwasDetailURL + namePair.get(0).getValue());
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			rwasDetailData = new RWAsDetailItemData();
+			rwasDetailData.setException(response);
+		}else{
+			rwasDetailData = myParser.parseRWAsDetail(response);
+		}
+		return rwasDetailData;
+		
+	}
+	
+	public List<RWAFacilityData> RWAsFacility(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		List<RWAFacilityData> rwaFacilityDataList = new ArrayList<RWAFacilityData>();
+//		RWAFacilityData rwaFacilityData;
+		PrintLog.show(Log.ERROR, TAG, "" + rwasDetailURL + namePair.get(1).getValue());
+		String response = NetworkConnection.networkHit(pair,rwasDetailURL + namePair.get(1).getValue());
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+//			rwaFacilityData = new RWAFacilityData();
+//			rwaFacilityData.setException(response);
+		}else{
+			rwaFacilityDataList = myParser.parseRWAsFacility(response);
+		}
+		return rwaFacilityDataList;
 		
 	}
 	

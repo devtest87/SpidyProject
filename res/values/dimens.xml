@@ -25,4 +25,8 @@
 <dimen name="option_height">40dp</dimen>
 <dimen name="option_margin">3dp</dimen>
 
+<dimen name="rwa_title_test_size">18sp</dimen>
+<dimen name="rwa_description_test_size">16sp</dimen>
+
+
 </resources>

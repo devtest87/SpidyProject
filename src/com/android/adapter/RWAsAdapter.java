@@ -54,26 +54,30 @@ public class RWAsAdapter extends BaseAdapter{
 			viewHolder = new ViewHolder();
 			convertView = mLayoutInflater.inflate(R.layout.row_rwa_layout, null, false);
 			viewHolder.rwaIV = (ImageView)convertView.findViewById(R.id.iv_apartments);
-			viewHolder.rwaAdressTV = (TextView)convertView.findViewById(R.id.tv_address);
-			viewHolder.rwaContactTV = (TextView)convertView.findViewById(R.id.tv_change_rwa);
-			viewHolder.descTV = (TextView)convertView.findViewById(R.id.tv_rwa_detail);
+			viewHolder.rwaAdressTV = (TextView)convertView.findViewById(R.id.tv_rwa_address);
+			viewHolder.rwaTitleTV = (TextView)convertView.findViewById(R.id.tv_rwa_title);
+			viewHolder.rwaDescTV = (TextView)convertView.findViewById(R.id.tv_rwa_desc);
+			viewHolder.rwaCityTV = (TextView)convertView.findViewById(R.id.tv_rwa_city);
+			 
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
+		viewHolder.rwaCityTV.setText(mRwaItemsDatasList.get(position).getCity());
 		viewHolder.rwaAdressTV.setText(mRwaItemsDatasList.get(position).getAdr());
-		viewHolder.rwaContactTV.setText(mRwaItemsDatasList.get(position).getCity());
-		viewHolder.descTV.setText(mRwaItemsDatasList.get(position).getDesc());
+		viewHolder.rwaTitleTV.setText(mRwaItemsDatasList.get(position).getTitle());
+		viewHolder.rwaDescTV.setText(mRwaItemsDatasList.get(position).getDesc());
 		mAQuery.id(viewHolder.rwaIV).image(mRwaItemsDatasList.get(position).getImage());
 		
 		return convertView;
 	}
 
 	static class ViewHolder{
+		TextView rwaCityTV;
 		TextView rwaAdressTV;
-		TextView rwaContactTV;
-		TextView descTV;
+		TextView rwaTitleTV;
+		TextView rwaDescTV;
 		ImageView rwaIV ;
 	}
 }

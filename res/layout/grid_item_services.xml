@@ -6,9 +6,10 @@
 
     <ImageView
         android:id="@+id/iv_services_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher" />
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/servicecolor"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/tv_mobilenumber"

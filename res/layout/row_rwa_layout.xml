@@ -1,180 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/tv_address_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eastend_apartments" />
-
-        <TextView
-            android:id="@+id/tv_change_rwa_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/change_rwa" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/rwacolor" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_weight="1"
-            android:paddingRight="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:id="@+id/tv_change_rwa"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/rwacolor" />
+    android:orientation="vertical" 
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/iv_apartments"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/rwacolor" />
-
-    <TextView
-        android:id="@+id/tv_rwa_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_rwa" />
-
-    <TextView
-        android:id="@+id/tv_register_rwa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="I AM A RESIDENT HERE. REGISTER ME WITH THIS RWA" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/rwacolor" />
+        android:layout_width="100dp"
+        android:scaleType="fitXY"
+        android:layout_height="100dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/iv_apartments"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_rwa_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1234567"
+            android:textSize="@dimen/rwa_title_test_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_rwa_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="1234567"
+            android:textSize="@dimen/rwa_description_test_size" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/tv_rwa_city_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change_rwa" />
+                android:text="@string/city"
+                android:textSize="@dimen/rwa_description_test_size" />
 
             <TextView
+                android:id="@+id/tv_rwa_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
+                android:layout_marginLeft="10dp"
+                android:text="1234567"
+                android:textSize="@dimen/rwa_description_test_size"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/tv_rwa_address_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
+                android:text="@string/address"
+                android:textSize="@dimen/rwa_description_test_size" />
 
             <TextView
+                android:id="@+id/tv_rwa_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_rwa" />
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="1234567"
+                android:textSize="@dimen/rwa_description_test_size"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

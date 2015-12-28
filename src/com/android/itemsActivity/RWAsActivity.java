@@ -1,12 +1,19 @@
 package com.android.itemsActivity;
 
+import java.util.List;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.RWAsAdapter;
 import com.android.spideycity.R;
+import com.bean.RWAItemsData;
 import com.bean.RWAsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
@@ -14,6 +21,10 @@ import com.utils.NetworkRequestName;
 
 public class RWAsActivity extends BaseActivity{
 	//private ExecutorService mExecutorService;
+	private ListView mRWAsListView;
+	private RWAsAdapter mRWAssAdapter;
+	private List<RWAItemsData> mRWAsDataList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,6 +38,19 @@ public class RWAsActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.rwacolor);
 		
+		mRWAsListView = (ListView)findViewById(R.id.listview_rwa);
+		mRWAsListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(RWAsActivity.this, RWAsDetailActivity.class);
+				intent.putExtra("url", mRWAsDataList.get(arg2).getUrl());
+				intent.putExtra("furl", mRWAsDataList.get(arg2).getFurl());
+				startActivity(intent);
+			}
+		});
+
 		loadRWAs();
 	}
 	
@@ -77,8 +101,8 @@ public class RWAsActivity extends BaseActivity{
 	}
 
 	public void response(RWAsData rwAsData) {
-		RWAsAdapter rwAsAdapter = new RWAsAdapter(getLayoutInflater(), rwAsData.getRwaItemsDatasList(), mAQuery);
-		ListView listView = (ListView)findViewById(R.id.listview_rwa);
-		listView.setAdapter(rwAsAdapter);
+		mRWAsDataList = rwAsData.getRwaItemsDatasList();
+		mRWAssAdapter = new RWAsAdapter(getLayoutInflater(),mRWAsDataList , mAQuery);
+		mRWAsListView.setAdapter(mRWAssAdapter);
 	}
 }

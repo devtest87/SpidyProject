@@ -13,20 +13,23 @@ import android.widget.Toast;
 
 import com.android.adapter.ServicesAdapter.SolventViewHolders;
 import com.android.spideycity.R;
+import com.androidquery.AQuery;
 import com.bean.ServicesItemsData;
 
 public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 
 	private List<ServicesItemsData> mServicesItemsDatasList;
 	private StartActivity mStartActivity;
+	private AQuery mAQuery;
 
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
 
-	public ServicesAdapter(StartActivity startActivity, List<ServicesItemsData> servicesItemsDatasList) {
+	public ServicesAdapter(StartActivity startActivity, List<ServicesItemsData> servicesItemsDatasList, AQuery aQuery) {
 		mServicesItemsDatasList = servicesItemsDatasList;
 		mStartActivity = startActivity;
+		mAQuery = aQuery;
 	}
 
 	@Override
@@ -41,6 +44,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 	public void onBindViewHolder(SolventViewHolders holder, int position) {
 		holder.mobileNumberTV.setText(mServicesItemsDatasList.get(position).getMobile());
 		holder.descTextView.setText(mServicesItemsDatasList.get(position).getDesc());
+		mAQuery.id(holder.serviceIconIV).image(mServicesItemsDatasList.get(position).getIcon());
 
 		holder.checkRequestTextView.setTag(position);
 		holder.checkRequestTextView.setOnClickListener(new OnClickListener() {
