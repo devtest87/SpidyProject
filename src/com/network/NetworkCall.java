@@ -32,6 +32,7 @@ import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
+import com.android.itemsActivity.NoticeBoardDetailActivity;
 import com.android.itemsActivity.OpinionPollActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.RWAsDetailActivity;
@@ -46,6 +47,7 @@ import com.bean.DirectoryData;
 import com.bean.GroupsData;
 import com.bean.LoginData;
 import com.bean.NoticeBoardData;
+import com.bean.NoticeBoardDetailData;
 import com.bean.OpinionPollsData;
 import com.bean.RWADetailData;
 import com.bean.RWAFacilityData;
@@ -75,13 +77,19 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String sliderTopURL = "http://top-story.in/api/news_slider.json";
 	private static final String rwasURL = "http://top-story.in/api/rwa_list.json";
 	private static final String rwasDetailURL = "http://top-story.in/api/";
-	private static final String groupsURL = "http://top-story.in/api/group-slider.php";
+	private static final String groupsURL = "http://top-story.in/api/groups_slider.json";
 	private static final String servicesURL = "http://top-story.in/api/service_list.json";
 	private static final String bookingsURL = "http://top-story.in/api/booking_list.php";
 	private static final String noticeBoardURL = "http://top-story.in/api/notice_list.json";
+	private static final String noticeBoardDetailURL = "http://top-story.in/api/";
 	private static final String directoryURL = "http://top-story.in/api/service_list.json";
 	private static final String spidyPickURL = "http://top-story.in/api/news_slider.json";
 	private static final String opinionPollsURL = "http://top-story.in/api/poll_list.json";
+	private static final String requestServiceURL = "http://top-story.in/api/request_service.php";
+	private static final String checkStatusURL = "http://top-story.in/api/my_service.php";
+	
+	//Service request api: http://top-story.in/api/request_service.php?user_id=5&service_id=4&rwa_id=1&msg=testfjjbf 'wejf wef w efwew ef efwe f
+		//Check Request status : http://top-story.in/api/my_service.php?user_id=5
 	
 	
 	private static final String NEWSURL = "http://golfapp.net/app/webservices/nearby.php";
@@ -133,14 +141,23 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		case SERVICES:
 			object = services();
 			break;
+		case SERVICES_DETAIL:
+			object = requestService(namePairList);
+			break;
 		case REQUEST_SERVICES:
 			object = requestService(namePairList);
+			break;
+		case SERVICES_REQUEST_STATUS:
+			object = checkRquestServiceStatus(namePairList);
 			break;
 		case BOOKINGS:
 			object = bookings();
 			break;
 		case NOTICEBOARDS:
 			object = noticeBoards();
+			break;
+		case NOTICEBOARDS_DETAILS:
+			object = noticeBoardsDetail(namePairList);
 			break;
 		case DIRECTORY:
 			object = directory();
@@ -297,10 +314,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 				((ServicesActivity) activity).response(servicesData);	
 			}
 			break;
-		case REQUEST_SERVICES:
+		case SERVICES_DETAIL:
 			RequestServicesData requestServicesData = (RequestServicesData)result;
-			if(activity instanceof RequestServicesActivity){
-				((RequestServicesActivity) activity).response(requestServicesData);	
+			if(activity instanceof ServicesActivity){
+				((ServicesActivity) activity).response(requestServicesData);	
+			}
+			break;
+		case REQUEST_SERVICES:
+			RequestServicesData requestServicesData2 = (RequestServicesData)result;
+			if(activity instanceof ServicesActivity){
+				((ServicesActivity) activity).response(requestServicesData2);	
+			}
+			break;
+		case SERVICES_REQUEST_STATUS:
+			RequestServicesData requestServicesData1 = (RequestServicesData)result;
+			if(activity instanceof ServicesActivity){
+				((ServicesActivity) activity).response(requestServicesData1);	
 			}
 			break;
 		case BOOKINGS:
@@ -313,6 +342,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			NoticeBoardData noticeBoardData = (NoticeBoardData)result;
 			if(activity instanceof NoticeBoardActivity){
 				((NoticeBoardActivity) activity).response(noticeBoardData);	
+			}
+			break;
+		case NOTICEBOARDS_DETAILS:
+			NoticeBoardDetailData noticeBoardDetailData = (NoticeBoardDetailData)result;
+			if(activity instanceof NoticeBoardDetailActivity){
+				((NoticeBoardDetailActivity) activity).response(noticeBoardDetailData);	
 			}
 			break;
 		case DIRECTORY:
@@ -656,7 +691,39 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private RequestServicesData requestService(List<NameValuePair> namePair){
 
 		RequestServicesData requestServicesData = new RequestServicesData();
-		String response = NetworkConnection.networkHit(namePair,LoginURL);
+		String response = NetworkConnection.networkHit(namePair,requestServiceURL);
+
+		//		response = LoadData("getlogin.txt");
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			requestServicesData.setException(response);
+		}else{
+			requestServicesData = myParser.parseRequestServices(response);
+		}
+		return requestServicesData;
+	}
+	
+	private RequestServicesData checkRquestServiceStatus(List<NameValuePair> namePair){
+
+		RequestServicesData requestServicesData = new RequestServicesData();
+		String response = NetworkConnection.networkHit(namePair,checkStatusURL);
+
+		//		response = LoadData("getlogin.txt");
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			requestServicesData.setException(response);
+		}else{
+			requestServicesData = myParser.parseRequestServices(response);
+		}
+		return requestServicesData;
+	}
+	
+	private RequestServicesData ServiceDetail(List<NameValuePair> namePair){
+
+		RequestServicesData requestServicesData = new RequestServicesData();
+		String response = NetworkConnection.networkHit(namePair,checkStatusURL);
 
 		//		response = LoadData("getlogin.txt");
 
@@ -698,6 +765,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			noticeBoardData = myParser.parseNoticeBoard(response);
 		}
 		return noticeBoardData;
+		
+	}
+	
+	public NoticeBoardDetailData noticeBoardsDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		NoticeBoardDetailData noticeBoardDetailData;
+		String response = NetworkConnection.networkHit(pair,noticeBoardDetailURL + namePair.get(0).getValue());
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			noticeBoardDetailData = new NoticeBoardDetailData();
+			noticeBoardDetailData.setException(response);
+		}else{
+			noticeBoardDetailData = myParser.parseNoticeBoardDetailData(response);
+		}
+		return noticeBoardDetailData;
 		
 	}
 	

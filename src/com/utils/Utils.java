@@ -1,6 +1,29 @@
 package com.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 
 public class Utils {
-	
+	public static String getTimeRemaining(String date) 
+	{ 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		long milis1 = 0;
+		try {
+			milis1 = dateFormat.parse(date).getTime();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	    // Get the represented date in milliseconds 
+	    long milis2 = System.currentTimeMillis();
+	 
+	    // Calculate difference in milliseconds 
+	    long diff = Math.abs(milis2 - milis1);
+	    int day = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);//(int)(diff / (24 * 60 * 60 * 1000));
+	 
+	    return day > 1 ? day + " days ago" : day + " day ago";
+	} 
 }

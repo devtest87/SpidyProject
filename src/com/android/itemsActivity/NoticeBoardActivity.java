@@ -9,12 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.adapter.NoticeBoardAdapter;
-import com.android.adapter.ServicesAdapter.StartActivity;
 import com.android.spideycity.R;
 import com.bean.NoticeBoardData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.SpacesItemDecoration;
 
 public class NoticeBoardActivity extends BaseActivity implements com.android.adapter.NoticeBoardAdapter.StartActivity{
 	//private ExecutorService mExecutorService;
@@ -26,7 +26,7 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_service_layout);
+		setContentView(R.layout.activity_noticeboard_layout);
 		//		mExecutorService = Executors.newFixedThreadPool(1);
 		//		mExecutorService.execute(new loadRWAs());
 		
@@ -46,6 +46,9 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 				new StaggeredGridLayoutManager(
 						2, //The number of Columns in the grid
 						LinearLayoutManager.VERTICAL);
+		
+		SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(30);
+        mRecyclerView.addItemDecoration(spacesItemDecoration);
 
 		loadRWAs();
 	}
@@ -97,13 +100,16 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 	}
 
 	public void response(NoticeBoardData noticeBoardData) {
-		mNoticeBoardAdapter = new NoticeBoardAdapter(this, noticeBoardData.getNoticeBoardItemsDatasList());
+		mNoticeBoardAdapter = new NoticeBoardAdapter(this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
 		mRecyclerView.setLayoutManager(staggeredGridLayoutManagerVertical);
 		mRecyclerView.setAdapter(mNoticeBoardAdapter);
 	}
 	
 	@Override
-	public void startActivity(String serviceId) {
+	public void startActivity(String url) {
+		Intent intent = new Intent(this, NoticeBoardDetailActivity.class);
+		intent.putExtra("url", url);
+		startActivity(intent);
 	}
 
 }

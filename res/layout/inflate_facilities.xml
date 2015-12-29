@@ -7,14 +7,10 @@
     <TextView
         android:id="@+id/tv_facilitylabelname"
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_dot"
         android:layout_height="wrap_content"
         android:textStyle="bold" 
         android:text="asasas"/>
-
-    <View
-        android:id="@+id/tv_facilitydetail"
-        android:layout_width="match_parent"
-        android:background="@drawable/shape_dot"
-        android:layout_height="2dp" />
 
 </LinearLayout>

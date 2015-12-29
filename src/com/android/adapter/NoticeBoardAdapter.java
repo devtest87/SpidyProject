@@ -2,6 +2,7 @@ package com.android.adapter;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.adapter.NoticeBoardAdapter.SolventViewHolders;
 import com.android.spideycity.R;
+import com.androidquery.AQuery;
 import com.bean.NoticeBoardItemsData;
 import com.bean.ServicesItemsData;
 
@@ -20,12 +22,14 @@ public class NoticeBoardAdapter extends RecyclerView.Adapter<SolventViewHolders>
 
 	private List<NoticeBoardItemsData> mNoticeBoardItemsDatasList;
 	private StartActivity mStartActivity;
+	private AQuery mAQuery;
 
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
 
-	public NoticeBoardAdapter(StartActivity startActivity, List<NoticeBoardItemsData> noticeBoardItemsDatasList) {
+	public NoticeBoardAdapter(StartActivity startActivity, List<NoticeBoardItemsData> noticeBoardItemsDatasList, AQuery aQuery) {
+		mAQuery = aQuery;
 		mNoticeBoardItemsDatasList = noticeBoardItemsDatasList;
 		mStartActivity = startActivity;
 	}
@@ -44,7 +48,7 @@ public class NoticeBoardAdapter extends RecyclerView.Adapter<SolventViewHolders>
 		holder.noticeboardTitleTV.setText(mNoticeBoardItemsDatasList.get(position).getTitle());
 		holder.noticeboardDescTV.setText(mNoticeBoardItemsDatasList.get(position).getDesc());
 		holder.noticeboardDateTV.setText(mNoticeBoardItemsDatasList.get(position).getReleaseYear());
-		holder.noticeboardCommentTV.setText(mNoticeBoardItemsDatasList.get(position).getGenre());
+		//mAQuery.id(holder.noticeboardIconIV).image(mNoticeBoardItemsDatasList.get(position).getImage());
 
 	}
 
@@ -59,7 +63,6 @@ public class NoticeBoardAdapter extends RecyclerView.Adapter<SolventViewHolders>
 		public TextView noticeboardTitleTV;
 		public TextView noticeboardDescTV;
 		public TextView noticeboardDateTV;
-		public TextView noticeboardCommentTV;
 
 		public SolventViewHolders(View convertView) {
 			super(convertView);
@@ -68,12 +71,12 @@ public class NoticeBoardAdapter extends RecyclerView.Adapter<SolventViewHolders>
 			noticeboardTitleTV = (TextView)convertView.findViewById(R.id.tv_noticeboardtitle);
 			noticeboardDescTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddescription);
 			noticeboardDateTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddate);
-			noticeboardCommentTV = (TextView)convertView.findViewById(R.id.tv_noticeboardcomment);
 		}
 
 		@Override
 		public void onClick(View view) {
-			Toast.makeText(view.getContext(), "Clicked Position = " + getPosition(), Toast.LENGTH_SHORT).show();
+			mStartActivity.startActivity(mNoticeBoardItemsDatasList.get(getPosition()).getUrl());
+			//Toast.makeText(view.getContext(), "Clicked Position = " + getPosition(), Toast.LENGTH_SHORT).show();
 		}
 	}
 }

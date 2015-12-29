@@ -3,7 +3,7 @@ package com.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupsData {
+public class NoticeBoardDetailData {
 	private String exception = "noexception";
 	public String getException() {
 		return exception;
@@ -26,11 +26,13 @@ public class GroupsData {
 	private String error_msg;
 	private String error;
 	
-	private List<GroupItemsData> groupItemsDataList = new ArrayList<GroupItemsData>();
-	public List<GroupItemsData> getGroupItemsDataList() {
-		return groupItemsDataList;
+	private List<NoticeBoardDetailItemsData> noticeBoardDetailItemsData = new ArrayList<NoticeBoardDetailItemsData>();
+	public List<NoticeBoardDetailItemsData> getNoticeBoardDetailItemsData() {
+		return noticeBoardDetailItemsData;
 	}
-	public void setGroupItemsDataList(List<GroupItemsData> groupItemsDataList) {
-		this.groupItemsDataList = groupItemsDataList;
+	public void setNoticeBoardDetailItemsData(
+			List<NoticeBoardDetailItemsData> noticeBoardDetailItemsData) {
+		this.noticeBoardDetailItemsData = noticeBoardDetailItemsData;
 	}
+	
 }

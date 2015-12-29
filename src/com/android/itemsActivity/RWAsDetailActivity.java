@@ -106,6 +106,7 @@ public class RWAsDetailActivity extends BaseActivity{
 		//		ListView listView = (ListView)findViewById(R.id.listview_rwa);
 		//		listView.setAdapter(rwAsAdapter);
 
+
 		TextView addressTitleTV = (TextView)findViewById(R.id.tv_address_title);
 		TextView addressTV = (TextView)findViewById(R.id.tv_address);
 		TextView conatctDetailTV = (TextView)findViewById(R.id.tv_contact_detail);
@@ -113,87 +114,95 @@ public class RWAsDetailActivity extends BaseActivity{
 		TextView descTV = (TextView)findViewById(R.id.tv_rwa_detail);
 		LinearLayout quickLookLL = (LinearLayout)findViewById(R.id.ll_quicklook);
 		LinearLayout facilityLL = (LinearLayout)findViewById(R.id.ll_facility);
+		LinearLayout parentLL = (LinearLayout)findViewById(R.id.ll_parent);
+		if(rwaDetailData != null){
+			parentLL.setVisibility(View.VISIBLE);
 
-		mAQuery.id(rwaIV).image(rwaDetailData.getRwAsDetailItemData().getImage());
-		addressTitleTV.setText(rwaDetailData.getRwAsDetailItemData().getTitle());
-		descTV.setText(rwaDetailData.getRwAsDetailItemData().getDesc());
-		addressTV.setText(rwaDetailData.getRwAsDetailItemData().getAddress());
-		if(rwaDetailData.getRwAsDetailItemData().getCdetails() != null){
-			JSONObject jobjLabel = rwaDetailData.getRwAsDetailItemData().getCdetailslabel();
-			JSONObject jobjLabelDetail = rwaDetailData.getRwAsDetailItemData().getCdetails();
+			mAQuery.id(rwaIV).image(rwaDetailData.getRwAsDetailItemData().getImage());
+			addressTitleTV.setText(rwaDetailData.getRwAsDetailItemData().getTitle());
+			descTV.setText(rwaDetailData.getRwAsDetailItemData().getDesc());
+			addressTV.setText(rwaDetailData.getRwAsDetailItemData().getAddress());
+			if(rwaDetailData.getRwAsDetailItemData().getCdetails() != null){
+				JSONObject jobjLabel = rwaDetailData.getRwAsDetailItemData().getCdetailslabel();
+				JSONObject jobjLabelDetail = rwaDetailData.getRwAsDetailItemData().getCdetails();
 
-			StringBuilder stringBuilder = new StringBuilder();
-			Iterator<String> key = rwaDetailData.getRwAsDetailItemData().getCdetails().keys();
-			for (Iterator iterator = key; iterator.hasNext();) {
-				String type = (String) iterator.next();
-				try {
-					stringBuilder.append(jobjLabel.getString(type) + " : " + jobjLabelDetail.getString(type) + "\n");
-				} catch (JSONException e) {
-					e.printStackTrace();
+				StringBuilder stringBuilder = new StringBuilder();
+				Iterator<String> key = rwaDetailData.getRwAsDetailItemData().getCdetails().keys();
+				for (Iterator iterator = key; iterator.hasNext();) {
+					String type = (String) iterator.next();
+					try {
+						stringBuilder.append(jobjLabel.getString(type) + " : " + jobjLabelDetail.getString(type) + "\n");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
+				conatctDetailTV.setText(stringBuilder);
 			}
-			conatctDetailTV.setText(stringBuilder);
-		}
 
-		LayoutInflater layoutInflater = getLayoutInflater();
-		if(rwaDetailData.getRwAsDetailItemData().getQuickLookLablel() != null){
-			JSONObject jobjLabel = rwaDetailData.getRwAsDetailItemData().getQuickLookLablel();
-			JSONObject jobjLabelDetail = rwaDetailData.getRwAsDetailItemData().getQuickLook();
+			LayoutInflater layoutInflater = getLayoutInflater();
+			if(rwaDetailData.getRwAsDetailItemData().getQuickLookLablel() != null){
+				JSONObject jobjLabel = rwaDetailData.getRwAsDetailItemData().getQuickLookLablel();
+				JSONObject jobjLabelDetail = rwaDetailData.getRwAsDetailItemData().getQuickLook();
 
-			int count = 0;
-			LinearLayout linearLayout = null;
-			LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			layoutParams.weight = 1.0f;
-			int index = 1;
-			Iterator<String> key = rwaDetailData.getRwAsDetailItemData().getQuickLookLablel().keys();
-			for (Iterator iterator = key; iterator.hasNext();) {
-				String type = (String) iterator.next();
-				try {
-					View view = layoutInflater.inflate(R.layout.inflate_quick_label, null, false);
-					TextView quickLableName = (TextView)view.findViewById(R.id.tv_quciklabelname);
-					TextView quickLableDetail = (TextView)view.findViewById(R.id.tv_quciklabelname);
+				int count = 0;
+				LinearLayout linearLayout = null;
+				LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				layoutParams.weight = 1.0f;
+				int index = 1;
+				Iterator<String> key = rwaDetailData.getRwAsDetailItemData().getQuickLookLablel().keys();
+				for (Iterator iterator = key; iterator.hasNext();) {
+					String type = (String) iterator.next();
+					try {
+						View view = layoutInflater.inflate(R.layout.inflate_quick_label, null, false);
+						TextView quickLableName = (TextView)view.findViewById(R.id.tv_quciklabelname);
+						TextView quickLableDetail = (TextView)view.findViewById(R.id.tv_quciklabeldetail);
+						//view.setLayoutParams(layoutParams);
+						quickLableName.setText(jobjLabel.getString(type) + " : ");
+						quickLableDetail.setText(jobjLabelDetail.getString(type));
+						//					if(count == 0){
+						//						linearLayout = new LinearLayout(getApplicationContext());
+						//						linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+						//					}
+						//					linearLayout.addView(view);
+						//					count ++;
+						//					if(count == 2){
+						quickLookLL.addView(view, index);
+						index++;
+						//						count = 0;
+						//					}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}else{
+				quickLookLL.setVisibility(View.GONE);
+			}
+
+			if(rwaDetailData.getRWAFacilityDataList().size() != 0){
+				int count = 0;
+				int index = 0;
+				LinearLayout linearLayout = null;
+				LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				layoutParams.weight = 1.0f;
+				for (int i = 0; i < rwaDetailData.getRWAFacilityDataList().size(); i++) {
+					View view = layoutInflater.inflate(R.layout.inflate_facilities, null, false);
+					TextView quickLableName = (TextView)view.findViewById(R.id.tv_facilitylabelname);
 					view.setLayoutParams(layoutParams);
-					quickLableName.setText(jobjLabel.getString(type) + " : ");
-					quickLableDetail.setText(jobjLabelDetail.getString(type));
+					quickLableName.setText(rwaDetailData.getRWAFacilityDataList().get(i).getFacilityName());
 					if(count == 0){
 						linearLayout = new LinearLayout(getApplicationContext());
 						linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 					}
 					linearLayout.addView(view);
 					count ++;
-					if(count == 2){
-						quickLookLL.addView(linearLayout, index);
+					if(count == 3){
+						facilityLL.addView(linearLayout, index);
 						index++;
 						count = 0;
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
 				}
-			}
-		}
-
-		if(rwaDetailData.getRWAFacilityDataList().size() != 0){
-			int count = 0;
-			int index = 1;
-			LinearLayout linearLayout = null;
-			LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			layoutParams.weight = 1.0f;
-			for (int i = 0; i < rwaDetailData.getRWAFacilityDataList().size(); i++) {
-				View view = layoutInflater.inflate(R.layout.inflate_facilities, null, false);
-				TextView quickLableName = (TextView)view.findViewById(R.id.tv_facilitylabelname);
-				view.setLayoutParams(layoutParams);
-				quickLableName.setText(rwaDetailData.getRWAFacilityDataList().get(i).getFacilityName());
-				if(count == 0){
-					linearLayout = new LinearLayout(getApplicationContext());
-					linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-				}
-				linearLayout.addView(view);
-				count ++;
-				if(count == 3){
-					facilityLL.addView(linearLayout, index);
-					index++;
-					count = 0;
-				}
+			}else{
+				facilityLL.setVisibility(View.GONE);
 			}
 		}
 	}

@@ -42,7 +42,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 
 	@Override
 	public void onBindViewHolder(SolventViewHolders holder, int position) {
-		holder.mobileNumberTV.setText(mServicesItemsDatasList.get(position).getMobile());
+		holder.mobileNumberTV.setText(mServicesItemsDatasList.get(position).getServiceProvider() + "\n" + 
+				mServicesItemsDatasList.get(position).getMobile());
 		holder.descTextView.setText(mServicesItemsDatasList.get(position).getDesc());
 		mAQuery.id(holder.serviceIconIV).image(mServicesItemsDatasList.get(position).getIcon());
 
@@ -52,7 +53,18 @@ public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 			@Override
 			public void onClick(View v) {
 				int pos = Integer.parseInt(v.getTag().toString());
-				mStartActivity.startActivity(mServicesItemsDatasList.get(pos).getId());
+				mStartActivity.startActivity("RS@" +mServicesItemsDatasList.get(pos).getId());
+
+			}
+		});
+		
+		holder.checkRequestTitleTextView.setTag(position);
+		holder.checkRequestTitleTextView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int pos = Integer.parseInt(v.getTag().toString());
+				mStartActivity.startActivity("CR@" + mServicesItemsDatasList.get(pos).getId());
 
 			}
 		});
@@ -62,12 +74,13 @@ public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 	public int getItemCount() {
 		return mServicesItemsDatasList.size();
 	}
-	
+
 	class SolventViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 		public ImageView serviceIconIV;
 		public TextView mobileNumberTV;
 		public TextView descTextView;
+		public TextView checkRequestTitleTextView;
 		public TextView checkRequestTextView;
 
 		public SolventViewHolders(View convertView) {
@@ -76,7 +89,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 			serviceIconIV = (ImageView)convertView.findViewById(R.id.iv_services_icon);
 			mobileNumberTV = (TextView)convertView.findViewById(R.id.tv_mobilenumber);
 			descTextView = (TextView)convertView.findViewById(R.id.tv_description);
+			checkRequestTitleTextView = (TextView)convertView.findViewById(R.id.tv_checkrequest_status_title);
 			checkRequestTextView = (TextView)convertView.findViewById(R.id.tv_checkrequest_status);
+			
 		}
 
 		@Override

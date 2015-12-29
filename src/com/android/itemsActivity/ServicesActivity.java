@@ -1,12 +1,16 @@
 package com.android.itemsActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,9 +18,11 @@ import com.android.adapter.ServicesAdapter;
 import com.android.adapter.ServicesAdapter.StartActivity;
 import com.android.spideycity.R;
 import com.bean.RequestBean;
+import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.SpacesItemDecoration;
 
 public class ServicesActivity extends BaseActivity  implements StartActivity{
 	//private ExecutorService mExecutorService;
@@ -110,29 +116,60 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 
 	@Override
 	public void startActivity(String serviceId) {
-		Intent intent = new Intent(this, RequestServicesActivity.class);
-		intent.putExtra("id", serviceId);
-		startActivity(intent);
+		String[] id = serviceId.split("@");
+		if(id[0].equals("CR")){
+			checkRequestStatus(id[1]);
+		}else if(id[0].equals("RS")){
+			requestService(id[1]);
+		}else{
+			serviceDetail(id[1]);
+		}
+//		Intent intent = new Intent(this, RequestServicesActivity.class);
+//		intent.putExtra("id", serviceId);
+//		startActivity(intent);
+	}
+
+	private void serviceDetail(String id) {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.SERVICES_DETAIL);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("service_id", id);
+		list.add(valuePair);
+		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+
+	private void checkRequestStatus(String id) {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.SERVICES_REQUEST_STATUS);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("service_id", id);
+		list.add(valuePair);
+		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+
+	private void requestService(String id) {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.REQUEST_SERVICES);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("service_id", id);
+		list.add(valuePair);
+		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+
+	public void response(RequestServicesData requestServicesData) {
+		
 	}
 	
-	public class SpacesItemDecoration extends RecyclerView.ItemDecoration { 
-		  private int space;
-		 
-		  public SpacesItemDecoration(int space) {
-		    this.space = space;
-		  } 
-		 
-		  @Override 
-		  public void getItemOffsets(Rect outRect, View view, 
-		      RecyclerView parent, RecyclerView.State state) {
-		    outRect.left = space;
-		    outRect.right = space;
-		    outRect.bottom = space;
-		 
-		    // Add top margin only for the first item to avoid double space between items 
-		    if(parent.getChildLayoutPosition(view) == 0)
-		        outRect.top = space;
-		  } 
-		} 
-
 }
