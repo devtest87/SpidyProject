@@ -3,7 +3,6 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,43 +12,42 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.itemsActivity.RWAsActivity;
-import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
-import com.bean.RWAItemsData;
+import com.bean.NoticeBoardItemsData;
 
-public class RWAsAdapter extends BaseAdapter implements Filterable{
+public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 
-	private List<RWAItemsData> mRwaItemsDatasList;
-	private List<RWAItemsData> mRwaFiterItemsDatasList;
-	private LayoutInflater mLayoutInflater;
+	private List<NoticeBoardItemsData> mNoticeBoardItemsDatasList;
+	private List<NoticeBoardItemsData> mNoticeBoardFilterItemsDatasList;
 	private StartActivity mStartActivity;
 	private AQuery mAQuery;
+	private LayoutInflater mLayoutInflater;
 	private ItemFilter mFilter = new ItemFilter();
-	
+
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
-	
-	public RWAsAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<RWAItemsData> rwaItemsDatasList, AQuery aQuery) {
-		mRwaItemsDatasList = rwaItemsDatasList;
-		mRwaFiterItemsDatasList = rwaItemsDatasList;
+
+	public GridNoticeBoardAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<NoticeBoardItemsData> noticeBoardItemsDatasList, AQuery aQuery) {
+		mNoticeBoardItemsDatasList = noticeBoardItemsDatasList;
+		mNoticeBoardFilterItemsDatasList = noticeBoardItemsDatasList;
 		mStartActivity = startActivity;
-		mLayoutInflater = layoutInflater;
 		mAQuery = aQuery;
+		mLayoutInflater = layoutInflater;
 	}
+
 	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return mRwaFiterItemsDatasList.size();
+		return mNoticeBoardFilterItemsDatasList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return mRwaFiterItemsDatasList.get(position);
+		return mNoticeBoardFilterItemsDatasList.get(position);
 	}
 
 	@Override
@@ -63,35 +61,34 @@ public class RWAsAdapter extends BaseAdapter implements Filterable{
 		ViewHolder viewHolder;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
-			convertView = mLayoutInflater.inflate(R.layout.row_rwa_layout, null, false);
-			viewHolder.rwaIV = (ImageView)convertView.findViewById(R.id.iv_apartments);
-			viewHolder.rwaAdressTV = (TextView)convertView.findViewById(R.id.tv_rwa_address);
-			viewHolder.rwaTitleTV = (TextView)convertView.findViewById(R.id.tv_rwa_title);
-			viewHolder.rwaDescTV = (TextView)convertView.findViewById(R.id.tv_rwa_desc);
-			viewHolder.rwaCityTV = (TextView)convertView.findViewById(R.id.tv_rwa_city);
+			convertView = mLayoutInflater.inflate(R.layout.row_noticeboard_layout, null, false);
+			viewHolder.noticeboardIconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
+			viewHolder.noticeboardTitleTV = (TextView)convertView.findViewById(R.id.tv_noticeboardtitle);
+			viewHolder.noticeboardCommentTV = (TextView)convertView.findViewById(R.id.tv_noticeboardcomment);
+			viewHolder.noticeboardDescTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddescription);
+			viewHolder.noticeboardDateTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddate);
 			 
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		viewHolder.rwaCityTV.setText(mRwaFiterItemsDatasList.get(position).getCity());
-		viewHolder.rwaAdressTV.setText(mRwaFiterItemsDatasList.get(position).getAdr());
-		viewHolder.rwaTitleTV.setText(mRwaFiterItemsDatasList.get(position).getTitle());
-		viewHolder.rwaDescTV.setText(mRwaFiterItemsDatasList.get(position).getDesc());
-		mAQuery.id(viewHolder.rwaIV).image(mRwaFiterItemsDatasList.get(position).getImage());
+		viewHolder.noticeboardTitleTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getTitle());
+		viewHolder.noticeboardDescTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getDesc());
+		viewHolder.noticeboardDateTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getReleaseYear());
 		
 		return convertView;
 	}
-
-	static class ViewHolder{
-		TextView rwaCityTV;
-		TextView rwaAdressTV;
-		TextView rwaTitleTV;
-		TextView rwaDescTV;
-		ImageView rwaIV ;
-	}
 	
+	static class ViewHolder {
+
+		public ImageView noticeboardIconIV;
+		public TextView noticeboardTitleTV;
+		public TextView noticeboardDescTV;
+		public TextView noticeboardCommentTV;
+		public TextView noticeboardDateTV;
+	}
+
 	@Override
 	public Filter getFilter() {
 		// TODO Auto-generated method stub
@@ -106,10 +103,10 @@ public class RWAsAdapter extends BaseAdapter implements Filterable{
 
             FilterResults results = new FilterResults();
 
-            final List<RWAItemsData> list = mRwaItemsDatasList;
+            final List<NoticeBoardItemsData> list = mNoticeBoardItemsDatasList;
 
             int count = list.size();
-            final List<RWAItemsData> nlist = new ArrayList<RWAItemsData>(count);
+            final List<NoticeBoardItemsData> nlist = new ArrayList<NoticeBoardItemsData>(count);
 
             String filterableString ;
 
@@ -129,13 +126,13 @@ public class RWAsAdapter extends BaseAdapter implements Filterable{
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mRwaFiterItemsDatasList = (List<RWAItemsData>) results.values;
+            mNoticeBoardFilterItemsDatasList = (List<NoticeBoardItemsData>) results.values;
             notifyDataSetChanged();
         }
 
     }
 
-	public void startActivity(int arg2) {
-		mStartActivity.startActivity(mRwaFiterItemsDatasList.get(arg2).getUrl() + "@" + mRwaFiterItemsDatasList.get(arg2).getFurl());
+	public void startActivity(int pos) {
+		mStartActivity.startActivity(mNoticeBoardFilterItemsDatasList.get(pos).getUrl());
 	}
 }

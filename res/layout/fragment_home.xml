@@ -22,7 +22,7 @@
         <LinearLayout
             android:id="@+id/lin1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/option_height"
             android:orientation="horizontal" >
 
             <Button
@@ -72,14 +72,14 @@
         <LinearLayout
             android:id="@+id/lin2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/option_height"
             android:layout_marginTop="@dimen/option_margin"
             android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/btn_noticeboard"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/option_height"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/noticecolor"
                 android:text="@string/notice_board"
@@ -89,7 +89,7 @@
             <Button
                 android:id="@+id/btn_directory"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/option_height"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/directorycolor"
@@ -100,7 +100,7 @@
             <Button
                 android:id="@+id/btn_spideypick"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/option_height"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/spideycolor"
@@ -111,7 +111,7 @@
             <Button
                 android:id="@+id/btn_opinionpolls"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/option_height"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/option_margin"
                 android:layout_weight="1"
                 android:background="@color/opinioncolor"

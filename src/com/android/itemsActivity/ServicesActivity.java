@@ -6,30 +6,33 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
-import com.android.adapter.ServicesAdapter;
-import com.android.adapter.ServicesAdapter.StartActivity;
+import com.android.adapter.GridServiceAdapter;
+import com.android.adapter.GridServiceAdapter.StartActivity;
 import com.android.spideycity.R;
 import com.bean.RequestBean;
 import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
-import com.utils.SpacesItemDecoration;
 
 public class ServicesActivity extends BaseActivity  implements StartActivity{
 	//private ExecutorService mExecutorService;
-	private RecyclerView mRecyclerView;
-	private ServicesAdapter mServicesAdapter;
-	
-    private StaggeredGridLayoutManager staggeredGridLayoutManagerVertical;
+//	private RecyclerView mRecyclerView;
+//	private ServicesAdapter mServicesAdapter;
+	private GridView mGridView;
+	private GridServiceAdapter mGridServiceAdapter;
+//	
+//    private StaggeredGridLayoutManager staggeredGridLayoutManagerVertical;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +49,48 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.servicecolor);
 		
-		mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_service);
+//		mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_service);
+//		
+//		
+//
+//        staggeredGridLayoutManagerVertical =
+//                new StaggeredGridLayoutManager(
+//                        2, //The number of Columns in the grid
+//                        LinearLayoutManager.VERTICAL);
+//        
+//        SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(30);
+//        mRecyclerView.addItemDecoration(spacesItemDecoration);
 		
+		mGridView = (GridView)findViewById(R.id.recyclerview_service);
 		
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
 
-        staggeredGridLayoutManagerVertical =
-                new StaggeredGridLayoutManager(
-                        2, //The number of Columns in the grid
-                        LinearLayoutManager.VERTICAL);
-        
-        SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(30);
-        mRecyclerView.addItemDecoration(spacesItemDecoration);
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				mGridServiceAdapter.startActivity(arg2);
+			}
+		});
+		
+		searchET.addTextChangedListener(new TextWatcher() {
+
+		    @Override
+		    public void onTextChanged(CharSequence s, int start, int before, int count) {
+		        System.out.println("Text ["+s+"]");
+		        if(mGridServiceAdapter!=null)
+		        mGridServiceAdapter.getFilter().filter(s.toString());                           
+		    }
+
+		    @Override
+		    public void beforeTextChanged(CharSequence s, int start, int count,
+		            int after) {
+
+		    }
+
+		    @Override
+		    public void afterTextChanged(Editable s) {
+		    }
+		});
         
 		loadRWAs();
 	}
@@ -109,9 +143,12 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 
 	public void response(ServicesData servicesData) {
 		
-		mServicesAdapter = new ServicesAdapter(this, servicesData.getServicesItemsDatasList(), mAQuery);
+		/*mServicesAdapter = new ServicesAdapter(this, servicesData.getServicesItemsDatasList(), mAQuery);
 		mRecyclerView.setLayoutManager(staggeredGridLayoutManagerVertical);
-		mRecyclerView.setAdapter(mServicesAdapter);
+		mRecyclerView.setAdapter(mServicesAdapter);*/
+		
+		mGridServiceAdapter = new GridServiceAdapter(getLayoutInflater(), this, servicesData.getServicesItemsDatasList(), mAQuery);
+	    mGridView.setAdapter(mGridServiceAdapter);
 	}
 
 	@Override

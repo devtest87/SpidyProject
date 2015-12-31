@@ -2,26 +2,33 @@ package com.android.itemsActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
 
-import com.android.adapter.NoticeBoardAdapter;
+import com.android.adapter.GridNoticeBoardAdapter;
+import com.android.adapter.GridNoticeBoardAdapter.StartActivity;
 import com.android.spideycity.R;
 import com.bean.NoticeBoardData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
-import com.utils.SpacesItemDecoration;
 
-public class NoticeBoardActivity extends BaseActivity implements com.android.adapter.NoticeBoardAdapter.StartActivity{
+public class NoticeBoardActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;
-	private RecyclerView mRecyclerView;
-	private NoticeBoardAdapter mNoticeBoardAdapter;
+//	private RecyclerView mRecyclerView;
+//	private NoticeBoardAdapter mNoticeBoardAdapter;
+//
+//	private StaggeredGridLayoutManager staggeredGridLayoutManagerVertical;
+	
+	private GridView mGridView;
+	private GridNoticeBoardAdapter mGridNoticeBoardAdapter;
 
-	private StaggeredGridLayoutManager staggeredGridLayoutManagerVertical;
 	//private ExecutorService mExecutorService;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 		titleTV.setBackgroundResource(R.color.noticecolor);
 
 
-		mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_service);
+		/*mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_service);
 
 
 
@@ -48,7 +55,37 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 						LinearLayoutManager.VERTICAL);
 		
 		SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(30);
-        mRecyclerView.addItemDecoration(spacesItemDecoration);
+        mRecyclerView.addItemDecoration(spacesItemDecoration);*/
+		
+		mGridView = (GridView)findViewById(R.id.recyclerview_service);
+        
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				mGridNoticeBoardAdapter.startActivity(arg2);
+			}
+		});
+        searchET.addTextChangedListener(new TextWatcher() {
+
+		    @Override
+		    public void onTextChanged(CharSequence s, int start, int before, int count) {
+		        System.out.println("Text ["+s+"]");
+		        if(mGridNoticeBoardAdapter!=null)
+		        	mGridNoticeBoardAdapter.getFilter().filter(s.toString());                           
+		    }
+
+		    @Override
+		    public void beforeTextChanged(CharSequence s, int start, int count,
+		            int after) {
+
+		    }
+
+		    @Override
+		    public void afterTextChanged(Editable s) {
+		    }
+		});
 
 		loadRWAs();
 	}
@@ -100,9 +137,11 @@ public class NoticeBoardActivity extends BaseActivity implements com.android.ada
 	}
 
 	public void response(NoticeBoardData noticeBoardData) {
-		mNoticeBoardAdapter = new NoticeBoardAdapter(this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
+		/*mNoticeBoardAdapter = new NoticeBoardAdapter(this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
 		mRecyclerView.setLayoutManager(staggeredGridLayoutManagerVertical);
-		mRecyclerView.setAdapter(mNoticeBoardAdapter);
+		mRecyclerView.setAdapter(mNoticeBoardAdapter);*/
+		mGridNoticeBoardAdapter = new GridNoticeBoardAdapter(getLayoutInflater(), this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
+		mGridView.setAdapter(mGridNoticeBoardAdapter);
 	}
 	
 	@Override

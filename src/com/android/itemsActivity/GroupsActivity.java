@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
 
-import com.android.adapter.GroupListAdapter;
-import com.android.adapter.GroupListAdapter.StartActivity;
+import com.android.adapter.GridGroupListAdapter;
+import com.android.adapter.GridGroupListAdapter.StartActivity;
 import com.android.spideycity.R;
 import com.bean.GroupsData;
 import com.bean.RequestBean;
@@ -16,11 +19,11 @@ import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.SpacesItemDecoration;
 
-public class GroupsActivity extends BaseActivity{
+public class GroupsActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;
 
-	private RecyclerView mRecyclerView;
-	private GroupListAdapter mGroupListAdapter;
+	private GridView mGridView;
+	private GridGroupListAdapter mGridGroupListAdapter;
 
 	private StaggeredGridLayoutManager staggeredGridLayoutManagerVertical;
 
@@ -37,7 +40,7 @@ public class GroupsActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.gray));
 		titleTV.setBackgroundResource(R.color.groupcolor);
 
-		mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_group);
+		/*mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_group);
 
 
 
@@ -47,8 +50,29 @@ public class GroupsActivity extends BaseActivity{
 						LinearLayoutManager.VERTICAL);
 
 		SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(30);
-		mRecyclerView.addItemDecoration(spacesItemDecoration);
+		mRecyclerView.addItemDecoration(spacesItemDecoration);*/
+		
+		mGridView = (GridView)findViewById(R.id.recyclerview_group);
 
+		searchET.addTextChangedListener(new TextWatcher() {
+
+		    @Override
+		    public void onTextChanged(CharSequence s, int start, int before, int count) {
+		        System.out.println("Text ["+s+"]");
+		        if(mGridGroupListAdapter!=null)
+		        	mGridGroupListAdapter.getFilter().filter(s.toString());                           
+		    }
+
+		    @Override
+		    public void beforeTextChanged(CharSequence s, int start, int count,
+		            int after) {
+
+		    }
+
+		    @Override
+		    public void afterTextChanged(Editable s) {
+		    }
+		});
 
 
 		loadGroups();
@@ -101,9 +125,16 @@ public class GroupsActivity extends BaseActivity{
 	}
 
 	public void response(GroupsData groupsData) {
-		mGroupListAdapter = new GroupListAdapter(groupsData.getGroupItemsDataList(), mAQuery);
+		/*mGroupListAdapter = new GroupListAdapter(groupsData.getGroupItemsDataList(), mAQuery);
 		mRecyclerView.setLayoutManager(staggeredGridLayoutManagerVertical);
-		mRecyclerView.setAdapter(mGroupListAdapter);
+		mRecyclerView.setAdapter(mGroupListAdapter);*/
+		mGridGroupListAdapter = new GridGroupListAdapter(getLayoutInflater(), this, groupsData.getGroupItemsDataList(), mAQuery);
+		mGridView.setAdapter(mGridGroupListAdapter);
+	}
+
+	@Override
+	public void startActivity(String serviceId) {
+		
 	}
 
 }

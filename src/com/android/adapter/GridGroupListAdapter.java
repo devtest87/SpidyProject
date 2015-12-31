@@ -3,7 +3,6 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,48 +12,44 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.itemsActivity.RWAsActivity;
-import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
-import com.bean.RWAItemsData;
+import com.bean.GroupItemsData;
 
-public class RWAsAdapter extends BaseAdapter implements Filterable{
+public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 
-	private List<RWAItemsData> mRwaItemsDatasList;
-	private List<RWAItemsData> mRwaFiterItemsDatasList;
-	private LayoutInflater mLayoutInflater;
+	private List<GroupItemsData> mGroupItemsDataList;
+	private List<GroupItemsData> mGrouFilterItemsDataList;
 	private StartActivity mStartActivity;
+	private LayoutInflater mLayoutInflater;
 	private AQuery mAQuery;
 	private ItemFilter mFilter = new ItemFilter();
-	
+
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
-	
-	public RWAsAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<RWAItemsData> rwaItemsDatasList, AQuery aQuery) {
-		mRwaItemsDatasList = rwaItemsDatasList;
-		mRwaFiterItemsDatasList = rwaItemsDatasList;
-		mStartActivity = startActivity;
+
+	public GridGroupListAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<GroupItemsData> groupItemsDataList, AQuery aQuery) {
+		mGroupItemsDataList = groupItemsDataList;
+		mGrouFilterItemsDataList = groupItemsDataList;
 		mLayoutInflater = layoutInflater;
+		mStartActivity = startActivity;
 		mAQuery = aQuery;
 	}
-	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return mRwaFiterItemsDatasList.size();
+		return mGrouFilterItemsDataList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return mRwaFiterItemsDatasList.get(position);
+		return mGrouFilterItemsDataList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -63,35 +58,27 @@ public class RWAsAdapter extends BaseAdapter implements Filterable{
 		ViewHolder viewHolder;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
-			convertView = mLayoutInflater.inflate(R.layout.row_rwa_layout, null, false);
-			viewHolder.rwaIV = (ImageView)convertView.findViewById(R.id.iv_apartments);
-			viewHolder.rwaAdressTV = (TextView)convertView.findViewById(R.id.tv_rwa_address);
-			viewHolder.rwaTitleTV = (TextView)convertView.findViewById(R.id.tv_rwa_title);
-			viewHolder.rwaDescTV = (TextView)convertView.findViewById(R.id.tv_rwa_desc);
-			viewHolder.rwaCityTV = (TextView)convertView.findViewById(R.id.tv_rwa_city);
+			convertView = mLayoutInflater.inflate(R.layout.row_group_layout, null, false);
+			viewHolder.groupiconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
+			viewHolder.groupTitleTV = (TextView)convertView.findViewById(R.id.tv_grouptitle);
+			viewHolder.groupMemberTV = (TextView)convertView.findViewById(R.id.tv_groupmember);
 			 
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		viewHolder.rwaCityTV.setText(mRwaFiterItemsDatasList.get(position).getCity());
-		viewHolder.rwaAdressTV.setText(mRwaFiterItemsDatasList.get(position).getAdr());
-		viewHolder.rwaTitleTV.setText(mRwaFiterItemsDatasList.get(position).getTitle());
-		viewHolder.rwaDescTV.setText(mRwaFiterItemsDatasList.get(position).getDesc());
-		mAQuery.id(viewHolder.rwaIV).image(mRwaFiterItemsDatasList.get(position).getImage());
-		
+		mAQuery.id(viewHolder.groupiconIV).image(mGrouFilterItemsDataList.get(position).getImage());
+		viewHolder.groupTitleTV.setText(mGrouFilterItemsDataList.get(position).getTitle());
 		return convertView;
 	}
-
-	static class ViewHolder{
-		TextView rwaCityTV;
-		TextView rwaAdressTV;
-		TextView rwaTitleTV;
-		TextView rwaDescTV;
-		ImageView rwaIV ;
-	}
 	
+	static class ViewHolder {
+		public ImageView groupiconIV;
+		public TextView groupTitleTV;
+		public TextView groupMemberTV;
+	}
+
 	@Override
 	public Filter getFilter() {
 		// TODO Auto-generated method stub
@@ -106,10 +93,10 @@ public class RWAsAdapter extends BaseAdapter implements Filterable{
 
             FilterResults results = new FilterResults();
 
-            final List<RWAItemsData> list = mRwaItemsDatasList;
+            final List<GroupItemsData> list = mGroupItemsDataList;
 
             int count = list.size();
-            final List<RWAItemsData> nlist = new ArrayList<RWAItemsData>(count);
+            final List<GroupItemsData> nlist = new ArrayList<GroupItemsData>(count);
 
             String filterableString ;
 
@@ -129,13 +116,10 @@ public class RWAsAdapter extends BaseAdapter implements Filterable{
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mRwaFiterItemsDatasList = (List<RWAItemsData>) results.values;
+            mGrouFilterItemsDataList = (List<GroupItemsData>) results.values;
             notifyDataSetChanged();
         }
 
     }
 
-	public void startActivity(int arg2) {
-		mStartActivity.startActivity(mRwaFiterItemsDatasList.get(arg2).getUrl() + "@" + mRwaFiterItemsDatasList.get(arg2).getFurl());
-	}
 }

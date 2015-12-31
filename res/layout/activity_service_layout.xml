@@ -8,11 +8,15 @@
         android:id="@+id/include_header"
         layout="@layout/include_common_header" />
 
-    <android.support.v7.widget.RecyclerView
+    <GridView
         android:id="@+id/recyclerview_service"
+        android:numColumns="2"
+        android:padding="10dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/header_background_color">
-    </android.support.v7.widget.RecyclerView>
+    </GridView>
 
 </LinearLayout>

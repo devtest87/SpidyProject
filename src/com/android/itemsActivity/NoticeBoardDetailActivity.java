@@ -7,6 +7,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.spideycity.R;
@@ -21,7 +23,11 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_noticeboard_detail_layout);
-
+		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		titleTV.setText(getResources().getString(R.string.notice_board));
+		titleTV.setTextColor(getResources().getColor(R.color.black));
+		titleTV.setBackgroundResource(R.color.noticecolor);
+		findViewById(R.id.rl_search).setVisibility(View.GONE);
 
 		
 		loadNoticeBoardDetail();

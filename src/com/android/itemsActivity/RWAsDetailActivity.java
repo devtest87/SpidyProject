@@ -9,7 +9,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -36,6 +40,7 @@ public class RWAsDetailActivity extends BaseActivity{
 
 
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		titleTV.setText(getResources().getString(R.string.rwas));
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
@@ -110,11 +115,19 @@ public class RWAsDetailActivity extends BaseActivity{
 		TextView addressTitleTV = (TextView)findViewById(R.id.tv_address_title);
 		TextView addressTV = (TextView)findViewById(R.id.tv_address);
 		TextView conatctDetailTV = (TextView)findViewById(R.id.tv_contact_detail);
+		TextView regRwaTV = (TextView)findViewById(R.id.tv_register_rwa);
 		ImageView rwaIV = (ImageView)findViewById(R.id.iv_apartments);
 		TextView descTV = (TextView)findViewById(R.id.tv_rwa_detail);
 		LinearLayout quickLookLL = (LinearLayout)findViewById(R.id.ll_quicklook);
 		LinearLayout facilityLL = (LinearLayout)findViewById(R.id.ll_facility);
 		LinearLayout parentLL = (LinearLayout)findViewById(R.id.ll_parent);
+		
+		String regRWA = getResources().getString(R.string.i_am_a_resident_here_register_me_with_this_rwa);
+		int starIndex = regRWA.indexOf("REGISTER");
+		Spannable wordtoSpan = new SpannableString(regRWA);        
+		wordtoSpan.setSpan(new ForegroundColorSpan(R.color.reg_rwa_color), starIndex, starIndex + "REGISTER".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		regRwaTV.setText(wordtoSpan);
+		
 		if(rwaDetailData != null){
 			parentLL.setVisibility(View.VISIBLE);
 

@@ -8,8 +8,9 @@
         <!-- API 11 theme customizations can go here. -->
     </style>
     
-    <style name="Theme.NoTitle" parent="@android:style/Theme.Holo.NoActionBar">
-        <item name="android:windowSoftInputMode">stateHidden</item>
+    
+     <style name="Theme.NoTitle" parent="@android:style/Theme.Holo.Light.NoActionBar">
+         <item name="android:windowSoftInputMode">stateHidden</item>
     </style>
 
 </resources>

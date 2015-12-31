@@ -1,42 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="180dp"
     android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/iv_services_icon"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/servicecolor"
+        android:background="@drawable/shape_rect_circular_service_corner"
+        android:scaleType="center"
         android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="12345"
+        android:textSize="@dimen/service_title_test_size"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_mobilenumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+        android:text="12345"
+        android:textColor="@color/white"
+        android:textSize="@dimen/service_description_test_size" />
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="12345"
+        android:textColor="@color/white"
+        android:textSize="@dimen/service_description_test_size" />
 
     <TextView
         android:id="@+id/tv_checkrequest_status_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="CHECK REQUEST STATUS >" />
+        android:text="CHECK REQUEST STATUS >"
+        android:textColor="@color/white"
+        android:textSize="@dimen/service_description_test_size" />
 
     <TextView
         android:id="@+id/tv_checkrequest_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/shape_rect_circular_grey_corner"
-        android:padding="5dp"
-        android:text="Request Service" />
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="Request Service"
+        android:textColor="@color/white"
+        android:textSize="@dimen/service_description_test_size" />
 
 </LinearLayout>

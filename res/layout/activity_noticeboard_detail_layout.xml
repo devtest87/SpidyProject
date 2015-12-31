@@ -4,58 +4,72 @@
     android:layout_height="match_parent"
     android:background="@color/header_background_color"
     android:orientation="vertical" >
+    <include
+        android:id="@+id/include_header"
+        layout="@layout/include_common_header" />
 
     <TextView
         android:id="@+id/tv_noticeboard_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size"
         android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/rwacolor" />
+        android:layout_marginTop="10dp"
+        android:background="@color/noticecolor" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:id="@+id/tv_postedtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginTop="10dp"
             android:text="@string/posted_"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_description_test_size"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_posteddate"
-            android:textSize="18sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_description_test_size" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/rwacolor" />
+        android:layout_marginTop="10dp"
+        android:background="@color/noticecolor" />
 
     <TextView
         android:id="@+id/tv_noticeboard_detail"
         android:layout_width="wrap_content"
-        android:textSize="18sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_description_test_size" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/rwacolor" />
+        android:layout_marginTop="10dp"
+        android:background="@color/noticecolor" />
+    
+    
 
 </LinearLayout>
