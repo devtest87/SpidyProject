@@ -5,18 +5,17 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="9"
+        android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="com.utils.SpidyCityApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.utils.SpidyCityApplication" >
+         >
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -28,55 +27,57 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@android:style/Theme.Black.NoTitleBar"
             android:name=".RegisterActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         <activity
             android:name=".HomeScreen"
-            android:screenOrientation="portrait" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+             />
         <activity
             android:name="com.android.itemsActivity.RWAsActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle"
+             />
+        <activity
+            android:name="com.android.itemsActivity.RWAsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+'
         <activity
             android:name="com.android.itemsActivity.GroupsActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
-        
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         <activity
             android:name="com.android.itemsActivity.ServicesActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
-        
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         <activity
             android:name="com.android.itemsActivity.BookingActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
-        
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         <activity
             android:name="com.android.itemsActivity.NoticeBoardActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+        <activity
+            android:name="com.android.itemsActivity.NoticeBoardDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         
         <activity
             android:name="com.android.itemsActivity.DirectoryActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         <activity
             android:name="com.android.itemsActivity.SpidyPickActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
         <activity
             android:name="com.android.itemsActivity.OpinionPollActivity"
-            android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
     </application>
 
 </manifest>

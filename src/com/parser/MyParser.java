@@ -22,6 +22,7 @@ import com.bean.NoticeBoardDetailData;
 import com.bean.NoticeBoardDetailItemsData;
 import com.bean.NoticeBoardItemsData;
 import com.bean.OpinionPollsData;
+import com.bean.OpinionPollsItemsData;
 import com.bean.RWAFacilityData;
 import com.bean.RWAItemsData;
 import com.bean.RWAsData;
@@ -532,26 +533,24 @@ public class MyParser
 
 	public OpinionPollsData parseOpinionPolls(String response){
 		OpinionPollsData opinionPollsData = new OpinionPollsData();
-		List<RWAItemsData> rwaItemsDatasList = opinionPollsData.getRwaItemsDatasList();
+		List<OpinionPollsItemsData> opinionPollsItemsDataList = opinionPollsData.getOpinionPollsItemsDataList();
 
 		try {
 
 			JSONArray jArrRWA = new JSONArray(response);
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				RWAItemsData rwaItemsData = new RWAItemsData();
+				OpinionPollsItemsData opinionPollsItemsData = new OpinionPollsItemsData();
 
-				rwaItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				rwaItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				rwaItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				rwaItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				rwaItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				rwaItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				rwaItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				rwaItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				rwaItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				rwaItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				opinionPollsItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				opinionPollsItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				opinionPollsItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				opinionPollsItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
+				opinionPollsItemsData.setStartPoll(jArrRWA.getJSONObject(i).getString("startPoll"));
+				opinionPollsItemsData.setEndPoll(jArrRWA.getJSONObject(i).getString("endPoll"));
+				opinionPollsItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				opinionPollsItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
 
-				rwaItemsDatasList.add(rwaItemsData);
+				opinionPollsItemsDataList.add(opinionPollsItemsData);
 			}
 
 		} catch (JSONException e) {

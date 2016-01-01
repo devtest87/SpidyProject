@@ -1,11 +1,14 @@
 package com.android.itemsActivity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -39,6 +42,47 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 		searchET.setHint(getResources().getString(R.string.search_groups_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.gray));
 		titleTV.setBackgroundResource(R.color.groupcolor);
+		
+		final TextView trendingTV = (TextView)findViewById(R.id.tv_trending);
+		final TextView latestTV = (TextView)findViewById(R.id.tv_latest);
+		final TextView popularTV = (TextView)findViewById(R.id.tv_popular);
+		
+		trendingTV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				trendingTV.setTypeface(Typeface.DEFAULT_BOLD);
+				latestTV.setTypeface(Typeface.DEFAULT);
+				popularTV.setTypeface(Typeface.DEFAULT);
+				trendingTV.setTextColor(getResources().getColor(R.color.white));
+				latestTV.setTextColor(getResources().getColor(R.color.white));
+				popularTV.setTextColor(getResources().getColor(R.color.white));
+			}
+		});
+		latestTV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				trendingTV.setTypeface(Typeface.DEFAULT);
+				latestTV.setTypeface(Typeface.DEFAULT_BOLD);
+				popularTV.setTypeface(Typeface.DEFAULT);
+				trendingTV.setTextColor(getResources().getColor(R.color.white));
+				latestTV.setTextColor(getResources().getColor(R.color.white));
+				popularTV.setTextColor(getResources().getColor(R.color.white));
+			}
+		});
+		popularTV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				trendingTV.setTypeface(Typeface.DEFAULT);
+				latestTV.setTypeface(Typeface.DEFAULT);
+				popularTV.setTypeface(Typeface.DEFAULT_BOLD);
+				trendingTV.setTextColor(getResources().getColor(R.color.white));
+				latestTV.setTextColor(getResources().getColor(R.color.white));
+				popularTV.setTextColor(getResources().getColor(R.color.white));
+			}
+		});
 
 		/*mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_group);
 

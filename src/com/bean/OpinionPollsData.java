@@ -26,11 +26,13 @@ public class OpinionPollsData {
 	private String error_msg;
 	private String error;
 	
-	private List<RWAItemsData> rwaItemsDatasList = new ArrayList<RWAItemsData>();
-	public List<RWAItemsData> getRwaItemsDatasList() {
-		return rwaItemsDatasList;
+	private List<OpinionPollsItemsData> opinionPollsItemsDataList = new ArrayList<OpinionPollsItemsData>();
+	public List<OpinionPollsItemsData> getOpinionPollsItemsDataList() {
+		return opinionPollsItemsDataList;
 	}
-	public void setRwaItemsDatasList(List<RWAItemsData> rwaItemsDatasList) {
-		this.rwaItemsDatasList = rwaItemsDatasList;
+	public void setOpinionPollsItemsDataList(
+			List<OpinionPollsItemsData> opinionPollsItemsDataList) {
+		this.opinionPollsItemsDataList = opinionPollsItemsDataList;
 	}
+	
 }

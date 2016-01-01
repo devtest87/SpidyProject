@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import android.text.format.DateFormat;
+
 
 public class Utils {
 	public static String getTimeRemaining(String date) 
@@ -26,4 +28,18 @@ public class Utils {
 	 
 	    return day > 1 ? day + " days ago" : day + " day ago";
 	} 
+	
+	public static String formatDate(String date){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat df1 = new SimpleDateFormat("dd MMM yyyy");
+		String formattedDate = null;
+        long startTime;
+		try {
+			startTime = df.parse(date).getTime();
+			formattedDate = df1.format(startTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        return formattedDate;
+	}
 }

@@ -9,7 +9,7 @@
         layout="@layout/include_common_navigate_header" />
 
     <GridView
-        android:id="@+id/recyclerview_group"
+        android:id="@+id/recyclerview_service"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"
