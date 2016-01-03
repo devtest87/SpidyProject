@@ -40,11 +40,13 @@ import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
+import com.android.itemsActivity.SpidyPickDetailActivity;
 import com.android.spideycity.LoginActivity;
 import com.android.spideycity.R;
 import com.android.spideycity.RegisterActivity;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
+import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
 import com.bean.DirectoryData;
 import com.bean.GroupDetailData;
@@ -63,6 +65,7 @@ import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.bean.SliderData;
 import com.bean.SpidyPickData;
+import com.bean.SpidyPickDetailData;
 import com.fragment.item.HomeFragment;
 import com.parser.MyParser;
 import com.utils.PrintLog;
@@ -83,6 +86,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String rwasURL = "http://top-story.in/api/rwa_list.json";
 	private static final String rwasDetailURL = "http://top-story.in/api/";
 	private static final String groupsURL = "http://top-story.in/api/groups_slider.json";
+	private static final String createGroupsURL = "http://top-story.in/api/create_group.php";
 	private static final String servicesURL = "http://top-story.in/api/service_list.json";
 	private static final String bookingsURL = "http://top-story.in/api/booking_list.php";
 	private static final String noticeBoardURL = "http://top-story.in/api/notice_list.json";
@@ -143,6 +147,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		case GROUPS:
 			object = group();
 			break;
+		case CREATE_GROUPS:
+			object = createGroup(namePairList);
+			break;
 		case GROUPS_DETAIL:
 			object = groupDetail(namePairList);
 			break;
@@ -175,6 +182,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			break;
 		case SPIDYPICKS:
 			object = spidyPick();
+			break;
+		case SPIDYPICKS_DETAILS:
+			object = spidyPickDetail(namePairList);
 			break;
 		case OPINIONPOLLS:
 			object = opinionPolls();
@@ -319,6 +329,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 				((GroupsActivity) activity).response(groupsData);	
 			}
 			break;
+		case CREATE_GROUPS:
+			CreateGroupDetailData createGroupDetailData = (CreateGroupDetailData)result;
+			if(activity instanceof GroupsActivity){
+				((GroupsActivity) activity).response(createGroupDetailData);	
+			}
+			break;
 		case GROUPS_DETAIL:
 			GroupDetailData groupDetailData = (GroupDetailData)result;
 			if(activity instanceof GroupDetailActivity){
@@ -383,6 +399,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			SpidyPickData spidyPickData = (SpidyPickData)result;
 			if(activity instanceof SpidyPickActivity){
 				((SpidyPickActivity) activity).response(spidyPickData);	
+			}
+			break;
+		case SPIDYPICKS_DETAILS:
+			SpidyPickDetailData spidyPickDetailData = (SpidyPickDetailData)result;
+			if(activity instanceof SpidyPickDetailActivity){
+				((SpidyPickDetailActivity) activity).response(spidyPickDetailData);	
 			}
 			break;
 		case OPINIONPOLLS:
@@ -695,6 +717,21 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		return groupsData;
 	}
 	
+	public CreateGroupDetailData createGroup(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		CreateGroupDetailData groupDetailData;
+		String response = NetworkConnection.networkHit(namePair,createGroupsURL);
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			groupDetailData = new CreateGroupDetailData();
+			groupDetailData.setException(response);
+		}else{
+			groupDetailData = myParser.parseCreateGroup(response);
+		}
+		return groupDetailData;
+	}
+	
 	public GroupDetailData groupDetail(List<NameValuePair> namePair){
 		List<NameValuePair> pair = null;
 		GroupDetailData groupDetailData;
@@ -870,6 +907,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			spidyPickData = myParser.parseSPidyPick(response);
 		}
 		return spidyPickData;
+		
+	}
+	
+	public SpidyPickDetailData spidyPickDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		SpidyPickDetailData spidyPickDetailData;
+		String response = NetworkConnection.networkHit(pair,baseURL + namePair.get(0).getValue());
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			spidyPickDetailData = new SpidyPickDetailData();
+			spidyPickDetailData.setException(response);
+		}else{
+			spidyPickDetailData = myParser.parseSPidyPickDetail(response);
+		}
+		return spidyPickDetailData;
 		
 	}
 	

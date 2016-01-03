@@ -15,6 +15,7 @@ import com.bean.BookingItemsData;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
+import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
 import com.bean.DeleteServicesItemsData;
 import com.bean.DirectoryData;
@@ -40,9 +41,11 @@ import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.bean.ServicesItemsData;
 import com.bean.SliderData;
+import com.bean.SpidyPickData;
+import com.bean.SpidyPickDetailData;
+import com.bean.SpidyPickDetailItemsData;
 import com.bean.SpidyPickItemsData;
 import com.bean.User;
-import com.bean.SpidyPickData;
 
 public class MyParser
 {
@@ -347,6 +350,36 @@ public class MyParser
 
 		return groupDetailData;
 	}
+	public CreateGroupDetailData parseCreateGroup(String response){
+		CreateGroupDetailData groupDetailData = new CreateGroupDetailData();
+		List<GroupDetailItemsData> groupDetailItemsDataList = groupDetailData.getGroupDetailItemsDataList();
+
+		try {
+
+			JSONArray jArrRWA = new JSONArray(response);
+			for (int i = 0; i < jArrRWA.length(); i++) {
+				GroupDetailItemsData groupDetailItemsData = new GroupDetailItemsData();
+
+				groupDetailItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				groupDetailItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				groupDetailItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				groupDetailItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
+				groupDetailItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				groupDetailItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
+				groupDetailItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+
+				groupDetailItemsDataList.add(groupDetailItemsData);
+			}
+
+		} catch (JSONException e) {
+			groupDetailData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return groupDetailData;
+	}
+	
 
 	public ServicesData parseServices(String response){
 		ServicesData servicesData = new ServicesData();
@@ -515,6 +548,7 @@ public class MyParser
 				NoticeBoardItemsData noticeBoardItemsData = new NoticeBoardItemsData();
 
 				noticeBoardItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				noticeBoardItemsData.setIcon(jArrRWA.getJSONObject(i).getString("icon"));
 				noticeBoardItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
 				noticeBoardItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
 				noticeBoardItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
@@ -611,6 +645,35 @@ public class MyParser
 				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
 				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
 				spidyPickItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
+				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+
+				spidyPickItemsDatasList.add(spidyPickItemsData);
+			}
+
+		} catch (JSONException e) {
+			spidyPickData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return spidyPickData;
+	}
+	
+	public SpidyPickDetailData parseSPidyPickDetail(String response){
+		SpidyPickDetailData spidyPickData = new SpidyPickDetailData();
+		List<SpidyPickDetailItemsData> spidyPickItemsDatasList = spidyPickData.getSpidyPickDetailItemsDataList();
+
+		try {
+
+			JSONArray jArrRWA = new JSONArray(response);
+			for (int i = 0; i < jArrRWA.length(); i++) {
+				SpidyPickDetailItemsData spidyPickItemsData = new SpidyPickDetailItemsData();
+
+				spidyPickItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				spidyPickItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				spidyPickItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
+				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
 				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
 
 				spidyPickItemsDatasList.add(spidyPickItemsData);

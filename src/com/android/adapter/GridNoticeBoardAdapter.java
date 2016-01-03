@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.NoticeBoardItemsData;
+import com.utils.Utils;
 
 public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 
@@ -73,9 +74,10 @@ public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
+		mAQuery.id(viewHolder.noticeboardIconIV).image(mNoticeBoardFilterItemsDatasList.get(position).getIcon());
 		viewHolder.noticeboardTitleTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getTitle());
 		viewHolder.noticeboardDescTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getDesc());
-		viewHolder.noticeboardDateTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getReleaseYear());
+		viewHolder.noticeboardDateTV.setText(Utils.getTimeRemaining(mNoticeBoardFilterItemsDatasList.get(position).getReleaseYear()));
 		
 		return convertView;
 	}

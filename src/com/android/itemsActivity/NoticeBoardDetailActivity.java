@@ -9,6 +9,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.spideycity.R;
@@ -28,6 +29,7 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.noticecolor);
 		findViewById(R.id.rl_search).setVisibility(View.GONE);
+		
 
 		
 		loadNoticeBoardDetail();
@@ -87,6 +89,9 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		TextView noticeBoardTitle = (TextView)findViewById(R.id.tv_noticeboard_title);
 		TextView noticeBoardDesc = (TextView)findViewById(R.id.tv_noticeboard_detail);
 		TextView noticeBoardPostDate = (TextView)findViewById(R.id.tv_posteddate);
+		ImageView noticeBoardIV = (ImageView)findViewById(R.id.iv_noticeboard);
+		
+		mAQuery.id(noticeBoardIV).image(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getImage());
 		noticeBoardTitle.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getTitle());
 		noticeBoardDesc.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getDesc());
 		noticeBoardPostDate.setText(Utils.getTimeRemaining(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getReleaseYear()));

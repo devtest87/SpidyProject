@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/header_background_color"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/include_common_header_height" >
+
+        <ImageView
+            android:id="@+id/iv_profile_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/iv_profile_picture"
+            android:layout_toRightOf="@+id/iv_profile_options"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/tv_plus"
+                android:gravity="center"
+                android:text="Groups" 
+                android:textSize="@dimen/rwa_title_test_size"/>
+
+            <TextView
+                android:id="@+id/tv_plus"
+                android:layout_width="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/rwa_title_test_size"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Create Groupd" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_profile_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/include_common_header_navigate_search_height"
+        android:background="@color/search_background_color" >
+
+        <RelativeLayout
+            android:id="@+id/rl_subsearch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/include_common_header_search_height"
+            android:background="@color/search_background_color" >
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/iv_search_icon"
+                android:background="@drawable/shape_rect_circular_corner"
+                android:hint="rwas"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+
+            <ImageView
+                android:id="@+id/iv_search_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/search" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_subsearch"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_trending"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TRENDING /"
+                android:textColor="@color/white"
+                android:textSize="@dimen/rwa_title_test_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_latest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="LATEST /"
+                android:textColor="@color/white"
+                android:textSize="@dimen/rwa_title_test_size" />
+
+            <TextView
+                android:id="@+id/tv_popular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="POPULAR"
+                android:textColor="@color/white"
+                android:textSize="@dimen/rwa_title_test_size" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

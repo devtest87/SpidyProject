@@ -8,11 +8,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.spideycity.R;
 import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
+import com.bean.SpidyPickDetailData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.Utils;
@@ -82,12 +84,16 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		super.onBackPressed();
 	}
 
-	public void response(NoticeBoardDetailData noticeBoardDetailData) {
+	public void response(SpidyPickDetailData spidyPickDetailData) {
 		TextView noticeBoardTitle = (TextView)findViewById(R.id.tv_noticeboard_title);
 		TextView noticeBoardDesc = (TextView)findViewById(R.id.tv_noticeboard_detail);
 		TextView noticeBoardPostDate = (TextView)findViewById(R.id.tv_posteddate);
-		noticeBoardTitle.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getTitle());
-		noticeBoardDesc.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getDesc());
-		noticeBoardPostDate.setText(Utils.getTimeRemaining(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getReleaseYear()));
+		
+        ImageView noticeBoardIV = (ImageView)findViewById(R.id.iv_noticeboard);
+		
+		mAQuery.id(noticeBoardIV).image(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getImage());
+		noticeBoardTitle.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTitle());
+		noticeBoardDesc.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getDesc());
+		noticeBoardPostDate.setText(Utils.getTimeRemaining(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getReleaseYear()));
 	}
 }

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_rect_circular_header_corner"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Create Group"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <TextView
+        android:id="@+id/tv_title_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginLeft="20dp"
+        android:text="Group will be visible to entire City Spidey community"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_description_test_size" />
+
+    <TextView
+        android:id="@+id/iv_cancel_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:text="Cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <TextView
+        android:id="@+id/tv_groupname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title_hint"
+        android:layout_marginTop="30dp"
+        android:text="Group Name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <EditText
+        android:id="@+id/et_groupname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_groupname"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_rect_circular_corner"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/tv_add_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_groupname"
+        android:layout_marginTop="30dp"
+        android:text="Add Description"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <EditText
+        android:id="@+id/et_add_description"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/tv_add_description"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_rect_circular_corner"
+        android:padding="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_add_description"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/tv_add_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPLOAD PHOTO"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_description_test_size" />
+
+        <RelativeLayout
+            android:id="@+id/rl_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tv_add_image"
+            android:background="@drawable/shape_rect_circular_darkgrey_corner" >
+
+            <ImageView
+                android:id="@+id/iv_click_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_click_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="CLICK\nHERE"
+                android:textColor="@color/white"
+                android:textSize="@dimen/rwa_description_test_size" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/tv_add_image"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_peoplecanjoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PEOPLE WHO CAN JOIN"
+                android:textColor="@color/white"
+                android:textSize="@dimen/rwa_description_test_size" />
+
+            <RadioGroup
+                android:id="@+id/rg_seclect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/radio_same_rwa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAME RWA"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/rwa_description_test_size" />
+
+                <RadioButton
+                    android:id="@+id/radio_neighbourhood_rwa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NEIGHBOURHOOD RWA"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/rwa_description_test_size" />
+
+                <RadioButton
+                    android:id="@+id/radio_entire_zones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENTIRE ZONES"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/rwa_description_test_size" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/rl_photo"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_rect_circular_darkgrey_corner"
+            android:minWidth="100dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="CREATE GROUP"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_title_test_size" />
+    </RelativeLayout>
+
+</RelativeLayout>

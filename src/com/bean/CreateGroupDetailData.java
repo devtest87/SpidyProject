@@ -3,7 +3,7 @@ package com.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpidyPickDetailData {
+public class CreateGroupDetailData {
 	private String exception = "noexception";
 	public String getException() {
 		return exception;
@@ -26,13 +26,13 @@ public class SpidyPickDetailData {
 	private String error_msg;
 	private String error;
 	
-	private List<SpidyPickDetailItemsData> spidyPickDetailItemsDataList = new ArrayList<SpidyPickDetailItemsData>();
-	public List<SpidyPickDetailItemsData> getSpidyPickDetailItemsDataList() {
-		return spidyPickDetailItemsDataList;
+	private List<GroupDetailItemsData> groupDetailItemsDataList = new ArrayList<GroupDetailItemsData>();
+	public List<GroupDetailItemsData> getGroupDetailItemsDataList() {
+		return groupDetailItemsDataList;
 	}
-	public void setSpidyPickDetailItemsDataList(
-			List<SpidyPickDetailItemsData> spidyPickDetailItemsDataList) {
-		this.spidyPickDetailItemsDataList = spidyPickDetailItemsDataList;
+	public void setGroupDetailItemsDataList(
+			List<GroupDetailItemsData> groupDetailItemsDataList) {
+		this.groupDetailItemsDataList = groupDetailItemsDataList;
 	}
 	
 }

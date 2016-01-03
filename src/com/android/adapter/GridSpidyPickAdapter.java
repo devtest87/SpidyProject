@@ -16,6 +16,7 @@ import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.NoticeBoardItemsData;
 import com.bean.SpidyPickItemsData;
+import com.utils.Utils;
 
 public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 
@@ -63,7 +64,7 @@ public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 		if(convertView == null){
 			viewHolder = new ViewHolder();
 			convertView = mLayoutInflater.inflate(R.layout.row_spidypick_layout, null, false);
-			viewHolder.noticeboardIconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
+			//viewHolder.noticeboardIconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
 			viewHolder.noticeboardTitleTV = (TextView)convertView.findViewById(R.id.tv_noticeboardtitle);
 			viewHolder.noticeboardCommentTV = (TextView)convertView.findViewById(R.id.tv_noticeboardcomment);
 			viewHolder.noticeboardDescTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddescription);
@@ -74,9 +75,10 @@ public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
+		//mAQuery.id(viewHolder.noticeboardIconIV).image(mNoticeBoardFilterItemsDatasList.get(position).getIcon());
 		viewHolder.noticeboardTitleTV.setText(mSpidyPickFilterItemsDatasList.get(position).getTitle());
 		viewHolder.noticeboardDescTV.setText(mSpidyPickFilterItemsDatasList.get(position).getDesc());
-		viewHolder.noticeboardDateTV.setText(mSpidyPickFilterItemsDatasList.get(position).getReleaseYear());
+		viewHolder.noticeboardDateTV.setText(Utils.getTimeRemaining(mSpidyPickFilterItemsDatasList.get(position).getReleaseYear()));
 		
 		return convertView;
 	}

@@ -3,6 +3,7 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.GroupItemsData;
+import com.utils.PrintLog;
 
 public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 
@@ -59,7 +61,7 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 		if(convertView == null){
 			viewHolder = new ViewHolder();
 			convertView = mLayoutInflater.inflate(R.layout.row_group_layout, null, false);
-			viewHolder.groupiconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
+			viewHolder.groupiconIV = (ImageView)convertView.findViewById(R.id.iv_groupicon);
 			viewHolder.groupTitleTV = (TextView)convertView.findViewById(R.id.tv_grouptitle);
 			viewHolder.groupMemberTV = (TextView)convertView.findViewById(R.id.tv_groupmember);
 			 
@@ -68,6 +70,7 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
+		//PrintLog.show(Log.ERROR, "", mGrouFilterItemsDataList.get(position).getImage());
 		mAQuery.id(viewHolder.groupiconIV).image(mGrouFilterItemsDataList.get(position).getImage());
 		viewHolder.groupTitleTV.setText(mGrouFilterItemsDataList.get(position).getTitle());
 		return convertView;

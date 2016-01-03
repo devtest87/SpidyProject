@@ -47,6 +47,13 @@ public class NoticeBoardItemsData {
 	private String title;
 	private String  desc;
 	private String image;
+	private String icon;
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	private String releaseYear;
 	private String genre;
 	private String url;

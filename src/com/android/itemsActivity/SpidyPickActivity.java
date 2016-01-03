@@ -39,7 +39,7 @@ public class SpidyPickActivity extends BaseActivity implements StartActivity{
 		//		mExecutorService.execute(new loadRWAs());
 		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
-		titleTV.setText(getResources().getString(R.string.notice_board));
+		titleTV.setText(getResources().getString(R.string.spidey_pick));
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_noticeboard_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
@@ -94,7 +94,7 @@ public class SpidyPickActivity extends BaseActivity implements StartActivity{
 	private void loadRWAs() {
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
-		request.setNetworkRequestName(NetworkRequestName.NOTICEBOARDS);
+		request.setNetworkRequestName(NetworkRequestName.SPIDYPICKS);
 		request.setCallingClassObject(this);
 		NetworkCall networkCall = new NetworkCall(request);
 		networkCall.execute("");
