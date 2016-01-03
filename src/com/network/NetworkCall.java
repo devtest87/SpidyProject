@@ -743,9 +743,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		return requestServicesData;
 	}
 	
-	private RequestServicesData checkRquestServiceStatus(List<NameValuePair> namePair){
+	private CheckRequestData checkRquestServiceStatus(List<NameValuePair> namePair){
 
-		RequestServicesData requestServicesData = new RequestServicesData();
+		CheckRequestData requestServicesData = new CheckRequestData();
 		String response = NetworkConnection.networkHit(namePair,checkStatusURL);
 
 		//		response = LoadData("getlogin.txt");
@@ -754,7 +754,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
 			requestServicesData.setException(response);
 		}else{
-			requestServicesData = myParser.parseRequestServices(response);
+			requestServicesData = myParser.parseCheckRequestServices(response);
 		}
 		return requestServicesData;
 	}

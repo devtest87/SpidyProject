@@ -13,6 +13,8 @@ import android.content.Context;
 
 import com.bean.BookingItemsData;
 import com.bean.BookingsData;
+import com.bean.CheckRequestData;
+import com.bean.CheckRequestItemsData;
 import com.bean.DeleteServicesData;
 import com.bean.DeleteServicesItemsData;
 import com.bean.DirectoryData;
@@ -397,6 +399,34 @@ public class MyParser
 				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
 				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
 				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
+
+				servicesItemsDatasList.add(servicesItemsData);
+			}
+
+		} catch (JSONException e) {
+			requestServicesData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return requestServicesData;
+	}
+	
+	public CheckRequestData parseCheckRequestServices(String response){
+		CheckRequestData requestServicesData = new CheckRequestData();
+		List<CheckRequestItemsData> servicesItemsDatasList = requestServicesData.getCheckRequestItemsDatasList();
+
+		try {
+
+			JSONArray jArrRWA = new JSONArray(response);
+			for (int i = 0; i < jArrRWA.length(); i++) {
+				CheckRequestItemsData servicesItemsData = new CheckRequestItemsData();
+
+				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
 
 				servicesItemsDatasList.add(servicesItemsData);
 			}
