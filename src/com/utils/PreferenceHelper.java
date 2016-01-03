@@ -22,11 +22,21 @@ public class PreferenceHelper {
 
 	public static enum PreferenceKey {
 
+		IS_LOGIN("false"),
+		
+		RWAS_ID(null),
+		
+		RWAS_NAME(null),
+		
+		EMAIL(null),
+		
 		USER_ID(null),
+		
+		MOBILE(null),
 
-		USER_FIRST_NAME(null),
+		NAME(null),
 
-		USER_LAST_NAME(null);
+		PHOTO(null);
 
 		String mDefaultValue;
 		PreferenceKey(String defaultValue) {

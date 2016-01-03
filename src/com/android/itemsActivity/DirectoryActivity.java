@@ -1,23 +1,42 @@
 package com.android.itemsActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.android.adapter.DirectoryAdapter;
+import com.android.adapter.DirectoryAdapter.StartActivity;
 import com.android.spideycity.R;
 import com.bean.DirectoryData;
+import com.bean.DiretoryItemsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
-
-public class DirectoryActivity extends BaseActivity{
+public class DirectoryActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;
+	private DirectoryAdapter mDirectoryAdapter;
+	private List<DiretoryItemsData> mDiretoryItemsDataList;
+	private ListView mDirectoryListView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_service_layout);
-//		mExecutorService = Executors.newFixedThreadPool(1);
+		setContentView(R.layout.activity_directory_layout);
 //		mExecutorService.execute(new loadRWAs());
 		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
@@ -27,14 +46,49 @@ public class DirectoryActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.directorycolor);
 		
-		loadRWAs();
+		mDirectoryListView = (ListView)findViewById(R.id.listview_directory);
+		mDirectoryListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				mDirectoryAdapter.startActivity(arg2);
+			}
+		});
+
+		searchET.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				System.out.println("Text ["+s+"]");
+				if(mDirectoryAdapter!=null)
+					mDirectoryAdapter.getFilter().filter(s.toString());                           
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
+
+		
+		loadDirectory();
 	}
 	
-	private void loadRWAs() {
+	private void loadDirectory() {
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.DIRECTORY);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("rwa_id", "3");//PreferenceHelper.getSingleInstance(this.getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		list.add(valuePair);
 		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
 		NetworkCall networkCall = new NetworkCall(request);
 		networkCall.execute("");
 	}
@@ -77,6 +131,12 @@ public class DirectoryActivity extends BaseActivity{
 	}
 
 	public void response(DirectoryData directoryData) {
+		mDirectoryAdapter = new DirectoryAdapter(getLayoutInflater(), this, directoryData.getDiretoryItemsDatasList(), mAQuery);
+		mDirectoryListView.setAdapter(mDirectoryAdapter);
+	}
+
+	@Override
+	public void startActivity(String serviceId) {
 		
 	}
 	

@@ -93,7 +93,10 @@ public class GridServiceAdapter extends BaseAdapter implements Filterable{
 			@Override
 			public void onClick(View v) {
 				int pos = Integer.parseInt(v.getTag().toString());
-				mStartActivity.startActivity("RS@" +mServicesFilterItemsDatasList.get(pos).getId());
+				mStartActivity.startActivity("RS@" +
+						mServicesFilterItemsDatasList.get(pos).getIcon()+"#"+
+						mServicesFilterItemsDatasList.get(pos).getId()+"#"+
+						mServicesFilterItemsDatasList.get(pos).getTitle());
 
 			}
 		});

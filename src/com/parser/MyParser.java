@@ -11,8 +11,14 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.bean.BookingItemsData;
 import com.bean.BookingsData;
+import com.bean.DeleteServicesData;
+import com.bean.DeleteServicesItemsData;
 import com.bean.DirectoryData;
+import com.bean.DiretoryItemsData;
+import com.bean.GroupDetailData;
+import com.bean.GroupDetailItemsData;
 import com.bean.GroupItemsData;
 import com.bean.GroupsData;
 import com.bean.HomeSliderItem;
@@ -32,8 +38,9 @@ import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.bean.ServicesItemsData;
 import com.bean.SliderData;
+import com.bean.SpidyPickItemsData;
 import com.bean.User;
-import com.bean.spidyPickData;
+import com.bean.SpidyPickData;
 
 public class MyParser
 {
@@ -308,6 +315,37 @@ public class MyParser
 		return groupsData;
 	}
 
+	
+	public GroupDetailData parseGroupsDetail(String response){
+		GroupDetailData groupDetailData = new GroupDetailData();
+		List<GroupDetailItemsData> groupDetailItemsDataList = groupDetailData.getGroupDetailItemsDataList();
+
+		try {
+
+			JSONArray jArrRWA = new JSONArray(response);
+			for (int i = 0; i < jArrRWA.length(); i++) {
+				GroupDetailItemsData groupDetailItemsData = new GroupDetailItemsData();
+
+				groupDetailItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				groupDetailItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				groupDetailItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				groupDetailItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
+				groupDetailItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				groupDetailItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
+				groupDetailItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+
+				groupDetailItemsDataList.add(groupDetailItemsData);
+			}
+
+		} catch (JSONException e) {
+			groupDetailData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return groupDetailData;
+	}
+
 	public ServicesData parseServices(String response){
 		ServicesData servicesData = new ServicesData();
 		List<ServicesItemsData> servicesItemsDatasList = servicesData.getServicesItemsDatasList();
@@ -371,29 +409,60 @@ public class MyParser
 
 		return requestServicesData;
 	}
-
-	public BookingsData parseBooings(String response){
-		BookingsData bookingsData = new BookingsData();
-		List<RWAItemsData> rwaItemsDatasList = bookingsData.getRwaItemsDatasList();
+	
+	public DeleteServicesData parseDeleteRequestServices(String response){
+		DeleteServicesData deleteServicesData = new DeleteServicesData();
+		List<DeleteServicesItemsData> DeleteServicesItemsDataList = deleteServicesData.getDeleteServicesItemsDataList();
 
 		try {
 
 			JSONArray jArrRWA = new JSONArray(response);
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				RWAItemsData rwaItemsData = new RWAItemsData();
+				DeleteServicesItemsData servicesItemsData = new DeleteServicesItemsData();
 
-				rwaItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				rwaItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				rwaItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				rwaItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				rwaItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				rwaItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				rwaItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				rwaItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				rwaItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				rwaItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+				servicesItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
+				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
+				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
 
-				rwaItemsDatasList.add(rwaItemsData);
+				DeleteServicesItemsDataList.add(servicesItemsData);
+			}
+
+		} catch (JSONException e) {
+			deleteServicesData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return deleteServicesData;
+	}
+
+	public BookingsData parseBooings(String response){
+		BookingsData bookingsData = new BookingsData();
+		List<BookingItemsData> bookingItemsDataList = bookingsData.getBookingItemsDataList();
+
+		try {
+
+			JSONArray jArrRWA = new JSONArray(response);
+			for (int i = 0; i < jArrRWA.length(); i++) {
+				BookingItemsData bookingItemsData = new BookingItemsData();
+
+				bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				bookingItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				bookingItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				bookingItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
+				bookingItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
+				bookingItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
+				bookingItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				bookingItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
+				bookingItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
+				bookingItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+
+				bookingItemsDataList.add(bookingItemsData);
 			}
 
 		} catch (JSONException e) {
@@ -467,26 +536,24 @@ public class MyParser
 
 	public DirectoryData parseDirectory(String response){
 		DirectoryData directoryData = new DirectoryData();
-		List<RWAItemsData> rwaItemsDatasList = directoryData.getRwaItemsDatasList();
+		List<DiretoryItemsData> diretoryItemsDatasList = directoryData.getDiretoryItemsDatasList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
+			JSONObject JsonObject = new JSONObject(response);
+			JSONArray jArrRWA = JsonObject.getJSONArray("myservice");
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				RWAItemsData rwaItemsData = new RWAItemsData();
+				DiretoryItemsData diretoryItemsData = new DiretoryItemsData();
 
-				rwaItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				rwaItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				rwaItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				rwaItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				rwaItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				rwaItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				rwaItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				rwaItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				rwaItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				rwaItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				diretoryItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				diretoryItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
+				diretoryItemsData.setLandline(jArrRWA.getJSONObject(i).getString("landline"));
+				diretoryItemsData.setExtno(jArrRWA.getJSONObject(i).getString("extno"));
+				diretoryItemsData.setHouseno(jArrRWA.getJSONObject(i).getString("houseno"));
+				diretoryItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+				diretoryItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
 
-				rwaItemsDatasList.add(rwaItemsData);
+				diretoryItemsDatasList.add(diretoryItemsData);
 			}
 
 		} catch (JSONException e) {
@@ -498,28 +565,25 @@ public class MyParser
 		return directoryData;
 	}
 
-	public spidyPickData parseSPidyPick(String response){
-		spidyPickData spidyPickData = new spidyPickData();
-		List<RWAItemsData> rwaItemsDatasList = spidyPickData.getRwaItemsDatasList();
+	public SpidyPickData parseSPidyPick(String response){
+		SpidyPickData spidyPickData = new SpidyPickData();
+		List<SpidyPickItemsData> spidyPickItemsDatasList = spidyPickData.getSpidyPickItemsDatasL();
 
 		try {
 
 			JSONArray jArrRWA = new JSONArray(response);
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				RWAItemsData rwaItemsData = new RWAItemsData();
+				SpidyPickItemsData spidyPickItemsData = new SpidyPickItemsData();
 
-				rwaItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				rwaItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				rwaItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				rwaItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				rwaItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				rwaItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				rwaItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				rwaItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				rwaItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				rwaItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				spidyPickItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				spidyPickItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				spidyPickItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
+				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				spidyPickItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
+				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
 
-				rwaItemsDatasList.add(rwaItemsData);
+				spidyPickItemsDatasList.add(spidyPickItemsData);
 			}
 
 		} catch (JSONException e) {

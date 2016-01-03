@@ -29,21 +29,25 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.itemsActivity.BookingActivity;
+import com.android.itemsActivity.CheckRequestStatusActivity;
 import com.android.itemsActivity.DirectoryActivity;
+import com.android.itemsActivity.GroupDetailActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
 import com.android.itemsActivity.NoticeBoardDetailActivity;
 import com.android.itemsActivity.OpinionPollActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.RWAsDetailActivity;
-import com.android.itemsActivity.RequestServicesActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
 import com.android.spideycity.LoginActivity;
 import com.android.spideycity.R;
 import com.android.spideycity.RegisterActivity;
 import com.bean.BookingsData;
+import com.bean.CheckRequestData;
+import com.bean.DeleteServicesData;
 import com.bean.DirectoryData;
+import com.bean.GroupDetailData;
 import com.bean.GroupsData;
 import com.bean.LoginData;
 import com.bean.NoticeBoardData;
@@ -58,7 +62,7 @@ import com.bean.RequestBean;
 import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.bean.SliderData;
-import com.bean.spidyPickData;
+import com.bean.SpidyPickData;
 import com.fragment.item.HomeFragment;
 import com.parser.MyParser;
 import com.utils.PrintLog;
@@ -72,6 +76,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private MyParser myParser;
 	private ProgressDialog mProgressDialog;
 
+	private static final String baseURL = "http://top-story.in/api/";
 	private static final String LoginURL = "http://top-story.in/api/login.php";
 	private static final String registerURL = "http://top-story.in/api/register.php";
 	private static final String sliderTopURL = "http://top-story.in/api/news_slider.json";
@@ -82,11 +87,11 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String bookingsURL = "http://top-story.in/api/booking_list.php";
 	private static final String noticeBoardURL = "http://top-story.in/api/notice_list.json";
 	private static final String noticeBoardDetailURL = "http://top-story.in/api/";
-	private static final String directoryURL = "http://top-story.in/api/service_list.json";
+	private static final String directoryURL = "http://top-story.in/api/directory.php";
 	private static final String spidyPickURL = "http://top-story.in/api/news_slider.json";
 	private static final String opinionPollsURL = "http://top-story.in/api/poll_list.json";
-	private static final String requestServiceURL = "http://top-story.in/api/request_service.php";
-	private static final String checkStatusURL = "http://top-story.in/api/my_service.php";
+	private static final String requestServiceURL = "http://top-story.in/api/request_service.json";
+	private static final String checkStatusURL = "http://top-story.in/api/my_service.json";
 	
 	//Service request api: http://top-story.in/api/request_service.php?user_id=5&service_id=4&rwa_id=1&msg=testfjjbf 'wejf wef w efwew ef efwe f
 		//Check Request status : http://top-story.in/api/my_service.php?user_id=5
@@ -138,6 +143,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		case GROUPS:
 			object = group();
 			break;
+		case GROUPS_DETAIL:
+			object = groupDetail(namePairList);
+			break;
 		case SERVICES:
 			object = services();
 			break;
@@ -150,6 +158,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		case SERVICES_REQUEST_STATUS:
 			object = checkRquestServiceStatus(namePairList);
 			break;
+		case SERVICES_DELETE:
+			object = deleteRquestServiceStatus(namePairList);
+			break;
 		case BOOKINGS:
 			object = bookings();
 			break;
@@ -160,7 +171,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			object = noticeBoardsDetail(namePairList);
 			break;
 		case DIRECTORY:
-			object = directory();
+			object = directory(namePairList);
 			break;
 		case SPIDYPICKS:
 			object = spidyPick();
@@ -308,6 +319,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 				((GroupsActivity) activity).response(groupsData);	
 			}
 			break;
+		case GROUPS_DETAIL:
+			GroupDetailData groupDetailData = (GroupDetailData)result;
+			if(activity instanceof GroupDetailActivity){
+				((GroupDetailActivity) activity).response(groupDetailData);	
+			}
+			break;
 		case SERVICES:
 			ServicesData servicesData = (ServicesData)result;
 			if(activity instanceof ServicesActivity){
@@ -327,9 +344,15 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			}
 			break;
 		case SERVICES_REQUEST_STATUS:
-			RequestServicesData requestServicesData1 = (RequestServicesData)result;
-			if(activity instanceof ServicesActivity){
-				((ServicesActivity) activity).response(requestServicesData1);	
+			CheckRequestData checkRequestData = (CheckRequestData)result;
+			if(activity instanceof CheckRequestStatusActivity){
+				((CheckRequestStatusActivity) activity).response(checkRequestData);	
+			}
+			break;
+		case SERVICES_DELETE:
+			DeleteServicesData deleteServicesData = (DeleteServicesData)result;
+			if(activity instanceof CheckRequestStatusActivity){
+				((CheckRequestStatusActivity) activity).response(deleteServicesData);	
 			}
 			break;
 		case BOOKINGS:
@@ -357,7 +380,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			}
 			break;
 		case SPIDYPICKS:
-			spidyPickData spidyPickData = (spidyPickData)result;
+			SpidyPickData spidyPickData = (SpidyPickData)result;
 			if(activity instanceof SpidyPickActivity){
 				((SpidyPickActivity) activity).response(spidyPickData);	
 			}
@@ -495,7 +518,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		String response = NetworkConnection.networkHit(namePair,LoginURL);
 
 		//		response = LoadData("getlogin.txt");
-
+		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
 			logindata.setException(response);
 		}else{
@@ -672,6 +695,21 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		return groupsData;
 	}
 	
+	public GroupDetailData groupDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		GroupDetailData groupDetailData;
+		String response = NetworkConnection.networkHit(pair,baseURL + namePair.get(0).getValue());
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			groupDetailData = new GroupDetailData();
+			groupDetailData.setException(response);
+		}else{
+			groupDetailData = myParser.parseGroupsDetail(response);
+		}
+		return groupDetailData;
+	}
+	
 	public ServicesData services(){
 		List<NameValuePair> pair = null;
 		ServicesData servicesData;
@@ -690,6 +728,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	
 	private RequestServicesData requestService(List<NameValuePair> namePair){
 
+		PrintLog.show(Log.ERROR, TAG, "" + namePair);
 		RequestServicesData requestServicesData = new RequestServicesData();
 		String response = NetworkConnection.networkHit(namePair,requestServiceURL);
 
@@ -718,6 +757,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			requestServicesData = myParser.parseRequestServices(response);
 		}
 		return requestServicesData;
+	}
+	
+	private DeleteServicesData deleteRquestServiceStatus(List<NameValuePair> namePair){
+
+		DeleteServicesData deleteServicesData = new DeleteServicesData();
+		String response = NetworkConnection.networkHit(namePair,checkStatusURL);
+
+		//		response = LoadData("getlogin.txt");
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			deleteServicesData.setException(response);
+		}else{
+			deleteServicesData = myParser.parseDeleteRequestServices(response);
+		}
+		return deleteServicesData;
 	}
 	
 	private RequestServicesData ServiceDetail(List<NameValuePair> namePair){
@@ -785,10 +840,11 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	}
 	
 	
-	public DirectoryData directory(){
+	public DirectoryData directory(List<NameValuePair> namePair){
+		PrintLog.show(Log.ERROR, TAG, "" + namePair);
 		List<NameValuePair> pair = null;
 		DirectoryData directoryData;
-		String response = NetworkConnection.networkHit(pair,directoryURL);
+		String response = NetworkConnection.networkHit(namePair,directoryURL);
 
 		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
@@ -801,14 +857,14 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		
 	}
 	
-	public spidyPickData spidyPick(){
+	public SpidyPickData spidyPick(){
 		List<NameValuePair> pair = null;
-		spidyPickData spidyPickData;
+		SpidyPickData spidyPickData;
 		String response = NetworkConnection.networkHit(pair,spidyPickURL);
 
 		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
-			spidyPickData = new spidyPickData();
+			spidyPickData = new SpidyPickData();
 			spidyPickData.setException(response);
 		}else{
 			spidyPickData = myParser.parseSPidyPick(response);

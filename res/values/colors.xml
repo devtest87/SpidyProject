@@ -56,6 +56,10 @@
     
     <color name="header_background_color">#4A4A4A</color>
     <color name="search_background_color">#9A9A9A</color>
+     <color name="request_service_bg_color">#CDCDCD</color>
+     <color name="request_service_text_heading_color">#5C5C5C</color>
+     <color name="request_service_text_color">#5A5A5A</color>
+    
     <color name="reg_rwa_color">#8D8FF6</color>
     <!-- <color name="raw_title_bg_color">#00D5FF</color>
     <color name="services_title_bg_color">#A5549A</color>

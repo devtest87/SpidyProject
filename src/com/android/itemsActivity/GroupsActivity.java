@@ -1,5 +1,6 @@
 package com.android.itemsActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,9 +10,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.android.adapter.GridGroupListAdapter;
 import com.android.adapter.GridGroupListAdapter.StartActivity;
@@ -40,7 +43,7 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 		titleTV.setText(getResources().getString(R.string.groups));
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_groups_hint));
-		titleTV.setTextColor(getResources().getColor(R.color.gray));
+		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.groupcolor);
 		
 		final TextView trendingTV = (TextView)findViewById(R.id.tv_trending);
@@ -97,6 +100,16 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 		mRecyclerView.addItemDecoration(spacesItemDecoration);*/
 		
 		mGridView = (GridView)findViewById(R.id.recyclerview_group);
+		
+		
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				mGridGroupListAdapter.startActivity(arg2);
+			}
+		});
 
 		searchET.addTextChangedListener(new TextWatcher() {
 
@@ -177,8 +190,10 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 	}
 
 	@Override
-	public void startActivity(String serviceId) {
-		
+	public void startActivity(String url) {
+		Intent intent = new Intent(this, GroupDetailActivity.class);
+		intent.putExtra("url", url);
+		startActivity(intent);
 	}
 
 }

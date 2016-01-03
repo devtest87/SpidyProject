@@ -9,47 +9,48 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
-import com.bean.GroupItemsData;
+import com.bean.DiretoryItemsData;
 
-public class GridGroupListAdapter extends BaseAdapter implements Filterable {
+public class DirectoryAdapter extends BaseAdapter implements Filterable{
 
-	private List<GroupItemsData> mGroupItemsDataList;
-	private List<GroupItemsData> mGrouFilterItemsDataList;
-	private StartActivity mStartActivity;
+	private List<DiretoryItemsData> mDiretoryItemsDatasList;
+	private List<DiretoryItemsData> mDiretoryFilterItemsDatasList;
 	private LayoutInflater mLayoutInflater;
+	private StartActivity mStartActivity;
 	private AQuery mAQuery;
 	private ItemFilter mFilter = new ItemFilter();
-
+	
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
-
-	public GridGroupListAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<GroupItemsData> groupItemsDataList, AQuery aQuery) {
-		mGroupItemsDataList = groupItemsDataList;
-		mGrouFilterItemsDataList = groupItemsDataList;
-		mLayoutInflater = layoutInflater;
+	
+	public DirectoryAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<DiretoryItemsData> rwaItemsDatasList, AQuery aQuery) {
+		mDiretoryItemsDatasList = rwaItemsDatasList;
+		mDiretoryFilterItemsDatasList = rwaItemsDatasList;
 		mStartActivity = startActivity;
+		mLayoutInflater = layoutInflater;
 		mAQuery = aQuery;
 	}
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return mGrouFilterItemsDataList.size();
+		return mDiretoryFilterItemsDatasList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return mGrouFilterItemsDataList.get(position);
+		return mDiretoryFilterItemsDatasList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -58,27 +59,35 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 		ViewHolder viewHolder;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
-			convertView = mLayoutInflater.inflate(R.layout.row_group_layout, null, false);
-			viewHolder.groupiconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
-			viewHolder.groupTitleTV = (TextView)convertView.findViewById(R.id.tv_grouptitle);
-			viewHolder.groupMemberTV = (TextView)convertView.findViewById(R.id.tv_groupmember);
+			convertView = mLayoutInflater.inflate(R.layout.row_directory_layout, null, false);
+			viewHolder.houseNoTV = (TextView)convertView.findViewById(R.id.tv_directory_houseno);
+			viewHolder.nameTV = (TextView)convertView.findViewById(R.id.tv_directory_name);
+			viewHolder.mobileNoTV = (TextView)convertView.findViewById(R.id.tv_directory_mobileno);
+			viewHolder.landlineNoTV = (TextView)convertView.findViewById(R.id.tv_directory_landlineno);
+			viewHolder.extnoTV = (TextView)convertView.findViewById(R.id.tv_directory_extno);
 			 
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		mAQuery.id(viewHolder.groupiconIV).image(mGrouFilterItemsDataList.get(position).getImage());
-		viewHolder.groupTitleTV.setText(mGrouFilterItemsDataList.get(position).getTitle());
+		viewHolder.houseNoTV.setText("House No: " + mDiretoryFilterItemsDatasList.get(position).getHouseno());
+		viewHolder.nameTV.setText("Name: " + mDiretoryFilterItemsDatasList.get(position).getTitle());
+		viewHolder.mobileNoTV.setText("Mobile No: " + mDiretoryFilterItemsDatasList.get(position).getMobile());
+		viewHolder.landlineNoTV.setText("Landline No: " + mDiretoryFilterItemsDatasList.get(position).getLandline());
+		viewHolder.extnoTV.setText("Extno: " + mDiretoryFilterItemsDatasList.get(position).getExtno());
+		
 		return convertView;
 	}
-	
-	static class ViewHolder {
-		public ImageView groupiconIV;
-		public TextView groupTitleTV;
-		public TextView groupMemberTV;
-	}
 
+	static class ViewHolder{
+		TextView houseNoTV;
+		TextView nameTV;
+		TextView mobileNoTV;
+		TextView landlineNoTV;
+		TextView extnoTV;
+	}
+	
 	@Override
 	public Filter getFilter() {
 		// TODO Auto-generated method stub
@@ -93,10 +102,10 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 
             FilterResults results = new FilterResults();
 
-            final List<GroupItemsData> list = mGroupItemsDataList;
+            final List<DiretoryItemsData> list = mDiretoryItemsDatasList;
 
             int count = list.size();
-            final List<GroupItemsData> nlist = new ArrayList<GroupItemsData>(count);
+            final List<DiretoryItemsData> nlist = new ArrayList<DiretoryItemsData>(count);
 
             String filterableString ;
 
@@ -116,14 +125,12 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mGrouFilterItemsDataList = (List<GroupItemsData>) results.values;
+        	mDiretoryFilterItemsDatasList = (List<DiretoryItemsData>) results.values;
             notifyDataSetChanged();
         }
 
     }
 
 	public void startActivity(int arg2) {
-		mStartActivity.startActivity(mGrouFilterItemsDataList.get(arg2).getUrl());
 	}
-
 }

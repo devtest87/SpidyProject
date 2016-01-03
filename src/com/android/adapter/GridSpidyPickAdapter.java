@@ -14,42 +14,46 @@ import android.widget.TextView;
 
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
-import com.bean.GroupItemsData;
+import com.bean.NoticeBoardItemsData;
+import com.bean.SpidyPickItemsData;
 
-public class GridGroupListAdapter extends BaseAdapter implements Filterable {
+public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 
-	private List<GroupItemsData> mGroupItemsDataList;
-	private List<GroupItemsData> mGrouFilterItemsDataList;
+	private List<SpidyPickItemsData> mSpidyPickItemsDatasList;
+	private List<SpidyPickItemsData> mSpidyPickFilterItemsDatasList;
 	private StartActivity mStartActivity;
-	private LayoutInflater mLayoutInflater;
 	private AQuery mAQuery;
+	private LayoutInflater mLayoutInflater;
 	private ItemFilter mFilter = new ItemFilter();
 
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
 
-	public GridGroupListAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<GroupItemsData> groupItemsDataList, AQuery aQuery) {
-		mGroupItemsDataList = groupItemsDataList;
-		mGrouFilterItemsDataList = groupItemsDataList;
-		mLayoutInflater = layoutInflater;
+	public GridSpidyPickAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<SpidyPickItemsData> spidyPickItemsDatasList, AQuery aQuery) {
+		mSpidyPickItemsDatasList = spidyPickItemsDatasList;
+		mSpidyPickFilterItemsDatasList = spidyPickItemsDatasList;
 		mStartActivity = startActivity;
 		mAQuery = aQuery;
+		mLayoutInflater = layoutInflater;
 	}
+
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return mGrouFilterItemsDataList.size();
+		return mSpidyPickFilterItemsDatasList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return mGrouFilterItemsDataList.get(position);
+		return mSpidyPickFilterItemsDatasList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -58,25 +62,32 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 		ViewHolder viewHolder;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
-			convertView = mLayoutInflater.inflate(R.layout.row_group_layout, null, false);
-			viewHolder.groupiconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
-			viewHolder.groupTitleTV = (TextView)convertView.findViewById(R.id.tv_grouptitle);
-			viewHolder.groupMemberTV = (TextView)convertView.findViewById(R.id.tv_groupmember);
+			convertView = mLayoutInflater.inflate(R.layout.row_spidypick_layout, null, false);
+			viewHolder.noticeboardIconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
+			viewHolder.noticeboardTitleTV = (TextView)convertView.findViewById(R.id.tv_noticeboardtitle);
+			viewHolder.noticeboardCommentTV = (TextView)convertView.findViewById(R.id.tv_noticeboardcomment);
+			viewHolder.noticeboardDescTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddescription);
+			viewHolder.noticeboardDateTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddate);
 			 
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		mAQuery.id(viewHolder.groupiconIV).image(mGrouFilterItemsDataList.get(position).getImage());
-		viewHolder.groupTitleTV.setText(mGrouFilterItemsDataList.get(position).getTitle());
+		viewHolder.noticeboardTitleTV.setText(mSpidyPickFilterItemsDatasList.get(position).getTitle());
+		viewHolder.noticeboardDescTV.setText(mSpidyPickFilterItemsDatasList.get(position).getDesc());
+		viewHolder.noticeboardDateTV.setText(mSpidyPickFilterItemsDatasList.get(position).getReleaseYear());
+		
 		return convertView;
 	}
 	
 	static class ViewHolder {
-		public ImageView groupiconIV;
-		public TextView groupTitleTV;
-		public TextView groupMemberTV;
+
+		public ImageView noticeboardIconIV;
+		public TextView noticeboardTitleTV;
+		public TextView noticeboardDescTV;
+		public TextView noticeboardCommentTV;
+		public TextView noticeboardDateTV;
 	}
 
 	@Override
@@ -93,10 +104,10 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 
             FilterResults results = new FilterResults();
 
-            final List<GroupItemsData> list = mGroupItemsDataList;
+            final List<SpidyPickItemsData> list = mSpidyPickItemsDatasList;
 
             int count = list.size();
-            final List<GroupItemsData> nlist = new ArrayList<GroupItemsData>(count);
+            final List<SpidyPickItemsData> nlist = new ArrayList<SpidyPickItemsData>(count);
 
             String filterableString ;
 
@@ -116,14 +127,13 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mGrouFilterItemsDataList = (List<GroupItemsData>) results.values;
+            mSpidyPickFilterItemsDatasList = (List<SpidyPickItemsData>) results.values;
             notifyDataSetChanged();
         }
 
     }
 
-	public void startActivity(int arg2) {
-		mStartActivity.startActivity(mGrouFilterItemsDataList.get(arg2).getUrl());
+	public void startActivity(int pos) {
+		mStartActivity.startActivity(mSpidyPickFilterItemsDatasList.get(pos).getUrl());
 	}
-
 }

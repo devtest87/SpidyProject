@@ -26,11 +26,12 @@ public class DirectoryData {
 	private String error_msg;
 	private String error;
 	
-	private List<RWAItemsData> rwaItemsDatasList = new ArrayList<RWAItemsData>();
-	public List<RWAItemsData> getRwaItemsDatasList() {
-		return rwaItemsDatasList;
+	private List<DiretoryItemsData> diretoryItemsDatasList = new ArrayList<DiretoryItemsData>();
+	public List<DiretoryItemsData> getDiretoryItemsDatasList() {
+		return diretoryItemsDatasList;
 	}
-	public void setRwaItemsDatasList(List<RWAItemsData> rwaItemsDatasList) {
-		this.rwaItemsDatasList = rwaItemsDatasList;
+	public void setDiretoryItemsDatasList(
+			List<DiretoryItemsData> diretoryItemsDatasList) {
+		this.diretoryItemsDatasList = diretoryItemsDatasList;
 	}
 }

@@ -6,15 +6,22 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.android.adapter.GridServiceAdapter;
 import com.android.adapter.GridServiceAdapter.StartActivity;
@@ -24,23 +31,17 @@ import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class ServicesActivity extends BaseActivity  implements StartActivity{
-	//private ExecutorService mExecutorService;
-//	private RecyclerView mRecyclerView;
-//	private ServicesAdapter mServicesAdapter;
 	private GridView mGridView;
 	private GridServiceAdapter mGridServiceAdapter;
-//	
-//    private StaggeredGridLayoutManager staggeredGridLayoutManagerVertical;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_service_layout);
-		//		mExecutorService = Executors.newFixedThreadPool(1);
-		//		mExecutorService.execute(new loadRWAs());
-		
 		
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
 		EditText searchET = (EditText)findViewById(R.id.et_search);
@@ -48,18 +49,6 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 		titleTV.setText(getResources().getString(R.string.servvices));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.servicecolor);
-		
-//		mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_service);
-//		
-//		
-//
-//        staggeredGridLayoutManagerVertical =
-//                new StaggeredGridLayoutManager(
-//                        2, //The number of Columns in the grid
-//                        LinearLayoutManager.VERTICAL);
-//        
-//        SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(30);
-//        mRecyclerView.addItemDecoration(spacesItemDecoration);
 		
 		mGridView = (GridView)findViewById(R.id.recyclerview_service);
 		
@@ -92,10 +81,10 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 		    }
 		});
         
-		loadRWAs();
+		loadService();
 	}
 
-	private void loadRWAs() {
+	private void loadService() {
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.SERVICES);
@@ -155,49 +144,33 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 	public void startActivity(String serviceId) {
 		String[] id = serviceId.split("@");
 		if(id[0].equals("CR")){
-			checkRequestStatus(id[1]);
+			checkRequestStatus();
 		}else if(id[0].equals("RS")){
-			requestService(id[1]);
-		}else{
-			serviceDetail(id[1]);
+			String[] service = id[1].split("#");
+			requestServiceDialog(service[0], service[1],  service.length ==3 ? service[2] : "");
 		}
 //		Intent intent = new Intent(this, RequestServicesActivity.class);
 //		intent.putExtra("id", serviceId);
 //		startActivity(intent);
 	}
 
-	private void serviceDetail(String id) {
-		RequestBean request = new RequestBean();
-		request.setActivity(this);
-		request.setNetworkRequestName(NetworkRequestName.SERVICES_DETAIL);
-		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		NameValuePair valuePair = new BasicNameValuePair("service_id", id);
-		list.add(valuePair);
-		request.setCallingClassObject(this);
-		request.setNamevaluepair(list);
-		NetworkCall networkCall = new NetworkCall(request);
-		networkCall.execute("");
+	private void checkRequestStatus() {
+		Intent intent = new Intent(this, CheckRequestStatusActivity.class);
+		startActivity(intent);
 	}
 
-	private void checkRequestStatus(String id) {
-		RequestBean request = new RequestBean();
-		request.setActivity(this);
-		request.setNetworkRequestName(NetworkRequestName.SERVICES_REQUEST_STATUS);
-		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		NameValuePair valuePair = new BasicNameValuePair("service_id", id);
-		list.add(valuePair);
-		request.setCallingClassObject(this);
-		request.setNamevaluepair(list);
-		NetworkCall networkCall = new NetworkCall(request);
-		networkCall.execute("");
-	}
-
-	private void requestService(String id) {
+	private void requestService(String serviceId, String msg) {
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.REQUEST_SERVICES);
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		NameValuePair valuePair = new BasicNameValuePair("service_id", id);
+		NameValuePair valuePair = new BasicNameValuePair("user_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("rwa_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("service_id", serviceId);
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("msg", msg);
 		list.add(valuePair);
 		request.setCallingClassObject(this);
 		request.setNamevaluepair(list);
@@ -208,5 +181,57 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 	public void response(RequestServicesData requestServicesData) {
 		
 	}
+	
+	private void requestServiceDialog(final String url, final String serviceId, final String serviceName){
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_request_service);
+        dialog.getWindow().getAttributes().width = ViewGroup.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView serviceTitleTV = (TextView)dialog.findViewById(R.id.tv_title);
+        TextView usernameTV = (TextView)dialog.findViewById(R.id.tv_username);
+        TextView checkPreviousServiceTV = (TextView)dialog.findViewById(R.id.tv_check_previuos_request);
+        TextView cancleTV = (TextView)dialog.findViewById(R.id.iv_cancel_icon);
+        final EditText msgET = (EditText)dialog.findViewById(R.id.et_message);
+        ImageView serviceIV = (ImageView)dialog.findViewById(R.id.iv_service_icon);
+        
+        mAQuery.id(serviceIV).image(url);
+        PreferenceHelper preferenceHelper = PreferenceHelper.getSingleInstance(this.getApplicationContext());
+        usernameTV.setText(preferenceHelper.getString(PreferenceKey.RWAS_NAME));
+        serviceTitleTV.setText(serviceName);
+
+
+        Button doneBTN = (Button)dialog.findViewById(R.id.btn_submit_request);
+        
+        checkPreviousServiceTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            	checkRequestStatus();
+                dialog.dismiss();
+            }
+        });
+
+        cancleTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        doneBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            	requestService(serviceId, msgET.getText().toString());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
 	
 }

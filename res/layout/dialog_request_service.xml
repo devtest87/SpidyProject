@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_rect_circular_header_corner"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <LinearLayout
+        android:id="@+id/ll_servicetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_service_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="service title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_title_test_size" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/iv_cancel_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:text="Cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/ll_servicetitle"
+        android:text="User name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:background="@drawable/shape_rect_circular_corner"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tv_username" />
+
+    <Button
+        android:id="@+id/btn_submit_request"
+        android:layout_width="wrap_content"
+        android:minWidth="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/et_message"
+        android:background="@drawable/shape_rect_circular_darkgrey_corner"
+        android:text="SUBMIT REQUEST"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_title_test_size" />
+
+    <TextView
+        android:id="@+id/tv_check_previuos_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btn_submit_request"
+        android:text="CHeck previous request status >"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_description_test_size" />
+
+</RelativeLayout>
