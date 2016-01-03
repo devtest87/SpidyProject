@@ -71,11 +71,11 @@ public class DirectoryAdapter extends BaseAdapter implements Filterable{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		viewHolder.houseNoTV.setText("House No: " + mDiretoryFilterItemsDatasList.get(position).getHouseno());
-		viewHolder.nameTV.setText("Name: " + mDiretoryFilterItemsDatasList.get(position).getTitle());
-		viewHolder.mobileNoTV.setText("Mobile No: " + mDiretoryFilterItemsDatasList.get(position).getMobile());
-		viewHolder.landlineNoTV.setText("Landline No: " + mDiretoryFilterItemsDatasList.get(position).getLandline());
-		viewHolder.extnoTV.setText("Extno: " + mDiretoryFilterItemsDatasList.get(position).getExtno());
+		viewHolder.houseNoTV.setText("" + mDiretoryFilterItemsDatasList.get(position).getHouseno());
+		viewHolder.nameTV.setText("" + mDiretoryFilterItemsDatasList.get(position).getTitle());
+		viewHolder.mobileNoTV.setText("" + mDiretoryFilterItemsDatasList.get(position).getMobile());
+		viewHolder.landlineNoTV.setText("" + mDiretoryFilterItemsDatasList.get(position).getLandline());
+		viewHolder.extnoTV.setText("" + mDiretoryFilterItemsDatasList.get(position).getExtno());
 		
 		return convertView;
 	}

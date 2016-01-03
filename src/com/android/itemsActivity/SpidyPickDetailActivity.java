@@ -25,7 +25,7 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_spidypick_detail_layout);
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
-		titleTV.setText(getResources().getString(R.string.notice_board));
+		titleTV.setText(getResources().getString(R.string.spidey_pick));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.noticecolor);
 		findViewById(R.id.rl_search).setVisibility(View.GONE);
