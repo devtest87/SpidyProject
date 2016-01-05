@@ -16,7 +16,9 @@ public class Utils {
 		long milis1 = 0;
 		try {
 			milis1 = dateFormat.parse(date).getTime();
-		} catch (ParseException e) {
+		} 
+catch (ParseException e) 
+{
 			e.printStackTrace();
 		}
 	    // Get the represented date in milliseconds 
