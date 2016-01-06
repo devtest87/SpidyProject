@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/include_header"
-        layout="@layout/include_common_header" />
+        layout="@layout/include_group_detail_header"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
