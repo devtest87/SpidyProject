@@ -12,11 +12,11 @@
 
         <ImageView
             android:id="@+id/iv_profile_options"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/ic_launcher" />
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/profile"
             app:border="true"
             app:border_color="@color/white"
             app:border_width="2dp"
