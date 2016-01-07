@@ -3,10 +3,14 @@ package com.network;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -15,11 +19,14 @@ import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.net.ParseException;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -65,7 +72,6 @@ import com.bean.SpidyPickData;
 import com.bean.SpidyPickDetailData;
 import com.parser.MyParser;
 import com.utils.PrintLog;
-
 
 public class NetworkCall extends AsyncTask<String, integer, Object>  
 {
@@ -563,6 +569,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 
 //			{"edirectorylandline":0,"landline":"vhhhh","termandcondition":1,"email":"bhhjj","headoffamily":1,"name":"popopo","locality":"vhhjjj","lastname":"hjjjjk","firstname":"popopo","edirectorymobile":0,"streetname":"ghjjj","mobile":"vbhjjj"}
 			
+			PrintLog.show(Log.ERROR, TAG, jObj.toString());
 			StringBody name = new StringBody(jObj.getString("name"));
 			StringBody email = new StringBody(jObj.getString("email"));
 			StringBody fname = new StringBody(jObj.getString("firstname"));
@@ -572,7 +579,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			StringBody landline = new StringBody(jObj.getString("landline"));
 			StringBody streetname = new StringBody(jObj.getString("streetname"));
 			ContentBody profilephoto;
-			String profilepath = jObj.getString("profilephoto");
+			String profilepath = jObj.has("profilephoto") ? jObj.getString("profilephoto") : "";
 			if(profilepath != null && !profilepath.equalsIgnoreCase("")){
 				profilephoto = new FileBody( new File(profilepath), "image/jpg" );
 			}else{
@@ -591,7 +598,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			reqEntity.addPart("firstname", fname);
 			reqEntity.addPart("lastname", lname);
 			reqEntity.addPart("password", password);
-			reqEntity.addPart("profilephoto", profilephoto)
+			reqEntity.addPart("profilephoto", profilephoto);
 			reqEntity.addPart("mobile", mobile);
 			reqEntity.addPart("landline", landline);
 			reqEntity.addPart("streetname", streetname);
@@ -600,8 +607,6 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			reqEntity.addPart("edirectorymobile",edirectorymobile);
 			reqEntity.addPart("edirectorylandline",edirectorylandline);
 			reqEntity.addPart("termandcondition",termandcondition);
-			
-			,edirectorymobile,edirectorylandline,termandcondition
 			
 			post.setEntity(reqEntity);
 			HttpResponse response;
@@ -638,6 +643,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		}else{
 			signUp = myParser.register(response_Reg);
 		}
+		PrintLog.show(Log.ERROR, TAG, response_Reg);
 
 		return signUp;
 	}

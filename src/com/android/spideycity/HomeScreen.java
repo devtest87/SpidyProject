@@ -2,18 +2,25 @@ package com.android.spideycity;
  
  
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
- 
- 
-import com.android.spideycity.R; 
-import com.bean.RequestBean; 
-import com.bean.SliderData; 
-import com.network.NetworkCall; 
-import com.utils.NetworkRequestName; 
+
+import com.android.itemsActivity.BookingActivity;
+import com.android.itemsActivity.DirectoryActivity;
+import com.android.itemsActivity.GroupsActivity;
+import com.android.itemsActivity.NoticeBoardActivity;
+import com.android.itemsActivity.OpinionPollActivity;
+import com.android.itemsActivity.RWAsActivity;
+import com.android.itemsActivity.ServicesActivity;
+import com.android.itemsActivity.SpidyPickActivity;
+import com.bean.RequestBean;
+import com.bean.SliderData;
+import com.network.NetworkCall;
+import com.utils.NetworkRequestName;
  
  
  
@@ -61,31 +68,31 @@ public class HomeScreen extends Activity implements OnClickListener {
  
 	@Override 
 	public void onClick(View v) {
-//		if(v.equals(rwaBTN)){ 
-//			Intent intent = new Intent(getActivity(), RWAsActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(groupsBTN)){ 
-//			Intent intent = new Intent(getActivity(), GroupsActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(servicesBTN)){ 
-//			Intent intent = new Intent(getActivity(), ServicesActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(bookingBTN)){ 
-//			Intent intent = new Intent(getActivity(), BookingActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(noticeBoardBTN)){ 
-//			Intent intent = new Intent(getActivity(), NoticeBoardActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(directoryBTN)){ 
-//			Intent intent = new Intent(getActivity(), DirectoryActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(spideyPickBTN)){ 
-//			Intent intent = new Intent(getActivity(), SpidyPickActivity.class); 
-//			getActivity().startActivity(intent); 
-//		}else if(v.equals(opinionPollBTN)){ 
-//			Intent intent = new Intent(getActivity(), OpinionPollActivity.class); 
-//			getActivity().startActivity(intent); 
-//		} 
+		if(v.equals(rwaBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, RWAsActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(groupsBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, GroupsActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(servicesBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, ServicesActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(bookingBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, BookingActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(noticeBoardBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, NoticeBoardActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(directoryBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, DirectoryActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(spideyPickBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, SpidyPickActivity.class); 
+			startActivity(intent); 
+		}else if(v.equals(opinionPollBTN)){ 
+			Intent intent = new Intent(HomeScreen.this, OpinionPollActivity.class); 
+			startActivity(intent); 
+		} 
 	} 
 	 
 	 

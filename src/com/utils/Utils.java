@@ -1,10 +1,14 @@
 package com.utils;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.text.format.DateFormat;
 
 
@@ -53,5 +57,25 @@ catch (ParseException e)
 			e.printStackTrace();
 		}
         return formattedDate;
+	}
+	
+	public static void saveImage(String imageUrl, Bitmap bitmap){
+		
+		FileOutputStream out = null;
+		try { 
+		    out = new FileOutputStream(imageUrl);
+		    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out); // bmp is your Bitmap instance
+		    // PNG is a lossless format, the compression factor (100) is ignored 
+		} catch (Exception e) {
+		    e.printStackTrace();
+		} finally { 
+		    try { 
+		        if (out != null) {
+		            out.close();
+		        } 
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    } 
+		} 
 	}
 }

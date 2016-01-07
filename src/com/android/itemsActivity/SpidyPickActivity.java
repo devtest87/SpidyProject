@@ -43,7 +43,7 @@ public class SpidyPickActivity extends BaseActivity implements StartActivity{
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_noticeboard_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
-		titleTV.setBackgroundResource(R.color.noticecolor);
+		titleTV.setBackgroundResource(R.color.spideycolor);
 
 
 		/*mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_service);

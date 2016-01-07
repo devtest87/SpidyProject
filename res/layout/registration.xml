@@ -57,7 +57,7 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/dname"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black" 
@@ -89,7 +89,7 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/fname"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -121,8 +121,41 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/lname"
                     android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/black" 
+                    android:textSize="@dimen/regtextsize"
+                    android:paddingLeft="@dimen/regleftpadding">
+                </EditText>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_left_rectangle"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:text="@string/password"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/regtextsize" />
+
+                <EditText
+                    android:id="@+id/lpasswordbox"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/regboxheight"
+                    android:layout_weight="2"
+                    android:background="@drawable/custom_right_rectangle"
+                    android:hint="@string/password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColor="@color/black" 
                     android:textSize="@dimen/regtextsize"
@@ -153,7 +186,7 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/mnumber"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black" 
@@ -193,7 +226,7 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/lnumber"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black" 
@@ -272,7 +305,7 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/yourhouseno"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -304,7 +337,7 @@
                     android:layout_height="@dimen/regboxheight"
                     android:layout_weight="2"
                     android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/youremail"
+                    android:hint="@string/youraddress"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black" 
@@ -312,6 +345,15 @@
                     android:paddingLeft="@dimen/regleftpadding">
                 </EditText>
             </LinearLayout>
+            
+             <Button android:id="@+id/uploadphoto"
+                     android:layout_width="250dp"
+                     android:layout_height="45dp"
+                     android:layout_marginTop="@dimen/regbtmmargin"
+                     android:text="@string/upload_profile_photo"
+                     android:textColor="@color/white"
+                     android:background="@drawable/custom_rectangle"
+                     android:layout_marginLeft="@dimen/regbtmmargin"/>
 
             <CheckBox
                 android:id="@+id/headfamily"

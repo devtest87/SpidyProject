@@ -13,7 +13,7 @@
 <dimen name="regbtmmargin">15dp</dimen>
 <dimen name="regboxheight">45dp</dimen>
 <dimen name="regtextsize">11sp</dimen>
-<dimen name="regleftpadding">6dp</dimen>
+<dimen name="regleftpadding">8dp</dimen>
 <dimen name="headerheight">45dp</dimen>
 <dimen name="headertextsize">17sp</dimen>
 

@@ -22,6 +22,7 @@
             <string name="empaty_mnumber">Please fill mobile number</string>
             <string name="empaty_youremail">Please fill your email.</string>
             <string name="empaty_hnumber">Please fill house number.</string>
+            <string name="empaty_password">Please fill password.</string>
             <string name="empaty_address">Please fill address.</string>
             
            
@@ -34,6 +35,7 @@
            <string name="headoffamily2">CERTAIN OPINION POLLS ARE LIMITED TO ONE VOTE PER FAMILY.</string>
            <string name="termscondition">I AGREE TO THE CITY SPIDEY TERMS AND CONDITIONS AND PRIVACY POLICY</string>
            <string name="submit">SUBMIT</string>
+           <string name="upload_profile_photo">UPLOAD PROFILE PHOTO</string>
            <string name="reset">RESET</string>
            
         <string name="confirmation">Are you sure, you want to log out from app?</string>
