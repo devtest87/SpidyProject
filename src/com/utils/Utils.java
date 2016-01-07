@@ -15,6 +15,7 @@ public class Utils {
 		
 		long milis1 = 0;
 		try {
+		// git test change only
 			milis1 = dateFormat.parse(date).getTime();
 		} 
 catch (ParseException e) 
