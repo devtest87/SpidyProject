@@ -1,29 +1,25 @@
 package com.network;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.net.ParseException;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -571,10 +567,17 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			StringBody email = new StringBody(jObj.getString("email"));
 			StringBody fname = new StringBody(jObj.getString("firstname"));
 			StringBody lname = new StringBody(jObj.getString("lastname"));
+			StringBody password = new StringBody(jObj.getString("password"));
 			StringBody mobile = new StringBody(jObj.getString("mobile"));
 			StringBody landline = new StringBody(jObj.getString("landline"));
 			StringBody streetname = new StringBody(jObj.getString("streetname"));
-			
+			ContentBody profilephoto;
+			String profilepath = jObj.getString("profilephoto");
+			if(profilepath != null && !profilepath.equalsIgnoreCase("")){
+				profilephoto = new FileBody( new File(profilepath), "image/jpg" );
+			}else{
+				profilephoto = new StringBody("");
+			}
 			StringBody locality = new StringBody(jObj.getString("locality"));
 			StringBody headoffamily = new StringBody(jObj.getString("headoffamily"));
 			StringBody edirectorymobile = new StringBody(jObj.getString("edirectorymobile"));
@@ -587,6 +590,8 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			reqEntity.addPart("email", email);
 			reqEntity.addPart("firstname", fname);
 			reqEntity.addPart("lastname", lname);
+			reqEntity.addPart("password", password);
+			reqEntity.addPart("profilephoto", profilephoto)
 			reqEntity.addPart("mobile", mobile);
 			reqEntity.addPart("landline", landline);
 			reqEntity.addPart("streetname", streetname);
@@ -596,6 +601,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			reqEntity.addPart("edirectorylandline",edirectorylandline);
 			reqEntity.addPart("termandcondition",termandcondition);
 			
+			,edirectorymobile,edirectorylandline,termandcondition
 			
 			post.setEntity(reqEntity);
 			HttpResponse response;
