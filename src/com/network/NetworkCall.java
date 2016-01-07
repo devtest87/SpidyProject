@@ -41,6 +41,7 @@ import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
 import com.android.itemsActivity.SpidyPickDetailActivity;
+import com.android.spideycity.HomeScreen;
 import com.android.spideycity.LoginActivity;
 import com.android.spideycity.R;
 import com.android.spideycity.RegisterActivity;
@@ -66,7 +67,6 @@ import com.bean.ServicesData;
 import com.bean.SliderData;
 import com.bean.SpidyPickData;
 import com.bean.SpidyPickDetailData;
-import com.fragment.item.HomeFragment;
 import com.parser.MyParser;
 import com.utils.PrintLog;
 
@@ -82,7 +82,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String baseURL = "http://top-story.in/api/";
 	private static final String LoginURL = "http://top-story.in/api/login.php";
 	private static final String registerURL = "http://top-story.in/api/register.php";
-	private static final String sliderTopURL = "http://top-story.in/api/news_slider.json";
+	private static final String sliderTopURL = "http://top-story.in/api/master_home.php";
 	private static final String rwasURL = "http://top-story.in/api/rwa_list.json";
 	private static final String rwasDetailURL = "http://top-story.in/api/";
 	private static final String groupsURL = "http://top-story.in/api/groups_slider.json";
@@ -306,8 +306,8 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			}
 			else{
 
-				if(request.getCallingClassObject() instanceof HomeFragment){
-					((HomeFragment) request.getCallingClassObject()).sliderWSresponse(sliderdata);	
+				if(activity instanceof HomeScreen){
+					((HomeScreen) activity).sliderWSresponse(sliderdata);	
 				}
 			}
 			break;

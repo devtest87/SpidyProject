@@ -176,7 +176,10 @@ public class MyParser
 						item.setDesc(jArrPoll.getJSONObject(i).getString("desc"));
 						item.setGenre(jArrPoll.getJSONObject(i).getString("genre"));
 						item.setImage(jArrPoll.getJSONObject(i).getString("image"));
-						item.setReleaseYear(jArrPoll.getJSONObject(i).getString("releaseYear"));
+						
+						item.setStartPoll(jArrPoll.getJSONObject(i).getString("startPoll"));
+						item.setEndPoll(jArrPoll.getJSONObject(i).getString("endPoll"));
+						
 						item.setTitle(jArrPoll.getJSONObject(i).getString("title"));
 						item.setUrl(jArrPoll.getJSONObject(i).getString("url"));
 

@@ -12,6 +12,19 @@ public class HomeSliderItem {
 //	    "url": "newsdetails_19.json"
 //	  }
 	
+//	poll": [
+//    {
+//      "id": "4",
+//      "title": "Is Noida completely ready for the growing residential infrastructure?",
+//      "desc": "",
+//      "startPoll": "2015-12-03 14:41:18",
+//      "endPoll": "2015-12-25 14:41:18",
+//      "image": "http:\/\/top-story.in\/uploads\/noticeboard\/noida.jpg",
+//      "genre": "SPIDEY PICK",
+//      "url": "polldetails_4.json"
+//    }
+//  ],
+	
 	private String id;
 	private String title;
 	private String desc;
@@ -19,6 +32,24 @@ public class HomeSliderItem {
 	private String releaseYear;
 	private String genre;
 	private String url;
+	
+	private String startPoll;
+	private String endPoll;
+	
+	
+	
+	public String getStartPoll() {
+		return startPoll;
+	}
+	public void setStartPoll(String startPoll) {
+		this.startPoll = startPoll;
+	}
+	public String getEndPoll() {
+		return endPoll;
+	}
+	public void setEndPoll(String endPoll) {
+		this.endPoll = endPoll;
+	}
 	public String getId() {
 		return id;
 	}
