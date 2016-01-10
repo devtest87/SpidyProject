@@ -96,8 +96,8 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String directoryURL = "http://top-story.in/api/directory.php";
 	private static final String spidyPickURL = "http://top-story.in/api/news_slider.json";
 	private static final String opinionPollsURL = "http://top-story.in/api/poll_list.json";
-	private static final String requestServiceURL = "http://top-story.in/api/request_service.json";
-	private static final String checkStatusURL = "http://top-story.in/api/my_service.json";
+	private static final String requestServiceURL = "http://top-story.in/api/request_service.php";
+	private static final String checkStatusURL = "http://top-story.in/api/my_service.php";
 	
 	//Service request api: http://top-story.in/api/request_service.php?user_id=5&service_id=4&rwa_id=1&msg=testfjjbf 'wejf wef w efwew ef efwe f
 		//Check Request status : http://top-story.in/api/my_service.php?user_id=5
@@ -574,7 +574,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			StringBody email = new StringBody(jObj.getString("email"));
 			StringBody fname = new StringBody(jObj.getString("firstname"));
 			StringBody lname = new StringBody(jObj.getString("lastname"));
-			StringBody password = new StringBody(jObj.getString("password"));
+			StringBody password = new StringBody("2");
 			StringBody mobile = new StringBody(jObj.getString("mobile"));
 			StringBody landline = new StringBody(jObj.getString("landline"));
 			StringBody streetname = new StringBody(jObj.getString("streetname"));
@@ -593,11 +593,11 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			
 			
 			
-			reqEntity.addPart("name",name);
+			reqEntity.addPart("displayname",name);
 			reqEntity.addPart("email", email);
 			reqEntity.addPart("firstname", fname);
 			reqEntity.addPart("lastname", lname);
-			reqEntity.addPart("password", password);
+			reqEntity.addPart("rwaid", password);
 			reqEntity.addPart("profilephoto", profilephoto);
 			reqEntity.addPart("mobile", mobile);
 			reqEntity.addPart("landline", landline);
@@ -794,6 +794,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	
 	private CheckRequestData checkRquestServiceStatus(List<NameValuePair> namePair){
 
+		PrintLog.show(Log.ERROR, TAG, "" + namePair);
 		CheckRequestData requestServicesData = new CheckRequestData();
 		String response = NetworkConnection.networkHit(namePair,checkStatusURL);
 
