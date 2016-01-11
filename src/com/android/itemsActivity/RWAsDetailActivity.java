@@ -9,13 +9,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.android.spideycity.R;
 import com.bean.RWADetailData;
+import com.bean.RWAFacilityData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
@@ -33,6 +34,7 @@ import com.utils.PreferenceHelper.PreferenceKey;
 public class RWAsDetailActivity extends BaseActivity{
 	private String mDetailUrl,mFacilityUrl;
 	//private ExecutorService mExecutorService;
+	private List<RWAFacilityData> mFacilityDataList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,6 +120,7 @@ public class RWAsDetailActivity extends BaseActivity{
 		//		listView.setAdapter(rwAsAdapter);
 
 
+		final TextView facilitydescTV = (TextView)findViewById(R.id.tv_facilitydesc);
 		TextView addressTitleTV = (TextView)findViewById(R.id.tv_address_title);
 		TextView addressTV = (TextView)findViewById(R.id.tv_address);
 		TextView conatctDetailTV = (TextView)findViewById(R.id.tv_contact_detail);
@@ -198,6 +201,7 @@ public class RWAsDetailActivity extends BaseActivity{
 			}
 
 			if(rwaDetailData.getRWAFacilityDataList().size() != 0){
+				mFacilityDataList = rwaDetailData.getRWAFacilityDataList();
 				int count = 0;
 				int index = 0;
 				LinearLayout linearLayout = null;
@@ -213,6 +217,27 @@ public class RWAsDetailActivity extends BaseActivity{
 						linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 					}
 					linearLayout.addView(view);
+					view.setTag(i);
+					view.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							int pos = Integer.parseInt(v.getTag().toString());
+							if(mFacilityDataList.get(pos).isExpand()){
+								facilitydescTV.setVisibility(View.INVISIBLE);
+							}else{
+								facilitydescTV.setVisibility(View.VISIBLE);
+								facilitydescTV.setText(mFacilityDataList.get(pos).getDesc());
+							}
+							for (int j = 0; j < mFacilityDataList.size(); j++) {
+								if(j != pos){
+									mFacilityDataList.get(j).setExpand(false);
+								}else{
+									mFacilityDataList.get(j).setExpand(!mFacilityDataList.get(pos).isExpand());
+								}
+							}
+						}
+					});
 					count ++;
 					if(count == 3){
 						facilityLL.addView(linearLayout, index);

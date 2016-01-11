@@ -2,6 +2,13 @@ package com.bean;
 
 public class RWAFacilityData {
 	private String id;
+	private boolean isExpand;
+	public boolean isExpand() {
+		return isExpand;
+	}
+	public void setExpand(boolean isExpand) {
+		this.isExpand = isExpand;
+	}
 	public String getId() {
 		return id;
 	}
