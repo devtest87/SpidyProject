@@ -18,7 +18,10 @@ import com.android.spideycity.R;
 import com.bean.OpinionPollsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
+import com.utils.DialogController;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class OpinionPollActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;
@@ -168,8 +171,17 @@ public class OpinionPollActivity extends BaseActivity implements StartActivity{
 	}
 
 	@Override
-	public void startActivity(String serviceId) {
-		
+	public void startActivity(String request) {
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			String[] requestArr = request.split("@@");
+			if(requestArr[0].equalsIgnoreCase("vote")){
+
+			}else{
+
+			}
+		}else{
+			DialogController.login(this);
+		}
 	}
 
 }

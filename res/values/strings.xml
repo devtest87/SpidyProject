@@ -9,6 +9,7 @@
         <string name="password">PASSWORD</string>
         <string name="login">Submit</string>
         <string name="register">Sign Up</string>
+        <string name="skip">Skip</string>
         
          <string name="dname">DISPLAY NAME</string>
           <string name="fname">FIRST NAME*</string>

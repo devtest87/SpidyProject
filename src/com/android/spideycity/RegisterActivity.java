@@ -193,7 +193,9 @@ public class RegisterActivity extends Activity {
 			
 			if(registerdata.getError().equalsIgnoreCase("success")){
 				Toast.makeText(RegisterActivity.this, registerdata.getSuccess_msg(), Toast.LENGTH_SHORT).show();
-				finish();
+				Intent i = new Intent(RegisterActivity.this, HomeScreen.class);
+				startActivity(i);
+				this.finish();
 			}else{
 				Toast.makeText(RegisterActivity.this, registerdata.getError_msg(), Toast.LENGTH_SHORT).show();
 			}

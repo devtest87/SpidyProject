@@ -20,7 +20,11 @@ import com.android.itemsActivity.SpidyPickActivity;
 import com.bean.RequestBean;
 import com.bean.SliderData;
 import com.network.NetworkCall;
+import com.utils.AppConstant;
+import com.utils.DialogController;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
  
  
  
@@ -70,30 +74,56 @@ public class HomeScreen extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if(v.equals(rwaBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, RWAsActivity.class); 
-			startActivity(intent); 
+			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE); 
 		}else if(v.equals(groupsBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, GroupsActivity.class); 
-			startActivity(intent); 
+			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE); 
 		}else if(v.equals(servicesBTN)){ 
-			Intent intent = new Intent(HomeScreen.this, ServicesActivity.class); 
-			startActivity(intent); 
+			if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+				Intent intent = new Intent(HomeScreen.this, ServicesActivity.class); 
+				startActivity(intent); 
+			}else{
+				DialogController.login(HomeScreen.this);
+			}
 		}else if(v.equals(bookingBTN)){ 
-			Intent intent = new Intent(HomeScreen.this, BookingActivity.class); 
-			startActivity(intent); 
+			if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+				Intent intent = new Intent(HomeScreen.this, BookingActivity.class); 
+				startActivity(intent); 
+			}else{
+				DialogController.login(HomeScreen.this);
+			}
 		}else if(v.equals(noticeBoardBTN)){ 
-			Intent intent = new Intent(HomeScreen.this, NoticeBoardActivity.class); 
-			startActivity(intent); 
+			if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+				Intent intent = new Intent(HomeScreen.this, NoticeBoardActivity.class); 
+				startActivity(intent); 
+			}else{
+				DialogController.login(HomeScreen.this);
+			}
 		}else if(v.equals(directoryBTN)){ 
-			Intent intent = new Intent(HomeScreen.this, DirectoryActivity.class); 
-			startActivity(intent); 
+			if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+				Intent intent = new Intent(HomeScreen.this, DirectoryActivity.class); 
+				startActivity(intent); 
+			}else{
+				DialogController.login(HomeScreen.this);
+			}
 		}else if(v.equals(spideyPickBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, SpidyPickActivity.class); 
-			startActivity(intent); 
+			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE); 
 		}else if(v.equals(opinionPollBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, OpinionPollActivity.class); 
-			startActivity(intent); 
+			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE);  
 		} 
 	} 
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == AppConstant.REQUEST_HOME_CODE){
+			Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
+			startActivity(intent);
+			finish();
+		}
+	}
 	 
 	 
 	private void callWS(){ 

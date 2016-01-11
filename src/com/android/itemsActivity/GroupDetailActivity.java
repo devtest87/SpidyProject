@@ -67,7 +67,11 @@ public class GroupDetailActivity extends BaseActivity{
 			public void onClick(View v) {
 				/*Intent intent = new Intent(GroupsActivity.this, CreateGroupsActivity.class);
 				startActivity(intent);*/
-				createGroupDialog();
+				if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+					createGroupDialog();
+				}else{
+					DialogController.login(GroupDetailActivity.this);
+				}
 			}
 		});
 		

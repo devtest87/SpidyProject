@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -45,12 +46,14 @@ import android.widget.TextView;
 
 import com.android.adapter.GridGroupListAdapter;
 import com.android.adapter.GridGroupListAdapter.StartActivity;
+import com.android.spideycity.HomeScreen;
 import com.android.spideycity.R;
 import com.bean.CreateGroupDetailData;
 import com.bean.GroupsData;
 import com.bean.RequestBean;
 import com.bumptech.glide.util.Util;
 import com.network.NetworkCall;
+import com.utils.AppConstant;
 import com.utils.DialogController;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
@@ -92,7 +95,11 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 			public void onClick(View v) {
 				/*Intent intent = new Intent(GroupsActivity.this, CreateGroupsActivity.class);
 				startActivity(intent);*/
-				createGroupDialog();
+				if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+					createGroupDialog();
+				}else{
+					DialogController.login(GroupsActivity.this);
+				}
 			}
 		});
 
@@ -245,8 +252,10 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 	public void startActivity(String url) {
 		Intent intent = new Intent(this, GroupDetailActivity.class);
 		intent.putExtra("url", url);
-		startActivity(intent);
+		startActivityForResult(intent, AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE);
 	}
+	
+	
 
 
 	private void createGroupDialog(){
@@ -323,50 +332,56 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		imageUrl = Environment.getExternalStorageDirectory() + "/" + System.currentTimeMillis() + "image.jpeg";
-		if (resultCode == RESULT_OK) {
-			if (requestCode == DialogController.REQUEST_CAMERA) {
-				Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-				thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-				File destination = new File(Environment.getExternalStorageDirectory(),
-						System.currentTimeMillis() + ".jpg");
-				FileOutputStream fo;
-				try {
-					destination.createNewFile();
-					fo = new FileOutputStream(destination);
-					fo.write(bytes.toByteArray());
-					fo.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+		if(requestCode == AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE){
+			Intent intent = new Intent();
+			setResult(Activity.RESULT_OK, intent);
+			finish();
+		}else{
+			imageUrl = Environment.getExternalStorageDirectory() + "/" + System.currentTimeMillis() + "image.jpeg";
+			if (resultCode == RESULT_OK) {
+				if (requestCode == DialogController.REQUEST_CAMERA) {
+					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+					thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+					File destination = new File(Environment.getExternalStorageDirectory(),
+							System.currentTimeMillis() + ".jpg");
+					FileOutputStream fo;
+					try {
+						destination.createNewFile();
+						fo = new FileOutputStream(destination);
+						fo.write(bytes.toByteArray());
+						fo.close();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					addIV.setImageBitmap(thumbnail);
+					Utils.saveImage(imageUrl, thumbnail);
+				} else if (requestCode == DialogController.SELECT_FILE) {
+					Uri selectedImageUri = data.getData();
+					String[] projection = { MediaColumns.DATA };
+					CursorLoader cursorLoader = new CursorLoader(this,selectedImageUri, projection, null, null,
+							null);
+					Cursor cursor =cursorLoader.loadInBackground();
+					int column_index = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
+					cursor.moveToFirst();
+					String selectedImagePath = cursor.getString(column_index);
+					Bitmap bm;
+					BitmapFactory.Options options = new BitmapFactory.Options();
+					options.inJustDecodeBounds = true;
+					BitmapFactory.decodeFile(selectedImagePath, options);
+					final int REQUIRED_SIZE = 200;
+					int scale = 1;
+					while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+							&& options.outHeight / scale / 2 >= REQUIRED_SIZE)
+						scale *= 2;
+					options.inSampleSize = scale;
+					options.inJustDecodeBounds = false;
+					bm = BitmapFactory.decodeFile(selectedImagePath, options);
+					addIV.setImageBitmap(bm);
+					Utils.saveImage(imageUrl, bm);
 				}
-				addIV.setImageBitmap(thumbnail);
-				Utils.saveImage(imageUrl, thumbnail);
-			} else if (requestCode == DialogController.SELECT_FILE) {
-				Uri selectedImageUri = data.getData();
-				String[] projection = { MediaColumns.DATA };
-				CursorLoader cursorLoader = new CursorLoader(this,selectedImageUri, projection, null, null,
-						null);
-				Cursor cursor =cursorLoader.loadInBackground();
-				int column_index = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
-				cursor.moveToFirst();
-				String selectedImagePath = cursor.getString(column_index);
-				Bitmap bm;
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inJustDecodeBounds = true;
-				BitmapFactory.decodeFile(selectedImagePath, options);
-				final int REQUIRED_SIZE = 200;
-				int scale = 1;
-				while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-						&& options.outHeight / scale / 2 >= REQUIRED_SIZE)
-					scale *= 2;
-				options.inSampleSize = scale;
-				options.inJustDecodeBounds = false;
-				bm = BitmapFactory.decodeFile(selectedImagePath, options);
-				addIV.setImageBitmap(bm);
-				Utils.saveImage(imageUrl, bm);
 			}
 		}
 

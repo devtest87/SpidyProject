@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/loginbg"
     >
+     <Button
+        android:id="@+id/skip"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:text="@string/skip"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:id="@+id/lin"
@@ -59,5 +67,7 @@
          android:background="@drawable/custom_rectangle"
         android:text="@string/register"
         android:textColor="@color/white" />
+        
+       
     
 </RelativeLayout>

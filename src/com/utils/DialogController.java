@@ -1,8 +1,17 @@
 package com.utils;
 
+import com.android.itemsActivity.BookingActivity;
+import com.android.itemsActivity.DirectoryActivity;
+import com.android.itemsActivity.GroupDetailActivity;
+import com.android.itemsActivity.GroupsActivity;
+import com.android.itemsActivity.NoticeBoardActivity;
+import com.android.itemsActivity.OpinionPollActivity;
+import com.android.spideycity.LoginActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.provider.MediaStore;
 
@@ -32,6 +41,40 @@ public class DialogController {
 				} else if (items[item].equals("Cancel")) {
 					dialog.dismiss();
 				}
+			}
+		});
+		builder.show();
+	}
+	
+	public static void login(final Activity activity) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle("WELCOME TO CITY SPIDEY");
+		builder.setMessage("PLEASE LOGIN OR REGISTER");
+		builder.setPositiveButton("OK", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				if(activity instanceof GroupsActivity || activity instanceof GroupDetailActivity ||
+						activity instanceof NoticeBoardActivity ||
+						activity instanceof DirectoryActivity ||
+						activity instanceof BookingActivity ||
+						activity instanceof OpinionPollActivity){
+					Intent intent = new Intent();
+					activity.setResult(Activity.RESULT_OK, intent);
+					activity.finish();
+				}else{
+					Intent intent = new Intent(activity, LoginActivity.class);
+					activity.startActivity(intent);
+					activity.finish();
+				}
+			}
+		});
+		builder.setNegativeButton("NO", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
 			}
 		});
 		builder.show();

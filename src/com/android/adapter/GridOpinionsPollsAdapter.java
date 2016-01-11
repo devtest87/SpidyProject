@@ -84,11 +84,12 @@ public class GridOpinionsPollsAdapter  extends BaseAdapter implements Filterable
 		viewHolder.opinionpollsTitleTV.setText(mOpinionPollsFilterItemsDatasList.get(position).getTitle());
 		viewHolder.opinionpollsPostedDateTV.setText("Posted " + Utils.getTimeRemaining(mOpinionPollsFilterItemsDatasList.get(position).getStartPoll()));
 		viewHolder.opinionpollsVotingEndDateTV.setText("Voting ends " + Utils.formatDate(mOpinionPollsFilterItemsDatasList.get(position).getEndPoll()));
+		viewHolder.opinionpollsVoteNowTV.setTag(position);
 		viewHolder.opinionpollsVoteNowTV.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mContext, "PLease login", Toast.LENGTH_SHORT).show();
+				mStartActivity.startActivity("vote@@" + mOpinionPollsFilterItemsDatasList.get(Integer.parseInt(v.getTag().toString())).getUrl());
 			}
 		});
 		
@@ -148,6 +149,6 @@ public class GridOpinionsPollsAdapter  extends BaseAdapter implements Filterable
     }
 
 	public void startActivity(int pos) {
-		mStartActivity.startActivity(mOpinionPollsFilterItemsDatasList.get(pos).getUrl());
+		mStartActivity.startActivity("detail@@" + mOpinionPollsFilterItemsDatasList.get(pos).getUrl());
 	}
 }

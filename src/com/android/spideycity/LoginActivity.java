@@ -26,7 +26,7 @@ import com.utils.PreferenceHelper.PreferenceKey;
 public class LoginActivity extends Activity {
 
 	private EditText idbox, pwdbox;
-	private Button submit, register;
+	private Button submit, register, skip;
 	PreferenceHelper preferenceHelper;
 	
     @Override
@@ -50,7 +50,18 @@ public class LoginActivity extends Activity {
         pwdbox  = (EditText) findViewById(R.id.passwordbox);
         submit  = (Button) findViewById(R.id.submit);
         register  = (Button) findViewById(R.id.register);
+        skip = (Button) findViewById(R.id.skip);
         
+        skip.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			
+				Intent intent = new Intent(LoginActivity.this,HomeScreen.class);
+				startActivity(intent);
+				finish();
+				
+			}
+		});
         
         register.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -116,6 +127,7 @@ public class LoginActivity extends Activity {
     		if(loginData.getError().equalsIgnoreCase("success")){
 
     			preferenceHelper.setString(PreferenceKey.USER_ID, loginData.getUid());
+    			preferenceHelper.setString(PreferenceKey.PHOTO, loginData.getPhoto());
     			preferenceHelper.setString(PreferenceKey.RWAS_ID, loginData.getRwaid());
     			preferenceHelper.setString(PreferenceKey.RWAS_NAME, loginData.getRwaname());
     			preferenceHelper.setBoolean(PreferenceKey.IS_LOGIN, true);
