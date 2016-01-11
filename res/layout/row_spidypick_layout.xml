@@ -16,15 +16,35 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#000000"
+            android:alpha="0.2" />
+
+        <TextView
+            android:id="@+id/tv_noticeboardcomment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_noticeboardtitle"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:text="12 COMMENTS"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_title_test_size" />
+
         <TextView
             android:id="@+id/tv_noticeboardtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:ellipsize="end"
-            android:maxLines="2"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textColor="@color/white"
