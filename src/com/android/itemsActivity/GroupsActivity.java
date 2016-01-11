@@ -102,6 +102,10 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 				}
 			}
 		});
+		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 
 		trendingTV.setOnClickListener(new OnClickListener() {
 
@@ -332,7 +336,7 @@ public class GroupsActivity extends BaseActivity implements StartActivity{
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE){
+		if(requestCode == AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE && resultCode == RESULT_OK){
 			Intent intent = new Intent();
 			setResult(Activity.RESULT_OK, intent);
 			finish();

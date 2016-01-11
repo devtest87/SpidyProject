@@ -75,6 +75,10 @@ public class GroupDetailActivity extends BaseActivity{
 			}
 		});
 		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
+		
 		loadGroupDetail();
 	}
 

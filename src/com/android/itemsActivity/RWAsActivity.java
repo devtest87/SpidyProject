@@ -21,6 +21,8 @@ import com.bean.RWAsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class RWAsActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;
@@ -50,6 +52,10 @@ public class RWAsActivity extends BaseActivity implements StartActivity{
 				mRWAssAdapter.startActivity(arg2);
 			}
 		});
+		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 
 		searchET.addTextChangedListener(new TextWatcher() {
 

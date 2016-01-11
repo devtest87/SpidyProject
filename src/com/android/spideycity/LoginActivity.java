@@ -126,6 +126,7 @@ public class LoginActivity extends Activity {
     		
     		if(loginData.getError().equalsIgnoreCase("success")){
 
+    			preferenceHelper.setString(PreferenceKey.NAME, loginData.getUser().getName());
     			preferenceHelper.setString(PreferenceKey.USER_ID, loginData.getUid());
     			preferenceHelper.setString(PreferenceKey.PHOTO, loginData.getPhoto());
     			preferenceHelper.setString(PreferenceKey.RWAS_ID, loginData.getRwaid());

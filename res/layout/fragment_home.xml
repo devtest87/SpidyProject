@@ -5,7 +5,7 @@
 
     <include
         android:id="@+id/include_header"
-        layout="@layout/include_common_header" />
+        layout="@layout/include_common_home_header" />
 
     <LinearLayout
         android:id="@+id/lin"

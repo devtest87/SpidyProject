@@ -17,7 +17,9 @@ import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
 import com.utils.Utils;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class NoticeBoardDetailActivity extends BaseActivity{
 	@Override
@@ -30,7 +32,9 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		titleTV.setBackgroundResource(R.color.noticecolor);
 		findViewById(R.id.rl_search).setVisibility(View.GONE);
 		
-
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 		
 		loadNoticeBoardDetail();
 	}

@@ -18,6 +18,8 @@ import com.bean.NoticeBoardData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class NoticeBoardActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;
@@ -86,6 +88,10 @@ public class NoticeBoardActivity extends BaseActivity implements StartActivity{
 		    public void afterTextChanged(Editable s) {
 		    }
 		});
+        
+        if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 
 		loadRWAs();
 	}

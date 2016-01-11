@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.android.itemsActivity.BaseActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
@@ -29,7 +32,7 @@ import com.utils.PreferenceHelper.PreferenceKey;
  
  
  
-public class HomeScreen extends Activity implements OnClickListener {
+public class HomeScreen extends BaseActivity implements OnClickListener {
  
  
 	LinearLayout newslin, assignmentlin, notificationlin, buslin, eventslin, noticelin;
@@ -62,6 +65,18 @@ public class HomeScreen extends Activity implements OnClickListener {
 		directoryBTN.setOnClickListener(this);
 		spideyPickBTN.setOnClickListener(this);
 		opinionPollBTN.setOnClickListener(this);
+		
+		TextView username = (TextView)findViewById(R.id.tv_profile_name);
+		TextView welcome = (TextView)findViewById(R.id.tv_welcome);
+		
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_home_hint));
+		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			username.setText("Hello "+ PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
+			welcome.setText("Welcome to " + PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_NAME));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
  
  
 		callWS(); 
@@ -118,7 +133,7 @@ public class HomeScreen extends Activity implements OnClickListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == AppConstant.REQUEST_HOME_CODE){
+		if(requestCode == AppConstant.REQUEST_HOME_CODE && resultCode == RESULT_OK){
 			Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
 			startActivity(intent);
 			finish();

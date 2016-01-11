@@ -84,7 +84,9 @@ public class OpinionPollActivity extends BaseActivity implements StartActivity{
 			}
 		});
 
-
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 
 		mGridView = (GridView)findViewById(R.id.recyclerview_service);
 

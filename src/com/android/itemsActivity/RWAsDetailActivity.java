@@ -27,6 +27,8 @@ import com.bean.RWADetailData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class RWAsDetailActivity extends BaseActivity{
 	private String mDetailUrl,mFacilityUrl;
@@ -50,6 +52,10 @@ public class RWAsDetailActivity extends BaseActivity{
 
 		mDetailUrl = getIntent().getStringExtra("url");
 		mFacilityUrl = getIntent().getStringExtra("furl");
+		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 
 		detailAndfacility();
 	}

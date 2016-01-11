@@ -5,6 +5,8 @@ import com.bean.BookingsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,6 +28,10 @@ public class BookingActivity extends BaseActivity{
 		titleTV.setText(getResources().getString(R.string.bookings));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.bookingcolor);
+		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 		
 		loadRWAs();
 	}

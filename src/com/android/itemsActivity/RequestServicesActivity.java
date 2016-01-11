@@ -19,6 +19,8 @@ import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class RequestServicesActivity extends BaseActivity{
 	//private ExecutorService mExecutorService;
@@ -38,6 +40,9 @@ public class RequestServicesActivity extends BaseActivity{
 		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.servicecolor);
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+		}
 		
 		loadRWAs();
 	}
