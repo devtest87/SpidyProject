@@ -71,6 +71,7 @@ public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 		//PrintLog.show(Log.ERROR, "", mGrouFilterItemsDataList.get(position).getImage());
 		mAQuery.id(viewHolder.groupiconIV).image(mGrouFilterItemsDataList.get(position).getImage());
 		viewHolder.groupTitleTV.setText(mGrouFilterItemsDataList.get(position).getTitle());
+		viewHolder.groupMemberTV.setText(mGrouFilterItemsDataList.get(position).getMembers());
 		return convertView;
 	}
 	

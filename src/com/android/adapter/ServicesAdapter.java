@@ -91,7 +91,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 			descTextView = (TextView)convertView.findViewById(R.id.tv_description);
 			checkRequestTitleTextView = (TextView)convertView.findViewById(R.id.tv_checkrequest_status_title);
 			checkRequestTextView = (TextView)convertView.findViewById(R.id.tv_checkrequest_status);
-			
+		  	
 		}
 
 		@Override

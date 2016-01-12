@@ -22,6 +22,7 @@ import com.android.itemsActivity.OpinionPollActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
+import com.androidquery.AQuery;
 import com.bean.RequestBean;
 import com.bean.SliderData;
 import com.network.NetworkCall;
@@ -30,6 +31,7 @@ import com.utils.DialogController;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
+import com.utils.Utils;
  
  
  
@@ -40,6 +42,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 	LinearLayout newslin, assignmentlin, notificationlin, buslin, eventslin, noticelin;
 	private Button rwaBTN, groupsBTN, servicesBTN, bookingBTN, noticeBoardBTN, directoryBTN, spideyPickBTN,
 	opinionPollBTN;
+	protected AQuery mAQuery;
  
  
 	 
@@ -49,6 +52,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		 
 		setContentView(R.layout.fragment_home);
  
+		mAQuery = new AQuery(getApplicationContext());
  
 		rwaBTN = (Button)findViewById(R.id.btn_rwa);
 		groupsBTN = (Button)findViewById(R.id.btn_groups);
@@ -157,15 +161,21 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		 
 		if(sliderdata!=null){
 			 if(sliderdata.getPollitem()!=null){
-				 ((TextView) findViewById(R.id.optitle)).setText(sliderdata.getPollitem().getTitle());
-				 ((TextView) findViewById(R.id.opdesc)).setText(sliderdata.getPollitem().getDesc());
-				 ((TextView) findViewById(R.id.optime)).setText("POSTED "+sliderdata.getPollitem().getStartPoll() +"AGO / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
+				 ((TextView) findViewById(R.id.optitle)).setText(sliderdata.getPollitem().getGenre());
+				 ((TextView) findViewById(R.id.opdesc)).setText(sliderdata.getPollitem().getTitle());
+//				 ((TextView) findViewById(R.id.optime)).setText("POSTED "+sliderdata.getPollitem().getStartPoll() +"AGO / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
+				 
+				 ((TextView) findViewById(R.id.optime)).setText("POSTED "+sliderdata.getPollitem().getStartPoll() +" / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
+				 
 			 }
 			 
 			 if(sliderdata.getNoticeitem()!=null){
-				 ((TextView) findViewById(R.id.rwtitle)).setText(sliderdata.getNoticeitem().getTitle());
-				 ((TextView) findViewById(R.id.rwdesc)).setText(sliderdata.getNoticeitem().getDesc());
-				// ((TextView) findViewById(R.id.rwtime)).setText("POSTED "+sliderdata.getNoticeitem().getStartPoll() +"AGO / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
+				 
+				 mAQuery.id(findViewById(R.id.rwicon)).image(sliderdata.getNoticeitem().getIcon());
+				 
+				 ((TextView) findViewById(R.id.rwtitle)).setText(sliderdata.getNoticeitem().getGenre());
+				 ((TextView) findViewById(R.id.rwdesc)).setText(sliderdata.getNoticeitem().getTitle());
+				 ((TextView) findViewById(R.id.rwtime)).setText(sliderdata.getNoticeitem().getDesc());
 			 }
 			 
 			 if(sliderdata.getSliderList()!=null){

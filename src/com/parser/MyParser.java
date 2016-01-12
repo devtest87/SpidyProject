@@ -164,7 +164,8 @@ public class MyParser
 						item.setReleaseYear(jArrNotice.getJSONObject(i).getString("releaseYear"));
 						item.setTitle(jArrNotice.getJSONObject(i).getString("title"));
 						item.setUrl(jArrNotice.getJSONObject(i).getString("url"));
-
+						item.setIcon(jArrNotice.getJSONObject(i).getString("icon"));
+						
 						slider.setNoticeitem(item);
 					}
 				}
@@ -312,7 +313,7 @@ public class MyParser
 				groupItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
 				groupItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
 				groupItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-
+				groupItemsData.setMembers(jArrRWA.getJSONObject(i).getString("members"));
 				groupItemsDataList.add(groupItemsData);
 			}
 

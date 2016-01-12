@@ -36,8 +36,16 @@ public class HomeSliderItem {
 	private String startPoll;
 	private String endPoll;
 	
+	private String icon;
 	
 	
+	
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	public String getStartPoll() {
 		return startPoll;
 	}

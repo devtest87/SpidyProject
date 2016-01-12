@@ -47,6 +47,17 @@ public class GroupItemsData {
 	private String genre;
 	private String url;
 	private String createdDate;
+	
+	private String members;
+	
+	
+	
+	public String getMembers() {
+		return members;
+	}
+	public void setMembers(String members) {
+		this.members = members;
+	}
 	public String getCreatedDate() {
 		return createdDate;
 	}

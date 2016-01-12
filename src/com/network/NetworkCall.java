@@ -81,13 +81,14 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private MyParser myParser;
 	private ProgressDialog mProgressDialog;
 
-	private static final String baseURL = "http://top-story.in/api/";
-	private static final String LoginURL = "http://top-story.in/api/login.php";
-	private static final String registerURL = "http://top-story.in/api/register.php";
-	private static final String sliderTopURL = "http://top-story.in/api/master_home.php";
-	private static final String rwasURL = "http://top-story.in/api/rwa_list.json";
-	private static final String rwasDetailURL = "http://top-story.in/api/";
-	private static final String groupsURL = "http://top-story.in/api/groups_slider.json";
+//	private static final String baseURL = "http://top-story.in/api/";
+	private static final String baseURL = "http://cityspidey.com/api/";
+	private static final String LoginURL = baseURL+"login.php";
+	private static final String registerURL = baseURL+"register.php";
+	private static final String sliderTopURL = baseURL+"master_home.php";
+	private static final String rwasURL = baseURL+"rwa_list.json";
+	private static final String rwasDetailURL = baseURL;
+	private static final String groupsURL = baseURL+"groups_slider.json";
 	private static final String createGroupsURL = "http://top-story.in/api/create_group.php";
 	private static final String servicesURL = "http://top-story.in/api/service_list.json";
 	private static final String bookingsURL = "http://top-story.in/api/booking_list.php";
@@ -655,7 +656,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		String response = NetworkConnection.networkHit(pair,sliderTopURL);
 
 		
-		response = LoadData("homepage.txt");
+//		response = LoadData("homepage.txt");
 		
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
 			sliderdata.setException(response);
