@@ -2,21 +2,17 @@ package com.android.adapter;
 
 import java.util.List;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.adapter.NoticeBoardAdapter.SolventViewHolders;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.NoticeBoardItemsData;
-import com.bean.ServicesItemsData;
 
 public class NoticeBoardAdapter extends RecyclerView.Adapter<SolventViewHolders> {
 

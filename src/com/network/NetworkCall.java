@@ -654,6 +654,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		SliderData sliderdata = new SliderData();
 		String response = NetworkConnection.networkHit(pair,sliderTopURL);
 
+		
+		response = LoadData("homepage.txt");
+		
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
 			sliderdata.setException(response);
 		}else{

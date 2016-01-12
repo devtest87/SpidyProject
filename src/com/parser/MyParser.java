@@ -150,6 +150,8 @@ public class MyParser
 					slidList.add(item);
 				}
 
+				slider.setSliderList(slidList);
+				
 				if(jObj.getJSONArray("notice")!=null){
 					JSONArray jArrNotice = jObj.getJSONArray("notice");
 					for (int i = 0; i < jArrNotice.length(); i++) {

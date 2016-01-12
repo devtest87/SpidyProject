@@ -14,9 +14,7 @@ import android.widget.TextView;
 
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
-import com.bean.NoticeBoardItemsData;
 import com.bean.SpidyPickItemsData;
-import com.utils.Utils;
 
 public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 

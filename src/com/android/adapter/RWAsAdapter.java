@@ -3,7 +3,6 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.itemsActivity.RWAsActivity;
-import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.RWAItemsData;

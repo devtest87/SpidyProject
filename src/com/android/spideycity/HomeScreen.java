@@ -4,6 +4,7 @@ package com.android.spideycity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.itemsActivity.BaseActivity;
+import com.android.adapter.ViewPagerAdapter;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
@@ -154,8 +156,30 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 	public void sliderWSresponse(SliderData sliderdata){
 		 
 		if(sliderdata!=null){
+			 if(sliderdata.getPollitem()!=null){
+				 ((TextView) findViewById(R.id.optitle)).setText(sliderdata.getPollitem().getTitle());
+				 ((TextView) findViewById(R.id.opdesc)).setText(sliderdata.getPollitem().getDesc());
+				 ((TextView) findViewById(R.id.optime)).setText("POSTED "+sliderdata.getPollitem().getStartPoll() +"AGO / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
+			 }
 			 
+			 if(sliderdata.getNoticeitem()!=null){
+				 ((TextView) findViewById(R.id.rwtitle)).setText(sliderdata.getNoticeitem().getTitle());
+				 ((TextView) findViewById(R.id.rwdesc)).setText(sliderdata.getNoticeitem().getDesc());
+				// ((TextView) findViewById(R.id.rwtime)).setText("POSTED "+sliderdata.getNoticeitem().getStartPoll() +"AGO / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
+			 }
+			 
+			 if(sliderdata.getSliderList()!=null){
+				 ViewPagerAdapter adapter = new ViewPagerAdapter(this, sliderdata.getSliderList());
+					ViewPager myPager = (ViewPager) findViewById(R.id.myfivepanelpager);
+					myPager.setAdapter(adapter);
+					myPager.setCurrentItem(0);
+			 }
 		} 
 	} 
+	
+	private int imageArra[] = { R.drawable.antartica1, R.drawable.antartica2,
+			R.drawable.antartica3, R.drawable.antartica4,
+			R.drawable.antartica5, R.drawable.antartica6,
+			R.drawable.antartica7, R.drawable.antartica8 };
 	 
 } 

@@ -3,7 +3,6 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.GroupItemsData;
-import com.utils.PrintLog;
 
 public class GridGroupListAdapter extends BaseAdapter implements Filterable {
 
