@@ -3,6 +3,9 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,7 +92,18 @@ public class GridOpinionsPollsAdapter  extends BaseAdapter implements Filterable
 			
 			@Override
 			public void onClick(View v) {
-				mStartActivity.startActivity("vote@@" + mOpinionPollsFilterItemsDatasList.get(Integer.parseInt(v.getTag().toString())).getUrl());
+				JSONObject object = new JSONObject();
+				try {
+					object.put("url", mOpinionPollsFilterItemsDatasList.get(Integer.parseInt(v.getTag().toString())).getUrl());
+					object.put("postdate", mOpinionPollsFilterItemsDatasList.get(Integer.parseInt(v.getTag().toString())).getStartPoll());
+					object.put("enddate", mOpinionPollsFilterItemsDatasList.get(Integer.parseInt(v.getTag().toString())).getEndPoll());
+					object.put("image", mOpinionPollsFilterItemsDatasList.get(Integer.parseInt(v.getTag().toString())).getImage());
+					mStartActivity.startActivity(object.toString());
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		

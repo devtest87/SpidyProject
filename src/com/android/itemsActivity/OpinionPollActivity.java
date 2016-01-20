@@ -1,5 +1,9 @@
 package com.android.itemsActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -173,16 +177,18 @@ public class OpinionPollActivity extends BaseActivity implements StartActivity{
 	}
 
 	@Override
-	public void startActivity(String request) {
-		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			String[] requestArr = request.split("@@");
-			if(requestArr[0].equalsIgnoreCase("vote")){
-
-			}else{
-
-			}
-		}else{
-			DialogController.login(this);
+	public void startActivity(String json) {
+		JSONObject object;
+		try {
+			object = new JSONObject(json);
+			Intent intent = new Intent(OpinionPollActivity.this, OpinionPollDetailActivity.class);
+			intent.putExtra("url", object.getString("url"));
+			intent.putExtra("postdate", object.getString("postdate"));
+			intent.putExtra("enddate", object.getString("enddate"));
+			intent.putExtra("image", object.getString("image"));
+			startActivity(intent);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 

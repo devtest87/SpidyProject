@@ -92,6 +92,15 @@
             android:name="com.android.itemsActivity.OpinionPollActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoTitle" />
+        <activity
+            android:name="com.android.itemsActivity.OpinionPollDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+        <activity
+            android:name="com.android.itemsActivity.OpinionPollsPostAnswerResponseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+        
     </application>
 
 </manifest>

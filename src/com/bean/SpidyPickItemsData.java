@@ -45,6 +45,13 @@ public class SpidyPickItemsData {
 		this.url = url;
 	}
 	private String title;
+	private String comments;
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	private String  desc;
 	private String image;
 	private String releaseYear;

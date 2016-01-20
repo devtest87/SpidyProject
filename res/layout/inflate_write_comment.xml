@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black" />
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_rect_circular_corner"
+        android:padding="5dp"
+        android:textSize="@dimen/rwa_description_test_size" />
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_comment"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/btn_submit"
+        android:layout_toRightOf="@+id/iv_creater"
+        android:background="@drawable/shape_rect_circular_searchbg_color_corner"
+        android:text="Reset"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_description_test_size" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/et_comment"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/iv_creater"
+        android:background="@drawable/shape_rect_circular_searchbg_color_corner"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rwa_description_test_size" />
+
+</RelativeLayout>

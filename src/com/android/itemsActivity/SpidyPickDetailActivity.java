@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.w3c.dom.ls.LSInput;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.adapter.SpidyPickDetailAdapter;
 import com.android.spideycity.R;
 import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
@@ -22,14 +25,17 @@ import com.utils.Utils;
 import com.utils.PreferenceHelper.PreferenceKey;
 
 public class SpidyPickDetailActivity extends BaseActivity{
+	
+	private ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_spidypick_detail_layout);
+		listView = (ListView)findViewById(R.id.listview);
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
 		titleTV.setText(getResources().getString(R.string.spidey_pick));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
-		titleTV.setBackgroundResource(R.color.noticecolor);
+		titleTV.setBackgroundResource(R.color.spideycolor);
 		findViewById(R.id.rl_search).setVisibility(View.GONE);
 
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
@@ -90,15 +96,37 @@ public class SpidyPickDetailActivity extends BaseActivity{
 	}
 
 	public void response(SpidyPickDetailData spidyPickDetailData) {
-		TextView noticeBoardTitle = (TextView)findViewById(R.id.tv_noticeboard_title);
-		TextView noticeBoardDesc = (TextView)findViewById(R.id.tv_noticeboard_detail);
-		TextView noticeBoardPostDate = (TextView)findViewById(R.id.tv_posteddate);
-		
-        ImageView noticeBoardIV = (ImageView)findViewById(R.id.iv_noticeboard);
+		View headerView = getHeaderView(spidyPickDetailData);
+		View footerView = getFooterView(spidyPickDetailData);
+		if(spidyPickDetailData.getCommentList().size() > 0){
+			SpidyPickDetailAdapter spidyPickDetailAdapter = new SpidyPickDetailAdapter
+					(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
+			listView.setAdapter(spidyPickDetailAdapter);
+		}
+		listView.addHeaderView(headerView);
+		listView.addFooterView(footerView);
+	}
+
+	private View getFooterView(SpidyPickDetailData spidyPickDetailData) {
+		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment, null, false);
+		return view;
+	}
+
+	private View getHeaderView(SpidyPickDetailData spidyPickDetailData) {
+		View view = getLayoutInflater().inflate(R.layout.inflate_spideypick_detail_header, null, false);
+		TextView noticeBoardTitle = (TextView)view.findViewById(R.id.tv_noticeboard_title);
+		TextView noticeBoardByLine = (TextView)view.findViewById(R.id.tv_noticeboard_byline);
+		TextView noticeBoardDesc = (TextView)view.findViewById(R.id.tv_noticeboard_detail);
+		TextView tag = (TextView)view.findViewById(R.id.tv_tags);
+		TextView noticeBoardPostDate = (TextView)view.findViewById(R.id.tv_noticeboard_posteddate);
+        ImageView noticeBoardIV = (ImageView)view.findViewById(R.id.iv_noticeboard);
 		
 		mAQuery.id(noticeBoardIV).image(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getImage());
+		noticeBoardByLine.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getByline());
+		tag.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTags());
 		noticeBoardTitle.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTitle());
 		noticeBoardDesc.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getDesc());
 		noticeBoardPostDate.setText(Utils.getTimeRemaining(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getReleaseYear()));
+		return view;
 	}
 }

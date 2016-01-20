@@ -1,5 +1,11 @@
 package com.android.itemsActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.android.spideycity.R;
 import com.bean.BookingsData;
 import com.bean.RequestBean;
@@ -40,7 +46,16 @@ public class BookingActivity extends BaseActivity{
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.BOOKINGS);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		
+		NameValuePair valuePair = new BasicNameValuePair(
+				"user_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair(
+				"rwaid", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		list.add(valuePair);
 		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
 		NetworkCall networkCall = new NetworkCall(request);
 		networkCall.execute("");
 	}

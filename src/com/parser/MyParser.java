@@ -10,11 +10,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.hardware.camera2.TotalCaptureResult;
 
 import com.bean.BookingItemsData;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
+import com.bean.Comments;
 import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
 import com.bean.DeleteServicesItemsData;
@@ -31,7 +33,10 @@ import com.bean.NoticeBoardDetailData;
 import com.bean.NoticeBoardDetailItemsData;
 import com.bean.NoticeBoardItemsData;
 import com.bean.OpinionPollsData;
+import com.bean.OpinionPollsDetailItemsData;
+import com.bean.OpinionPollsDetailsData;
 import com.bean.OpinionPollsItemsData;
+import com.bean.OpinionPostAnswerPollsDetailsData;
 import com.bean.RWAFacilityData;
 import com.bean.RWAItemsData;
 import com.bean.RWAsData;
@@ -151,7 +156,7 @@ public class MyParser
 				}
 
 				slider.setSliderList(slidList);
-				
+
 				if(jObj.getJSONArray("notice")!=null){
 					JSONArray jArrNotice = jObj.getJSONArray("notice");
 					for (int i = 0; i < jArrNotice.length(); i++) {
@@ -165,7 +170,7 @@ public class MyParser
 						item.setTitle(jArrNotice.getJSONObject(i).getString("title"));
 						item.setUrl(jArrNotice.getJSONObject(i).getString("url"));
 						item.setIcon(jArrNotice.getJSONObject(i).getString("icon"));
-						
+
 						slider.setNoticeitem(item);
 					}
 				}
@@ -179,10 +184,10 @@ public class MyParser
 						item.setDesc(jArrPoll.getJSONObject(i).getString("desc"));
 						item.setGenre(jArrPoll.getJSONObject(i).getString("genre"));
 						item.setImage(jArrPoll.getJSONObject(i).getString("image"));
-						
+
 						item.setStartPoll(jArrPoll.getJSONObject(i).getString("startPoll"));
 						item.setEndPoll(jArrPoll.getJSONObject(i).getString("endPoll"));
-						
+
 						item.setTitle(jArrPoll.getJSONObject(i).getString("title"));
 						item.setUrl(jArrPoll.getJSONObject(i).getString("url"));
 
@@ -248,8 +253,8 @@ public class MyParser
 			rwasDetailData.setTitle(object.getString("title"));
 			rwasDetailData.setGenre(object.getString("genre"));
 			rwasDetailData.setCreatedby(object.getString("createdby"));
-			
-			
+
+
 			if(object.has("cdetailslabel")){
 				rwasDetailData.setCdetailslabel(object.getJSONObject("cdetailslabel"));
 				rwasDetailData.setCdetails(object.getJSONObject("cdetails"));
@@ -267,10 +272,10 @@ public class MyParser
 
 		return rwasDetailData;
 	}
-	
+
 	public List<RWAFacilityData> parseRWAsFacility(String response){
 		List<RWAFacilityData> rwaFacilityDataList = new ArrayList<RWAFacilityData>();
-		
+
 		try {
 
 			JSONArray jArrRWA = new JSONArray(response);
@@ -326,7 +331,7 @@ public class MyParser
 		return groupsData;
 	}
 
-	
+
 	public GroupDetailData parseGroupsDetail(String response){
 		GroupDetailData groupDetailData = new GroupDetailData();
 		List<GroupDetailItemsData> groupDetailItemsDataList = groupDetailData.getGroupDetailItemsDataList();
@@ -385,7 +390,7 @@ public class MyParser
 
 		return groupDetailData;
 	}
-	
+
 
 	public ServicesData parseServices(String response){
 		ServicesData servicesData = new ServicesData();
@@ -406,7 +411,7 @@ public class MyParser
 				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
 				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
 				servicesItemsData.setIcon(jArrRWA.getJSONObject(i).getString("icon"));
-				
+
 
 				servicesItemsDatasList.add(servicesItemsData);
 			}
@@ -450,7 +455,7 @@ public class MyParser
 
 		return requestServicesData;
 	}
-	
+
 	public CheckRequestData parseCheckRequestServices(String response){
 		CheckRequestData requestServicesData = new CheckRequestData();
 		List<CheckRequestItemsData> servicesItemsDatasList = requestServicesData.getCheckRequestItemsDatasList();
@@ -478,7 +483,7 @@ public class MyParser
 
 		return requestServicesData;
 	}
-	
+
 	public DeleteServicesData parseDeleteRequestServices(String response){
 		DeleteServicesData deleteServicesData = new DeleteServicesData();
 		List<DeleteServicesItemsData> DeleteServicesItemsDataList = deleteServicesData.getDeleteServicesItemsDataList();
@@ -573,7 +578,7 @@ public class MyParser
 
 		return noticeBoardData;
 	}
-	
+
 	public NoticeBoardDetailData parseNoticeBoardDetailData(String response){
 		NoticeBoardDetailData noticeBoardDetailData = new NoticeBoardDetailData();
 		List<NoticeBoardDetailItemsData> noticeBoardDetailItemsDataList = noticeBoardDetailData.getNoticeBoardDetailItemsData();
@@ -650,6 +655,7 @@ public class MyParser
 				spidyPickItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
 				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
 				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				spidyPickItemsData.setComments(jArrRWA.getJSONObject(i).getString("comments"));
 				spidyPickItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
 				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
 
@@ -664,33 +670,42 @@ public class MyParser
 
 		return spidyPickData;
 	}
-	
+
 	public SpidyPickDetailData parseSPidyPickDetail(String response){
 		SpidyPickDetailData spidyPickData = new SpidyPickDetailData();
 		List<SpidyPickDetailItemsData> spidyPickItemsDatasList = spidyPickData.getSpidyPickDetailItemsDataList();
+		List<Comments> spidyPickItemsCommentDatasList = spidyPickData.getCommentList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
+			JSONObject jsonObject = new JSONObject(response);
+			JSONObject innerJsonObject = jsonObject.getJSONObject("0");
+			SpidyPickDetailItemsData spidyPickItemsData = new SpidyPickDetailItemsData();
+
+			spidyPickItemsData.setId(innerJsonObject.getString("id"));
+			spidyPickItemsData.setDesc(innerJsonObject.getString("desc"));
+			spidyPickItemsData.setGenre(innerJsonObject.getString("genre"));
+			spidyPickItemsData.setComment(innerJsonObject.getString("comments"));
+			spidyPickItemsData.setByline(innerJsonObject.getString("byline"));
+			spidyPickItemsData.setTags(innerJsonObject.getString("tags"));
+			spidyPickItemsData.setImage(innerJsonObject.getString("image"));
+			spidyPickItemsData.setTitle(innerJsonObject.getString("title"));
+			spidyPickItemsData.setReleaseYear(innerJsonObject.getString("releaseYear"));
+
+			spidyPickItemsDatasList.add(spidyPickItemsData);
+			JSONArray jArrRWA = jsonObject.getJSONArray("comment");
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				SpidyPickDetailItemsData spidyPickItemsData = new SpidyPickDetailItemsData();
-
-				spidyPickItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				spidyPickItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				spidyPickItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
-
-				spidyPickItemsDatasList.add(spidyPickItemsData);
+				Comments comments = new Comments();
+				comments.setCommentby(jArrRWA.getJSONObject(i).getString("commentby"));
+				comments.setDescrption(jArrRWA.getJSONObject(i).getString("descrption"));
+				comments.setProfilephoto(jArrRWA.getJSONObject(i).getString("profilephoto"));
+				spidyPickItemsCommentDatasList.add(comments);
 			}
 
 		} catch (JSONException e) {
 			spidyPickData.setException("JsonParseException");
 			e.printStackTrace();
 		}
-
-
 		return spidyPickData;
 	}
 
@@ -716,6 +731,72 @@ public class MyParser
 				opinionPollsItemsDataList.add(opinionPollsItemsData);
 			}
 
+		} catch (JSONException e) {
+			opinionPollsData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return opinionPollsData;
+	}
+
+	public OpinionPollsDetailsData parseOpinionPollsDetail(String response){
+		OpinionPollsDetailsData opinionPollsData = new OpinionPollsDetailsData();
+		List<OpinionPollsDetailItemsData> opinionPollsItemsDataList = opinionPollsData.getOpinionPollsDetailItemsDataList();
+
+		try {
+
+			JSONArray jArrRWA = new JSONArray(response);
+			for (int i = 0; i < jArrRWA.length(); i++) {
+
+				opinionPollsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				opinionPollsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				opinionPollsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
+				opinionPollsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
+				opinionPollsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+
+				JSONArray innerjArrRWA = jArrRWA.getJSONObject(i).getJSONArray("option");
+				for (int j = 0; j < innerjArrRWA.length(); j++) {
+					OpinionPollsDetailItemsData opinionPollsDetailItemsData = new OpinionPollsDetailItemsData();
+					opinionPollsDetailItemsData.setId(innerjArrRWA.getJSONObject(j).getString("id"));
+					opinionPollsDetailItemsData.setOptions(innerjArrRWA.getJSONObject(j).getString("options"));
+					opinionPollsDetailItemsData.setVotes(innerjArrRWA.getJSONObject(j).getString("votes"));
+					opinionPollsItemsDataList.add(opinionPollsDetailItemsData);
+				}
+
+			}
+
+		} catch (JSONException e) {
+			opinionPollsData.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return opinionPollsData;
+	}
+
+	public OpinionPostAnswerPollsDetailsData parseOpinionPostAnswerPolls(String response){
+		OpinionPostAnswerPollsDetailsData opinionPollsData = new OpinionPostAnswerPollsDetailsData();
+		List<String> opinionOptionList = opinionPollsData.getOptionsList();
+		List<String> opinionTotalDataList = opinionPollsData.getTotalCountList();
+		List<String> opinionColorDataList = opinionPollsData.getColorList();
+
+		try {
+
+			JSONObject jsonObject = new JSONObject(response);
+			opinionPollsData.setMsg(jsonObject.getString("msg"));
+			JSONArray jArrRWA1 = jsonObject.getJSONArray("option");
+			JSONArray jArrRWA2 = jsonObject.getJSONArray("totalcounts");
+			JSONArray jArrRWA3 = jsonObject.getJSONArray("color");
+			for (int i = 0; i < jArrRWA1.length(); i++) {
+				opinionOptionList.add(jArrRWA1.getString(i));
+			}
+			for (int i = 0; i < jArrRWA2.length(); i++) {
+				opinionTotalDataList.add(jArrRWA1.getString(i));
+			}
+			for (int i = 0; i < jArrRWA3.length(); i++) {
+				opinionColorDataList.add(jArrRWA1.getString(i));
+			}
 		} catch (JSONException e) {
 			opinionPollsData.setException("JsonParseException");
 			e.printStackTrace();

@@ -39,6 +39,7 @@ import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
 import com.android.itemsActivity.NoticeBoardDetailActivity;
 import com.android.itemsActivity.OpinionPollActivity;
+import com.android.itemsActivity.OpinionPollDetailActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.itemsActivity.ServicesActivity;
@@ -59,6 +60,9 @@ import com.bean.LoginData;
 import com.bean.NoticeBoardData;
 import com.bean.NoticeBoardDetailData;
 import com.bean.OpinionPollsData;
+import com.bean.OpinionPollsDetailItemsData;
+import com.bean.OpinionPollsDetailsData;
+import com.bean.OpinionPostAnswerPollsDetailsData;
 import com.bean.RWADetailData;
 import com.bean.RWAFacilityData;
 import com.bean.RWAsData;
@@ -83,22 +87,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 
 //	private static final String baseURL = "http://top-story.in/api/";
 	private static final String baseURL = "http://cityspidey.com/api/";
-	private static final String LoginURL = baseURL+"login.php";
-	private static final String registerURL = baseURL+"register.php";
-	private static final String sliderTopURL = baseURL+"master_home.php";
-	private static final String rwasURL = baseURL+"rwa_list.json";
-	private static final String rwasDetailURL = baseURL;
-	private static final String groupsURL = baseURL+"groups_slider.json";
-	private static final String createGroupsURL = "http://top-story.in/api/create_group.php";
-	private static final String servicesURL = "http://top-story.in/api/service_list.json";
-	private static final String bookingsURL = "http://top-story.in/api/booking_list.php";
-	private static final String noticeBoardURL = "http://top-story.in/api/notice_list.json";
-	private static final String noticeBoardDetailURL = "http://top-story.in/api/";
-	private static final String directoryURL = "http://top-story.in/api/directory.php";
-	private static final String spidyPickURL = "http://top-story.in/api/news_slider.json";
-	private static final String opinionPollsURL = "http://top-story.in/api/poll_list.json";
-	private static final String requestServiceURL = "http://top-story.in/api/request_service.php";
-	private static final String checkStatusURL = "http://top-story.in/api/my_service.php";
+	private static final String LoginURL = baseURL + "login.php";
+	private static final String registerURL = baseURL + "register.php";
+	private static final String sliderTopURL = baseURL + "master_home.php";
+	private static final String rwasURL = baseURL + "rwa_list.json";
+	private static final String groupsURL = baseURL + "groups_slider.json";
+	private static final String createGroupsURL = baseURL + "create_group.php";
+	private static final String servicesURL = baseURL + "service_list.json";
+	private static final String bookingsURL = baseURL + "booking_list.php";
+	private static final String noticeBoardURL = baseURL + "notice_list.json";
+	private static final String noticeBoardDetailURL = baseURL + "";
+	private static final String directoryURL = baseURL + "directory.php";
+	private static final String spidyPickURL = "http://cityspidey.com/api/spideypick.php";
+	private static final String opinionPollsURL = baseURL + "poll_list.json";
+	private static final String pollsAnswerOpinionPollsURL = baseURL + "polls_answer_save.php";
+	private static final String requestServiceURL = baseURL + "request_service.php";
+	private static final String checkStatusURL = baseURL + "my_service.php";
 	
 	//Service request api: http://top-story.in/api/request_service.php?user_id=5&service_id=4&rwa_id=1&msg=testfjjbf 'wejf wef w efwew ef efwe f
 		//Check Request status : http://top-story.in/api/my_service.php?user_id=5
@@ -191,6 +195,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			break;
 		case OPINIONPOLLS:
 			object = opinionPolls();
+			break;
+		case OPINIONPOLLS_DETAILS:
+			object = opinionPollsDetail(namePairList);
+			break;
+		case OPINIONPOLLS_VOTE:
+			object = postAnswerOpinionPollsDetail(namePairList);
 			break;
 
 		}
@@ -416,6 +426,20 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 				((OpinionPollActivity) activity).response(opinionPollsData);	
 			}
 			break;
+		case OPINIONPOLLS_DETAILS:
+			OpinionPollsDetailsData opinionPollsDetailsData = (OpinionPollsDetailsData)result;
+			if(activity instanceof OpinionPollDetailActivity){
+				((OpinionPollDetailActivity) activity).response(opinionPollsDetailsData);	
+			}
+			break;
+
+		case OPINIONPOLLS_VOTE:
+			OpinionPostAnswerPollsDetailsData opinionPostAnswerPollsDetailsData = (OpinionPostAnswerPollsDetailsData)result;
+			if(activity instanceof OpinionPollDetailActivity){
+				((OpinionPollDetailActivity) activity).response(opinionPostAnswerPollsDetailsData);	
+			}
+			break;
+
 
 		}
 
@@ -686,8 +710,8 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	public RWAsDetailItemData RWAsDetail(List<NameValuePair> namePair){
 		List<NameValuePair> pair = null;
 		RWAsDetailItemData rwasDetailData;
-		PrintLog.show(Log.ERROR, TAG, "" + rwasDetailURL + namePair.get(0).getValue());
-		String response = NetworkConnection.networkHit(pair,rwasDetailURL + namePair.get(0).getValue());
+		PrintLog.show(Log.ERROR, TAG, "" + baseURL + namePair.get(0).getValue());
+		String response = NetworkConnection.networkHit(pair,baseURL + namePair.get(0).getValue());
 
 		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
@@ -704,8 +728,8 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		List<NameValuePair> pair = null;
 		List<RWAFacilityData> rwaFacilityDataList = new ArrayList<RWAFacilityData>();
 //		RWAFacilityData rwaFacilityData;
-		PrintLog.show(Log.ERROR, TAG, "" + rwasDetailURL + namePair.get(1).getValue());
-		String response = NetworkConnection.networkHit(pair,rwasDetailURL + namePair.get(1).getValue());
+		PrintLog.show(Log.ERROR, TAG, "" + baseURL + namePair.get(1).getValue());
+		String response = NetworkConnection.networkHit(pair,baseURL + namePair.get(1).getValue());
 
 		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
@@ -959,6 +983,37 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		
 	}
 	
+	public OpinionPostAnswerPollsDetailsData postAnswerOpinionPollsDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		OpinionPostAnswerPollsDetailsData opinionPollsDetailsData;
+		String response = NetworkConnection.networkHit(namePair, pollsAnswerOpinionPollsURL);
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			opinionPollsDetailsData = new OpinionPostAnswerPollsDetailsData();
+			opinionPollsDetailsData.setException(response);
+		}else{
+			opinionPollsDetailsData = myParser.parseOpinionPostAnswerPolls(response);
+		}
+		return opinionPollsDetailsData;
+		
+	}
+	
+	public OpinionPollsDetailsData opinionPollsDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		OpinionPollsDetailsData opinionPollsDetailsData;
+		String response = NetworkConnection.networkHit(pair,baseURL + namePair.get(0).getValue());
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			opinionPollsDetailsData = new OpinionPollsDetailsData();
+			opinionPollsDetailsData.setException(response);
+		}else{
+			opinionPollsDetailsData = myParser.parseOpinionPollsDetail(response);
+		}
+		return opinionPollsDetailsData;
+		
+	}
 	
 	public String LoadData(String inFile) {
 		String tContents = "";

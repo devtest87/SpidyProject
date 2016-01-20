@@ -1,5 +1,8 @@
 package com.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpidyPickDetailItemsData {
 	private String id;
 	public String getId() {
@@ -38,7 +41,28 @@ public class SpidyPickDetailItemsData {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public String getByline() {
+		return byline;
+	}
+	public void setByline(String byline) {
+		this.byline = byline;
+	}
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	private String tags;
+	private String byline;
+	private String comment;
 	private String title;
 	private String  desc;
 	private String image;

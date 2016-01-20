@@ -64,6 +64,7 @@ public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 			convertView = mLayoutInflater.inflate(R.layout.row_spidypick_layout, null, false);
 			viewHolder.noticeboardIconIV = (ImageView)convertView.findViewById(R.id.iv_noticeboardicon);
 			viewHolder.noticeboardTitleTV = (TextView)convertView.findViewById(R.id.tv_noticeboardtitle);
+			viewHolder.noticeboardCommentTV = (TextView)convertView.findViewById(R.id.tv_noticeboardcomment);
 			 
 			convertView.setTag(viewHolder);
 		}else{
@@ -72,6 +73,7 @@ public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 		
 		mAQuery.id(viewHolder.noticeboardIconIV).image(mSpidyPickFilterItemsDatasList.get(position).getImage());
 		viewHolder.noticeboardTitleTV.setText(mSpidyPickFilterItemsDatasList.get(position).getTitle());
+		viewHolder.noticeboardCommentTV.setText(mSpidyPickFilterItemsDatasList.get(position).getComments());
 		
 		return convertView;
 	}
@@ -80,6 +82,7 @@ public class GridSpidyPickAdapter  extends BaseAdapter implements Filterable{
 
 		public ImageView noticeboardIconIV;
 		public TextView noticeboardTitleTV;
+		public TextView noticeboardCommentTV;
 	}
 
 	@Override
