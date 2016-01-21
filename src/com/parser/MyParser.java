@@ -16,6 +16,7 @@ import com.bean.BookingItemsData;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
+import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
@@ -462,16 +463,18 @@ public class MyParser
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
+			JSONObject joObject = new JSONObject(response);
+			JSONArray jArrRWA = joObject.getJSONArray("myservice");
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				CheckRequestItemsData servicesItemsData = new CheckRequestItemsData();
 
 				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
 				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
 				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-
+				servicesItemsData.setSercice_id(jArrRWA.getJSONObject(i).getString("sercice_id"));
+				servicesItemsData.setServiceName(jArrRWA.getJSONObject(i).getString("serviceName"));
+				servicesItemsData.setService_status(jArrRWA.getJSONObject(i).getString("service_status"));
+				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
 				servicesItemsDatasList.add(servicesItemsData);
 			}
 
@@ -804,6 +807,20 @@ public class MyParser
 
 
 		return opinionPollsData;
+	}
+	
+	public CommentSave parseCommentSave(String response){
+		CommentSave commentSave = new CommentSave();
+		try {
+			JSONObject jsonObject = new JSONObject(response);
+			commentSave.setError(jsonObject.getString("error"));
+		} catch (JSONException e) {
+			commentSave.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return commentSave;
 	}
 
 }

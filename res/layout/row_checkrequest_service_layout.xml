@@ -87,6 +87,7 @@
             android:textColor="@color/white"
             android:background="@drawable/shape_rect_circular_darkgrey_corner"
             android:text="DELETE RQUEST"
+            android:layout_marginBottom="30dp"
             android:textSize="@dimen/rwa_title_test_size" />
     </LinearLayout>
 

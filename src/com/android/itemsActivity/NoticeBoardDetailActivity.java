@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.spideycity.R;
+import com.bean.CommentSave;
 import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
@@ -30,7 +31,6 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		titleTV.setText(getResources().getString(R.string.notice_board));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.noticecolor);
-		findViewById(R.id.rl_search).setVisibility(View.GONE);
 		
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
 			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
@@ -99,5 +99,9 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		noticeBoardTitle.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getTitle());
 		noticeBoardDesc.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getDesc());
 		noticeBoardPostDate.setText(Utils.getTimeRemaining(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getReleaseYear()));
+	}
+
+	public void response(CommentSave commentSave) {
+		
 	}
 }

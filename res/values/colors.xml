@@ -67,5 +67,22 @@
     <color name="noticeboard_title_bg_color">#FF1E00</color> -->
     
     
+    <color name="calender_symptom_color_selected">#003366</color>
+    <color name="calender_reaction_color_selected">#003366</color>
+    <color name="calender_static_text_color">#003366</color>
+    <color name="calender_journal_entry_listitem_text_color">#003366</color>
+    <color name="calender_note_text_disabled">#333333</color>
+    <color name="calender_blue">#0000FF</color>
+    <color name="calender_navy">#6699FF</color>
+    <color name="calender_sky">#0099CC</color>
+    <color name="calender_gray">#808080</color>
+    <color name="calender_lightgray">#e7e7e7</color>
+      <color name="calender_lightgray02">#bfbfbf</color>
+    <color name="calender_dark">#000015</color>
+    <color name="calender_lightgreen">#336666</color>
+    <color name="calender_orrange">#e33d1b</color>
+    <color name="calender_darkorrange">#cc2303</color>
+    
+    
 </resources>
  

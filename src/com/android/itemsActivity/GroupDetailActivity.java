@@ -37,6 +37,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.spideycity.R;
+import com.bean.CommentSave;
 import com.bean.GroupDetailData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
@@ -59,7 +60,6 @@ public class GroupDetailActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.groupcolor);
 		plusTV.setBackgroundResource(R.color.groupcolor);
-		findViewById(R.id.rl_search).setVisibility(View.GONE);
 
 		plusTV.setOnClickListener(new OnClickListener() {
 
@@ -286,5 +286,10 @@ public class GroupDetailActivity extends BaseActivity{
 		        e.printStackTrace();
 		    } 
 		} 
+	}
+
+	public void response(CommentSave commentSave) {
+		// TODO Auto-generated method stub
+		
 	}
 }

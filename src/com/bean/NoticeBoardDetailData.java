@@ -35,4 +35,12 @@ public class NoticeBoardDetailData {
 		this.noticeBoardDetailItemsData = noticeBoardDetailItemsData;
 	}
 	
+	private List<Comments> commentList = new ArrayList<Comments>();
+	public List<Comments> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comments> commentList) {
+		this.commentList = commentList;
+	}
+	
 }

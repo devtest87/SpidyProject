@@ -50,7 +50,6 @@ public class RWAsDetailActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.rwacolor);
 
-		findViewById(R.id.rl_search).setVisibility(View.GONE);
 
 		mDetailUrl = getIntent().getStringExtra("url");
 		mFacilityUrl = getIntent().getStringExtra("furl");

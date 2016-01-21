@@ -32,7 +32,6 @@
         android:layout_marginTop="10dp"
         android:layout_height="match_parent"
         android:background="@color/header_background_color"
-        android:divider="@color/white"
-        android:dividerHeight="1dp" />
+        android:divider="@null"/>
 
 </LinearLayout>

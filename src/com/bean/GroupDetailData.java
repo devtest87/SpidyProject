@@ -35,4 +35,12 @@ public class GroupDetailData {
 		this.groupDetailItemsDataList = groupDetailItemsDataList;
 	}
 	
+	private List<Comments> commentList = new ArrayList<Comments>();
+	public List<Comments> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comments> commentList) {
+		this.commentList = commentList;
+	}
+	
 }

@@ -172,8 +172,8 @@ public class OpinionPollDetailActivity extends BaseActivity{
 				vote2.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+1).getOptions());
 				vote3.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+2).getOptions());
 				vote1.setTag((i*3)+0);
-				vote1.setTag((i*3)+1);
-				vote1.setTag((i*3)+2);
+				vote2.setTag((i*3)+1);
+				vote3.setTag((i*3)+2);
 			}else{
 				if(reminder == 1){
 					vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());

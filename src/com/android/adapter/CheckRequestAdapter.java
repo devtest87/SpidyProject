@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.CheckRequestItemsData;
+import com.utils.Utils;
 
 public class CheckRequestAdapter extends BaseAdapter implements Filterable{
 
@@ -74,12 +76,21 @@ public class CheckRequestAdapter extends BaseAdapter implements Filterable{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		viewHolder.titleTV.setText(mCheckRequestFilterItemsDataList.get(position).getCity());
-		viewHolder.postDateTV.setText(mCheckRequestFilterItemsDataList.get(position).getAdr());
-		viewHolder.descTV.setText(mCheckRequestFilterItemsDataList.get(position).getTitle());
-		viewHolder.alertTV.setText(mCheckRequestFilterItemsDataList.get(position).getDesc());
-		viewHolder.statusTV.setText(mCheckRequestFilterItemsDataList.get(position).getDesc());
-		mAQuery.id(viewHolder.serviceIV).image(mCheckRequestFilterItemsDataList.get(position).getImage());
+		viewHolder.titleTV.setText(mCheckRequestFilterItemsDataList.get(position).getServiceName());
+		viewHolder.postDateTV.setText(Utils.getTimeRemaining(mCheckRequestFilterItemsDataList.get(position).getCreatedDate()));
+		viewHolder.descTV.setText(mCheckRequestFilterItemsDataList.get(position).getDesc());
+		viewHolder.alertTV.setText("");
+		viewHolder.statusTV.setText(mCheckRequestFilterItemsDataList.get(position).getService_status());
+		//mAQuery.id(viewHolder.serviceIV).image(mCheckRequestFilterItemsDataList.get(position).getImage());
+		
+		viewHolder.deleteTV.setTag(position);
+		viewHolder.deleteTV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int pos = Integer.parseInt(v.getTag().toString());
+			}
+		});
 		
 		return convertView;
 	}
@@ -96,7 +107,6 @@ public class CheckRequestAdapter extends BaseAdapter implements Filterable{
 	
 	@Override
 	public Filter getFilter() {
-		// TODO Auto-generated method stub
 		return mFilter;
 	}
 	
@@ -116,7 +126,7 @@ public class CheckRequestAdapter extends BaseAdapter implements Filterable{
             String filterableString ;
 
             for (int i = 0; i < count; i++) {
-                filterableString = list.get(i).getTitle();
+                filterableString = list.get(i).getServiceName();
                 if (filterableString.toLowerCase().contains(filterString)) {
                     nlist.add(list.get(i));
                 }

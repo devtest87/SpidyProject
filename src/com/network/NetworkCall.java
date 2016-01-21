@@ -51,6 +51,7 @@ import com.android.spideycity.R;
 import com.android.spideycity.RegisterActivity;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
+import com.bean.CommentSave;
 import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
 import com.bean.DirectoryData;
@@ -60,7 +61,6 @@ import com.bean.LoginData;
 import com.bean.NoticeBoardData;
 import com.bean.NoticeBoardDetailData;
 import com.bean.OpinionPollsData;
-import com.bean.OpinionPollsDetailItemsData;
 import com.bean.OpinionPollsDetailsData;
 import com.bean.OpinionPostAnswerPollsDetailsData;
 import com.bean.RWADetailData;
@@ -102,7 +102,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String opinionPollsURL = baseURL + "poll_list.json";
 	private static final String pollsAnswerOpinionPollsURL = baseURL + "polls_answer_save.php";
 	private static final String requestServiceURL = baseURL + "request_service.php";
-	private static final String checkStatusURL = baseURL + "my_service.php";
+	private static final String checkStatusURL = baseURL + "service_request_status.php?";
+	private static final String commentSaveURL = baseURL + "comment_save.php";
+	
 	
 	//Service request api: http://top-story.in/api/request_service.php?user_id=5&service_id=4&rwa_id=1&msg=testfjjbf 'wejf wef w efwew ef efwe f
 		//Check Request status : http://top-story.in/api/my_service.php?user_id=5
@@ -200,6 +202,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			object = opinionPollsDetail(namePairList);
 			break;
 		case OPINIONPOLLS_VOTE:
+			object = postAnswerOpinionPollsDetail(namePairList);
+			break;
+		case COMMENT:
 			object = postAnswerOpinionPollsDetail(namePairList);
 			break;
 
@@ -437,6 +442,16 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			OpinionPostAnswerPollsDetailsData opinionPostAnswerPollsDetailsData = (OpinionPostAnswerPollsDetailsData)result;
 			if(activity instanceof OpinionPollDetailActivity){
 				((OpinionPollDetailActivity) activity).response(opinionPostAnswerPollsDetailsData);	
+			}
+			break;
+		case COMMENT:
+			CommentSave commentSave = (CommentSave)result;
+			if(activity instanceof SpidyPickDetailActivity){
+				((SpidyPickDetailActivity) activity).response(commentSave);	
+			}else if(activity instanceof NoticeBoardDetailActivity){
+				((NoticeBoardDetailActivity) activity).response(commentSave);	
+			}else if(activity instanceof GroupDetailActivity){
+				((GroupDetailActivity) activity).response(commentSave);	
 			}
 			break;
 
@@ -996,6 +1011,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			opinionPollsDetailsData = myParser.parseOpinionPostAnswerPolls(response);
 		}
 		return opinionPollsDetailsData;
+		
+	}
+	
+	public CommentSave comment(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		CommentSave commentSave;
+		String response = NetworkConnection.networkHit(namePair, commentSaveURL);
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			commentSave = new CommentSave();
+			commentSave.setException(response);
+		}else{
+			commentSave = myParser.parseCommentSave(response);
+		}
+		return commentSave;
 		
 	}
 	

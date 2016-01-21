@@ -35,7 +35,7 @@ public class OpinionPollsPostAnswerResponseActivity  extends BaseActivity{
 		TextView tv_postandenddate = (TextView)findViewById(R.id.tv_postandenddate);
 		LinearLayout voteOptionLL = (LinearLayout)findViewById(R.id.ll_vote_options);
 
-		titleTV.setText(opinionPostAnswerPollsDetailsData.getMsg());
+		tv_opiniontitle.setText(opinionPostAnswerPollsDetailsData.getMsg());
 		tv_postandenddate.setText("Posted " + Utils.getTimeRemaining(getIntent().getStringExtra("postdate"))+
 				"/Voting ends\n " + Utils.formatDate(getIntent().getStringExtra("enddate")));
 		int size = opinionPostAnswerPollsDetailsData.getOptionsList().size();

@@ -46,8 +46,8 @@ public class CheckRequestStatusActivity extends BaseActivity implements StartAct
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
-		titleTV.setTextColor(getResources().getColor(R.color.black));
-		titleTV.setBackgroundResource(R.color.rwacolor);
+		titleTV.setTextColor(getResources().getColor(R.color.white));
+		titleTV.setBackgroundResource(R.color.servicecolor);
 		
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
 			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));

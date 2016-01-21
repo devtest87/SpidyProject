@@ -5,28 +5,31 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.w3c.dom.ls.LSInput;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.SpidyPickDetailAdapter;
 import com.android.spideycity.R;
-import com.bean.NoticeBoardDetailData;
+import com.bean.CommentSave;
+import com.bean.Comments;
 import com.bean.RequestBean;
 import com.bean.SpidyPickDetailData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
-import com.utils.Utils;
 import com.utils.PreferenceHelper.PreferenceKey;
+import com.utils.Utils;
 
 public class SpidyPickDetailActivity extends BaseActivity{
 	
 	private ListView listView;
+	private SpidyPickDetailData spidyPickDetailData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,7 +39,6 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		titleTV.setText(getResources().getString(R.string.spidey_pick));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.spideycolor);
-		findViewById(R.id.rl_search).setVisibility(View.GONE);
 
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
 			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
@@ -95,11 +97,13 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		super.onBackPressed();
 	}
 
+	private SpidyPickDetailAdapter spidyPickDetailAdapter;
 	public void response(SpidyPickDetailData spidyPickDetailData) {
-		View headerView = getHeaderView(spidyPickDetailData);
-		View footerView = getFooterView(spidyPickDetailData);
+		this.spidyPickDetailData = spidyPickDetailData;
+		View headerView = getHeaderView();
+		View footerView = getFooterView();
 		if(spidyPickDetailData.getCommentList().size() > 0){
-			SpidyPickDetailAdapter spidyPickDetailAdapter = new SpidyPickDetailAdapter
+			spidyPickDetailAdapter = new SpidyPickDetailAdapter
 					(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
 			listView.setAdapter(spidyPickDetailAdapter);
 		}
@@ -107,12 +111,41 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		listView.addFooterView(footerView);
 	}
 
-	private View getFooterView(SpidyPickDetailData spidyPickDetailData) {
+	private View getFooterView() {
 		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment, null, false);
+		final EditText commentET = (EditText)view.findViewById(R.id.et_comment);
+		TextView resetBTN = (TextView)view.findViewById(R.id.btn_reset);
+		TextView submitBTN = (TextView)view.findViewById(R.id.btn_submit);
+		resetBTN.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				commentET.setText("");
+			}
+		});
+		
+		submitBTN.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Comments comments = new Comments();
+				comments.setCommentby(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
+				comments.setDescrption(commentET.getText().toString());
+				comments.setProfilephoto(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+				spidyPickDetailData.getCommentList().add(comments);
+				if(spidyPickDetailAdapter != null){
+					spidyPickDetailAdapter = new SpidyPickDetailAdapter(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
+					listView.setAdapter(spidyPickDetailAdapter);
+				}else{
+					spidyPickDetailAdapter.notifyDataSetChanged();
+				}
+				listView.setSelection(spidyPickDetailData.getCommentList().size()-1);
+			}
+		});
 		return view;
 	}
 
-	private View getHeaderView(SpidyPickDetailData spidyPickDetailData) {
+	private View getHeaderView() {
 		View view = getLayoutInflater().inflate(R.layout.inflate_spideypick_detail_header, null, false);
 		TextView noticeBoardTitle = (TextView)view.findViewById(R.id.tv_noticeboard_title);
 		TextView noticeBoardByLine = (TextView)view.findViewById(R.id.tv_noticeboard_byline);
@@ -128,5 +161,23 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		noticeBoardDesc.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getDesc());
 		noticeBoardPostDate.setText(Utils.getTimeRemaining(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getReleaseYear()));
 		return view;
+	}
+	
+	private void comment() {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.SPIDYPICKS_DETAILS);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("url", getIntent().getStringExtra("url"));
+		list.add(valuePair);
+		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+
+
+	public void response(CommentSave commentSave) {
+		
 	}
 }
