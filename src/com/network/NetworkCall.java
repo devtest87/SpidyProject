@@ -205,7 +205,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			object = postAnswerOpinionPollsDetail(namePairList);
 			break;
 		case COMMENT:
-			object = postAnswerOpinionPollsDetail(namePairList);
+			object = comment(namePairList);
 			break;
 
 		}

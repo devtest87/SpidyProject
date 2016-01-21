@@ -32,13 +32,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.adapter.SpidyPickDetailAdapter;
 import com.android.spideycity.R;
 import com.bean.CommentSave;
+import com.bean.Comments;
 import com.bean.GroupDetailData;
+import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.DialogController;
@@ -49,10 +53,12 @@ import com.utils.PreferenceHelper.PreferenceKey;
 
 public class GroupDetailActivity extends BaseActivity{
 	private String imageUrl;
+	private ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_group_detail_layout);
+		listView = (ListView)findViewById(R.id.listview);
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
 		TextView plusTV = (TextView)findViewById(R.id.tv_plus);
 		plusTV.setTextColor(getResources().getColor(R.color.black));
@@ -133,18 +139,96 @@ public class GroupDetailActivity extends BaseActivity{
 	}
 
 	public void response(GroupDetailData groupDetailData) {
-		TextView groupTitleTV = (TextView)findViewById(R.id.tv_group_title);
-		TextView createdDAteTV = (TextView)findViewById(R.id.tv_createddate);
-		TextView groupAdminTV = (TextView)findViewById(R.id.tv_groupadmin);
-		ImageView groupDetailIV = (ImageView)findViewById(R.id.iv_group_detail);
+		this.groupDetailData = groupDetailData;
+		View headerView = getHeaderView();
+		View footerView = getFooterView();
+		if(groupDetailData.getCommentList().size() > 0){
+			spidyPickDetailAdapter = new SpidyPickDetailAdapter
+					(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
+			listView.setAdapter(spidyPickDetailAdapter);
+		}
+		listView.addHeaderView(headerView);
+		listView.addFooterView(footerView);
+	}
+	
+	
+	private SpidyPickDetailAdapter spidyPickDetailAdapter;
+	private GroupDetailData groupDetailData;
+
+	private View getFooterView() {
+		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment, null, false);
+		final EditText commentET = (EditText)view.findViewById(R.id.et_comment);
+		TextView resetBTN = (TextView)view.findViewById(R.id.btn_reset);
+		TextView submitBTN = (TextView)view.findViewById(R.id.btn_submit);
+		resetBTN.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				commentET.setText("");
+			}
+		});
+		
+		submitBTN.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Comments comments = new Comments();
+				comments.setCommentby(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
+				comments.setDescrption(commentET.getText().toString());
+				comments.setProfilephoto(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+				groupDetailData.getCommentList().add(comments);
+				if(spidyPickDetailAdapter != null){
+					spidyPickDetailAdapter = new SpidyPickDetailAdapter(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
+					listView.setAdapter(spidyPickDetailAdapter);
+				}else{
+					spidyPickDetailAdapter.notifyDataSetChanged();
+				}
+				listView.setSelection(groupDetailData.getCommentList().size()-1);
+				comment(commentET.getText().toString());
+				commentET.setText("");
+			}
+		});
+		return view;
+	}
+
+	private View getHeaderView() {
+		View view = getLayoutInflater().inflate(R.layout.inflate_ngroup_detail_header, null, false);
+		TextView groupTitleTV = (TextView)view.findViewById(R.id.tv_group_title);
+		TextView createdDAteTV = (TextView)view.findViewById(R.id.tv_createddate);
+		TextView groupAdminTV = (TextView)view.findViewById(R.id.tv_groupadmin);
+		ImageView groupDetailIV = (ImageView)view.findViewById(R.id.iv_group_detail);
 		mAQuery.id(groupDetailIV).image(groupDetailData.getGroupDetailItemsDataList().get(0).getImage());
-		TextView descTV = (TextView)findViewById(R.id.tv_desc);
+		TextView descTV = (TextView)view.findViewById(R.id.tv_desc);
 		groupTitleTV.setText(groupDetailData.getGroupDetailItemsDataList().get(0).getTitle());
 		createdDAteTV.setText("Created: " + Utils.getTimeRemaining(groupDetailData.getGroupDetailItemsDataList().get(0).getCreatedDate()));
 		groupAdminTV.setText("Group Admin: " + groupDetailData.getGroupDetailItemsDataList().get(0).getCreatedby());
 		descTV.setText(groupDetailData.getGroupDetailItemsDataList().get(0).getDesc());
+		
+		return view;
 	}
 	
+	private void comment(String message) {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.COMMENT);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		BasicNameValuePair valuePair = new BasicNameValuePair("articleid", groupDetailData.getGroupDetailItemsDataList().get(0).getId());
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("content_type", "3");//1 for spideypick
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("userid", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("task", "addComments");
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("message", message);
+		list.add(valuePair);
+		
+		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+
 	private void createGroupDialog(){
 		// custom dialog
 		final Dialog dialog = new Dialog(this);
@@ -289,7 +373,6 @@ public class GroupDetailActivity extends BaseActivity{
 	}
 
 	public void response(CommentSave commentSave) {
-		// TODO Auto-generated method stub
 		
 	}
 }

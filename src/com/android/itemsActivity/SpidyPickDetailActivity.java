@@ -140,6 +140,8 @@ public class SpidyPickDetailActivity extends BaseActivity{
 					spidyPickDetailAdapter.notifyDataSetChanged();
 				}
 				listView.setSelection(spidyPickDetailData.getCommentList().size()-1);
+				comment(commentET.getText().toString());
+				commentET.setText("");
 			}
 		});
 		return view;
@@ -163,13 +165,22 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		return view;
 	}
 	
-	private void comment() {
+	private void comment(String message) {
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
-		request.setNetworkRequestName(NetworkRequestName.SPIDYPICKS_DETAILS);
+		request.setNetworkRequestName(NetworkRequestName.COMMENT);
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		NameValuePair valuePair = new BasicNameValuePair("url", getIntent().getStringExtra("url"));
+		BasicNameValuePair valuePair = new BasicNameValuePair("articleid", spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getId());
 		list.add(valuePair);
+		valuePair = new BasicNameValuePair("content_type", "1");//1 for spideypick
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("userid", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("task", "addComments");
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("message", message);
+		list.add(valuePair);
+		
 		request.setCallingClassObject(this);
 		request.setNamevaluepair(list);
 		NetworkCall networkCall = new NetworkCall(request);

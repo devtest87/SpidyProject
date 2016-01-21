@@ -336,22 +336,30 @@ public class MyParser
 	public GroupDetailData parseGroupsDetail(String response){
 		GroupDetailData groupDetailData = new GroupDetailData();
 		List<GroupDetailItemsData> groupDetailItemsDataList = groupDetailData.getGroupDetailItemsDataList();
+		List<Comments> groupDetailDataCommentDatasList = groupDetailData.getCommentList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
+			JSONObject jsonObject = new JSONObject(response);
+			JSONObject innerJsonObject = jsonObject.getJSONObject("0");
+			GroupDetailItemsData groupDetailItemsData = new GroupDetailItemsData();
+
+			groupDetailItemsData.setId(innerJsonObject.getString("id"));
+			groupDetailItemsData.setDesc(innerJsonObject.getString("desc"));
+			groupDetailItemsData.setGenre(innerJsonObject.getString("genre"));
+			groupDetailItemsData.setImage(innerJsonObject.getString("image"));
+			groupDetailItemsData.setTitle(innerJsonObject.getString("title"));
+			groupDetailItemsData.setCreatedby(innerJsonObject.getString("createdby"));
+			groupDetailItemsData.setCreatedDate(innerJsonObject.getString("createdDate"));
+
+			groupDetailItemsDataList.add(groupDetailItemsData);
+			JSONArray jArrRWA = jsonObject.getJSONArray("comment");
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				GroupDetailItemsData groupDetailItemsData = new GroupDetailItemsData();
-
-				groupDetailItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				groupDetailItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				groupDetailItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				groupDetailItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				groupDetailItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				groupDetailItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-				groupDetailItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-
-				groupDetailItemsDataList.add(groupDetailItemsData);
+				Comments comments = new Comments();
+				comments.setCommentby(jArrRWA.getJSONObject(i).getString("commentby"));
+				comments.setDescrption(jArrRWA.getJSONObject(i).getString("descrption"));
+				comments.setProfilephoto(jArrRWA.getJSONObject(i).getString("profilephoto"));
+				groupDetailDataCommentDatasList.add(comments);
 			}
 
 		} catch (JSONException e) {
@@ -359,9 +367,9 @@ public class MyParser
 			e.printStackTrace();
 		}
 
-
 		return groupDetailData;
 	}
+	
 	public CreateGroupDetailData parseCreateGroup(String response){
 		CreateGroupDetailData groupDetailData = new CreateGroupDetailData();
 		List<GroupDetailItemsData> groupDetailItemsDataList = groupDetailData.getGroupDetailItemsDataList();
@@ -585,22 +593,29 @@ public class MyParser
 	public NoticeBoardDetailData parseNoticeBoardDetailData(String response){
 		NoticeBoardDetailData noticeBoardDetailData = new NoticeBoardDetailData();
 		List<NoticeBoardDetailItemsData> noticeBoardDetailItemsDataList = noticeBoardDetailData.getNoticeBoardDetailItemsData();
+		List<Comments> noticeBoardCommentDatasList = noticeBoardDetailData.getCommentList();
 
 		try {
+			JSONObject jsonObject = new JSONObject(response);
+			JSONObject innerJsonObject = jsonObject.getJSONObject("0");
+			NoticeBoardDetailItemsData noticeBoardItemsData = new NoticeBoardDetailItemsData();
 
-			JSONArray jArrRWA = new JSONArray(response);
+			noticeBoardItemsData.setId(innerJsonObject.getString("id"));
+			noticeBoardItemsData.setDesc(innerJsonObject.getString("desc"));
+			noticeBoardItemsData.setGenre(innerJsonObject.getString("genre"));
+			noticeBoardItemsData.setImage(innerJsonObject.getString("image"));
+			noticeBoardItemsData.setTitle(innerJsonObject.getString("title"));
+			noticeBoardItemsData.setCreatedby(innerJsonObject.getString("createdby"));
+			noticeBoardItemsData.setReleaseYear(innerJsonObject.getString("releaseYear"));
+			noticeBoardDetailItemsDataList.add(noticeBoardItemsData);
+
+			JSONArray jArrRWA = jsonObject.getJSONArray("comment");
 			for (int i = 0; i < jArrRWA.length(); i++) {
-				NoticeBoardDetailItemsData noticeBoardItemsData = new NoticeBoardDetailItemsData();
-
-				noticeBoardItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				noticeBoardItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				noticeBoardItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				noticeBoardItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				noticeBoardItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				noticeBoardItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-				noticeBoardItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
-
-				noticeBoardDetailItemsDataList.add(noticeBoardItemsData);
+				Comments comments = new Comments();
+				comments.setCommentby(jArrRWA.getJSONObject(i).getString("commentby"));
+				comments.setDescrption(jArrRWA.getJSONObject(i).getString("descrption"));
+				comments.setProfilephoto(jArrRWA.getJSONObject(i).getString("profilephoto"));
+				noticeBoardCommentDatasList.add(comments);
 			}
 
 		} catch (JSONException e) {
