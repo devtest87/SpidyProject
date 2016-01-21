@@ -214,7 +214,7 @@ public class GroupDetailActivity extends BaseActivity{
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		BasicNameValuePair valuePair = new BasicNameValuePair("articleid", groupDetailData.getGroupDetailItemsDataList().get(0).getId());
 		list.add(valuePair);
-		valuePair = new BasicNameValuePair("content_type", "3");//1 for spideypick
+		valuePair = new BasicNameValuePair("content_type", "2");//2 for group
 		list.add(valuePair);
 		valuePair = new BasicNameValuePair("userid", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
 		list.add(valuePair);

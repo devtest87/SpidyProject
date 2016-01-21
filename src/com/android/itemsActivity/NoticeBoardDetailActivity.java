@@ -172,7 +172,7 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		BasicNameValuePair valuePair = new BasicNameValuePair("articleid", noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getId());
 		list.add(valuePair);
-		valuePair = new BasicNameValuePair("content_type", "3");//1 for spideypick
+		valuePair = new BasicNameValuePair("content_type", "3");//3 for noticeboard
 		list.add(valuePair);
 		valuePair = new BasicNameValuePair("userid", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
 		list.add(valuePair);
