@@ -12,14 +12,15 @@ import android.widget.Toast;
 import com.android.spideycity.R;
 
 public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> { 
-	private List<String> labels;
+	private List<String> facilityNameList;
+	private StartActivity startActivity;
 
-
-	public BookingAdapter(int count) {
-		labels = new ArrayList<String>(count);
-		for (int i = 0; i < count; ++i) {
-			labels.add(String.valueOf(i));
-		} 
+	public static interface StartActivity{
+		void startActivity(String serviceId);
+	}
+	public BookingAdapter(List<String> facilityNameList, StartActivity startActivity) {
+		this.facilityNameList = facilityNameList;
+		this.startActivity = startActivity;
 	} 
 
 
@@ -32,7 +33,7 @@ public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> {
 
 	@Override 
 	public void onBindViewHolder(final TextViewHolder holder, final int position) {
-		final String label = labels.get(position);
+		final String label = facilityNameList.get(position);
 		holder.textView.setText(label);
 		holder.textView.setOnClickListener(new View.OnClickListener() {
 			@Override 
@@ -46,6 +47,6 @@ public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> {
 
 	@Override 
 	public int getItemCount() { 
-		return labels.size();
+		return facilityNameList.size();
 	} 
 } 

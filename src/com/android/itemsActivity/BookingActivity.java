@@ -3,12 +3,16 @@ package com.android.itemsActivity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,13 +29,24 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.BookingAdapter;
+import com.android.adapter.BookingListAdapter;
+import com.android.adapter.BookingAdapter.StartActivity;
 import com.android.spideycity.R;
+import com.bean.BookingItemsData;
 import com.bean.BookingsData;
+import com.bean.RequestBean;
+import com.network.NetworkCall;
+import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PrintLog;
+import com.utils.PreferenceHelper.PreferenceKey;
+import com.utils.Utils;
 
-public class BookingActivity extends BaseActivity implements OnClickListener {
+public class BookingActivity extends BaseActivity implements OnClickListener, StartActivity {
 	private static final String tag = "MyCalendarActivity";
 
 	private TextView currentMonth;
@@ -47,6 +62,10 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 	@SuppressLint({ "NewApi", "NewApi", "NewApi", "NewApi" })
 	private final DateFormat dateFormatter = new DateFormat();
 	private static final String dateTemplate = "MMMM yyyy";
+	private RecyclerView myList;
+	private BookingsData bookingsData;
+	private ListView listview;
+	private List<BookingItemsData> mBookingItemsDatasList;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -54,44 +73,24 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_calendar_view);
 
-		LinearLayoutManager layoutManager
-		= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-		RecyclerView myList = (RecyclerView) findViewById(R.id.my_recycler_view);
-		myList.setLayoutManager(layoutManager);
+		listview = (ListView) findViewById(R.id.listview);
 		
-		BookingAdapter bookingAdapter = new BookingAdapter(20);
-		myList.setAdapter(bookingAdapter);
-
-		_calendar = Calendar.getInstance(Locale.getDefault());
-		month = _calendar.get(Calendar.MONTH) + 1;
-		year = _calendar.get(Calendar.YEAR);
-		Log.d(tag, "Calendar Instance:= " + "Month: " + month + " " + "Year: "
-				+ year);
-
-		selectedDayMonthYearButton = (Button) this
-				.findViewById(R.id.selectedDayMonthYear);
-		selectedDayMonthYearButton.setText("Selected: ");
-
-		prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
-		prevMonth.setOnClickListener(this);
-
-		currentMonth = (TextView) this.findViewById(R.id.currentMonth);
-		currentMonth.setText(DateFormat.format(dateTemplate,
-				_calendar.getTime()));
-
-		nextMonth = (ImageView) this.findViewById(R.id.nextMonth);
-		nextMonth.setOnClickListener(this);
-
-		calendarView = (GridView) this.findViewById(R.id.calendar);
-
-		// Initialised
-		adapter = new GridCellAdapter(getApplicationContext(),
-				R.id.calendar_day_gridcell, month, year);
-		adapter.notifyDataSetChanged();
-		calendarView.setAdapter(adapter);
+		loadBooking();
 	}
 
+	private void loadBooking() {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("rwaid", 
+				PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		list.add(valuePair);
+		request.setNamevaluepair(list);
+		request.setNetworkRequestName(NetworkRequestName.BOOKINGS);
+		request.setCallingClassObject(this);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
 	/**
 	 * 
 	 * @param month
@@ -140,6 +139,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 	}
 
+	private List<String> monthList;
 	// Inner Class
 	public class GridCellAdapter extends BaseAdapter implements OnClickListener {
 		private static final String tag = "GridCellAdapter";
@@ -167,6 +167,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 		public GridCellAdapter(Context context, int textViewResourceId,
 				int month, int year) {
 			super();
+			monthList = Arrays.asList(months);
 			this._context = context;
 			this.list = new ArrayList<String>();
 			Log.d(tag, "==> Passed in Date FOR Month: " + month + " "
@@ -299,6 +300,9 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 			for (int i = 1; i <= daysInMonth; i++) {
 				Log.d(currentMonthName, String.valueOf(i) + " "
 						+ getMonthAsString(currentMonth) + " " + yy);
+				if(year == 1){
+					
+				}
 				if (i == getCurrentDayOfMonth()) {
 					list.add(String.valueOf(i) + "-BLUE" + "-"
 							+ getMonthAsString(currentMonth) + "-" + yy);
@@ -373,14 +377,18 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 			Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-"
 					+ theyear);
 
-			if (day_color[1].equals("GREY")) {
+			/*if (day_color[1].equals("GREY")) {
 				gridcell.setTextColor(getResources()
 						.getColor(R.color.calender_lightgray));
 			}
 			if (day_color[1].equals("WHITE")) {
 				gridcell.setTextColor(getResources().getColor(
 						R.color.calender_lightgray02));
+			}*/
+			if(bookingsData != null && isCurrentDayBooked(theday, themonth, theyear)){
+				gridcell.setBackgroundColor(getResources().getColor(R.color.blue));
 			}
+			
 			if (day_color[1].equals("BLUE")) {
 				gridcell.setTextColor(getResources().getColor(R.color.calender_orrange));
 			}
@@ -418,8 +426,80 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
+	private BookingListAdapter mBookingListAdapter;
+	private boolean isFilterSelected;
+	private boolean isDaySelected;
 	public void response(BookingsData bookingsData) {
-		// TODO Auto-generated method stub
+		View view = headerView();
+		BookingAdapter bookingAdapter = new BookingAdapter(bookingsData.getFacilitiesNameItemsDataList(), this);
+		myList.setAdapter(bookingAdapter);
+		this.bookingsData = bookingsData;
+		listview.addHeaderView(view);
+		mBookingItemsDatasList = bookingsData.getBookingItemsDataList();
+		mBookingListAdapter = new BookingListAdapter(getLayoutInflater(), bookingsData.getBookingItemsDataList());
+		listview.setAdapter(mBookingListAdapter);
+	}
+
+	private View headerView() {
+		View view = getLayoutInflater().inflate(R.layout.inflate_booking_header, null, false);
+		LinearLayoutManager layoutManager
+		= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+		myList = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+		myList.setLayoutManager(layoutManager);
+		
+
+		_calendar = Calendar.getInstance(Locale.getDefault());
+		month = _calendar.get(Calendar.MONTH) + 1;
+		year = _calendar.get(Calendar.YEAR);
+		Log.d(tag, "Calendar Instance:= " + "Month: " + month + " " + "Year: "
+				+ year);
+
+		selectedDayMonthYearButton = (Button) view.
+				findViewById(R.id.selectedDayMonthYear);
+		selectedDayMonthYearButton.setText("Selected: ");
+
+		prevMonth = (ImageView) view.findViewById(R.id.prevMonth);
+		prevMonth.setOnClickListener(this);
+
+		currentMonth = (TextView) view.findViewById(R.id.currentMonth);
+		currentMonth.setText(DateFormat.format(dateTemplate,
+				_calendar.getTime()));
+
+		nextMonth = (ImageView) view.findViewById(R.id.nextMonth);
+		nextMonth.setOnClickListener(this);
+
+		calendarView = (GridView) view.findViewById(R.id.calendar);
+
+		// Initialised
+		adapter = new GridCellAdapter(getApplicationContext(),
+				R.id.calendar_day_gridcell, month, year);
+		adapter.notifyDataSetChanged();
+		calendarView.setAdapter(adapter);
+		return view;
+	}
+
+	public boolean isCurrentDayBooked(String theday, String themonth,
+			String theyear) {
+		boolean isFound = false;
+		for (BookingItemsData iterable_element : bookingsData.getBookingItemsDataList()) {
+			String date1 = (year + "-" + monthList.indexOf(themonth)+1 + "-" + theday);
+			String date2 = iterable_element.getBooking_start_date().split(" ")[0];
+			PrintLog.show(Log.INFO, tag, "date1 : " + date1 + " date2 " + date2 );
+			if(date1.equalsIgnoreCase(date2)){
+				isFound = true;
+				break;
+			}
+		}
+		return isFound;
+	}
+
+	@Override
+	public void startActivity(String serviceId) {
+		
+	}
+	
+	private void filterData(){
 		
 	}
 }

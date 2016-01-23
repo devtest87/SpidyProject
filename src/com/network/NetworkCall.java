@@ -178,7 +178,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			object = deleteRquestServiceStatus(namePairList);
 			break;
 		case BOOKINGS:
-			object = bookings();
+			object = bookings(namePairList);
 			break;
 		case NOTICEBOARDS:
 			object = noticeBoards();
@@ -884,10 +884,10 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		return requestServicesData;
 	}
 	
-	public BookingsData bookings(){
+	public BookingsData bookings(List<NameValuePair> namePair){
 		List<NameValuePair> pair = null;
 		BookingsData bookingsData;
-		String response = NetworkConnection.networkHit(pair,bookingsURL);
+		String response = NetworkConnection.networkHit(namePair,bookingsURL);
 
 		PrintLog.show(Log.ERROR, TAG + Thread.currentThread().getStackTrace()[1].getMethodName(), "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){

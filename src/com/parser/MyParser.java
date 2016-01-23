@@ -529,23 +529,31 @@ public class MyParser
 	public BookingsData parseBooings(String response){
 		BookingsData bookingsData = new BookingsData();
 		List<BookingItemsData> bookingItemsDataList = bookingsData.getBookingItemsDataList();
+		List<String> facilitiesidsItemsDataList = bookingsData.getFacilitiesIdsItemsDataList();
+		List<String> facilitiesNameItemsDataList = bookingsData.getFacilitiesNameItemsDataList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
+			JSONObject jObject = new JSONObject(response);
+			JSONArray jArrRWA = jObject.getJSONArray("booking_list");
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				BookingItemsData bookingItemsData = new BookingItemsData();
 
 				bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				bookingItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				bookingItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				bookingItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				bookingItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				bookingItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				bookingItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				bookingItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				bookingItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				bookingItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				bookingItemsData.setBooking_start_date(jArrRWA.getJSONObject(i).getString("booking_start_date"));
+				bookingItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
+				bookingItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+				bookingItemsData.setEndtime(jArrRWA.getJSONObject(i).getString("endtime"));
+				bookingItemsData.setFacility_Id(jArrRWA.getJSONObject(i).getString("facility_Id"));
+				bookingItemsData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+				bookingItemsData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
+				bookingItemsData.setStarttime(jArrRWA.getJSONObject(i).getString("starttime"));
+				bookingItemsData.setTime(jArrRWA.getJSONObject(i).getString("time"));
+				
+				if(!facilitiesidsItemsDataList.contains(bookingItemsData.getFacility_Id())){
+					facilitiesidsItemsDataList.add(bookingItemsData.getFacility_Id());
+					facilitiesNameItemsDataList.add(bookingItemsData.getFacilityName());
+				}
 
 				bookingItemsDataList.add(bookingItemsData);
 			}

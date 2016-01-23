@@ -8,67 +8,67 @@ public class BookingItemsData {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+	public String getRwaid() {
+		return rwaid;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setRwaid(String rwaid) {
+		this.rwaid = rwaid;
 	}
-	public String getAdr() {
-		return adr;
+	public String getFacility_Id() {
+		return facility_Id;
 	}
-	public void setAdr(String adr) {
-		this.adr = adr;
+	public void setFacility_Id(String facility_Id) {
+		this.facility_Id = facility_Id;
 	}
-	public String getCity() {
-		return city;
+	public String getFacilityName() {
+		return facilityName;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setFacilityName(String facilityName) {
+		this.facilityName = facilityName;
 	}
-	public String getDesc() {
-		return desc;
+	public String getBooking_start_date() {
+		return booking_start_date;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setBooking_start_date(String booking_start_date) {
+		this.booking_start_date = booking_start_date;
 	}
-	public String getImage() {
-		return image;
+	public String getStarttime() {
+		return starttime;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
 	}
-	public String getReleaseYear() {
-		return releaseYear;
+	public String getEndtime() {
+		return endtime;
 	}
-	public void setReleaseYear(String releaseYear) {
-		this.releaseYear = releaseYear;
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
 	}
-	public String getGenre() {
-		return genre;
+	public String getTime() {
+		return time;
 	}
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setTime(String time) {
+		this.time = time;
 	}
-	public String getUrl() {
-		return url;
+	public String getCreatedDate() {
+		return createdDate;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
-	public String getFurl() {
-		return furl;
+	public String getCreatedby() {
+		return createdby;
 	}
-	public void setFurl(String furl) {
-		this.furl = furl;
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
 	}
-	private String title;
-	private String adr;
-	private String city;
-	private String  desc;
-	private String image;
-	private String releaseYear;
-	private String genre;
-	private String url;
-	private String furl;
+	private String rwaid;
+	private String facility_Id;
+	private String facilityName;
+	private String  booking_start_date;
+	private String starttime;
+	private String endtime;
+	private String time;
+	private String createdDate;
+	private String createdby;
 }

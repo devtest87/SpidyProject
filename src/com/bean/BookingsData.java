@@ -26,6 +26,22 @@ public class BookingsData {
 	private String error_msg;
 	private String error;
 	
+	private List<String> facilitiesIdsItemsDataList = new ArrayList<String>();
+	public List<String> getFacilitiesIdsItemsDataList() {
+		return facilitiesIdsItemsDataList;
+	}
+	public void setFacilitiesIdsItemsDataList(
+			List<String> facilitiesIdsItemsDataList) {
+		this.facilitiesIdsItemsDataList = facilitiesIdsItemsDataList;
+	}
+	public List<String> getFacilitiesNameItemsDataList() {
+		return facilitiesNameItemsDataList;
+	}
+	public void setFacilitiesNameItemsDataList(
+			List<String> facilitiesNameItemsDataList) {
+		this.facilitiesNameItemsDataList = facilitiesNameItemsDataList;
+	}
+	private List<String> facilitiesNameItemsDataList = new ArrayList<String>();
 	private List<BookingItemsData> bookingItemsDataList = new ArrayList<BookingItemsData>();
 	public List<BookingItemsData> getBookingItemsDataList() {
 		return bookingItemsDataList;
