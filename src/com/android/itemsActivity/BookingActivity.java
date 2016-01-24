@@ -65,7 +65,6 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 	private RecyclerView myList;
 	private BookingsData bookingsData;
 	private ListView listview;
-	private List<BookingItemsData> mBookingItemsDatasList;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -387,6 +386,8 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 			}*/
 			if(bookingsData != null && isCurrentDayBooked(theday, themonth, theyear)){
 				gridcell.setBackgroundColor(getResources().getColor(R.color.blue));
+			}else{
+				gridcell.setBackgroundColor(getResources().getColor(R.color.search_background_color));
 			}
 			
 			if (day_color[1].equals("BLUE")) {
@@ -402,6 +403,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 			Log.e("Selected date", date_month_year);
 			try {
 				Date parsedDate = dateFormatter.parse(date_month_year);
+				filterData(parsedDate);
 				Log.d(tag, "Parsed Date: " + parsedDate.toString());
 
 			} catch (ParseException e) {
@@ -427,16 +429,21 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 	}
 
 	private BookingListAdapter mBookingListAdapter;
-	private boolean isFilterSelected;
-	private boolean isDaySelected;
+	private BookingAdapter facilityAdapter;
+	private List<BookingItemsData> mBookingItemsDatasList;
+	private List<BookingItemsData> mShowSelectDateData = new ArrayList<BookingItemsData>();
 	public void response(BookingsData bookingsData) {
+		mBookingItemsDatasList = bookingsData.getBookingItemsDataList();
 		View view = headerView();
-		BookingAdapter bookingAdapter = new BookingAdapter(bookingsData.getFacilitiesNameItemsDataList(), this);
-		myList.setAdapter(bookingAdapter);
+		facilityAdapter = new BookingAdapter(bookingsData.getBookingOptionFacilityDataList(), this, mAQuery);
+		myList.setAdapter(facilityAdapter);
+		if(bookingsData.getBookingOptionFacilityDataList().size() == 0){
+			view.findViewById(R.id.buttonlayout).setVisibility(View.GONE);
+		}
 		this.bookingsData = bookingsData;
 		listview.addHeaderView(view);
 		mBookingItemsDatasList = bookingsData.getBookingItemsDataList();
-		mBookingListAdapter = new BookingListAdapter(getLayoutInflater(), bookingsData.getBookingItemsDataList());
+		mBookingListAdapter = new BookingListAdapter(getLayoutInflater(), mShowSelectDateData);
 		listview.setAdapter(mBookingListAdapter);
 	}
 
@@ -482,7 +489,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 	public boolean isCurrentDayBooked(String theday, String themonth,
 			String theyear) {
 		boolean isFound = false;
-		for (BookingItemsData iterable_element : bookingsData.getBookingItemsDataList()) {
+		for (BookingItemsData iterable_element : mBookingItemsDatasList) {
 			String date1 = (year + "-" + monthList.indexOf(themonth)+1 + "-" + theday);
 			String date2 = iterable_element.getBooking_start_date().split(" ")[0];
 			PrintLog.show(Log.INFO, tag, "date1 : " + date1 + " date2 " + date2 );
@@ -495,11 +502,29 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 	}
 
 	@Override
-	public void startActivity(String serviceId) {
-		
+	public void startActivity(String position) {
+		mBookingItemsDatasList.clear();
+		int pos = Integer.parseInt(position);
+		bookingsData.getBookingOptionFacilityDataList().get(pos).setSelected(!bookingsData.getBookingOptionFacilityDataList().get(pos).isSelected());
+		String filterData = bookingsData.getBookingOptionFacilityDataList().get(pos).getFacilityName();
+		for (BookingItemsData iterable_element : bookingsData.getBookingItemsDataList()) {
+			if(iterable_element.getFacilityName().equalsIgnoreCase(filterData)){
+				mBookingItemsDatasList.add(iterable_element);
+			}
+		}
+		facilityAdapter.notifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 	}
 	
-	private void filterData(){
-		
+	private void filterData(Date date){
+		mShowSelectDateData.clear();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formatDate = dateFormat.format(date);
+		for (BookingItemsData iterable_element : mBookingItemsDatasList) {
+			if(formatDate.equalsIgnoreCase(iterable_element.getBooking_start_date())){
+				mShowSelectDateData.add(iterable_element);
+			}
+		}
+		mBookingListAdapter.notifyDataSetChanged();
 	}
 }

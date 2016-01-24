@@ -13,6 +13,7 @@ import android.content.Context;
 import android.hardware.camera2.TotalCaptureResult;
 
 import com.bean.BookingItemsData;
+import com.bean.BookingOptionFacilityData;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
@@ -529,33 +530,45 @@ public class MyParser
 	public BookingsData parseBooings(String response){
 		BookingsData bookingsData = new BookingsData();
 		List<BookingItemsData> bookingItemsDataList = bookingsData.getBookingItemsDataList();
-		List<String> facilitiesidsItemsDataList = bookingsData.getFacilitiesIdsItemsDataList();
-		List<String> facilitiesNameItemsDataList = bookingsData.getFacilitiesNameItemsDataList();
+		List<BookingOptionFacilityData> bookingOptionFacilityDataList = bookingsData.getBookingOptionFacilityDataList();
 
 		try {
 
 			JSONObject jObject = new JSONObject(response);
-			JSONArray jArrRWA = jObject.getJSONArray("booking_list");
-			for (int i = 0; i < jArrRWA.length(); i++) {
-				BookingItemsData bookingItemsData = new BookingItemsData();
+			if(!jObject.isNull("booking_list")){
+				JSONArray jArrRWA = jObject.getJSONArray("booking_list");
+				for (int i = 0; i < jArrRWA.length(); i++) {
+					BookingItemsData bookingItemsData = new BookingItemsData();
 
-				bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				bookingItemsData.setBooking_start_date(jArrRWA.getJSONObject(i).getString("booking_start_date"));
-				bookingItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-				bookingItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				bookingItemsData.setEndtime(jArrRWA.getJSONObject(i).getString("endtime"));
-				bookingItemsData.setFacility_Id(jArrRWA.getJSONObject(i).getString("facility_Id"));
-				bookingItemsData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
-				bookingItemsData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
-				bookingItemsData.setStarttime(jArrRWA.getJSONObject(i).getString("starttime"));
-				bookingItemsData.setTime(jArrRWA.getJSONObject(i).getString("time"));
-				
-				if(!facilitiesidsItemsDataList.contains(bookingItemsData.getFacility_Id())){
-					facilitiesidsItemsDataList.add(bookingItemsData.getFacility_Id());
-					facilitiesNameItemsDataList.add(bookingItemsData.getFacilityName());
+					bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+					bookingItemsData.setBooking_start_date(jArrRWA.getJSONObject(i).getString("booking_start_date"));
+					bookingItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
+					bookingItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+					bookingItemsData.setEndtime(jArrRWA.getJSONObject(i).getString("endtime"));
+					bookingItemsData.setFacility_Id(jArrRWA.getJSONObject(i).getString("facility_Id"));
+					bookingItemsData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+					bookingItemsData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
+					bookingItemsData.setStarttime(jArrRWA.getJSONObject(i).getString("starttime"));
+					bookingItemsData.setTime(jArrRWA.getJSONObject(i).getString("time"));
+
+					bookingItemsDataList.add(bookingItemsData);
 				}
+			}
+			
+			if(!jObject.isNull("rwa_facility")){
+				JSONArray jArrRWA = jObject.getJSONArray("rwa_facility");
+				for (int i = 0; i < jArrRWA.length(); i++) {
+					BookingOptionFacilityData bookingOptionFacilityData = new BookingOptionFacilityData();
 
-				bookingItemsDataList.add(bookingItemsData);
+					bookingOptionFacilityData.setId(jArrRWA.getJSONObject(i).getString("id"));
+					bookingOptionFacilityData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+					bookingOptionFacilityData.setFacility_id(jArrRWA.getJSONObject(i).getString("facility_id"));
+					bookingOptionFacilityData.setFacilityImg(jArrRWA.getJSONObject(i).getString("facilityImg"));
+					bookingOptionFacilityData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
+					bookingOptionFacilityData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+
+					bookingOptionFacilityDataList.add(bookingOptionFacilityData);
+				}
 			}
 
 		} catch (JSONException e) {

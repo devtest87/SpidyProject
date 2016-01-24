@@ -6,19 +6,23 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_gravity="center_vertical"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv_bookingoption"
+        <RelativeLayout
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_circular"
-            android:gravity="center"
-            android:text="12" />
+            android:background="@drawable/shape_circular" >
+
+            <ImageView
+                android:id="@+id/iv_bookingoption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_bookingoptiontitle"

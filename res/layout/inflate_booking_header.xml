@@ -3,48 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-<RelativeLayout
-        android:id="@+id/buttonlayout"
-        android:layout_marginTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="75dp" >
 
-        <ImageView
-            android:id="@+id/leftarr"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="center"
-            android:src="@drawable/calendar_left_arrow_selector" >
-        </ImageView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/my_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/rightarr"
-            android:layout_toRightOf="@+id/leftarr"
-            android:scrollbars="vertical" />
+        <RelativeLayout
+            android:id="@+id/buttonlayout"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="10dp" >
 
-        <ImageView
-            android:id="@+id/rightarr"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center"
-            android:scaleType="center"
-            android:src="@drawable/calendar_right_arrow_selector" >
-        </ImageView>
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/leftarr"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:src="@drawable/calendar_left_arrow_selector" >
+            </ImageView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/rightarr"
+                android:layout_toRightOf="@+id/leftarr"
+                android:scrollbars="vertical" />
+
+            <ImageView
+                android:id="@+id/rightarr"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:src="@drawable/calendar_right_arrow_selector" >
+            </ImageView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/bookingcolor" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="60dp" >
+        android:layout_height="40dp" >
 
         <ImageView
             android:id="@+id/prevMonth"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="10sp"
@@ -64,7 +77,7 @@
 
         <ImageView
             android:id="@+id/nextMonth"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
@@ -80,8 +93,16 @@
         android:layout_gravity="center"
         android:background="@drawable/calendar_top_header"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF" >
+        android:textColor="#FFFFFF"
+        android:visibility="gone" >
     </Button>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bookingcolor" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -93,7 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="SUN" />
+            android:text="SUN"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/munheader"
@@ -101,7 +123,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="MUN" />
+            android:text="MUN"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tueheader"
@@ -109,7 +132,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="TUE" />
+            android:text="TUE"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/wedheader"
@@ -117,7 +141,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="WED" />
+            android:text="WED"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/thuheader"
@@ -125,7 +150,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="THU" />
+            android:text="THU"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/friheader"
@@ -133,7 +159,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="FRI" />
+            android:text="FRI"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/satheader"
@@ -141,13 +168,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="SAT" />
+            android:text="SAT"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <GridView
         android:id="@+id/calendar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="7" >
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:horizontalSpacing="1dp"
+        android:numColumns="7"
+        android:verticalSpacing="1dp" >
     </GridView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bookingcolor" />
+
 </LinearLayout>
