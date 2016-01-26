@@ -93,16 +93,17 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String rwasURL = baseURL + "rwa_list.json";
 	private static final String groupsURL = baseURL + "groups_slider.json";
 	private static final String createGroupsURL = baseURL + "create_group.php";
-	private static final String servicesURL = baseURL + "service_list.json";
+	private static final String servicesURL = baseURL + "services.php";
 	private static final String bookingsURL = baseURL + "booking_list.php";
 	private static final String noticeBoardURL = baseURL + "notice_list.json";
 	private static final String noticeBoardDetailURL = baseURL + "";
 	private static final String directoryURL = baseURL + "directory.php";
-	private static final String spidyPickURL = "http://cityspidey.com/api/spideypick.php";
+	private static final String spidyPickURL = baseURL + "spideypick.php";
 	private static final String opinionPollsURL = baseURL + "poll_list.json";
 	private static final String pollsAnswerOpinionPollsURL = baseURL + "polls_answer_save.php";
 	private static final String requestServiceURL = baseURL + "request_service.php";
-	private static final String checkStatusURL = baseURL + "service_request_status.php?";
+	private static final String checkStatusURL = baseURL + "service_request_status.php";
+	private static final String deleteServiceStatusURL = baseURL + "delete_service.php";
 	private static final String commentSaveURL = baseURL + "comment_save.php";
 	
 	
@@ -163,7 +164,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			object = groupDetail(namePairList);
 			break;
 		case SERVICES:
-			object = services();
+			object = services(namePairList);
 			break;
 		case SERVICES_DETAIL:
 			object = requestService(namePairList);
@@ -802,10 +803,10 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		return groupDetailData;
 	}
 	
-	public ServicesData services(){
+	public ServicesData services(List<NameValuePair> namePair){
 		List<NameValuePair> pair = null;
 		ServicesData servicesData;
-		String response = NetworkConnection.networkHit(pair,servicesURL);
+		String response = NetworkConnection.networkHit(namePair,servicesURL);
 
 		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
@@ -855,7 +856,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private DeleteServicesData deleteRquestServiceStatus(List<NameValuePair> namePair){
 
 		DeleteServicesData deleteServicesData = new DeleteServicesData();
-		String response = NetworkConnection.networkHit(namePair,checkStatusURL);
+		String response = NetworkConnection.networkHit(namePair,deleteServiceStatusURL);
 
 		//		response = LoadData("getlogin.txt");
 

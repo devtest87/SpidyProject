@@ -498,25 +498,12 @@ public class MyParser
 
 	public DeleteServicesData parseDeleteRequestServices(String response){
 		DeleteServicesData deleteServicesData = new DeleteServicesData();
-		List<DeleteServicesItemsData> DeleteServicesItemsDataList = deleteServicesData.getDeleteServicesItemsDataList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
-			for (int i = 0; i < jArrRWA.length(); i++) {
-				DeleteServicesItemsData servicesItemsData = new DeleteServicesItemsData();
-
-				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				servicesItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
-				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
-
-				DeleteServicesItemsDataList.add(servicesItemsData);
-			}
+			JSONObject jobject = new JSONObject(response);
+			String error = jobject.getString("error");
+			deleteServicesData.setError(error);
 
 		} catch (JSONException e) {
 			deleteServicesData.setException("JsonParseException");

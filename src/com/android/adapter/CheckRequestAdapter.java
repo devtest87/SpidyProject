@@ -1,6 +1,5 @@
 package com.android.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.view.LayoutInflater;
@@ -8,8 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,14 +15,13 @@ import com.androidquery.AQuery;
 import com.bean.CheckRequestItemsData;
 import com.utils.Utils;
 
-public class CheckRequestAdapter extends BaseAdapter implements Filterable{
+public class CheckRequestAdapter extends BaseAdapter{
 
 	private List<CheckRequestItemsData> mCheckRequestItemsDataList;
 	private List<CheckRequestItemsData> mCheckRequestFilterItemsDataList;
 	private LayoutInflater mLayoutInflater;
 	private StartActivity mStartActivity;
 	private AQuery mAQuery;
-	private ItemFilter mFilter = new ItemFilter();
 	
 	public static interface StartActivity{
 		void startActivity(String serviceId);
@@ -89,6 +85,7 @@ public class CheckRequestAdapter extends BaseAdapter implements Filterable{
 			@Override
 			public void onClick(View v) {
 				int pos = Integer.parseInt(v.getTag().toString());
+				mStartActivity.startActivity(mCheckRequestFilterItemsDataList.get(pos).getSercice_id() + "@" + pos);
 			}
 		});
 		
@@ -105,48 +102,6 @@ public class CheckRequestAdapter extends BaseAdapter implements Filterable{
 		ImageView serviceIV ;
 	}
 	
-	@Override
-	public Filter getFilter() {
-		return mFilter;
-	}
-	
-	private class ItemFilter extends Filter {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-
-            String filterString = constraint.toString().toLowerCase();
-
-            FilterResults results = new FilterResults();
-
-            final List<CheckRequestItemsData> list = mCheckRequestItemsDataList;
-
-            int count = list.size();
-            final List<CheckRequestItemsData> nlist = new ArrayList<CheckRequestItemsData>(count);
-
-            String filterableString ;
-
-            for (int i = 0; i < count; i++) {
-                filterableString = list.get(i).getServiceName();
-                if (filterableString.toLowerCase().contains(filterString)) {
-                    nlist.add(list.get(i));
-                }
-            }
-
-            results.values = nlist;
-            results.count = nlist.size();
-
-            return results;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-        	mCheckRequestFilterItemsDataList = (List<CheckRequestItemsData>) results.values;
-            notifyDataSetChanged();
-        }
-
-    }
-
 	public void startActivity(int arg2) {
 		mStartActivity.startActivity(mCheckRequestFilterItemsDataList.get(arg2).getId());
 	}
