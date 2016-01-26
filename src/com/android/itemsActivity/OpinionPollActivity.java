@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.android.adapter.GridOpinionsPollsAdapter;
 import com.android.adapter.GridOpinionsPollsAdapter.StartActivity;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.OpinionPollsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;

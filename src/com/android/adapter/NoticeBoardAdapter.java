@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.adapter.NoticeBoardAdapter.SolventViewHolders;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.androidquery.AQuery;
 import com.bean.NoticeBoardItemsData;
 

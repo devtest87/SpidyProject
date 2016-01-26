@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/tv_noticeboardtitle"
-            android:layout_centerHorizontal="true"
             android:ellipsize="end"
             android:text="12 COMMENTS"
             android:paddingLeft="5dp"

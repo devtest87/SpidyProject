@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 
 
 

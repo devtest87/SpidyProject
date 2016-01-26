@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.android.adapter.GridNoticeBoardAdapter;
 import com.android.adapter.GridNoticeBoardAdapter.StartActivity;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.NoticeBoardData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;

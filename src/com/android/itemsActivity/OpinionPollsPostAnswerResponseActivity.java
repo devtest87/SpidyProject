@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.OpinionPostAnswerPollsDetailsData;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;

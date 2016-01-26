@@ -33,9 +33,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.BookingAdapter;
+import com.android.cityspidey.R;
 import com.android.adapter.BookingListAdapter;
 import com.android.adapter.BookingAdapter.StartActivity;
-import com.android.spideycity.R;
 import com.bean.BookingItemsData;
 import com.bean.BookingsData;
 import com.bean.RequestBean;

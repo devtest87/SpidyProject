@@ -1,6 +1,6 @@
 package com.fragment.item;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

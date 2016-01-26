@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.SpidyPickDetailAdapter;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.RequestBean;
@@ -37,7 +37,7 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		listView = (ListView)findViewById(R.id.listview);
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
 		titleTV.setText(getResources().getString(R.string.spidey_pick));
-		titleTV.setTextColor(getResources().getColor(R.color.black));
+		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.spideycolor);
 
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
@@ -105,10 +105,13 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		if(spidyPickDetailData.getCommentList().size() > 0){
 			spidyPickDetailAdapter = new SpidyPickDetailAdapter
 					(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
-			listView.setAdapter(spidyPickDetailAdapter);
+//			listView.setAdapter(spidyPickDetailAdapter);
 		}
 		listView.addHeaderView(headerView);
 		listView.addFooterView(footerView);
+		
+		
+		listView.setAdapter(spidyPickDetailAdapter);
 	}
 
 	private View getFooterView() {

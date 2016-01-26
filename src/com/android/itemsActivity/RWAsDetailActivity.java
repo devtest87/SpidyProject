@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.RWADetailData;
 import com.bean.RWAFacilityData;
 import com.bean.RequestBean;

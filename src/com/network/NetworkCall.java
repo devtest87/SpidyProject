@@ -31,6 +31,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.cityspidey.HomeScreen;
+import com.android.cityspidey.LoginActivity;
+import com.android.cityspidey.R;
+import com.android.cityspidey.RegisterActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.CheckRequestStatusActivity;
 import com.android.itemsActivity.DirectoryActivity;
@@ -45,10 +49,6 @@ import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
 import com.android.itemsActivity.SpidyPickDetailActivity;
-import com.android.spideycity.HomeScreen;
-import com.android.spideycity.LoginActivity;
-import com.android.spideycity.R;
-import com.android.spideycity.RegisterActivity;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CommentSave;
@@ -105,7 +105,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String checkStatusURL = baseURL + "service_request_status.php";
 	private static final String deleteServiceStatusURL = baseURL + "delete_service.php";
 	private static final String commentSaveURL = baseURL + "comment_save.php";
-	
+
 	
 	//Service request api: http://top-story.in/api/request_service.php?user_id=5&service_id=4&rwa_id=1&msg=testfjjbf 'wejf wef w efwew ef efwe f
 		//Check Request status : http://top-story.in/api/my_service.php?user_id=5

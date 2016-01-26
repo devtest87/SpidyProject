@@ -13,7 +13,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.android.adapter.ServicesAdapter;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.RequestBean;
 import com.bean.RequestServicesData;
 import com.bean.ServicesData;
