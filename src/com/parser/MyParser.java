@@ -13,6 +13,7 @@ import android.content.Context;
 import android.hardware.camera2.TotalCaptureResult;
 
 import com.bean.BookingItemsData;
+import com.bean.BookingOptionFacilityData;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
@@ -497,25 +498,12 @@ public class MyParser
 
 	public DeleteServicesData parseDeleteRequestServices(String response){
 		DeleteServicesData deleteServicesData = new DeleteServicesData();
-		List<DeleteServicesItemsData> DeleteServicesItemsDataList = deleteServicesData.getDeleteServicesItemsDataList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
-			for (int i = 0; i < jArrRWA.length(); i++) {
-				DeleteServicesItemsData servicesItemsData = new DeleteServicesItemsData();
-
-				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				servicesItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
-				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
-
-				DeleteServicesItemsDataList.add(servicesItemsData);
-			}
+			JSONObject jobject = new JSONObject(response);
+			String error = jobject.getString("error");
+			deleteServicesData.setError(error);
 
 		} catch (JSONException e) {
 			deleteServicesData.setException("JsonParseException");
@@ -529,25 +517,45 @@ public class MyParser
 	public BookingsData parseBooings(String response){
 		BookingsData bookingsData = new BookingsData();
 		List<BookingItemsData> bookingItemsDataList = bookingsData.getBookingItemsDataList();
+		List<BookingOptionFacilityData> bookingOptionFacilityDataList = bookingsData.getBookingOptionFacilityDataList();
 
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
-			for (int i = 0; i < jArrRWA.length(); i++) {
-				BookingItemsData bookingItemsData = new BookingItemsData();
+			JSONObject jObject = new JSONObject(response);
+			if(!jObject.isNull("booking_list")){
+				JSONArray jArrRWA = jObject.getJSONArray("booking_list");
+				for (int i = 0; i < jArrRWA.length(); i++) {
+					BookingItemsData bookingItemsData = new BookingItemsData();
 
-				bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				bookingItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				bookingItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				bookingItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				bookingItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				bookingItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				bookingItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				bookingItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				bookingItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				bookingItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+					bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+					bookingItemsData.setBooking_start_date(jArrRWA.getJSONObject(i).getString("booking_start_date"));
+					bookingItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
+					bookingItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+					bookingItemsData.setEndtime(jArrRWA.getJSONObject(i).getString("endtime"));
+					bookingItemsData.setFacility_Id(jArrRWA.getJSONObject(i).getString("facility_Id"));
+					bookingItemsData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+					bookingItemsData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
+					bookingItemsData.setStarttime(jArrRWA.getJSONObject(i).getString("starttime"));
+					bookingItemsData.setTime(jArrRWA.getJSONObject(i).getString("time"));
 
-				bookingItemsDataList.add(bookingItemsData);
+					bookingItemsDataList.add(bookingItemsData);
+				}
+			}
+			
+			if(!jObject.isNull("rwa_facility")){
+				JSONArray jArrRWA = jObject.getJSONArray("rwa_facility");
+				for (int i = 0; i < jArrRWA.length(); i++) {
+					BookingOptionFacilityData bookingOptionFacilityData = new BookingOptionFacilityData();
+
+					bookingOptionFacilityData.setId(jArrRWA.getJSONObject(i).getString("id"));
+					bookingOptionFacilityData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+					bookingOptionFacilityData.setFacility_id(jArrRWA.getJSONObject(i).getString("facility_id"));
+					bookingOptionFacilityData.setFacilityImg(jArrRWA.getJSONObject(i).getString("facilityImg"));
+					bookingOptionFacilityData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
+					bookingOptionFacilityData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+
+					bookingOptionFacilityDataList.add(bookingOptionFacilityData);
+				}
 			}
 
 		} catch (JSONException e) {

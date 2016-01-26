@@ -1,25 +1,28 @@
 package com.android.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
+import com.androidquery.AQuery;
+import com.bean.BookingOptionFacilityData;
 
 public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> { 
-	private List<String> labels;
+	private List<BookingOptionFacilityData> facilityNameList;
+	private StartActivity startActivity;
+	private AQuery mAQuery;
 
-
-	public BookingAdapter(int count) {
-		labels = new ArrayList<String>(count);
-		for (int i = 0; i < count; ++i) {
-			labels.add(String.valueOf(i));
-		} 
+	public static interface StartActivity{
+		void startActivity(String serviceId);
+	}
+	public BookingAdapter(List<BookingOptionFacilityData> facilityNameList, StartActivity startActivity, AQuery aQuery) {
+		this.facilityNameList = facilityNameList;
+		this.startActivity = startActivity;
+		this.mAQuery = aQuery;
 	} 
 
 
@@ -32,13 +35,14 @@ public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> {
 
 	@Override 
 	public void onBindViewHolder(final TextViewHolder holder, final int position) {
-		final String label = labels.get(position);
+		final String label = facilityNameList.get(position).getFacilityName();
 		holder.textView.setText(label);
+		mAQuery.id(holder.bookingOptionIV).image(facilityNameList.get(position).getFacilityImg());
+		holder.textView.setTag(position);
 		holder.textView.setOnClickListener(new View.OnClickListener() {
 			@Override 
 			public void onClick(View v) {
-				Toast.makeText(
-						holder.textView.getContext(), label, Toast.LENGTH_SHORT).show();
+				startActivity.startActivity(v.getTag().toString());
 			} 
 		}); 
 	} 
@@ -46,6 +50,6 @@ public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> {
 
 	@Override 
 	public int getItemCount() { 
-		return labels.size();
+		return facilityNameList.size();
 	} 
 } 

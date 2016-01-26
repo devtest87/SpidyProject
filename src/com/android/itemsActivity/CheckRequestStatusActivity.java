@@ -63,25 +63,25 @@ public class CheckRequestStatusActivity extends BaseActivity implements StartAct
 			}
 		});
 
-		searchET.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				System.out.println("Text ["+s+"]");
-				if(mCheckRequestAdapter!=null)
-					mCheckRequestAdapter.getFilter().filter(s.toString());                           
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-			}
-		});
+//		searchET.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//				System.out.println("Text ["+s+"]");
+//				if(mCheckRequestAdapter!=null)
+//					mCheckRequestAdapter.getFilter().filter(s.toString());                           
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count,
+//					int after) {
+//
+//			}
+//
+//			@Override
+//			public void afterTextChanged(Editable s) {
+//			}
+//		});
 
 		loadCheckRequestStatus();
 	}
@@ -143,15 +143,28 @@ public class CheckRequestStatusActivity extends BaseActivity implements StartAct
 	}
 	
 	public void response(DeleteServicesData deleteServicesData) {
+		if(deleteServicesData.getError().equalsIgnoreCase("success")){
+			mCheckRequestItemsDataList.remove(position);
+			if(mCheckRequestItemsDataList.size() == 0){
+				finish();
+			}else{
+				mCheckRequestAdapter.notifyDataSetChanged();
+			}
+		}
 	}
+	
+	private int position = 0;
 
 	@Override
-	public void startActivity(String service_id) {
+	public void startActivity(String data) {
+		String[] tag = data.split("@");
+		String service_id = tag[0];
+		position = Integer.parseInt(tag[1]);
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.SERVICES_DELETE);
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		NameValuePair valuePair = new BasicNameValuePair("service_id", service_id);
+		NameValuePair valuePair = new BasicNameValuePair("id", service_id);
 		list.add(valuePair);
 		request.setCallingClassObject(this);
 		request.setNamevaluepair(list);

@@ -93,6 +93,10 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.SERVICES);
 		request.setCallingClassObject(this);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("rwa_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		list.add(valuePair);
+		request.setNamevaluepair(list);
 		NetworkCall networkCall = new NetworkCall(request);
 		networkCall.execute("");
 	}

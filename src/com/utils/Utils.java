@@ -4,12 +4,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import android.graphics.Bitmap;
-import android.os.Environment;
-import android.text.format.DateFormat;
 
 
 public class Utils {
@@ -78,4 +76,5 @@ catch (ParseException e)
 		    } 
 		} 
 	}
+	
 }
