@@ -19,7 +19,7 @@ import android.util.Log;
 import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 
 public class CircularImageView extends ImageView {
     // Default Values 

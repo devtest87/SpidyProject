@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.OpinionPollsDetailsData;
 import com.bean.OpinionPostAnswerPollsDetailsData;
 import com.bean.RequestBean;

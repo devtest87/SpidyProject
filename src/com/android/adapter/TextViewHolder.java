@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 
 public class TextViewHolder  extends RecyclerView.ViewHolder { 
 	  public TextView textView;

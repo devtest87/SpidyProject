@@ -1,12 +1,12 @@
 package com.utils;
 
+import com.android.cityspidey.LoginActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupDetailActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
 import com.android.itemsActivity.OpinionPollActivity;
-import com.android.spideycity.LoginActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;

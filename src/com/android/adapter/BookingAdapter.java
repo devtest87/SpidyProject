@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 
 public class BookingAdapter extends RecyclerView.Adapter<TextViewHolder> { 
 	private List<String> labels;

@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.adapter.BookingAdapter;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.BookingsData;
 
 public class BookingActivity extends BaseActivity implements OnClickListener {

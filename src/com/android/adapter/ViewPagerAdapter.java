@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,9 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.adapter.GridGroupListAdapter.ViewHolder;
-import com.android.spideycity.R;
+import com.android.adapter.GridSpidyPickAdapter.StartActivity;
+import com.android.cityspidey.HomeScreen;
+import com.android.cityspidey.R;
+import com.android.itemsActivity.SpidyPickDetailActivity;
 import com.androidquery.AQuery;
 import com.bean.HomeSliderItem;
 
@@ -22,7 +27,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 	Activity activity;
 	List<HomeSliderItem> homedata;
 	
-	
 	ImageView img;
 	TextView txtv1;
 	TextView txtv2;
@@ -30,10 +34,10 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	protected AQuery mAQuery;
 	
-	public ViewPagerAdapter(Activity act,  List<HomeSliderItem> homelist) {
+	public ViewPagerAdapter( Activity act,  List<HomeSliderItem> homelist) {
 		this.homedata = homelist;
 		activity = act;
-		
+
 		mAQuery = new AQuery(activity.getApplicationContext());
 	}
 
@@ -41,7 +45,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 		return homedata.size();
 	}
 
-	public Object instantiateItem(View collection, int position) {
+	public Object instantiateItem(View collection,final int position) {
 //		ImageView view = new ImageView(activity);
 //		view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 //				LayoutParams.FILL_PARENT));
@@ -66,6 +70,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 		txtv2.setText(homedata.get(position).getTitle());
 		txtv3.setText(homedata.get(position).getDesc());
 		
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			
+				((HomeScreen) activity).sliderclicked(homedata.get(position).getUrl());
+				
+			}
+		});
 		
 		((ViewPager) collection).addView(view, 0);
 		
