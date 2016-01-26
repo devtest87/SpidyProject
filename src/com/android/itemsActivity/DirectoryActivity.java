@@ -89,7 +89,7 @@ public class DirectoryActivity extends BaseActivity implements StartActivity{
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.DIRECTORY);
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		NameValuePair valuePair = new BasicNameValuePair("rwa_id", "3");//PreferenceHelper.getSingleInstance(this.getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		NameValuePair valuePair = new BasicNameValuePair("rwa_id", PreferenceHelper.getSingleInstance(this.getApplicationContext()).getString(PreferenceKey.RWAS_ID));//PreferenceHelper.getSingleInstance(this.getApplicationContext()).getString(PreferenceKey.RWAS_ID));
 		list.add(valuePair);
 		request.setCallingClassObject(this);
 		request.setNamevaluepair(list);

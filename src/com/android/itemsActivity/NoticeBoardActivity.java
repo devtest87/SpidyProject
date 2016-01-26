@@ -1,5 +1,11 @@
 package com.android.itemsActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -100,7 +106,11 @@ public class NoticeBoardActivity extends BaseActivity implements StartActivity{
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
 		request.setNetworkRequestName(NetworkRequestName.NOTICEBOARDS);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("rwa_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_ID));
+		list.add(valuePair);
 		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
 		NetworkCall networkCall = new NetworkCall(request);
 		networkCall.execute("");
 	}

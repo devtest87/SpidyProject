@@ -95,7 +95,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String createGroupsURL = baseURL + "create_group.php";
 	private static final String servicesURL = baseURL + "services.php";
 	private static final String bookingsURL = baseURL + "booking_list.php";
-	private static final String noticeBoardURL = baseURL + "notice_list.json";
+	private static final String noticeBoardURL = baseURL + "notice_board.php";
 	private static final String noticeBoardDetailURL = baseURL + "";
 	private static final String directoryURL = baseURL + "directory.php";
 	private static final String spidyPickURL = baseURL + "spideypick.php";
@@ -182,7 +182,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			object = bookings(namePairList);
 			break;
 		case NOTICEBOARDS:
-			object = noticeBoards();
+			object = noticeBoards(namePairList);
 			break;
 		case NOTICEBOARDS_DETAILS:
 			object = noticeBoardsDetail(namePairList);
@@ -901,10 +901,10 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		
 	}
 	
-	public NoticeBoardData noticeBoards(){
+	public NoticeBoardData noticeBoards(List<NameValuePair> namePair){
 		List<NameValuePair> pair = null;
 		NoticeBoardData noticeBoardData;
-		String response = NetworkConnection.networkHit(pair,noticeBoardURL);
+		String response = NetworkConnection.networkHit(namePair,noticeBoardURL);
 
 		PrintLog.show(Log.ERROR, TAG, "" + response);
 		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
