@@ -1,25 +1,25 @@
 package com.android.itemsActivity;
 
-import com.android.adapter.GridSpidyPickAdapter;
-import com.android.adapter.GridSpidyPickAdapter.StartActivity;
-import com.android.cityspidey.R;
-import com.bean.RequestBean;
-import com.bean.SpidyPickData;
-import com.network.NetworkCall;
-import com.utils.NetworkRequestName;
-import com.utils.PreferenceHelper;
-import com.utils.PreferenceHelper.PreferenceKey;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.android.adapter.GridSpidyPickAdapter;
+import com.android.adapter.GridSpidyPickAdapter.StartActivity;
+import com.android.spideycity.R;
+import com.bean.RequestBean;
+import com.bean.SpidyPickData;
+import com.network.NetworkCall;
+import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 public class SearchActivity extends BaseActivity implements StartActivity{
 	//private ExecutorService mExecutorService;

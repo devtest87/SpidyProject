@@ -6,10 +6,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -19,12 +16,11 @@ import android.widget.TextView;
 
 import com.android.adapter.CheckRequestAdapter;
 import com.android.adapter.CheckRequestAdapter.StartActivity;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
 import com.bean.DeleteServicesData;
 import com.bean.RequestBean;
-import com.bean.RequestServiceData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.android.adapter.RWAsAdapter;
 import com.android.adapter.RWAsAdapter.StartActivity;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.RWAItemsData;
 import com.bean.RWAsData;
 import com.bean.RequestBean;

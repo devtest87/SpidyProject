@@ -16,10 +16,9 @@ import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 
 public class CircularImageView extends ImageView {
     // Default Values 

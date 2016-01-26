@@ -3,7 +3,7 @@ package com.android.itemsActivity;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.androidquery.AQuery;
 
 public class BaseActivity extends Activity{

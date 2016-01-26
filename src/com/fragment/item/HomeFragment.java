@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.android.cityspidey.R;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
@@ -22,6 +21,7 @@ import com.android.itemsActivity.OpinionPollActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
+import com.android.spideycity.R;
 import com.bean.RequestBean;
 import com.bean.SliderData;
 import com.network.NetworkCall;

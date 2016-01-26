@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.spideycity.R;
 import com.bean.RegisterData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;

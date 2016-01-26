@@ -1,15 +1,13 @@
 package com.bean;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
-import com.utils.NetworkRequestName;
-
-import android.R.bool;
 import android.app.Activity;
+
+import com.utils.NetworkRequestName;
 
 @SuppressWarnings("rawtypes")
 public class RequestBean {

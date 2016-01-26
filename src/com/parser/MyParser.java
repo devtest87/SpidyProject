@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.hardware.camera2.TotalCaptureResult;
 
 import com.bean.BookingItemsData;
 import com.bean.BookingOptionFacilityData;
@@ -21,7 +20,6 @@ import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
-import com.bean.DeleteServicesItemsData;
 import com.bean.DirectoryData;
 import com.bean.DiretoryItemsData;
 import com.bean.GroupDetailData;

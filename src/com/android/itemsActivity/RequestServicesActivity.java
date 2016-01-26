@@ -6,17 +6,15 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.android.adapter.ServicesAdapter;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.RequestBean;
 import com.bean.RequestServicesData;
-import com.bean.ServicesData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;

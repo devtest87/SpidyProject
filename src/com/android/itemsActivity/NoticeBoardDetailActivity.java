@@ -15,17 +15,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.SpidyPickDetailAdapter;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
-import com.bean.SpidyPickDetailData;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
-import com.utils.Utils;
 import com.utils.PreferenceHelper.PreferenceKey;
+import com.utils.Utils;
 
 public class NoticeBoardDetailActivity extends BaseActivity{
 	

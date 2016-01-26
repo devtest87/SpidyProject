@@ -1,7 +1,6 @@
 package com.android.spideycity; 
  
  
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -12,8 +11,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.itemsActivity.BaseActivity;
 import com.android.adapter.ViewPagerAdapter;
+import com.android.itemsActivity.BaseActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
@@ -31,7 +30,6 @@ import com.utils.DialogController;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
-import com.utils.Utils;
  
  
  

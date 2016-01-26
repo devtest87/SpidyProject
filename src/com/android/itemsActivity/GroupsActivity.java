@@ -12,9 +12,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,7 +22,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -46,8 +43,7 @@ import android.widget.TextView;
 
 import com.android.adapter.GridGroupListAdapter;
 import com.android.adapter.GridGroupListAdapter.StartActivity;
-import com.android.cityspidey.HomeScreen;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.CreateGroupDetailData;
 import com.bean.GroupsData;
 import com.bean.RequestBean;

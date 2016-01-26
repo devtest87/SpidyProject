@@ -1,7 +1,5 @@
 package com.bean;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpidyPickDetailItemsData {
 	private String id;

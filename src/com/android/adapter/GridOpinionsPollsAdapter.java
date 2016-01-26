@@ -16,9 +16,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.OpinionPollsItemsData;
 import com.utils.Utils;

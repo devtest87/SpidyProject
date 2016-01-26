@@ -3,7 +3,6 @@ package com.android.itemsActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 
 import com.android.adapter.GridGroupListAdapter;
 import com.android.adapter.GridGroupListAdapter.StartActivity;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.GroupsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;

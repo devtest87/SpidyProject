@@ -1,13 +1,12 @@
 package com.android.itemsActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.OpinionPostAnswerPollsDetailsData;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;

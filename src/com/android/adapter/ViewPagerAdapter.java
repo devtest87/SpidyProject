@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,13 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.adapter.GridGroupListAdapter.ViewHolder;
-import com.android.adapter.GridSpidyPickAdapter.StartActivity;
 import com.android.cityspidey.HomeScreen;
-import com.android.cityspidey.R;
-import com.android.itemsActivity.SpidyPickDetailActivity;
+import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.HomeSliderItem;
 

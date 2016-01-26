@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import com.android.adapter.GridSpidyPickAdapter;
 import com.android.adapter.GridSpidyPickAdapter.StartActivity;
-import com.android.cityspidey.R;
-import com.bean.NoticeBoardData;
+import com.android.spideycity.R;
 import com.bean.RequestBean;
 import com.bean.SpidyPickData;
 import com.network.NetworkCall;

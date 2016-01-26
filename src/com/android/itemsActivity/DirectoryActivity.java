@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.android.adapter.DirectoryAdapter;
 import com.android.adapter.DirectoryAdapter.StartActivity;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.DirectoryData;
 import com.bean.DiretoryItemsData;
 import com.bean.RequestBean;

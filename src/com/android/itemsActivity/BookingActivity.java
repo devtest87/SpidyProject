@@ -33,18 +33,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.BookingAdapter;
-import com.android.cityspidey.R;
-import com.android.adapter.BookingListAdapter;
 import com.android.adapter.BookingAdapter.StartActivity;
+import com.android.adapter.BookingListAdapter;
+import com.android.spideycity.R;
 import com.bean.BookingItemsData;
 import com.bean.BookingsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
-import com.utils.PrintLog;
 import com.utils.PreferenceHelper.PreferenceKey;
-import com.utils.Utils;
+import com.utils.PrintLog;
 
 public class BookingActivity extends BaseActivity implements OnClickListener, StartActivity {
 	private static final String tag = "MyCalendarActivity";

@@ -29,6 +29,7 @@ import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
 import com.android.itemsActivity.SpidyPickDetailActivity;
+import com.android.spideycity.R;
 import com.androidquery.AQuery;
 import com.bean.RequestBean;
 import com.bean.SliderData;

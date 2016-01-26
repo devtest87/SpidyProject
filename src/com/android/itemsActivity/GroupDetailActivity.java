@@ -11,9 +11,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -22,13 +20,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.content.CursorLoader;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,18 +35,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.adapter.SpidyPickDetailAdapter;
-import com.android.cityspidey.R;
+import com.android.spideycity.R;
 import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.GroupDetailData;
-import com.bean.NoticeBoardDetailData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.DialogController;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
-import com.utils.Utils;
 import com.utils.PreferenceHelper.PreferenceKey;
+import com.utils.Utils;
 
 public class GroupDetailActivity extends BaseActivity{
 	private String imageUrl;
