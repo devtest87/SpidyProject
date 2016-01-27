@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/ll_parent"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@color/search_background_color"

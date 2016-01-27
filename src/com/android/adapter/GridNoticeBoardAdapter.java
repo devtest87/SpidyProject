@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.cityspidey.R;
@@ -71,7 +72,7 @@ public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 			viewHolder.noticeboardCommentTV = (TextView)convertView.findViewById(R.id.tv_noticeboardcomment);
 			viewHolder.noticeboardDescTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddescription);
 			viewHolder.noticeboardDateTV = (TextView)convertView.findViewById(R.id.tv_noticeboarddate);
-			 
+			viewHolder.backgroundLL = (LinearLayout)convertView.findViewById(R.id.ll_parent);
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -84,9 +85,9 @@ public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 		viewHolder.noticeboardDateTV.setText(Utils.getTimeRemaining(mNoticeBoardFilterItemsDatasList.get(position).getReleaseYear()));
 		if(mNoticeBoardFilterItemsDatasList.get(position).getStatus() != null && 
 				mNoticeBoardFilterItemsDatasList.get(position).getStatus().equalsIgnoreCase("Inactive")){
-			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.noticecolor));
+			viewHolder.backgroundLL.setBackgroundColor(mContext.getResources().getColor(R.color.search_background_color));
 		}else{
-			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.search_background_color));
+			viewHolder.backgroundLL.setBackgroundColor(mContext.getResources().getColor(R.color.noticecolor));
 		}
 		
 		return convertView;
@@ -99,6 +100,7 @@ public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 		public TextView noticeboardDescTV;
 		public TextView noticeboardCommentTV;
 		public TextView noticeboardDateTV;
+		public LinearLayout backgroundLL;
 	}
 
 	@Override
