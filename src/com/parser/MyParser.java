@@ -653,6 +653,9 @@ public class MyParser
 				diretoryItemsData.setHouseno(jArrRWA.getJSONObject(i).getString("houseno"));
 				diretoryItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
 				diretoryItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				diretoryItemsData.setMobile_icon(jArrRWA.getJSONObject(i).getString("mobile_icon"));
+				diretoryItemsData.setLandline_icon(jArrRWA.getJSONObject(i).getString("landline_icon"));
+				diretoryItemsData.setExtno_icon(jArrRWA.getJSONObject(i).getString("extno_icon"));
 
 				diretoryItemsDatasList.add(diretoryItemsData);
 			}
