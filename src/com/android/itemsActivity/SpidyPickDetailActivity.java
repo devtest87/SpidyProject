@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.adapter.SpidyPickDetailAdapter;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.RequestBean;

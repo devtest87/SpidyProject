@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.android.cityspidey.HomeScreen;
 import com.android.cityspidey.LoginActivity;
+import com.android.cityspidey.R;
 import com.android.cityspidey.RegisterActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.CheckRequestStatusActivity;
@@ -48,7 +49,6 @@ import com.android.itemsActivity.RWAsDetailActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
 import com.android.itemsActivity.SpidyPickDetailActivity;
-import com.android.spideycity.R;
 import com.bean.BookingsData;
 import com.bean.CheckRequestData;
 import com.bean.CommentSave;

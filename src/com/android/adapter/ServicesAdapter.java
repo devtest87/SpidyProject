@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.adapter.ServicesAdapter.SolventViewHolders;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.androidquery.AQuery;
 import com.bean.ServicesItemsData;
 

@@ -43,7 +43,7 @@ import android.widget.TextView;
 
 import com.android.adapter.GridGroupListAdapter;
 import com.android.adapter.GridGroupListAdapter.StartActivity;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.CreateGroupDetailData;
 import com.bean.GroupsData;
 import com.bean.RequestBean;

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.android.adapter.CheckRequestAdapter;
 import com.android.adapter.CheckRequestAdapter.StartActivity;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.CheckRequestData;
 import com.bean.CheckRequestItemsData;
 import com.bean.DeleteServicesData;

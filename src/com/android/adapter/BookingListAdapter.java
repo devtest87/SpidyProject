@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.bean.BookingItemsData;
 
 public class BookingListAdapter extends BaseAdapter{

@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.spideycity.R;
 import com.bean.LoginData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;

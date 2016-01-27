@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.cityspidey.HomeScreen;
-import com.android.spideycity.R;
+import com.android.cityspidey.R;
 import com.androidquery.AQuery;
 import com.bean.HomeSliderItem;
 
