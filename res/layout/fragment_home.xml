@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@color/header_background_color">
 
     <include
         android:id="@+id/include_header"
@@ -159,7 +160,10 @@
         android:layout_height="150dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="2dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:paddingBottom="1dp">
         
         <RelativeLayout
         android:id="@+id/left"
@@ -227,25 +231,32 @@
         android:background="@color/noticecolor">
             
             
-            <ImageView android:id="@+id/rwicon"
+            
+            <LinearLayout android:id="@+id/lin2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+            
+                <ImageView android:id="@+id/rwicon"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
                 />
             
                 <TextView 
                 android:id="@+id/rwtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/rwicon"
                 android:textColor="@color/white"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                
-                android:layout_above="@+id/rwdesc"
                 android:layout_marginLeft="5dp"
                 />
+            
+                
+                
+            </LinearLayout>
+            
             
             <TextView
                 android:id="@+id/rwdesc"
@@ -253,11 +264,12 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="10dp"
-                android:layout_centerVertical="true"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/lin2"
                 android:singleLine="false"
                 android:maxLines="3"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
                 />
             
             <TextView 

@@ -37,6 +37,9 @@
     <item name="spideycolor" type="color">#000000</item>
     <item name="opinioncolor" type="color">#cb3a4c</item>
     
+    <item name="opinioncolor" type="color">#cb3a4c</item>
+    <item name="votenowcolor" type="color">#9b9b9b</item>
+    
     <integer-array name="androidcolors">
         <item>@color/blue</item>
         <item>@color/purple</item>
