@@ -3,6 +3,7 @@ package com.android.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,17 +26,19 @@ public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 	private AQuery mAQuery;
 	private LayoutInflater mLayoutInflater;
 	private ItemFilter mFilter = new ItemFilter();
+	private Context mContext;
 
 	public static interface StartActivity{
 		void startActivity(String serviceId);
 	}
 
-	public GridNoticeBoardAdapter(LayoutInflater layoutInflater, StartActivity startActivity, List<NoticeBoardItemsData> noticeBoardItemsDatasList, AQuery aQuery) {
+	public GridNoticeBoardAdapter(Context context, LayoutInflater layoutInflater, StartActivity startActivity, List<NoticeBoardItemsData> noticeBoardItemsDatasList, AQuery aQuery) {
 		mNoticeBoardItemsDatasList = noticeBoardItemsDatasList;
 		mNoticeBoardFilterItemsDatasList = noticeBoardItemsDatasList;
 		mStartActivity = startActivity;
 		mAQuery = aQuery;
 		mLayoutInflater = layoutInflater;
+		mContext = context;
 	}
 
 	
@@ -75,9 +78,16 @@ public class GridNoticeBoardAdapter  extends BaseAdapter implements Filterable{
 		}
 		
 		mAQuery.id(viewHolder.noticeboardIconIV).image(mNoticeBoardFilterItemsDatasList.get(position).getIcon());
-		viewHolder.noticeboardTitleTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getTitle());
-		viewHolder.noticeboardDescTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getDesc());
+		viewHolder.noticeboardTitleTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getGenre());
+		viewHolder.noticeboardDescTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getTitle());
+		viewHolder.noticeboardCommentTV.setText(mNoticeBoardFilterItemsDatasList.get(position).getComment());
 		viewHolder.noticeboardDateTV.setText(Utils.getTimeRemaining(mNoticeBoardFilterItemsDatasList.get(position).getReleaseYear()));
+		if(mNoticeBoardFilterItemsDatasList.get(position).getStatus() != null && 
+				mNoticeBoardFilterItemsDatasList.get(position).getStatus().equalsIgnoreCase("Inactive")){
+			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.noticecolor));
+		}else{
+			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.search_background_color));
+		}
 		
 		return convertView;
 	}

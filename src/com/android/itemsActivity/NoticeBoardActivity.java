@@ -75,25 +75,25 @@ public class NoticeBoardActivity extends BaseActivity implements StartActivity{
 				mGridNoticeBoardAdapter.startActivity(arg2);
 			}
 		});
-        searchET.addTextChangedListener(new TextWatcher() {
-
-		    @Override
-		    public void onTextChanged(CharSequence s, int start, int before, int count) {
-		        System.out.println("Text ["+s+"]");
-		        if(mGridNoticeBoardAdapter!=null)
-		        	mGridNoticeBoardAdapter.getFilter().filter(s.toString());                           
-		    }
-
-		    @Override
-		    public void beforeTextChanged(CharSequence s, int start, int count,
-		            int after) {
-
-		    }
-
-		    @Override
-		    public void afterTextChanged(Editable s) {
-		    }
-		});
+//        searchET.addTextChangedListener(new TextWatcher() {
+//
+//		    @Override
+//		    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//		        System.out.println("Text ["+s+"]");
+//		        if(mGridNoticeBoardAdapter!=null)
+//		        	mGridNoticeBoardAdapter.getFilter().filter(s.toString());                           
+//		    }
+//
+//		    @Override
+//		    public void beforeTextChanged(CharSequence s, int start, int count,
+//		            int after) {
+//
+//		    }
+//
+//		    @Override
+//		    public void afterTextChanged(Editable s) {
+//		    }
+//		});
         
         if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
 			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
@@ -156,7 +156,7 @@ public class NoticeBoardActivity extends BaseActivity implements StartActivity{
 		/*mNoticeBoardAdapter = new NoticeBoardAdapter(this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
 		mRecyclerView.setLayoutManager(staggeredGridLayoutManagerVertical);
 		mRecyclerView.setAdapter(mNoticeBoardAdapter);*/
-		mGridNoticeBoardAdapter = new GridNoticeBoardAdapter(getLayoutInflater(), this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
+		mGridNoticeBoardAdapter = new GridNoticeBoardAdapter(this, getLayoutInflater(), this, noticeBoardData.getNoticeBoardItemsDatasList(), mAQuery);
 		mGridView.setAdapter(mGridNoticeBoardAdapter);
 	}
 	

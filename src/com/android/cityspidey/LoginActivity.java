@@ -121,9 +121,6 @@ public class LoginActivity extends Activity {
     public void loginresponse(LoginData loginData){
     	
     	if(loginData != null){
-    		Intent intent = new Intent(LoginActivity.this,HomeScreen.class);
-			startActivity(intent);
-    		
     		if(loginData.getError().equalsIgnoreCase("success")){
 
     			preferenceHelper.setString(PreferenceKey.NAME, loginData.getUser().getName());
@@ -139,6 +136,9 @@ public class LoginActivity extends Activity {
 				
     		}
     		
+    	}else{
+    		Toast.makeText(getApplicationContext(), "" + loginData.getError_msg(), Toast.LENGTH_SHORT).
+    		show();
     	}
     }
 

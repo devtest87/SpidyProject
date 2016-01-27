@@ -576,6 +576,8 @@ public class MyParser
 				NoticeBoardItemsData noticeBoardItemsData = new NoticeBoardItemsData();
 
 				noticeBoardItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
+				noticeBoardItemsData.setComment(jArrRWA.getJSONObject(i).getString("comments"));
+				noticeBoardItemsData.setStatus(jArrRWA.getJSONObject(i).getString("status"));
 				noticeBoardItemsData.setIcon(jArrRWA.getJSONObject(i).getString("icon"));
 				noticeBoardItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
 				noticeBoardItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
