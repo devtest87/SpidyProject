@@ -209,7 +209,7 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
         
         mAQuery.id(serviceIV).image(url);
         PreferenceHelper preferenceHelper = PreferenceHelper.getSingleInstance(this.getApplicationContext());
-        usernameTV.setText(preferenceHelper.getString(PreferenceKey.RWAS_NAME));
+        usernameTV.setText("Hello " + preferenceHelper.getString(PreferenceKey.NAME));
         serviceTitleTV.setText(serviceName);
 
 

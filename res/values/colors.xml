@@ -37,7 +37,6 @@
     <item name="spideycolor" type="color">#000000</item>
     <item name="opinioncolor" type="color">#cb3a4c</item>
     
-    <item name="opinioncolor" type="color">#cb3a4c</item>
     <item name="votenowcolor" type="color">#9b9b9b</item>
     
     <integer-array name="androidcolors">
@@ -86,6 +85,7 @@
     <color name="calender_orrange">#e33d1b</color>
     <color name="calender_darkorrange">#cc2303</color>
     
+    <color name="request_service_dialog_bg">#D0D0D0</color>
     
 </resources>
  

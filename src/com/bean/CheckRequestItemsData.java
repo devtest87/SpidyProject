@@ -50,5 +50,19 @@ public class CheckRequestItemsData {
 	private String  service_status;
 	private String createdDate;
 	private String genre;
+	private String serviceIcon;
+	public String getServiceIcon() {
+		return serviceIcon;
+	}
+	public void setServiceIcon(String serviceIcon) {
+		this.serviceIcon = serviceIcon;
+	}
+	public String getDeletebutton() {
+		return deletebutton;
+	}
+	public void setDeletebutton(String deletebutton) {
+		this.deletebutton = deletebutton;
+	}
+	private String deletebutton;
 	
 }

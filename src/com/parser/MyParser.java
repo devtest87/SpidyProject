@@ -21,6 +21,7 @@ import com.bean.Comments;
 import com.bean.CreateGroupDetailData;
 import com.bean.DeleteServicesData;
 import com.bean.DirectoryData;
+import com.bean.DirectoryRwaDetail;
 import com.bean.DiretoryItemsData;
 import com.bean.GroupDetailData;
 import com.bean.GroupDetailItemsData;
@@ -482,6 +483,8 @@ public class MyParser
 				servicesItemsData.setServiceName(jArrRWA.getJSONObject(i).getString("serviceName"));
 				servicesItemsData.setService_status(jArrRWA.getJSONObject(i).getString("service_status"));
 				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+				servicesItemsData.setDeletebutton(jArrRWA.getJSONObject(i).getString("deletebutton"));
+				servicesItemsData.setServiceIcon(jArrRWA.getJSONObject(i).getString("serviceIcon"));
 				servicesItemsDatasList.add(servicesItemsData);
 			}
 
@@ -638,6 +641,7 @@ public class MyParser
 	public DirectoryData parseDirectory(String response){
 		DirectoryData directoryData = new DirectoryData();
 		List<DiretoryItemsData> diretoryItemsDatasList = directoryData.getDiretoryItemsDatasList();
+		List<DirectoryRwaDetail> diretoryRwaDatasList = directoryData.getDiretoryRwasDatasList();
 
 		try {
 
@@ -658,6 +662,20 @@ public class MyParser
 				diretoryItemsData.setExtno_icon(jArrRWA.getJSONObject(i).getString("extno_icon"));
 
 				diretoryItemsDatasList.add(diretoryItemsData);
+			}
+			
+			jArrRWA = JsonObject.getJSONArray("rwadetail");
+			for (int i = 0; i < jArrRWA.length(); i++) {
+				DirectoryRwaDetail directoryRwaDetail = new DirectoryRwaDetail();
+
+				directoryRwaDetail.setId(jArrRWA.getJSONObject(i).getString("id"));
+				directoryRwaDetail.setAddress(jArrRWA.getJSONObject(i).getString("address"));
+				directoryRwaDetail.setEmail(jArrRWA.getJSONObject(i).getString("email"));
+				directoryRwaDetail.setPhone(jArrRWA.getJSONObject(i).getString("phone"));
+				directoryRwaDetail.setTitle(jArrRWA.getJSONObject(i).getString("title"));
+				directoryRwaDetail.setWebsite(jArrRWA.getJSONObject(i).getString("website"));
+
+				diretoryRwaDatasList.add(directoryRwaDetail);
 			}
 
 		} catch (JSONException e) {

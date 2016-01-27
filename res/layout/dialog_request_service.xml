@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_rect_circular_header_corner"
+    android:background="@drawable/shape_rect_circular_request_service_corner"
     android:orientation="vertical"
     android:padding="20dp" >
 
@@ -10,8 +10,7 @@
         android:id="@+id/ll_servicetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="horizontal" >
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_service_icon"
@@ -23,8 +22,8 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="service title"
             android:textColor="@color/white"
             android:textSize="@dimen/rwa_title_test_size" />
@@ -69,7 +68,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_below="@+id/et_message"
-        android:background="@drawable/shape_rect_circular_darkgrey_corner"
+        android:background="@drawable/shape_rect_circular_header_corner"
         android:text="SUBMIT REQUEST"
         android:textColor="@color/white"
         android:textSize="@dimen/rwa_title_test_size" />

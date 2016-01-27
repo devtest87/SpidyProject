@@ -27,6 +27,14 @@ public class DirectoryData {
 	private String error;
 	
 	private List<DiretoryItemsData> diretoryItemsDatasList = new ArrayList<DiretoryItemsData>();
+	private List<DirectoryRwaDetail> diretoryRwasDatasList = new ArrayList<DirectoryRwaDetail>();
+	public List<DirectoryRwaDetail> getDiretoryRwasDatasList() {
+		return diretoryRwasDatasList;
+	}
+	public void setDiretoryRwasDatasList(
+			List<DirectoryRwaDetail> diretoryRwasDatasList) {
+		this.diretoryRwasDatasList = diretoryRwasDatasList;
+	}
 	public List<DiretoryItemsData> getDiretoryItemsDatasList() {
 		return diretoryItemsDatasList;
 	}

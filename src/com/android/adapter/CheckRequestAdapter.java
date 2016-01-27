@@ -63,7 +63,6 @@ public class CheckRequestAdapter extends BaseAdapter{
 			viewHolder.titleTV = (TextView)convertView.findViewById(R.id.tv_service_title);
 			viewHolder.postDateTV = (TextView)convertView.findViewById(R.id.tv_service_date);
 			viewHolder.descTV = (TextView)convertView.findViewById(R.id.tv_service_desc);
-			viewHolder.alertTV = (TextView)convertView.findViewById(R.id.tv_service_alert);
 			viewHolder.statusTV = (TextView)convertView.findViewById(R.id.tv_service_status);
 			viewHolder.deleteTV = (TextView)convertView.findViewById(R.id.tv_service_delete);
 			 
@@ -75,9 +74,13 @@ public class CheckRequestAdapter extends BaseAdapter{
 		viewHolder.titleTV.setText(mCheckRequestFilterItemsDataList.get(position).getServiceName());
 		viewHolder.postDateTV.setText(Utils.getTimeRemaining(mCheckRequestFilterItemsDataList.get(position).getCreatedDate()));
 		viewHolder.descTV.setText(mCheckRequestFilterItemsDataList.get(position).getDesc());
-		viewHolder.alertTV.setText("");
 		viewHolder.statusTV.setText(mCheckRequestFilterItemsDataList.get(position).getService_status());
-		//mAQuery.id(viewHolder.serviceIV).image(mCheckRequestFilterItemsDataList.get(position).getImage());
+		mAQuery.id(viewHolder.serviceIV).image(mCheckRequestFilterItemsDataList.get(position).getServiceIcon());
+		if(mCheckRequestFilterItemsDataList.get(position).getDeletebutton().equalsIgnoreCase("0")){
+			viewHolder.deleteTV.setVisibility(View.VISIBLE);
+		}else{
+			viewHolder.deleteTV.setVisibility(View.GONE);
+		}
 		
 		viewHolder.deleteTV.setTag(position);
 		viewHolder.deleteTV.setOnClickListener(new OnClickListener() {
@@ -96,7 +99,6 @@ public class CheckRequestAdapter extends BaseAdapter{
 		TextView titleTV;
 		TextView postDateTV;
 		TextView descTV;
-		TextView alertTV;
 		TextView statusTV;
 		TextView deleteTV;
 		ImageView serviceIV ;

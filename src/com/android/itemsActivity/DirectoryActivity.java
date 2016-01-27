@@ -46,6 +46,11 @@ public class DirectoryActivity extends BaseActivity implements StartActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.directorycolor);
 		
+		
+		
+		
+		
+		
 		mDirectoryListView = (ListView)findViewById(R.id.listview_directory);
 		mDirectoryListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -135,6 +140,14 @@ public class DirectoryActivity extends BaseActivity implements StartActivity{
 	}
 
 	public void response(DirectoryData directoryData) {
+		TextView apartmentTV = (TextView)findViewById(R.id.tv_apartment);
+		TextView addressTV = (TextView)findViewById(R.id.address);
+		TextView conatctDetailTV = (TextView)findViewById(R.id.contactdetail);
+		apartmentTV.setText(directoryData.getDiretoryRwasDatasList().get(0).getTitle());
+		addressTV.setText(directoryData.getDiretoryRwasDatasList().get(0).getAddress());
+		conatctDetailTV.setText("RWA PHONE: " + directoryData.getDiretoryRwasDatasList().get(0).getPhone() + "\n" +
+				"RWA EMAIL: " + directoryData.getDiretoryRwasDatasList().get(0).getEmail() + "\n" +
+				"RWA WEBSITE: " + directoryData.getDiretoryRwasDatasList().get(0).getWebsite());
 		mDirectoryAdapter = new DirectoryAdapter(getLayoutInflater(), this, directoryData.getDiretoryItemsDatasList(), mAQuery);
 		mDirectoryListView.setAdapter(mDirectoryAdapter);
 	}

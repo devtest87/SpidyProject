@@ -45,13 +45,6 @@
             android:textColor="@color/request_service_text_color"
             android:text="Electricity is not working for more than a week"
             android:textSize="@dimen/rwa_title_test_size" />
-        <TextView
-            android:id="@+id/tv_service_alert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/request_service_text_color"
-            android:text="Please check asap"
-            android:textSize="@dimen/rwa_title_test_size" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -85,7 +78,7 @@
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:background="@drawable/shape_rect_circular_darkgrey_corner"
+            android:background="@drawable/shape_rect_circular_header_corner"
             android:text="DELETE RQUEST"
             android:layout_marginBottom="30dp"
             android:textSize="@dimen/rwa_title_test_size" />
