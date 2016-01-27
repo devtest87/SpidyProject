@@ -4,6 +4,9 @@ package com.android.cityspidey;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.adapter.ViewPagerAdapter;
@@ -24,7 +28,9 @@ import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
+import com.android.itemsActivity.NoticeBoardDetailActivity;
 import com.android.itemsActivity.OpinionPollActivity;
+import com.android.itemsActivity.OpinionPollDetailActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
@@ -48,8 +54,12 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 	LinearLayout newslin, assignmentlin, notificationlin, buslin, eventslin, noticelin;
 	private Button rwaBTN, groupsBTN, servicesBTN, bookingBTN, noticeBoardBTN, directoryBTN, spideyPickBTN,
 	opinionPollBTN;
+	private Button votenow;
+	private RelativeLayout rightbottom;
+	private String noticeurl = null;
 	protected AQuery mAQuery;
 	private LinearLayout circleroot;
+	private JSONObject voteJson = new JSONObject();
 
 
 	@Override 
@@ -68,7 +78,10 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		directoryBTN = (Button)findViewById(R.id.btn_directory);
 		spideyPickBTN = (Button)findViewById(R.id.btn_spideypick);
 		opinionPollBTN = (Button)findViewById(R.id.btn_opinionpolls);
+		rightbottom = (RelativeLayout)findViewById(R.id.right);
 
+		votenow = (Button)findViewById(R.id.votenow);
+		
 		rwaBTN.setOnClickListener(this);
 		groupsBTN.setOnClickListener(this);
 		servicesBTN.setOnClickListener(this);
@@ -77,6 +90,8 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		directoryBTN.setOnClickListener(this);
 		spideyPickBTN.setOnClickListener(this);
 		opinionPollBTN.setOnClickListener(this);
+		votenow.setOnClickListener(this);
+		rightbottom.setOnClickListener(this);
 		
 		circleroot = (LinearLayout)findViewById(R.id.dotroot);
 
@@ -142,7 +157,25 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		}else if(v.equals(opinionPollBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, OpinionPollActivity.class); 
 			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE);  
-		} 
+		} else if(v.equals(votenow)){
+			
+			try {
+				Intent intent = new Intent(HomeScreen.this, OpinionPollDetailActivity.class);
+				intent.putExtra("url", voteJson.getString("url"));
+				intent.putExtra("postdate", voteJson.getString("postdate"));
+				intent.putExtra("enddate", voteJson.getString("enddate"));
+				intent.putExtra("image", voteJson.getString("image"));
+				startActivity(intent);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}else if(v.equals(rightbottom)){
+			if(noticeurl!=null){
+			Intent intent = new Intent(this, NoticeBoardDetailActivity.class);
+			intent.putExtra("url", noticeurl);
+			startActivity(intent);
+			}
+		}
 	} 
 
 	@Override
@@ -176,6 +209,17 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 
 				((TextView) findViewById(R.id.optime)).setText("POSTED "+sliderdata.getPollitem().getStartPoll() +" / VOTING ENDS "+ sliderdata.getPollitem().getEndPoll());
 
+				try{
+				
+				voteJson.put("url", sliderdata.getPollitem().getUrl());
+				voteJson.put("postdate", sliderdata.getPollitem().getStartPoll());
+				voteJson.put("enddate", sliderdata.getPollitem().getEndPoll());
+				voteJson.put("image", sliderdata.getPollitem().getImage());
+				
+				}catch(JSONException je){
+					je.printStackTrace();
+				}
+				
 			}
 
 			if(sliderdata.getNoticeitem()!=null){
@@ -185,6 +229,8 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 				((TextView) findViewById(R.id.rwtitle)).setText(sliderdata.getNoticeitem().getGenre());
 				((TextView) findViewById(R.id.rwdesc)).setText(sliderdata.getNoticeitem().getTitle());
 				((TextView) findViewById(R.id.rwtime)).setText(sliderdata.getNoticeitem().getDesc());
+				
+				noticeurl = sliderdata.getNoticeitem().getUrl();
 			}
 
 			if(sliderdata.getSliderList()!=null){
@@ -238,7 +284,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 			public void run() {
 				handler.post(Update);
 			}
-		}, 5000, 5000);
+		}, 10000, 10000);
 	}
 
 	private void getCircle(int count){

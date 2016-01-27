@@ -1,5 +1,8 @@
 package com.fragment.item;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.android.cityspidey.HomeScreen;
 import com.android.cityspidey.R;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
 import com.android.itemsActivity.OpinionPollActivity;
+import com.android.itemsActivity.OpinionPollDetailActivity;
 import com.android.itemsActivity.RWAsActivity;
 import com.android.itemsActivity.ServicesActivity;
 import com.android.itemsActivity.SpidyPickActivity;
@@ -33,6 +38,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	LinearLayout newslin, assignmentlin, notificationlin, buslin, eventslin, noticelin;
 	private Button rwaBTN, groupsBTN, servicesBTN, bookingBTN, noticeBoardBTN, directoryBTN, spideyPickBTN,
 	opinionPollBTN;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,6 +91,8 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		directoryBTN.setOnClickListener(this);
 		spideyPickBTN.setOnClickListener(this);
 		opinionPollBTN.setOnClickListener(this);
+		
+		
 	}
 
 	@Override
