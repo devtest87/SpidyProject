@@ -158,7 +158,7 @@ public class GroupDetailActivity extends BaseActivity{
 	private GroupDetailData groupDetailData;
 
 	private View getFooterView() {
-		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment, null, false);
+		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment_group, null, false);
 		final EditText commentET = (EditText)view.findViewById(R.id.et_comment);
 		TextView resetBTN = (TextView)view.findViewById(R.id.btn_reset);
 		TextView submitBTN = (TextView)view.findViewById(R.id.btn_submit);

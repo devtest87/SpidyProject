@@ -116,7 +116,7 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 	private NoticeBoardDetailData noticeBoardDetailData;
 
 	private View getFooterView() {
-		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment, null, false);
+		View view = getLayoutInflater().inflate(R.layout.inflate_write_comment_noticeboard, null, false);
 		final EditText commentET = (EditText)view.findViewById(R.id.et_comment);
 		TextView resetBTN = (TextView)view.findViewById(R.id.btn_reset);
 		TextView submitBTN = (TextView)view.findViewById(R.id.btn_submit);
@@ -157,10 +157,13 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		TextView noticeBoardDesc = (TextView)view.findViewById(R.id.tv_noticeboard_detail);
 		TextView noticeBoardPostDate = (TextView)view.findViewById(R.id.tv_posteddate);
 		ImageView noticeBoardIV = (ImageView)view.findViewById(R.id.iv_noticeboard);
+		ImageView noticeBoardIcon = (ImageView)view.findViewById(R.id.iv_icon);
+		
 		
 		if(noticeBoardDetailData!=null){
 			if(noticeBoardDetailData.getNoticeBoardDetailItemsData()!=null && noticeBoardDetailData.getNoticeBoardDetailItemsData().size()>0){
 				mAQuery.id(noticeBoardIV).image(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getImage());
+				mAQuery.id(noticeBoardIcon).image(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getIcon());
 				noticeBoardTitle.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getTitle());
 				noticeBoardDesc.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getDesc());
 				noticeBoardPostDate.setText(Utils.getTimeRemaining(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getReleaseYear()));		

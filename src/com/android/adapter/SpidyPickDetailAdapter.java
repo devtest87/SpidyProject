@@ -62,7 +62,8 @@ public class SpidyPickDetailAdapter extends BaseAdapter{
 		viewHolder.createrTV.setText(mCommentList.get(position).getCommentby());
 		viewHolder.dateTV.setText(mCommentList.get(position).getCommentby());
 		viewHolder.commentTV.setText(mCommentList.get(position).getDescrption());
-		mAQuery.id(viewHolder.createrIV).image(mCommentList.get(position).getProfilephoto());
+//		mAQuery.id(viewHolder.createrIV).image(mCommentList.get(position).getProfilephoto());
+		mAQuery.id(viewHolder.createrIV).image(mCommentList.get(position).getProfilephoto(), true, true, 0, R.drawable.profile);
 		
 		return convertView;
 	}

@@ -605,6 +605,7 @@ public class MyParser
 
 			noticeBoardItemsData.setId(innerJsonObject.optString("id"));
 			noticeBoardItemsData.setDesc(innerJsonObject.optString("desc"));
+			noticeBoardItemsData.setIcon(innerJsonObject.optString("icon"));
 			noticeBoardItemsData.setGenre(innerJsonObject.optString("genre"));
 			noticeBoardItemsData.setImage(innerJsonObject.optString("image"));
 			noticeBoardItemsData.setTitle(innerJsonObject.optString("title"));

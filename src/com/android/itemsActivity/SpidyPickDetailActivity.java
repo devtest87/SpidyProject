@@ -162,7 +162,7 @@ public class SpidyPickDetailActivity extends BaseActivity{
         ImageView noticeBoardIV = (ImageView)view.findViewById(R.id.iv_noticeboard);
         TextView tv_comment_title = (TextView)view.findViewById(R.id.tv_comment_title);
 		if(spidyPickDetailData.getCommentList().size() == 0){
-			tv_comment_title.setVisibility(View.INVISIBLE);
+			//tv_comment_title.setVisibility(View.INVISIBLE);
 		}
 		mAQuery.id(noticeBoardIV).image(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getImage());
 		noticeBoardByLine.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getByline());
