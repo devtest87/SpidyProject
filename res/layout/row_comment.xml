@@ -4,34 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <com.customview.CircularImageView
-        android:id="@+id/iv_creater"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/profile"
-        app:border="true"
-        app:border_color="@color/white"
-        app:border_width="2dp"
-        app:shadow="true"
-        app:shadow_color="#3f51b5"
-        app:shadow_radius="0" >
-    </com.customview.CircularImageView>
-
-    <TextView
-        android:id="@+id/tv_creater"
-        android:layout_width="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="@dimen/rwa_title_test_size"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iv_creater" />
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
 
-    <TextView
-        android:id="@+id/tv_comment"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-         android:textSize="@dimen/rwa_description_test_size"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_creater"
-        android:layout_toRightOf="@+id/iv_creater" />
+        <com.customview.CircularImageView
+            android:id="@+id/iv_creater"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/profile"
+            app:border="true"
+            app:border_color="@color/white"
+            app:border_width="2dp"
+            app:shadow="true"
+            app:shadow_color="#3f51b5"
+            app:shadow_radius="0" >
+        </com.customview.CircularImageView>
+
+        <TextView
+            android:id="@+id/tv_creater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_creater"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_title_test_size" />
+
+        <TextView
+            android:id="@+id/tv_comment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_creater"
+            android:layout_toRightOf="@+id/iv_creater"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_description_test_size" />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_comment_date"
+            android:layout_toRightOf="@+id/iv_creater"
+            android:textColor="@color/white"
+            android:textSize="@dimen/rwa_description_test_size" />
+    </RelativeLayout>
 
 </RelativeLayout>

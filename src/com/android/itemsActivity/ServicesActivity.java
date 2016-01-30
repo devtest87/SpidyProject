@@ -30,6 +30,7 @@ import com.bean.RequestBean;
 import com.bean.RequestServicesData;
 import com.bean.ServicesData;
 import com.network.NetworkCall;
+import com.utils.DialogController;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
@@ -186,8 +187,11 @@ public class ServicesActivity extends BaseActivity  implements StartActivity{
 		networkCall.execute("");
 	}
 
+	private String message = "YOU HAVE SUCCESSFULLY SUBMIT A REQUEST.WE WILL SHOURTLY RESPOND TO YOUR REQUEST THANKS.";
 	public void response(RequestServicesData requestServicesData) {
-		
+		if("success".equalsIgnoreCase(requestServicesData.getError())){
+			DialogController.showCommonMessage(this, "CitySpidey", message);
+		}
 	}
 	
 	private void requestServiceDialog(final String url, final String serviceId, final String serviceName){

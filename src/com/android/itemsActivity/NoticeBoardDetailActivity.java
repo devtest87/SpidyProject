@@ -97,17 +97,19 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 	}
 
 	public void response(NoticeBoardDetailData noticeBoardDetailData) {
-		this.noticeBoardDetailData = noticeBoardDetailData;
-		View headerView = getHeaderView();
-		View footerView = getFooterView();
-		if(noticeBoardDetailData.getCommentList().size() > 0){
-			spidyPickDetailAdapter = new SpidyPickDetailAdapter
-					(getLayoutInflater(), noticeBoardDetailData.getCommentList(), mAQuery);
-			listView.setAdapter(spidyPickDetailAdapter);
+		if(noticeBoardDetailData.getNoticeBoardDetailItemsData().size() != 0){
+			this.noticeBoardDetailData = noticeBoardDetailData;
+			View headerView = getHeaderView();
+			View footerView = getFooterView();
+			if(noticeBoardDetailData.getCommentList().size() > 0){
+				spidyPickDetailAdapter = new SpidyPickDetailAdapter
+						(getLayoutInflater(), noticeBoardDetailData.getCommentList(), mAQuery);
+				listView.setAdapter(spidyPickDetailAdapter);
+			}
+			listView.addHeaderView(headerView);
+			listView.addFooterView(footerView);
 		}
-		listView.addHeaderView(headerView);
-		listView.addFooterView(footerView);
-		
+
 	}
 
 	private SpidyPickDetailAdapter spidyPickDetailAdapter;

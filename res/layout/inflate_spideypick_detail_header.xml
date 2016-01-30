@@ -82,6 +82,15 @@
             android:layout_height="2dp"
             android:layout_marginTop="10dp"
             android:background="@color/black" />
+        
+        <TextView
+            android:id="@+id/tv_comment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:text="COMMENTS"
+            android:textSize="@dimen/rwa_title_test_size" />
     </LinearLayout>
 
 </LinearLayout>

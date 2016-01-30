@@ -38,6 +38,13 @@ public class GroupDetailItemsData {
 	private String  desc;
 	private String image;
 	private String createdDate;
+	private String members;
+	public String getMembers() {
+		return members;
+	}
+	public void setMembers(String members) {
+		this.members = members;
+	}
 	public String getCreatedDate() {
 		return createdDate;
 	}

@@ -96,104 +96,108 @@ public class OpinionPollDetailActivity extends BaseActivity{
 	}
 
 	public void response(final OpinionPollsDetailsData opinionPollsDetailsData) {
-		ImageView opinionPollIV = (ImageView)findViewById(R.id.iv_opinion);
-		TextView titleTV = (TextView)findViewById(R.id.tv_opiniontitle);
-		TextView postandendDateTV = (TextView)findViewById(R.id.tv_postandenddate);
-		LinearLayout voteOptionLL = (LinearLayout)findViewById(R.id.ll_vote_options);
+		if(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().size() != 0){
+			if(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().size() != 0){
+				ImageView opinionPollIV = (ImageView)findViewById(R.id.iv_opinion);
+				TextView titleTV = (TextView)findViewById(R.id.tv_opiniontitle);
+				TextView postandendDateTV = (TextView)findViewById(R.id.tv_postandenddate);
+				LinearLayout voteOptionLL = (LinearLayout)findViewById(R.id.ll_vote_options);
 
-		mAQuery.id(opinionPollIV).image(getIntent().getStringExtra("image"));
-		titleTV.setText(opinionPollsDetailsData.getTitle());
-		postandendDateTV.setText("Posted " + Utils.getTimeRemaining(getIntent().getStringExtra("postdate"))+
-				"/Voting ends\n " + Utils.formatDate(getIntent().getStringExtra("enddate")));
-		int size = opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().size();
-		int rowCount  = size / 3;
-		int reminder = size % 3;
-		for (int i = 0; i < rowCount + 1; i++) {
-			View view = getLayoutInflater().inflate(R.layout.inflate_vote_option, null, false);
-			TextView vote1 = (TextView)view.findViewById(R.id.tv_vote1);
-			TextView vote2 = (TextView)view.findViewById(R.id.tv_vote2);
-			TextView vote3 = (TextView)view.findViewById(R.id.tv_vote3);
-			vote1.setOnClickListener(new OnClickListener() {
+				mAQuery.id(opinionPollIV).image(getIntent().getStringExtra("image"));
+				titleTV.setText(opinionPollsDetailsData.getTitle());
+				postandendDateTV.setText("Posted " + Utils.getTimeRemaining(getIntent().getStringExtra("postdate"))+
+						"/Voting ends\n " + Utils.formatDate(getIntent().getStringExtra("enddate")));
+				int size = opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().size();
+				int rowCount  = size / 3;
+				int reminder = size % 3;
+				for (int i = 0; i < rowCount + 1; i++) {
+					View view = getLayoutInflater().inflate(R.layout.inflate_vote_option, null, false);
+					TextView vote1 = (TextView)view.findViewById(R.id.tv_vote1);
+					TextView vote2 = (TextView)view.findViewById(R.id.tv_vote2);
+					TextView vote3 = (TextView)view.findViewById(R.id.tv_vote3);
+					vote1.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					int pos = Integer.parseInt(v.getTag().toString());
-					List<NameValuePair> list = new ArrayList<NameValuePair>();
-					NameValuePair nameValuePairs = new BasicNameValuePair("user_id", PreferenceHelper.
-							getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
-					list.add(nameValuePairs);
-					nameValuePairs = new BasicNameValuePair("poll_id", 
-							opinionPollsDetailsData.getId());
-					list.add(nameValuePairs);
-					nameValuePairs = new BasicNameValuePair("ans", opinionPollsDetailsData.
-							getOpinionPollsDetailItemsDataList().get(pos).getId());
-					list.add(nameValuePairs);
-					voteNow(list);
-				}
-			});
-			vote2.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							int pos = Integer.parseInt(v.getTag().toString());
+							List<NameValuePair> list = new ArrayList<NameValuePair>();
+							NameValuePair nameValuePairs = new BasicNameValuePair("user_id", PreferenceHelper.
+									getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+							list.add(nameValuePairs);
+							nameValuePairs = new BasicNameValuePair("poll_id", 
+									opinionPollsDetailsData.getId());
+							list.add(nameValuePairs);
+							nameValuePairs = new BasicNameValuePair("ans", opinionPollsDetailsData.
+									getOpinionPollsDetailItemsDataList().get(pos).getId());
+							list.add(nameValuePairs);
+							voteNow(list);
+						}
+					});
+					vote2.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					int pos = Integer.parseInt(v.getTag().toString());
-					List<NameValuePair> list = new ArrayList<NameValuePair>();
-					NameValuePair nameValuePairs = new BasicNameValuePair("user_id", PreferenceHelper.
-							getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
-					list.add(nameValuePairs);
-					nameValuePairs = new BasicNameValuePair("poll_id", 
-							opinionPollsDetailsData.getId());
-					list.add(nameValuePairs);
-					nameValuePairs = new BasicNameValuePair("ans", opinionPollsDetailsData.
-							getOpinionPollsDetailItemsDataList().get(pos).getId());
-					list.add(nameValuePairs);
-					voteNow(list);
-				}
-			});
-			vote3.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							int pos = Integer.parseInt(v.getTag().toString());
+							List<NameValuePair> list = new ArrayList<NameValuePair>();
+							NameValuePair nameValuePairs = new BasicNameValuePair("user_id", PreferenceHelper.
+									getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+							list.add(nameValuePairs);
+							nameValuePairs = new BasicNameValuePair("poll_id", 
+									opinionPollsDetailsData.getId());
+							list.add(nameValuePairs);
+							nameValuePairs = new BasicNameValuePair("ans", opinionPollsDetailsData.
+									getOpinionPollsDetailItemsDataList().get(pos).getId());
+							list.add(nameValuePairs);
+							voteNow(list);
+						}
+					});
+					vote3.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					int pos = Integer.parseInt(v.getTag().toString());
-					List<NameValuePair> list = new ArrayList<NameValuePair>();
-					NameValuePair nameValuePairs = new BasicNameValuePair("user_id", PreferenceHelper.
-							getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
-					list.add(nameValuePairs);
-					nameValuePairs = new BasicNameValuePair("poll_id", 
-							opinionPollsDetailsData.getId());
-					list.add(nameValuePairs);
-					nameValuePairs = new BasicNameValuePair("ans", opinionPollsDetailsData.
-							getOpinionPollsDetailItemsDataList().get(pos).getId());
-					list.add(nameValuePairs);
-					voteNow(list);
-				}
-			});
-			if(i != rowCount){
-				vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());
-				vote2.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+1).getOptions());
-				vote3.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+2).getOptions());
-				vote1.setTag((i*3)+0);
-				vote2.setTag((i*3)+1);
-				vote3.setTag((i*3)+2);
-			}else{
-				if(reminder == 1){
-					vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());
-					vote1.setTag((i*3)+0);
-					vote2.setVisibility(View.INVISIBLE);
-					vote3.setVisibility(View.INVISIBLE);
-				}else if(reminder == 2){
-					vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());
-					vote2.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+1).getOptions());
-					vote1.setTag((i*3)+0);
-					vote2.setTag((i*3)+1);
-					vote3.setVisibility(View.INVISIBLE);
-				}else if(reminder == 0){
-					vote1.setVisibility(View.GONE);
-					vote2.setVisibility(View.GONE);
-					vote3.setVisibility(View.GONE);
+						@Override
+						public void onClick(View v) {
+							int pos = Integer.parseInt(v.getTag().toString());
+							List<NameValuePair> list = new ArrayList<NameValuePair>();
+							NameValuePair nameValuePairs = new BasicNameValuePair("user_id", PreferenceHelper.
+									getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+							list.add(nameValuePairs);
+							nameValuePairs = new BasicNameValuePair("poll_id", 
+									opinionPollsDetailsData.getId());
+							list.add(nameValuePairs);
+							nameValuePairs = new BasicNameValuePair("ans", opinionPollsDetailsData.
+									getOpinionPollsDetailItemsDataList().get(pos).getId());
+							list.add(nameValuePairs);
+							voteNow(list);
+						}
+					});
+					if(i != rowCount){
+						vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());
+						vote2.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+1).getOptions());
+						vote3.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+2).getOptions());
+						vote1.setTag((i*3)+0);
+						vote2.setTag((i*3)+1);
+						vote3.setTag((i*3)+2);
+					}else{
+						if(reminder == 1){
+							vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());
+							vote1.setTag((i*3)+0);
+							vote2.setVisibility(View.INVISIBLE);
+							vote3.setVisibility(View.INVISIBLE);
+						}else if(reminder == 2){
+							vote1.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+0).getOptions());
+							vote2.setText(opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().get((i*3)+1).getOptions());
+							vote1.setTag((i*3)+0);
+							vote2.setTag((i*3)+1);
+							vote3.setVisibility(View.INVISIBLE);
+						}else if(reminder == 0){
+							vote1.setVisibility(View.GONE);
+							vote2.setVisibility(View.GONE);
+							vote3.setVisibility(View.GONE);
+						}
+					}
+					voteOptionLL.addView(view);
+
 				}
 			}
-			voteOptionLL.addView(view);
-
 		}
 	}
 

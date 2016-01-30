@@ -4,12 +4,14 @@
     android:layout_height="wrap_content" >
 
     <View
+        android:id="@+id/bottomline"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="10dp"
         android:background="@color/black" />
 
     <EditText
+        android:layout_below="@+id/bottomline"
         android:id="@+id/et_comment"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -25,6 +27,7 @@
         android:layout_below="@+id/et_comment"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@+id/btn_submit"
         android:layout_toRightOf="@+id/iv_creater"
         android:background="@drawable/shape_rect_circular_searchbg_color_corner"
@@ -35,6 +38,7 @@
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="100dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/et_comment"

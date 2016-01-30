@@ -21,5 +21,12 @@ public class Comments {
 		this.profilephoto = profilephoto;
 	}
 	private String  commentby;
+	private String  createdDate;
+	public String getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
 	private String profilephoto;
 }

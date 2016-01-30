@@ -99,19 +99,21 @@ public class SpidyPickDetailActivity extends BaseActivity{
 
 	private SpidyPickDetailAdapter spidyPickDetailAdapter;
 	public void response(SpidyPickDetailData spidyPickDetailData) {
-		this.spidyPickDetailData = spidyPickDetailData;
-		View headerView = getHeaderView();
-		View footerView = getFooterView();
-		if(spidyPickDetailData.getCommentList().size() > 0){
-			spidyPickDetailAdapter = new SpidyPickDetailAdapter
-					(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
-//			listView.setAdapter(spidyPickDetailAdapter);
+		if(spidyPickDetailData.getSpidyPickDetailItemsDataList().size() != 0){
+			this.spidyPickDetailData = spidyPickDetailData;
+			View headerView = getHeaderView();
+			View footerView = getFooterView();
+			if(spidyPickDetailData.getCommentList().size() > 0){
+				spidyPickDetailAdapter = new SpidyPickDetailAdapter
+						(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
+				//			listView.setAdapter(spidyPickDetailAdapter);
+			}
+			listView.addHeaderView(headerView);
+			listView.addFooterView(footerView);
+
+
+			listView.setAdapter(spidyPickDetailAdapter);
 		}
-		listView.addHeaderView(headerView);
-		listView.addFooterView(footerView);
-		
-		
-		listView.setAdapter(spidyPickDetailAdapter);
 	}
 
 	private View getFooterView() {
@@ -158,10 +160,13 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		TextView tag = (TextView)view.findViewById(R.id.tv_tags);
 		TextView noticeBoardPostDate = (TextView)view.findViewById(R.id.tv_noticeboard_posteddate);
         ImageView noticeBoardIV = (ImageView)view.findViewById(R.id.iv_noticeboard);
-		
+        TextView tv_comment_title = (TextView)view.findViewById(R.id.tv_comment_title);
+		if(spidyPickDetailData.getCommentList().size() == 0){
+			tv_comment_title.setVisibility(View.INVISIBLE);
+		}
 		mAQuery.id(noticeBoardIV).image(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getImage());
 		noticeBoardByLine.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getByline());
-		tag.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTags());
+		tag.setText("TAGS: " + spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTags());
 		noticeBoardTitle.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTitle());
 		noticeBoardDesc.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getDesc());
 		noticeBoardPostDate.setText(Utils.getTimeRemaining(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getReleaseYear()));

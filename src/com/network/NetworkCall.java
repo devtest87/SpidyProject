@@ -57,6 +57,7 @@ import com.bean.DeleteServicesData;
 import com.bean.DirectoryData;
 import com.bean.GroupDetailData;
 import com.bean.GroupsData;
+import com.bean.JoinGroupData;
 import com.bean.LoginData;
 import com.bean.NoticeBoardData;
 import com.bean.NoticeBoardDetailData;
@@ -92,6 +93,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private static final String sliderTopURL = baseURL + "master_home.php";
 	private static final String rwasURL = baseURL + "rwa_list.json";
 	private static final String groupsURL = baseURL + "groups_slider.json";
+	private static final String joinGroupsURL = baseURL + "join_group.php";
 	private static final String createGroupsURL = baseURL + "create_group.php";
 	private static final String servicesURL = baseURL + "services.php";
 	private static final String bookingsURL = baseURL + "booking_list.php";
@@ -162,6 +164,9 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			break;
 		case GROUPS_DETAIL:
 			object = groupDetail(namePairList);
+			break;
+		case JOIN_GROUP:
+			object = joinGroupDetail(namePairList);
 			break;
 		case SERVICES:
 			object = services(namePairList);
@@ -358,6 +363,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			GroupDetailData groupDetailData = (GroupDetailData)result;
 			if(activity instanceof GroupDetailActivity){
 				((GroupDetailActivity) activity).response(groupDetailData);	
+			}
+			break;
+		case JOIN_GROUP:
+			JoinGroupData joinGroupData = (JoinGroupData)result;
+			if(activity instanceof GroupDetailActivity){
+				((GroupDetailActivity) activity).response(joinGroupData);	
 			}
 			break;
 		case SERVICES:
@@ -802,6 +813,22 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		}
 		return groupDetailData;
 	}
+	
+	public JoinGroupData joinGroupDetail(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		JoinGroupData groupDetailData;
+		String response = NetworkConnection.networkHit(namePair, joinGroupsURL);
+
+		PrintLog.show(Log.ERROR, TAG, namePair + "  " + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			groupDetailData = new JoinGroupData();
+			groupDetailData.setException(response);
+		}else{
+			groupDetailData = myParser.parseJoinGroupsDetail(response);
+		}
+		return groupDetailData;
+	}
+	
 	
 	public ServicesData services(List<NameValuePair> namePair){
 		List<NameValuePair> pair = null;

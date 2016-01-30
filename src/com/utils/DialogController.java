@@ -79,4 +79,18 @@ public class DialogController {
 		});
 		builder.show();
 	}
+	
+	public static void showCommonMessage(final Activity activity, String title, String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(title);
+		builder.setMessage(message);
+		builder.setPositiveButton("OK", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.show();
+	}
 }

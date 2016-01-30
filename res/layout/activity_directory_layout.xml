@@ -22,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="qqwwqq"
             android:textSize="@dimen/rwa_title_test_size"
             android:textStyle="bold" />
 
@@ -43,7 +42,6 @@
             <TextView
                 android:id="@+id/address"
                 android:layout_width="0dp"
-                android:text="qqwwqq"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingRight="10dp"
@@ -53,7 +51,6 @@
             <TextView
                 android:id="@+id/contactdetail"
                 android:layout_width="0dp"
-                android:text="qqwwqq"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"

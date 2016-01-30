@@ -28,6 +28,7 @@ import com.bean.GroupDetailItemsData;
 import com.bean.GroupItemsData;
 import com.bean.GroupsData;
 import com.bean.HomeSliderItem;
+import com.bean.JoinGroupData;
 import com.bean.LoginData;
 import com.bean.NoticeBoardData;
 import com.bean.NoticeBoardDetailData;
@@ -70,32 +71,32 @@ public class MyParser
 		try 
 		{
 			JSONObject	jObj = new JSONObject(response);
-			String error = jObj.getString("error");
+			String error = jObj.optString("error");
 
 			login.setError(error);
 
 			if(error.equalsIgnoreCase("success"))
 			{
 
-				login.setUid(jObj.getString("uid"));
-				login.setRwaid(jObj.getString("rwaid"));
-				login.setRwaname(jObj.getString("rwaname"));
-				login.setPhoto(jObj.getString("photo"));
+				login.setUid(jObj.optString("uid"));
+				login.setRwaid(jObj.optString("rwaid"));
+				login.setRwaname(jObj.optString("rwaname"));
+				login.setPhoto(jObj.optString("photo"));
 
 				User user = new User();
 
 				jObj = jObj.getJSONObject("user");
 
-				user.setName(jObj.getString("name"));
-				user.setEmail(jObj.getString("email"));
-				user.setMobile(jObj.getString("mobile"));
-				user.setUpdateddate(jObj.getString("updateddate"));
+				user.setName(jObj.optString("name"));
+				user.setEmail(jObj.optString("email"));
+				user.setMobile(jObj.optString("mobile"));
+				user.setUpdateddate(jObj.optString("updateddate"));
 
 				login.setUser(user);
 			}
 			else
 			{
-				login.setError_msg(jObj.getString("error_msg"));
+				login.setError_msg(jObj.optString("error_msg"));
 
 			}
 
@@ -113,14 +114,14 @@ public class MyParser
 		{
 			JSONObject jObj = new JSONObject(response);
 
-			String error = jObj.getString("error");
+			String error = jObj.optString("error");
 			reg.setError(error);
 
 			if(error.equalsIgnoreCase("success"))
 			{
-				reg.setSuccess_msg(jObj.getString("success_msg"));
+				reg.setSuccess_msg(jObj.optString("success_msg"));
 			}else{
-				reg.setError_msg(jObj.getString("error_msg"));
+				reg.setError_msg(jObj.optString("error_msg"));
 			}
 
 		} catch (Exception e) {
@@ -136,8 +137,8 @@ public class MyParser
 
 			JSONObject jObj = new JSONObject(response);
 
-			if(jObj.getString("error").equalsIgnoreCase("success")){
-				slider.setError(jObj.getString("error"));
+			if(jObj.optString("error").equalsIgnoreCase("success")){
+				slider.setError(jObj.optString("error"));
 
 				JSONArray jArrTop = jObj.getJSONArray("top");
 
@@ -145,13 +146,13 @@ public class MyParser
 				for (int i = 0; i < jArrTop.length(); i++) {
 					HomeSliderItem item = new HomeSliderItem();
 
-					item.setId(jArrTop.getJSONObject(i).getString("id"));
-					item.setDesc(jArrTop.getJSONObject(i).getString("desc"));
-					item.setGenre(jArrTop.getJSONObject(i).getString("genre"));
-					item.setImage(jArrTop.getJSONObject(i).getString("image"));
-					item.setReleaseYear(jArrTop.getJSONObject(i).getString("releaseYear"));
-					item.setTitle(jArrTop.getJSONObject(i).getString("title"));
-					item.setUrl(jArrTop.getJSONObject(i).getString("url"));
+					item.setId(jArrTop.getJSONObject(i).optString("id"));
+					item.setDesc(jArrTop.getJSONObject(i).optString("desc"));
+					item.setGenre(jArrTop.getJSONObject(i).optString("genre"));
+					item.setImage(jArrTop.getJSONObject(i).optString("image"));
+					item.setReleaseYear(jArrTop.getJSONObject(i).optString("releaseYear"));
+					item.setTitle(jArrTop.getJSONObject(i).optString("title"));
+					item.setUrl(jArrTop.getJSONObject(i).optString("url"));
 
 					slidList.add(item);
 				}
@@ -163,14 +164,14 @@ public class MyParser
 					for (int i = 0; i < jArrNotice.length(); i++) {
 						HomeSliderItem item = new HomeSliderItem();
 
-						item.setId(jArrNotice.getJSONObject(i).getString("id"));
-						item.setDesc(jArrNotice.getJSONObject(i).getString("desc"));
-						item.setGenre(jArrNotice.getJSONObject(i).getString("genre"));
-						item.setImage(jArrNotice.getJSONObject(i).getString("image"));
-						item.setReleaseYear(jArrNotice.getJSONObject(i).getString("releaseYear"));
-						item.setTitle(jArrNotice.getJSONObject(i).getString("title"));
-						item.setUrl(jArrNotice.getJSONObject(i).getString("url"));
-						item.setIcon(jArrNotice.getJSONObject(i).getString("icon"));
+						item.setId(jArrNotice.getJSONObject(i).optString("id"));
+						item.setDesc(jArrNotice.getJSONObject(i).optString("desc"));
+						item.setGenre(jArrNotice.getJSONObject(i).optString("genre"));
+						item.setImage(jArrNotice.getJSONObject(i).optString("image"));
+						item.setReleaseYear(jArrNotice.getJSONObject(i).optString("releaseYear"));
+						item.setTitle(jArrNotice.getJSONObject(i).optString("title"));
+						item.setUrl(jArrNotice.getJSONObject(i).optString("url"));
+						item.setIcon(jArrNotice.getJSONObject(i).optString("icon"));
 
 						slider.setNoticeitem(item);
 					}
@@ -181,16 +182,16 @@ public class MyParser
 					for (int i = 0; i < jArrPoll.length(); i++) {
 						HomeSliderItem item = new HomeSliderItem();
 
-						item.setId(jArrPoll.getJSONObject(i).getString("id"));
-						item.setDesc(jArrPoll.getJSONObject(i).getString("desc"));
-						item.setGenre(jArrPoll.getJSONObject(i).getString("genre"));
-						item.setImage(jArrPoll.getJSONObject(i).getString("image"));
+						item.setId(jArrPoll.getJSONObject(i).optString("id"));
+						item.setDesc(jArrPoll.getJSONObject(i).optString("desc"));
+						item.setGenre(jArrPoll.getJSONObject(i).optString("genre"));
+						item.setImage(jArrPoll.getJSONObject(i).optString("image"));
 
-						item.setStartPoll(jArrPoll.getJSONObject(i).getString("startPoll"));
-						item.setEndPoll(jArrPoll.getJSONObject(i).getString("endPoll"));
+						item.setStartPoll(jArrPoll.getJSONObject(i).optString("startPoll"));
+						item.setEndPoll(jArrPoll.getJSONObject(i).optString("endPoll"));
 
-						item.setTitle(jArrPoll.getJSONObject(i).getString("title"));
-						item.setUrl(jArrPoll.getJSONObject(i).getString("url"));
+						item.setTitle(jArrPoll.getJSONObject(i).optString("title"));
+						item.setUrl(jArrPoll.getJSONObject(i).optString("url"));
 
 						slider.setPollitem(item);
 					}
@@ -217,16 +218,16 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				RWAItemsData rwaItemsData = new RWAItemsData();
 
-				rwaItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				rwaItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				rwaItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				rwaItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				rwaItemsData.setAdr(jArrRWA.getJSONObject(i).getString("adr"));
-				rwaItemsData.setCity(jArrRWA.getJSONObject(i).getString("city"));
-				rwaItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				rwaItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				rwaItemsData.setFurl(jArrRWA.getJSONObject(i).getString("furl"));
-				rwaItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				rwaItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				rwaItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				rwaItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				rwaItemsData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				rwaItemsData.setAdr(jArrRWA.getJSONObject(i).optString("adr"));
+				rwaItemsData.setCity(jArrRWA.getJSONObject(i).optString("city"));
+				rwaItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				rwaItemsData.setUrl(jArrRWA.getJSONObject(i).optString("url"));
+				rwaItemsData.setFurl(jArrRWA.getJSONObject(i).optString("furl"));
+				rwaItemsData.setReleaseYear(jArrRWA.getJSONObject(i).optString("releaseYear"));
 
 				rwaItemsDatasList.add(rwaItemsData);
 			}
@@ -245,15 +246,16 @@ public class MyParser
 		try {
 
 			JSONObject object = new JSONObject(response);
-			rwasDetailData.setId(object.getString("id"));
-			rwasDetailData.setAddress(object.getString("adr"));
-			rwasDetailData.setDesc(object.getString("desc"));
-			rwasDetailData.setGenre(object.getString("genre"));
-			rwasDetailData.setImage(object.getString("image"));
-			rwasDetailData.setReleaseYear(object.getString("releaseYear"));
-			rwasDetailData.setTitle(object.getString("title"));
-			rwasDetailData.setGenre(object.getString("genre"));
-			rwasDetailData.setCreatedby(object.getString("createdby"));
+			rwasDetailData.setError(object.optString("error"));
+			rwasDetailData.setId(object.optString("id"));
+			rwasDetailData.setAddress(object.optString("adr"));
+			rwasDetailData.setDesc(object.optString("desc"));
+			rwasDetailData.setGenre(object.optString("genre"));
+			rwasDetailData.setImage(object.optString("image"));
+			rwasDetailData.setReleaseYear(object.optString("releaseYear"));
+			rwasDetailData.setTitle(object.optString("title"));
+			rwasDetailData.setGenre(object.optString("genre"));
+			rwasDetailData.setCreatedby(object.optString("createdby"));
 
 
 			if(object.has("cdetailslabel")){
@@ -283,13 +285,13 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				RWAFacilityData rwaFacilityData = new RWAFacilityData();
 
-				rwaFacilityData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				rwaFacilityData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				rwaFacilityData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-				rwaFacilityData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				rwaFacilityData.setFacility_Id(jArrRWA.getJSONObject(i).getString("facility_Id"));
-				rwaFacilityData.setRwaId(jArrRWA.getJSONObject(i).getString("rwaId"));
-				rwaFacilityData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+				rwaFacilityData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				rwaFacilityData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				rwaFacilityData.setCreatedby(jArrRWA.getJSONObject(i).optString("createdby"));
+				rwaFacilityData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				rwaFacilityData.setFacility_Id(jArrRWA.getJSONObject(i).optString("facility_Id"));
+				rwaFacilityData.setRwaId(jArrRWA.getJSONObject(i).optString("rwaId"));
+				rwaFacilityData.setFacilityName(jArrRWA.getJSONObject(i).optString("facilityName"));
 
 				rwaFacilityDataList.add(rwaFacilityData);
 			}
@@ -312,14 +314,14 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				GroupItemsData groupItemsData = new GroupItemsData();
 
-				groupItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				groupItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				groupItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				groupItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				groupItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				groupItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				groupItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				groupItemsData.setMembers(jArrRWA.getJSONObject(i).getString("members"));
+				groupItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				groupItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				groupItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				groupItemsData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				groupItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				groupItemsData.setUrl(jArrRWA.getJSONObject(i).optString("url"));
+				groupItemsData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+				groupItemsData.setMembers(jArrRWA.getJSONObject(i).optString("members"));
 				groupItemsDataList.add(groupItemsData);
 			}
 
@@ -344,21 +346,22 @@ public class MyParser
 			JSONObject innerJsonObject = jsonObject.getJSONObject("0");
 			GroupDetailItemsData groupDetailItemsData = new GroupDetailItemsData();
 
-			groupDetailItemsData.setId(innerJsonObject.getString("id"));
-			groupDetailItemsData.setDesc(innerJsonObject.getString("desc"));
-			groupDetailItemsData.setGenre(innerJsonObject.getString("genre"));
-			groupDetailItemsData.setImage(innerJsonObject.getString("image"));
-			groupDetailItemsData.setTitle(innerJsonObject.getString("title"));
-			groupDetailItemsData.setCreatedby(innerJsonObject.getString("createdby"));
-			groupDetailItemsData.setCreatedDate(innerJsonObject.getString("createdDate"));
+			groupDetailItemsData.setId(innerJsonObject.optString("id"));
+			groupDetailItemsData.setDesc(innerJsonObject.optString("desc"));
+			groupDetailItemsData.setGenre(innerJsonObject.optString("genre"));
+			groupDetailItemsData.setImage(innerJsonObject.optString("image"));
+			groupDetailItemsData.setMembers(innerJsonObject.optString("members"));
+			groupDetailItemsData.setTitle(innerJsonObject.optString("title"));
+			groupDetailItemsData.setCreatedby(innerJsonObject.optString("createdby"));
+			groupDetailItemsData.setCreatedDate(innerJsonObject.optString("createdDate"));
 
 			groupDetailItemsDataList.add(groupDetailItemsData);
 			JSONArray jArrRWA = jsonObject.getJSONArray("comment");
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				Comments comments = new Comments();
-				comments.setCommentby(jArrRWA.getJSONObject(i).getString("commentby"));
-				comments.setDescrption(jArrRWA.getJSONObject(i).getString("descrption"));
-				comments.setProfilephoto(jArrRWA.getJSONObject(i).getString("profilephoto"));
+				comments.setCommentby(jArrRWA.getJSONObject(i).optString("commentby"));
+				comments.setDescrption(jArrRWA.getJSONObject(i).optString("descrption"));
+				comments.setProfilephoto(jArrRWA.getJSONObject(i).optString("profilephoto"));
 				groupDetailDataCommentDatasList.add(comments);
 			}
 
@@ -380,13 +383,13 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				GroupDetailItemsData groupDetailItemsData = new GroupDetailItemsData();
 
-				groupDetailItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				groupDetailItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				groupDetailItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				groupDetailItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				groupDetailItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				groupDetailItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-				groupDetailItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
+				groupDetailItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				groupDetailItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				groupDetailItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				groupDetailItemsData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				groupDetailItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				groupDetailItemsData.setCreatedby(jArrRWA.getJSONObject(i).optString("createdby"));
+				groupDetailItemsData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
 
 				groupDetailItemsDataList.add(groupDetailItemsData);
 			}
@@ -411,15 +414,15 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				ServicesItemsData servicesItemsData = new ServicesItemsData();
 
-				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				servicesItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
-				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
-				servicesItemsData.setIcon(jArrRWA.getJSONObject(i).getString("icon"));
+				servicesItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+				servicesItemsData.setMobile(jArrRWA.getJSONObject(i).optString("mobile"));
+				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).optString("url"));
+				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).optString("serviceProvider"));
+				servicesItemsData.setIcon(jArrRWA.getJSONObject(i).optString("icon"));
 
 
 				servicesItemsDatasList.add(servicesItemsData);
@@ -436,25 +439,10 @@ public class MyParser
 
 	public RequestServicesData parseRequestServices(String response){
 		RequestServicesData requestServicesData = new RequestServicesData();
-		List<ServicesItemsData> servicesItemsDatasList = requestServicesData.getServicesItemsDatasList();
-
 		try {
 
-			JSONArray jArrRWA = new JSONArray(response);
-			for (int i = 0; i < jArrRWA.length(); i++) {
-				ServicesItemsData servicesItemsData = new ServicesItemsData();
-
-				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				servicesItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
-				servicesItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				servicesItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				servicesItemsData.setServiceProvider(jArrRWA.getJSONObject(i).getString("serviceProvider"));
-
-				servicesItemsDatasList.add(servicesItemsData);
-			}
+			JSONObject jSONObject = new JSONObject(response);
+			requestServicesData.setError(jSONObject.optString("error"));
 
 		} catch (JSONException e) {
 			requestServicesData.setException("JsonParseException");
@@ -476,15 +464,15 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				CheckRequestItemsData servicesItemsData = new CheckRequestItemsData();
 
-				servicesItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				servicesItemsData.setSercice_id(jArrRWA.getJSONObject(i).getString("sercice_id"));
-				servicesItemsData.setServiceName(jArrRWA.getJSONObject(i).getString("serviceName"));
-				servicesItemsData.setService_status(jArrRWA.getJSONObject(i).getString("service_status"));
-				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				servicesItemsData.setDeletebutton(jArrRWA.getJSONObject(i).getString("deletebutton"));
-				servicesItemsData.setServiceIcon(jArrRWA.getJSONObject(i).getString("serviceIcon"));
+				servicesItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				servicesItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				servicesItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				servicesItemsData.setSercice_id(jArrRWA.getJSONObject(i).optString("sercice_id"));
+				servicesItemsData.setServiceName(jArrRWA.getJSONObject(i).optString("serviceName"));
+				servicesItemsData.setService_status(jArrRWA.getJSONObject(i).optString("service_status"));
+				servicesItemsData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+				servicesItemsData.setDeletebutton(jArrRWA.getJSONObject(i).optString("deletebutton"));
+				servicesItemsData.setServiceIcon(jArrRWA.getJSONObject(i).optString("serviceIcon"));
 				servicesItemsDatasList.add(servicesItemsData);
 			}
 
@@ -503,7 +491,7 @@ public class MyParser
 		try {
 
 			JSONObject jobject = new JSONObject(response);
-			String error = jobject.getString("error");
+			String error = jobject.optString("error");
 			deleteServicesData.setError(error);
 
 		} catch (JSONException e) {
@@ -523,21 +511,23 @@ public class MyParser
 		try {
 
 			JSONObject jObject = new JSONObject(response);
+			bookingsData.setError(jObject.optString("error"));
+			bookingsData.setError_msg(jObject.optString("error_msg"));
 			if(!jObject.isNull("booking_list")){
 				JSONArray jArrRWA = jObject.getJSONArray("booking_list");
 				for (int i = 0; i < jArrRWA.length(); i++) {
 					BookingItemsData bookingItemsData = new BookingItemsData();
 
-					bookingItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-					bookingItemsData.setBooking_start_date(jArrRWA.getJSONObject(i).getString("booking_start_date"));
-					bookingItemsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-					bookingItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-					bookingItemsData.setEndtime(jArrRWA.getJSONObject(i).getString("endtime"));
-					bookingItemsData.setFacility_Id(jArrRWA.getJSONObject(i).getString("facility_Id"));
-					bookingItemsData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
-					bookingItemsData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
-					bookingItemsData.setStarttime(jArrRWA.getJSONObject(i).getString("starttime"));
-					bookingItemsData.setTime(jArrRWA.getJSONObject(i).getString("time"));
+					bookingItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+					bookingItemsData.setBooking_start_date(jArrRWA.getJSONObject(i).optString("booking_start_date"));
+					bookingItemsData.setCreatedby(jArrRWA.getJSONObject(i).optString("createdby"));
+					bookingItemsData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+					bookingItemsData.setEndtime(jArrRWA.getJSONObject(i).optString("endtime"));
+					bookingItemsData.setFacility_Id(jArrRWA.getJSONObject(i).optString("facility_Id"));
+					bookingItemsData.setFacilityName(jArrRWA.getJSONObject(i).optString("facilityName"));
+					bookingItemsData.setRwaid(jArrRWA.getJSONObject(i).optString("rwaid"));
+					bookingItemsData.setStarttime(jArrRWA.getJSONObject(i).optString("starttime"));
+					bookingItemsData.setTime(jArrRWA.getJSONObject(i).optString("time"));
 
 					bookingItemsDataList.add(bookingItemsData);
 				}
@@ -548,12 +538,12 @@ public class MyParser
 				for (int i = 0; i < jArrRWA.length(); i++) {
 					BookingOptionFacilityData bookingOptionFacilityData = new BookingOptionFacilityData();
 
-					bookingOptionFacilityData.setId(jArrRWA.getJSONObject(i).getString("id"));
-					bookingOptionFacilityData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-					bookingOptionFacilityData.setFacility_id(jArrRWA.getJSONObject(i).getString("facility_id"));
-					bookingOptionFacilityData.setFacilityImg(jArrRWA.getJSONObject(i).getString("facilityImg"));
-					bookingOptionFacilityData.setRwaid(jArrRWA.getJSONObject(i).getString("rwaid"));
-					bookingOptionFacilityData.setFacilityName(jArrRWA.getJSONObject(i).getString("facilityName"));
+					bookingOptionFacilityData.setId(jArrRWA.getJSONObject(i).optString("id"));
+					bookingOptionFacilityData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+					bookingOptionFacilityData.setFacility_id(jArrRWA.getJSONObject(i).optString("facility_id"));
+					bookingOptionFacilityData.setFacilityImg(jArrRWA.getJSONObject(i).optString("facilityImg"));
+					bookingOptionFacilityData.setRwaid(jArrRWA.getJSONObject(i).optString("rwaid"));
+					bookingOptionFacilityData.setFacilityName(jArrRWA.getJSONObject(i).optString("facilityName"));
 
 					bookingOptionFacilityDataList.add(bookingOptionFacilityData);
 				}
@@ -578,16 +568,16 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				NoticeBoardItemsData noticeBoardItemsData = new NoticeBoardItemsData();
 
-				noticeBoardItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				noticeBoardItemsData.setComment(jArrRWA.getJSONObject(i).getString("comments"));
-				noticeBoardItemsData.setStatus(jArrRWA.getJSONObject(i).getString("status"));
-				noticeBoardItemsData.setIcon(jArrRWA.getJSONObject(i).getString("icon"));
-				noticeBoardItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				noticeBoardItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				noticeBoardItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				noticeBoardItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				noticeBoardItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				noticeBoardItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				noticeBoardItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				noticeBoardItemsData.setComment(jArrRWA.getJSONObject(i).optString("comments"));
+				noticeBoardItemsData.setStatus(jArrRWA.getJSONObject(i).optString("status"));
+				noticeBoardItemsData.setIcon(jArrRWA.getJSONObject(i).optString("icon"));
+				noticeBoardItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				noticeBoardItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				noticeBoardItemsData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				noticeBoardItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				noticeBoardItemsData.setUrl(jArrRWA.getJSONObject(i).optString("url"));
+				noticeBoardItemsData.setReleaseYear(jArrRWA.getJSONObject(i).optString("releaseYear"));
 
 				noticeBoardItemsDatasList.add(noticeBoardItemsData);
 			}
@@ -608,24 +598,26 @@ public class MyParser
 
 		try {
 			JSONObject jsonObject = new JSONObject(response);
+			noticeBoardDetailData.setError(jsonObject.optString("error"));
+			noticeBoardDetailData.setError_msg(jsonObject.optString("error_msg"));
 			JSONObject innerJsonObject = jsonObject.getJSONObject("0");
 			NoticeBoardDetailItemsData noticeBoardItemsData = new NoticeBoardDetailItemsData();
 
-			noticeBoardItemsData.setId(innerJsonObject.getString("id"));
-			noticeBoardItemsData.setDesc(innerJsonObject.getString("desc"));
-			noticeBoardItemsData.setGenre(innerJsonObject.getString("genre"));
-			noticeBoardItemsData.setImage(innerJsonObject.getString("image"));
-			noticeBoardItemsData.setTitle(innerJsonObject.getString("title"));
-			noticeBoardItemsData.setCreatedby(innerJsonObject.getString("createdby"));
-			noticeBoardItemsData.setReleaseYear(innerJsonObject.getString("releaseYear"));
+			noticeBoardItemsData.setId(innerJsonObject.optString("id"));
+			noticeBoardItemsData.setDesc(innerJsonObject.optString("desc"));
+			noticeBoardItemsData.setGenre(innerJsonObject.optString("genre"));
+			noticeBoardItemsData.setImage(innerJsonObject.optString("image"));
+			noticeBoardItemsData.setTitle(innerJsonObject.optString("title"));
+			noticeBoardItemsData.setCreatedby(innerJsonObject.optString("createdby"));
+			noticeBoardItemsData.setReleaseYear(innerJsonObject.optString("releaseYear"));
 			noticeBoardDetailItemsDataList.add(noticeBoardItemsData);
 
 			JSONArray jArrRWA = jsonObject.getJSONArray("comment");
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				Comments comments = new Comments();
-				comments.setCommentby(jArrRWA.getJSONObject(i).getString("commentby"));
-				comments.setDescrption(jArrRWA.getJSONObject(i).getString("descrption"));
-				comments.setProfilephoto(jArrRWA.getJSONObject(i).getString("profilephoto"));
+				comments.setCommentby(jArrRWA.getJSONObject(i).optString("commentby"));
+				comments.setDescrption(jArrRWA.getJSONObject(i).optString("descrption"));
+				comments.setProfilephoto(jArrRWA.getJSONObject(i).optString("profilephoto"));
 				noticeBoardCommentDatasList.add(comments);
 			}
 
@@ -646,20 +638,22 @@ public class MyParser
 		try {
 
 			JSONObject JsonObject = new JSONObject(response);
+			directoryData.setError(JsonObject.optString("error"));
+			directoryData.setError_msg(JsonObject.optString("error_msg"));
 			JSONArray jArrRWA = JsonObject.getJSONArray("myservice");
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				DiretoryItemsData diretoryItemsData = new DiretoryItemsData();
 
-				diretoryItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				diretoryItemsData.setMobile(jArrRWA.getJSONObject(i).getString("mobile"));
-				diretoryItemsData.setLandline(jArrRWA.getJSONObject(i).getString("landline"));
-				diretoryItemsData.setExtno(jArrRWA.getJSONObject(i).getString("extno"));
-				diretoryItemsData.setHouseno(jArrRWA.getJSONObject(i).getString("houseno"));
-				diretoryItemsData.setCreatedDate(jArrRWA.getJSONObject(i).getString("createdDate"));
-				diretoryItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				diretoryItemsData.setMobile_icon(jArrRWA.getJSONObject(i).getString("mobile_icon"));
-				diretoryItemsData.setLandline_icon(jArrRWA.getJSONObject(i).getString("landline_icon"));
-				diretoryItemsData.setExtno_icon(jArrRWA.getJSONObject(i).getString("extno_icon"));
+				diretoryItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				diretoryItemsData.setMobile(jArrRWA.getJSONObject(i).optString("mobile"));
+				diretoryItemsData.setLandline(jArrRWA.getJSONObject(i).optString("landline"));
+				diretoryItemsData.setExtno(jArrRWA.getJSONObject(i).optString("extno"));
+				diretoryItemsData.setHouseno(jArrRWA.getJSONObject(i).optString("houseno"));
+				diretoryItemsData.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+				diretoryItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				diretoryItemsData.setMobile_icon(jArrRWA.getJSONObject(i).optString("mobile_icon"));
+				diretoryItemsData.setLandline_icon(jArrRWA.getJSONObject(i).optString("landline_icon"));
+				diretoryItemsData.setExtno_icon(jArrRWA.getJSONObject(i).optString("extno_icon"));
 
 				diretoryItemsDatasList.add(diretoryItemsData);
 			}
@@ -668,12 +662,12 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				DirectoryRwaDetail directoryRwaDetail = new DirectoryRwaDetail();
 
-				directoryRwaDetail.setId(jArrRWA.getJSONObject(i).getString("id"));
-				directoryRwaDetail.setAddress(jArrRWA.getJSONObject(i).getString("address"));
-				directoryRwaDetail.setEmail(jArrRWA.getJSONObject(i).getString("email"));
-				directoryRwaDetail.setPhone(jArrRWA.getJSONObject(i).getString("phone"));
-				directoryRwaDetail.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				directoryRwaDetail.setWebsite(jArrRWA.getJSONObject(i).getString("website"));
+				directoryRwaDetail.setId(jArrRWA.getJSONObject(i).optString("id"));
+				directoryRwaDetail.setAddress(jArrRWA.getJSONObject(i).optString("address"));
+				directoryRwaDetail.setEmail(jArrRWA.getJSONObject(i).optString("email"));
+				directoryRwaDetail.setPhone(jArrRWA.getJSONObject(i).optString("phone"));
+				directoryRwaDetail.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				directoryRwaDetail.setWebsite(jArrRWA.getJSONObject(i).optString("website"));
 
 				diretoryRwaDatasList.add(directoryRwaDetail);
 			}
@@ -697,14 +691,14 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				SpidyPickItemsData spidyPickItemsData = new SpidyPickItemsData();
 
-				spidyPickItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				spidyPickItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				spidyPickItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				spidyPickItemsData.setComments(jArrRWA.getJSONObject(i).getString("comments"));
-				spidyPickItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
-				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).getString("releaseYear"));
+				spidyPickItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				spidyPickItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				spidyPickItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				spidyPickItemsData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				spidyPickItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				spidyPickItemsData.setComments(jArrRWA.getJSONObject(i).optString("comments"));
+				spidyPickItemsData.setUrl(jArrRWA.getJSONObject(i).optString("url"));
+				spidyPickItemsData.setReleaseYear(jArrRWA.getJSONObject(i).optString("releaseYear"));
 
 				spidyPickItemsDatasList.add(spidyPickItemsData);
 			}
@@ -726,26 +720,29 @@ public class MyParser
 		try {
 
 			JSONObject jsonObject = new JSONObject(response);
+			spidyPickData.setError(jsonObject.optString("error"));
+			spidyPickData.setError_msg(jsonObject.optString("error_msg"));
 			JSONObject innerJsonObject = jsonObject.getJSONObject("0");
 			SpidyPickDetailItemsData spidyPickItemsData = new SpidyPickDetailItemsData();
 
-			spidyPickItemsData.setId(innerJsonObject.getString("id"));
-			spidyPickItemsData.setDesc(innerJsonObject.getString("desc"));
-			spidyPickItemsData.setGenre(innerJsonObject.getString("genre"));
-			spidyPickItemsData.setComment(innerJsonObject.getString("comments"));
-			spidyPickItemsData.setByline(innerJsonObject.getString("byline"));
-			spidyPickItemsData.setTags(innerJsonObject.getString("tags"));
-			spidyPickItemsData.setImage(innerJsonObject.getString("image"));
-			spidyPickItemsData.setTitle(innerJsonObject.getString("title"));
-			spidyPickItemsData.setReleaseYear(innerJsonObject.getString("releaseYear"));
+			spidyPickItemsData.setId(innerJsonObject.optString("id"));
+			spidyPickItemsData.setDesc(innerJsonObject.optString("desc"));
+			spidyPickItemsData.setGenre(innerJsonObject.optString("genre"));
+			spidyPickItemsData.setComment(innerJsonObject.optString("comments"));
+			spidyPickItemsData.setByline(innerJsonObject.optString("byline"));
+			spidyPickItemsData.setTags(innerJsonObject.optString("tags"));
+			spidyPickItemsData.setImage(innerJsonObject.optString("image"));
+			spidyPickItemsData.setTitle(innerJsonObject.optString("title"));
+			spidyPickItemsData.setReleaseYear(innerJsonObject.optString("releaseYear"));
 
 			spidyPickItemsDatasList.add(spidyPickItemsData);
 			JSONArray jArrRWA = jsonObject.getJSONArray("comment");
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				Comments comments = new Comments();
-				comments.setCommentby(jArrRWA.getJSONObject(i).getString("commentby"));
-				comments.setDescrption(jArrRWA.getJSONObject(i).getString("descrption"));
-				comments.setProfilephoto(jArrRWA.getJSONObject(i).getString("profilephoto"));
+				comments.setCommentby(jArrRWA.getJSONObject(i).optString("commentby"));
+				comments.setDescrption(jArrRWA.getJSONObject(i).optString("descrption"));
+				comments.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+				comments.setProfilephoto(jArrRWA.getJSONObject(i).optString("profilephoto"));
 				spidyPickItemsCommentDatasList.add(comments);
 			}
 
@@ -766,14 +763,14 @@ public class MyParser
 			for (int i = 0; i < jArrRWA.length(); i++) {
 				OpinionPollsItemsData opinionPollsItemsData = new OpinionPollsItemsData();
 
-				opinionPollsItemsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				opinionPollsItemsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				opinionPollsItemsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
-				opinionPollsItemsData.setImage(jArrRWA.getJSONObject(i).getString("image"));
-				opinionPollsItemsData.setStartPoll(jArrRWA.getJSONObject(i).getString("startPoll"));
-				opinionPollsItemsData.setEndPoll(jArrRWA.getJSONObject(i).getString("endPoll"));
-				opinionPollsItemsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				opinionPollsItemsData.setUrl(jArrRWA.getJSONObject(i).getString("url"));
+				opinionPollsItemsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				opinionPollsItemsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				opinionPollsItemsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
+				opinionPollsItemsData.setImage(jArrRWA.getJSONObject(i).optString("image"));
+				opinionPollsItemsData.setStartPoll(jArrRWA.getJSONObject(i).optString("startPoll"));
+				opinionPollsItemsData.setEndPoll(jArrRWA.getJSONObject(i).optString("endPoll"));
+				opinionPollsItemsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				opinionPollsItemsData.setUrl(jArrRWA.getJSONObject(i).optString("url"));
 
 				opinionPollsItemsDataList.add(opinionPollsItemsData);
 			}
@@ -796,18 +793,18 @@ public class MyParser
 			JSONArray jArrRWA = new JSONArray(response);
 			for (int i = 0; i < jArrRWA.length(); i++) {
 
-				opinionPollsData.setId(jArrRWA.getJSONObject(i).getString("id"));
-				opinionPollsData.setTitle(jArrRWA.getJSONObject(i).getString("title"));
-				opinionPollsData.setCreatedby(jArrRWA.getJSONObject(i).getString("createdby"));
-				opinionPollsData.setDesc(jArrRWA.getJSONObject(i).getString("desc"));
-				opinionPollsData.setGenre(jArrRWA.getJSONObject(i).getString("genre"));
+				opinionPollsData.setId(jArrRWA.getJSONObject(i).optString("id"));
+				opinionPollsData.setTitle(jArrRWA.getJSONObject(i).optString("title"));
+				opinionPollsData.setCreatedby(jArrRWA.getJSONObject(i).optString("createdby"));
+				opinionPollsData.setDesc(jArrRWA.getJSONObject(i).optString("desc"));
+				opinionPollsData.setGenre(jArrRWA.getJSONObject(i).optString("genre"));
 
 				JSONArray innerjArrRWA = jArrRWA.getJSONObject(i).getJSONArray("option");
 				for (int j = 0; j < innerjArrRWA.length(); j++) {
 					OpinionPollsDetailItemsData opinionPollsDetailItemsData = new OpinionPollsDetailItemsData();
-					opinionPollsDetailItemsData.setId(innerjArrRWA.getJSONObject(j).getString("id"));
-					opinionPollsDetailItemsData.setOptions(innerjArrRWA.getJSONObject(j).getString("options"));
-					opinionPollsDetailItemsData.setVotes(innerjArrRWA.getJSONObject(j).getString("votes"));
+					opinionPollsDetailItemsData.setId(innerjArrRWA.getJSONObject(j).optString("id"));
+					opinionPollsDetailItemsData.setOptions(innerjArrRWA.getJSONObject(j).optString("options"));
+					opinionPollsDetailItemsData.setVotes(innerjArrRWA.getJSONObject(j).optString("votes"));
 					opinionPollsItemsDataList.add(opinionPollsDetailItemsData);
 				}
 
@@ -831,18 +828,20 @@ public class MyParser
 		try {
 
 			JSONObject jsonObject = new JSONObject(response);
-			opinionPollsData.setMsg(jsonObject.getString("msg"));
+			opinionPollsData.setError(jsonObject.optString("error"));
+			opinionPollsData.setError_msg(jsonObject.optString("error_msg"));
+			opinionPollsData.setMsg(jsonObject.optString("msg"));
 			JSONArray jArrRWA1 = jsonObject.getJSONArray("option");
 			JSONArray jArrRWA2 = jsonObject.getJSONArray("totalcounts");
 			JSONArray jArrRWA3 = jsonObject.getJSONArray("color");
 			for (int i = 0; i < jArrRWA1.length(); i++) {
-				opinionOptionList.add(jArrRWA1.getString(i));
+				opinionOptionList.add(jArrRWA1.optString(i));
 			}
 			for (int i = 0; i < jArrRWA2.length(); i++) {
-				opinionTotalDataList.add(jArrRWA1.getString(i));
+				opinionTotalDataList.add(jArrRWA1.optString(i));
 			}
 			for (int i = 0; i < jArrRWA3.length(); i++) {
-				opinionColorDataList.add(jArrRWA1.getString(i));
+				opinionColorDataList.add(jArrRWA1.optString(i));
 			}
 		} catch (JSONException e) {
 			opinionPollsData.setException("JsonParseException");
@@ -857,7 +856,24 @@ public class MyParser
 		CommentSave commentSave = new CommentSave();
 		try {
 			JSONObject jsonObject = new JSONObject(response);
-			commentSave.setError(jsonObject.getString("error"));
+			commentSave.setError(jsonObject.optString("error"));
+			commentSave.setError_msg(jsonObject.optString("error_msg"));
+		} catch (JSONException e) {
+			commentSave.setException("JsonParseException");
+			e.printStackTrace();
+		}
+
+
+		return commentSave;
+	}
+
+
+	public JoinGroupData parseJoinGroupsDetail(String response) {
+		JoinGroupData commentSave = new JoinGroupData();
+		try {
+			JSONObject jsonObject = new JSONObject(response);
+			commentSave.setError(jsonObject.optString("error"));
+			commentSave.setError_msg(jsonObject.optString("error_msg"));
 		} catch (JSONException e) {
 			commentSave.setException("JsonParseException");
 			e.printStackTrace();

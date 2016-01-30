@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.spec.MGF1ParameterSpec;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,7 @@ import com.android.cityspidey.R;
 import com.bean.CommentSave;
 import com.bean.Comments;
 import com.bean.GroupDetailData;
+import com.bean.JoinGroupData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
 import com.utils.DialogController;
@@ -60,6 +62,8 @@ public class GroupDetailActivity extends BaseActivity{
 		plusTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setText(getResources().getString(R.string.groups));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_add_groups_hint));
 		titleTV.setBackgroundResource(R.color.groupcolor);
 		plusTV.setBackgroundResource(R.color.groupcolor);
 
@@ -135,16 +139,18 @@ public class GroupDetailActivity extends BaseActivity{
 	}
 
 	public void response(GroupDetailData groupDetailData) {
-		this.groupDetailData = groupDetailData;
-		View headerView = getHeaderView();
-		View footerView = getFooterView();
-		if(groupDetailData.getCommentList().size() > 0){
-			spidyPickDetailAdapter = new SpidyPickDetailAdapter
-					(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
-			listView.setAdapter(spidyPickDetailAdapter);
+		if(groupDetailData.getGroupDetailItemsDataList().size() != 0){
+			this.groupDetailData = groupDetailData;
+			View headerView = getHeaderView();
+			View footerView = getFooterView();
+			if(groupDetailData.getCommentList().size() > 0){
+				spidyPickDetailAdapter = new SpidyPickDetailAdapter
+						(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
+				listView.setAdapter(spidyPickDetailAdapter);
+			}
+			listView.addHeaderView(headerView);
+			listView.addFooterView(footerView);
 		}
-		listView.addHeaderView(headerView);
-		listView.addFooterView(footerView);
 	}
 	
 	
@@ -192,17 +198,43 @@ public class GroupDetailActivity extends BaseActivity{
 		TextView groupTitleTV = (TextView)view.findViewById(R.id.tv_group_title);
 		TextView createdDAteTV = (TextView)view.findViewById(R.id.tv_createddate);
 		TextView groupAdminTV = (TextView)view.findViewById(R.id.tv_groupadmin);
+		TextView tv_members = (TextView)view.findViewById(R.id.tv_members);
+		TextView joinGroup = (TextView)view.findViewById(R.id.tv_report_group);
 		ImageView groupDetailIV = (ImageView)view.findViewById(R.id.iv_group_detail);
 		mAQuery.id(groupDetailIV).image(groupDetailData.getGroupDetailItemsDataList().get(0).getImage());
 		TextView descTV = (TextView)view.findViewById(R.id.tv_desc);
 		groupTitleTV.setText(groupDetailData.getGroupDetailItemsDataList().get(0).getTitle());
+		tv_members.setText("Members: " + groupDetailData.getGroupDetailItemsDataList().get(0).getMembers());
 		createdDAteTV.setText("Created: " + Utils.getTimeRemaining(groupDetailData.getGroupDetailItemsDataList().get(0).getCreatedDate()));
 		groupAdminTV.setText("Group Admin: " + groupDetailData.getGroupDetailItemsDataList().get(0).getCreatedby());
 		descTV.setText(groupDetailData.getGroupDetailItemsDataList().get(0).getDesc());
+		joinGroup.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				joinGroup();
+			}
+		});
 		
 		return view;
 	}
 	
+	protected void joinGroup() {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.JOIN_GROUP);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		BasicNameValuePair valuePair = new BasicNameValuePair("group_id", groupDetailData.getGroupDetailItemsDataList().get(0).getId());
+		list.add(valuePair);
+		valuePair = new BasicNameValuePair("user_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+		list.add(valuePair);
+		
+		request.setCallingClassObject(this);
+		request.setNamevaluepair(list);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+
 	private void comment(String message) {
 		RequestBean request = new RequestBean();
 		request.setActivity(this);
@@ -370,5 +402,10 @@ public class GroupDetailActivity extends BaseActivity{
 
 	public void response(CommentSave commentSave) {
 		
+	}
+
+	public void response(JoinGroupData joinGroupData) {
+		DialogController.showCommonMessage(this, groupDetailData.getGroupDetailItemsDataList().get(0).getTitle(),
+				joinGroupData.getError_msg());
 	}
 }

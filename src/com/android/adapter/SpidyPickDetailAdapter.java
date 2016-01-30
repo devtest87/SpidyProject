@@ -51,6 +51,7 @@ public class SpidyPickDetailAdapter extends BaseAdapter{
 			convertView = mLayoutInflater.inflate(R.layout.row_comment, null, false);
 			viewHolder.createrIV = (ImageView)convertView.findViewById(R.id.iv_creater);
 			viewHolder.createrTV = (TextView)convertView.findViewById(R.id.tv_creater);
+			viewHolder.dateTV = (TextView)convertView.findViewById(R.id.tv_comment_date);
 			viewHolder.commentTV = (TextView)convertView.findViewById(R.id.tv_comment);
 			 
 			convertView.setTag(viewHolder);
@@ -59,6 +60,7 @@ public class SpidyPickDetailAdapter extends BaseAdapter{
 		}
 		
 		viewHolder.createrTV.setText(mCommentList.get(position).getCommentby());
+		viewHolder.dateTV.setText(mCommentList.get(position).getCommentby());
 		viewHolder.commentTV.setText(mCommentList.get(position).getDescrption());
 		mAQuery.id(viewHolder.createrIV).image(mCommentList.get(position).getProfilephoto());
 		
@@ -68,6 +70,7 @@ public class SpidyPickDetailAdapter extends BaseAdapter{
 	static class ViewHolder{
 		TextView commentTV;
 		TextView createrTV;
+		TextView dateTV;
 		ImageView createrIV ;
 	}
 }
