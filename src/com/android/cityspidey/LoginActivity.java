@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.bean.LoginData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
+import com.utils.AppConstant;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
@@ -68,7 +69,7 @@ public class LoginActivity extends Activity {
 			public void onClick(View v) {
 			
 				Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE);
 				
 			}
 		});
@@ -116,6 +117,16 @@ public class LoginActivity extends Activity {
 				}
 			}
 		});
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	if(resultCode == RESULT_OK){
+    		Intent i = new Intent(LoginActivity.this, HomeScreen.class);
+    		startActivity(i);
+    		finish();
+    	}
     }
     
     public void loginresponse(LoginData loginData){

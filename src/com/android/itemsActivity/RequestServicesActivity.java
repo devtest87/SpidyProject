@@ -39,7 +39,7 @@ public class RequestServicesActivity extends BaseActivity{
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.servicecolor);
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
 		
 		loadRWAs();

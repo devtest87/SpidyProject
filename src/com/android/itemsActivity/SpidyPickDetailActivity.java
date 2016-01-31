@@ -36,12 +36,14 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		setContentView(R.layout.activity_spidypick_detail_layout);
 		listView = (ListView)findViewById(R.id.listview);
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_groups_hint));
 		titleTV.setText(getResources().getString(R.string.spidey_pick));
 		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.spideycolor);
 
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
 		
 		loadSpidyPickDetail();

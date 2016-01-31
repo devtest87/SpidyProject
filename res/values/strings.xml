@@ -12,6 +12,7 @@
         <string name="skip">Skip</string>
         
          <string name="dname">DISPLAY NAME</string>
+         <string name="rwaname">CHOOSE OR TYPE RWA NAME</string>
           <string name="fname">FIRST NAME*</string>
            <string name="lname">LAST NAME*</string>
            <string name="mnumber">MOBILE NUMBER*</string>
@@ -19,6 +20,7 @@
         
             
             <string name="empaty_fname">Please fill first name.</string>
+            <string name="empaty_rwa">Please select rwa name</string>
             <string name="empaty_lname">Please fill last name.</string>
             <string name="empaty_mnumber">Please fill mobile number</string>
             <string name="empaty_youremail">Please fill your email.</string>
@@ -70,6 +72,7 @@
     <string name="search_rwas_hint">Search in Name</string>
     <string name="search_groups_hint">Weekend activities</string>
     <string name="search_add_groups_hint">Search in Groups</string>
+    <string name="search_in_selected_category">Search in given category</string>
     <string name="search_services_request_hint">Search in Request</string>
     <string name="search_noticeboard_hint">Search in Noticeboard</string>
     <string name="search_opinionpolls_hint">Search in Opinion Poll</string>

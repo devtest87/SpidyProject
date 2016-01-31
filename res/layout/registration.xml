@@ -31,6 +31,35 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp" >
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/regboxheight"
+                android:layout_marginBottom="@dimen/regbtmmargin"
+                android:layout_marginTop="@dimen/regbtmmargin" >
+
+                <AutoCompleteTextView
+                    android:id="@+id/rwaname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_rectangle_white"
+                    android:hint="@string/rwaname"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
+                </AutoCompleteTextView>
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_alignParentRight="true"
+                    style="?android:attr/android:progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="@dimen/regleftpadding"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,10 +88,10 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/dname"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -91,10 +120,10 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/fname"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/regtextsize" 
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -123,13 +152,13 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/lname"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,10 +185,10 @@
                     android:hint="@string/password"
                     android:imeOptions="actionNext"
                     android:inputType="textPassword"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -188,10 +217,10 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/mnumber"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -200,8 +229,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textSize="@dimen/regtextsize"
-                android:text="@string/edirectory" />
+                android:text="@string/edirectory"
+                android:textSize="@dimen/regtextsize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,10 +257,10 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/lnumber"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -240,8 +269,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textSize="@dimen/regtextsize"
-                android:text="@string/edirectory" />
+                android:text="@string/edirectory"
+                android:textSize="@dimen/regtextsize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -268,10 +297,10 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/youremail"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -279,8 +308,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textSize="@dimen/regtextsize"
-                android:text="@string/confirmation" />
+                android:text="@string/confirmation"
+                android:textSize="@dimen/regtextsize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -307,10 +336,10 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/yourhouseno"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/regtextsize" 
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
 
@@ -339,70 +368,70 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/youraddress"
                     android:imeOptions="actionNext"
+                    android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
-                    android:textColor="@color/black" 
-                    android:textSize="@dimen/regtextsize"
-                    android:paddingLeft="@dimen/regleftpadding">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regtextsize" >
                 </EditText>
             </LinearLayout>
-            
-             <Button android:id="@+id/uploadphoto"
-                     android:layout_width="250dp"
-                     android:layout_height="45dp"
-                     android:layout_marginTop="@dimen/regbtmmargin"
-                     android:text="@string/upload_profile_photo"
-                     android:textColor="@color/white"
-                     android:background="@drawable/custom_rectangle"
-                     android:layout_marginLeft="@dimen/regbtmmargin"/>
+
+            <Button
+                android:id="@+id/uploadphoto"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="@dimen/regbtmmargin"
+                android:layout_marginTop="@dimen/regbtmmargin"
+                android:background="@drawable/custom_rectangle"
+                android:text="@string/upload_profile_photo"
+                android:textColor="@color/white" />
 
             <CheckBox
                 android:id="@+id/headfamily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/regtextsize"
-                android:text="@string/headoffamily1" />
+                android:text="@string/headoffamily1"
+                android:textSize="@dimen/regtextsize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textSize="@dimen/regtextsize"
-                android:text="@string/headoffamily1" 
-                android:paddingLeft="25dp"/>
+                android:paddingLeft="25dp"
+                android:text="@string/headoffamily1"
+                android:textSize="@dimen/regtextsize" />
 
             <CheckBox
                 android:id="@+id/termscondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/regbtmmargin"
-                android:text="@string/termscondition" 
-                android:textSize="@dimen/regtextsize"/>
-            
-            
-             <LinearLayout
+                android:text="@string/termscondition"
+                android:textSize="@dimen/regtextsize" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal" >
-            
-                 <Button android:id="@+id/reset"
-                     android:layout_width="100dp"
-                     android:layout_height="45dp"
-                     android:text="@string/reset"
-                     android:textColor="@color/white"
-                     android:background="@drawable/custom_rectangle"/>
-                 
-                 <Button android:id="@+id/submit"
-                     android:layout_width="100dp"
-                     android:layout_height="45dp"
-                     android:text="@string/submit"
-                     android:textColor="@color/white"
-                     android:background="@drawable/custom_rectangle"
-                     android:layout_marginLeft="15dp"/>
-                 
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/reset"
+                    android:layout_width="100dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/custom_rectangle"
+                    android:text="@string/reset"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="100dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/custom_rectangle"
+                    android:text="@string/submit"
+                    android:textColor="@color/white" />
             </LinearLayout>
-            
         </LinearLayout>
     </ScrollView>
 

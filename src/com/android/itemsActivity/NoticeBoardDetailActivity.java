@@ -35,12 +35,14 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		setContentView(R.layout.activity_noticeboard_detail_layout);
 		listView = (ListView)findViewById(R.id.listview);
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_noticeboard_hint));
 		titleTV.setText(getResources().getString(R.string.notice_board));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
 		titleTV.setBackgroundResource(R.color.noticecolor);
 		
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
 		
 		loadNoticeBoardDetail();

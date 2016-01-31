@@ -6,8 +6,12 @@
     android:paddingRight="10dp"
     android:background="@color/header_background_color"
     android:orientation="vertical" >
+    <include
+        android:id="@+id/include_header"
+        layout="@layout/include_common_header" />
 
     <ListView
+        android:layout_below="@+id/include_header"
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

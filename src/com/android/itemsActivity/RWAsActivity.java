@@ -20,6 +20,7 @@ import com.bean.RWAItemsData;
 import com.bean.RWAsData;
 import com.bean.RequestBean;
 import com.network.NetworkCall;
+import com.utils.AppConstant;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
@@ -54,7 +55,7 @@ public class RWAsActivity extends BaseActivity implements StartActivity{
 		});
 		
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
 
 		searchET.addTextChangedListener(new TextWatcher() {
@@ -131,6 +132,15 @@ public class RWAsActivity extends BaseActivity implements StartActivity{
 		mRWAssAdapter = new RWAsAdapter(getLayoutInflater(),this, mRWAsDataList , mAQuery);
 		mRWAsListView.setAdapter(mRWAssAdapter);
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK){
+			setResult(RESULT_OK);
+			finish();
+		}
+	}
 
 	@Override
 	public void startActivity(String url) {
@@ -138,7 +148,7 @@ public class RWAsActivity extends BaseActivity implements StartActivity{
 		Intent intent = new Intent(RWAsActivity.this, RWAsDetailActivity.class);
 		intent.putExtra("url", urls[0]);
 		intent.putExtra("furl", urls[1]);
-		startActivity(intent);
+		startActivityForResult(intent, AppConstant.REQUEST_RWA_ACTIVITY_CODE);
 
 	}
 }

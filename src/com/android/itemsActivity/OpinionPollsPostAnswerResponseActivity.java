@@ -1,5 +1,6 @@
 package com.android.itemsActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -26,7 +27,7 @@ public class OpinionPollsPostAnswerResponseActivity  extends BaseActivity{
 		searchET.setHint(getResources().getString(R.string.search_opinionpolls_hint));
 
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
 
 		OpinionPostAnswerPollsDetailsData opinionPostAnswerPollsDetailsData = (OpinionPostAnswerPollsDetailsData) getIntent().getSerializableExtra("data");
@@ -38,14 +39,23 @@ public class OpinionPollsPostAnswerResponseActivity  extends BaseActivity{
 		tv_postandenddate.setText("Posted " + Utils.getTimeRemaining(getIntent().getStringExtra("postdate"))+
 				"/Voting ends\n " + Utils.formatDate(getIntent().getStringExtra("enddate")));
 		int size = opinionPostAnswerPollsDetailsData.getOptionsList().size();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size+1; i++) {
 			View view = getLayoutInflater().inflate(R.layout.inflate_vote_count, null, false);
 			TextView vote1 = (TextView)view.findViewById(R.id.tv_option);
 			TextView vote2 = (TextView)view.findViewById(R.id.tv_option_count);
-			vote1.setText(opinionPostAnswerPollsDetailsData.getOptionsList().get(i));
-			vote2.setText(opinionPostAnswerPollsDetailsData.getTotalCountList().get(i));
-			//vote1.setBackgroundColor(Color.parseColor(opinionPostAnswerPollsDetailsData.getColorList().get(i)));
-			voteOptionLL.addView(view);
+			if(i == size){
+				vote1.setText("Total");
+				vote2.setText(opinionPostAnswerPollsDetailsData.getTotalVote());
+				vote1.setBackgroundColor(getResources().getColor(R.color.white));
+				vote1.setTextColor(getResources().getColor(R.color.black));
+				voteOptionLL.addView(view, 0);
+			}else{
+				vote1.setText(opinionPostAnswerPollsDetailsData.getOptionsList().get(i));
+				vote2.setText(opinionPostAnswerPollsDetailsData.getTotalCountList().get(i));
+				vote1.setBackgroundColor(Color.parseColor(opinionPostAnswerPollsDetailsData.getColorList().get(i)));
+				vote1.setTextColor(getResources().getColor(R.color.white));
+				voteOptionLL.addView(view);
+			}
 
 		}
 	}

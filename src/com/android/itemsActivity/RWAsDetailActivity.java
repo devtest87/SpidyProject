@@ -9,8 +9,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -59,7 +57,7 @@ public class RWAsDetailActivity extends BaseActivity{
 		mFacilityUrl = getIntent().getStringExtra("furl");
 		
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
 
 		detailAndfacility();
@@ -143,10 +141,8 @@ public class RWAsDetailActivity extends BaseActivity{
 
 					@Override
 					public void onClick(View widget) {
-						String url = "http://www.google.com";
-						Intent i = new Intent(Intent.ACTION_VIEW);
-						i.setData(Uri.parse(url));
-						startActivity(i);
+						setResult(RESULT_OK);
+						finish();
 					}
 				}, starIndex, starIndex + "REGISTER".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				regRwaTV.setText(wordtoSpan);

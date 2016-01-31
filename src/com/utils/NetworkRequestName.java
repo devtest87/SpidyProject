@@ -3,6 +3,8 @@ package com.utils;
 public enum NetworkRequestName {
 	LOGIN,
 	REGISTER,
+	PROFILE,
+	SEARCH_RWA,
 	HOMESLIDER,
 	RWAS,
 	RWAS_DTEAIL,
