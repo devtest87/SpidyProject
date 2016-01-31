@@ -9,8 +9,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -48,7 +46,8 @@ public class RWAsDetailActivity extends BaseActivity{
 
 
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
-		titleTV.setText(getResources().getString(R.string.rwas));
+		//		titleTV.setText(getResources().getString(R.string.rwas));
+		titleTV.setText("RWA");
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
@@ -57,7 +56,7 @@ public class RWAsDetailActivity extends BaseActivity{
 
 		mDetailUrl = getIntent().getStringExtra("url");
 		mFacilityUrl = getIntent().getStringExtra("furl");
-		
+
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
 			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
 		}
@@ -143,10 +142,8 @@ public class RWAsDetailActivity extends BaseActivity{
 
 					@Override
 					public void onClick(View widget) {
-						String url = "http://www.google.com";
-						Intent i = new Intent(Intent.ACTION_VIEW);
-						i.setData(Uri.parse(url));
-						startActivity(i);
+						setResult(RESULT_OK);
+						finish();
 					}
 				}, starIndex, starIndex + "REGISTER".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				regRwaTV.setText(wordtoSpan);
