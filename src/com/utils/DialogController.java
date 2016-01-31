@@ -50,7 +50,7 @@ public class DialogController {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle("WELCOME TO CITY SPIDEY");
 		builder.setMessage("PLEASE LOGIN OR REGISTER");
-		builder.setPositiveButton("YES", new OnClickListener() {
+		builder.setPositiveButton("OK", new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

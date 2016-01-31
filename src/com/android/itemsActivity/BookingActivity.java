@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -71,7 +72,19 @@ public class BookingActivity extends BaseActivity implements OnClickListener, St
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_calendar_view);
 
+		TextView titleTV = (TextView)findViewById(R.id.tv_title);
+		EditText searchET = (EditText
+				)findViewById(R.id.et_search);
+		searchET.setHint(getResources().getString(R.string.search_in_selected_category));
+		titleTV.setTextColor(getResources().getColor(R.color.white));
+		titleTV.setBackgroundResource(R.color.bookingcolor);
+		titleTV.setText(getResources().getString(R.string.bookings));
+		
 		listview = (ListView) findViewById(R.id.listview);
+		
+		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
+		}
 		
 		loadBooking();
 	}

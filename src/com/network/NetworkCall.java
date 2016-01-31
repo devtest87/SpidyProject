@@ -38,6 +38,7 @@ import com.android.cityspidey.RegisterActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.CheckRequestStatusActivity;
 import com.android.itemsActivity.DirectoryActivity;
+import com.android.itemsActivity.EditProfileActivity;
 import com.android.itemsActivity.GroupDetailActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
@@ -64,6 +65,7 @@ import com.bean.NoticeBoardDetailData;
 import com.bean.OpinionPollsData;
 import com.bean.OpinionPollsDetailsData;
 import com.bean.OpinionPostAnswerPollsDetailsData;
+import com.bean.ProfileData;
 import com.bean.RWADetailData;
 import com.bean.RWAFacilityData;
 import com.bean.RWAsData;
@@ -71,6 +73,8 @@ import com.bean.RWAsDetailItemData;
 import com.bean.RegisterData;
 import com.bean.RequestBean;
 import com.bean.RequestServicesData;
+import com.bean.RwaSearchData;
+import com.bean.RwaSearchItem;
 import com.bean.ServicesData;
 import com.bean.SliderData;
 import com.bean.SpidyPickData;
@@ -86,10 +90,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 	private MyParser myParser;
 	private ProgressDialog mProgressDialog;
 
-//	private static final String baseURL = "http://top-story.in/api/";
+//	private static final String baseURL1 = "http://top-story.in/api/";
 	private static final String baseURL = "http://cityspidey.com/api/";
 	private static final String LoginURL = baseURL + "login.php";
 	private static final String registerURL = baseURL + "register.php";
+	private static final String rwaSearchURL = baseURL + "rwalist.php";
+	private static final String profileURL = baseURL + "my_profile.php";
 	private static final String sliderTopURL = baseURL + "master_home.php";
 	private static final String rwasURL = baseURL + "rwa_list.json";
 	private static final String groupsURL = baseURL + "groups_slider.json";
@@ -143,6 +149,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 		case REGISTER:
 			JSONObject jobject = request.getJsonReq();
 			object = callSignUPWS(jobject);
+			break;
+		case PROFILE:
+			object = getProfileData(namePairList);
+			break;
+		case SEARCH_RWA:
+			object = searchRwa(null, namePairList);
 			break;
 		case HOMESLIDER:
 			object = callhomeslider();
@@ -216,44 +228,6 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 
 		}
 		return object;
-		/*if(request.getMethodName().equalsIgnoreCase("login"))
-		{
-			LoginData logindata = callLoginWS(namePairList);
-			return logindata;
-		}else if(request.getMethodName().equalsIgnoreCase("register")){
-			JSONObject jobject = request.getJsonReq();
-			RegisterData logindata = callSignUPWS(jobject);
-			return logindata;
-		}else if(request.getMethodName().equalsIgnoreCase("homeslider")){
-			SliderData sliderdata = callhomeslider();
-			return sliderdata;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.RWAS.toString())){
-			RWAsData rwAsData = RWAs();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.GROUPS.toString())){
-			GroupsData rwAsData = group();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.SERVICES.toString())){
-			ServicesData rwAsData = services();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.BOOKINGS.toString())){
-			BookingsData rwAsData = bookings();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.NOTICEBOARDS.toString())){
-			NoticeBoardData rwAsData = noticeBoards();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.DIRECTORY.toString())){
-			DirectoryData rwAsData = directory();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.SPIDYPICKS.toString())){
-			spidyPickData rwAsData = spidyPick();
-			return rwAsData;
-		}else if(request.getMethodName().equalsIgnoreCase(NetworkRequestName.OPINIONPOLLS.toString())){
-			OpinionPollsData rwAsData = opinionPolls();
-			return rwAsData;
-		}
-
-		return null;*/
 	}
 
 	@Override
@@ -315,6 +289,14 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 				}
 			}
 			break;
+		case SEARCH_RWA:
+			RwaSearchData rwaSearchData = (RwaSearchData)result;
+			if(activity instanceof RegisterActivity){
+				((RegisterActivity) activity).response(rwaSearchData);	
+			}else if(activity instanceof EditProfileActivity){
+				((EditProfileActivity) activity).response(rwaSearchData);	
+			}
+			break;
 		case HOMESLIDER:
 			SliderData sliderdata = (SliderData)result;
 
@@ -333,6 +315,12 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 				if(activity instanceof HomeScreen){
 					((HomeScreen) activity).sliderWSresponse(sliderdata);	
 				}
+			}
+			break;
+		case PROFILE:
+			ProfileData profileData = (ProfileData)result;
+			if(activity instanceof EditProfileActivity){
+				((EditProfileActivity) activity).response(profileData);	
 			}
 			break;
 		case RWAS:
@@ -626,7 +614,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			StringBody email = new StringBody(jObj.getString("email"));
 			StringBody fname = new StringBody(jObj.getString("firstname"));
 			StringBody lname = new StringBody(jObj.getString("lastname"));
-			StringBody password = new StringBody("2");
+			StringBody rwa_id = new StringBody(jObj.getString("rwa_id"));
 			StringBody mobile = new StringBody(jObj.getString("mobile"));
 			StringBody landline = new StringBody(jObj.getString("landline"));
 			StringBody streetname = new StringBody(jObj.getString("streetname"));
@@ -649,7 +637,7 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			reqEntity.addPart("email", email);
 			reqEntity.addPart("firstname", fname);
 			reqEntity.addPart("lastname", lname);
-			reqEntity.addPart("rwaid", password);
+			reqEntity.addPart("rwaid", rwa_id);
 			reqEntity.addPart("profilephoto", profilephoto);
 			reqEntity.addPart("mobile", mobile);
 			reqEntity.addPart("landline", landline);
@@ -797,6 +785,36 @@ public class NetworkCall extends AsyncTask<String, integer, Object>
 			groupDetailData = myParser.parseCreateGroup(response);
 		}
 		return groupDetailData;
+	}
+	
+	public ProfileData getProfileData(List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		ProfileData ProfileData;
+		String response = NetworkConnection.networkHit(namePair,profileURL);
+
+		PrintLog.show(Log.ERROR, TAG, namePair + " " + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			ProfileData = new ProfileData();
+			ProfileData.setException(response);
+		}else{
+			ProfileData = myParser.parseProfile(response);
+		}
+		return ProfileData;
+	}
+	
+	public RwaSearchData searchRwa(MyParser myParser, List<NameValuePair> namePair){
+		List<NameValuePair> pair = null;
+		RwaSearchData rwaSearchData;
+		String response = NetworkConnection.networkHit(namePair,rwaSearchURL);
+
+		PrintLog.show(Log.ERROR, TAG, "" + response);
+		if(response.equalsIgnoreCase("UnsupportedEncodingException") || response.equalsIgnoreCase("ClientProtocolException") || response.equalsIgnoreCase("IOException") || response.equalsIgnoreCase("ParseException")){
+			rwaSearchData = new RwaSearchData();
+			//rwaSearchItem.setException(response);
+		}else{
+			rwaSearchData = myParser.searchRwa(response);
+		}
+		return rwaSearchData;
 	}
 	
 	public GroupDetailData groupDetail(List<NameValuePair> namePair){

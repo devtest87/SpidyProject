@@ -111,5 +111,4 @@ public class PreferenceHelper {
 			mPreferenceData[key.ordinal()] = new PreferenceData(key.name(), mSharedPreferences.getString(key.name(), key.mDefaultValue));
 		}
 	}
-
 }

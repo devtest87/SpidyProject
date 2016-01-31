@@ -7,7 +7,10 @@ import java.util.TimerTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.tv.TvContract.Channels.Logo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -26,6 +29,7 @@ import com.android.adapter.ViewPagerAdapter;
 import com.android.itemsActivity.BaseActivity;
 import com.android.itemsActivity.BookingActivity;
 import com.android.itemsActivity.DirectoryActivity;
+import com.android.itemsActivity.EditProfileActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
 import com.android.itemsActivity.NoticeBoardDetailActivity;
@@ -38,6 +42,7 @@ import com.android.itemsActivity.SpidyPickDetailActivity;
 import com.androidquery.AQuery;
 import com.bean.RequestBean;
 import com.bean.SliderData;
+import com.customview.CircularImageView;
 import com.network.NetworkCall;
 import com.utils.AppConstant;
 import com.utils.DialogController;
@@ -69,7 +74,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.fragment_home);
 
 		mAQuery = new AQuery(getApplicationContext());
-
+		
 		rwaBTN = (Button)findViewById(R.id.btn_rwa);
 		groupsBTN = (Button)findViewById(R.id.btn_groups);
 		servicesBTN = (Button)findViewById(R.id.btn_services);
@@ -105,12 +110,52 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 			username.setText("Hello "+ PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
 //			welcome.setText("Welcome to " + PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_NAME));
 			welcome.setText(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.RWAS_NAME));
-			mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+				mAQuery.id(R.id.iv_profile_picture).image(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO), true, true, 0, R.drawable.profile);
 		}
+		
+		CircularImageView imageView = (CircularImageView)findViewById(R.id.iv_profile_picture);
+		imageView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showMenu();
+			}
+		});
 
 
 		callWS(); 
 	} 
+	
+
+
+
+	protected void showMenu() {
+		CharSequence colors[] = new CharSequence[] {"Profile", "logout"};
+		 
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Cityspidey");
+		builder.setItems(colors, new DialogInterface.OnClickListener() {
+		    @Override 
+		    public void onClick(DialogInterface dialog, int which) {
+		    	if(which == 0){
+		    		Intent intent = new Intent(HomeScreen.this, EditProfileActivity.class);
+		    		startActivity(intent);
+		    	}else if(which == 1){
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setString(PreferenceKey.RWAS_ID, null);
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setString(PreferenceKey.NAME, null);
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setString(PreferenceKey.EMAIL, null);
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setString(PreferenceKey.USER_ID, null);
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setString(PreferenceKey.PHOTO, null);
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setString(PreferenceKey.RWAS_NAME, null);
+		    		PreferenceHelper.getSingleInstance(getApplicationContext()).setBoolean(PreferenceKey.IS_LOGIN, false);
+		    		Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
+		    		startActivity(intent);
+		    		finish();
+		    	}
+		    } 
+		}); 
+		builder.show();		
+	}
 
 
 
@@ -119,7 +164,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		if(v.equals(rwaBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, RWAsActivity.class); 
-			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE); 
+			startActivityForResult(intent, AppConstant.REQUEST_REGISTER_CODE); 
 		}else if(v.equals(groupsBTN)){ 
 			Intent intent = new Intent(HomeScreen.this, GroupsActivity.class); 
 			startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE); 
@@ -183,6 +228,10 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode == AppConstant.REQUEST_HOME_CODE && resultCode == RESULT_OK){
 			Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
+			startActivity(intent);
+			finish();
+		}else if(requestCode == AppConstant.REQUEST_REGISTER_CODE && resultCode == RESULT_OK){
+			Intent intent = new Intent(HomeScreen.this, RegisterActivity.class);
 			startActivity(intent);
 			finish();
 		}

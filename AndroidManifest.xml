@@ -29,12 +29,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".EditProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoTitle" />
         <activity
             android:name=".HomeScreen"
-            android:theme="@style/AppTheme"
+            android:theme="@style/Theme.NoTitle"
             android:screenOrientation="portrait"
              />
         <activity
@@ -100,6 +100,11 @@
             android:name="com.android.itemsActivity.OpinionPollsPostAnswerResponseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoTitle" />
+        <activity
+            android:name="com.android.itemsActivity.EditProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+        
         
     </application>
 

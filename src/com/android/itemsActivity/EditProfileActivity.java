@@ -1,4 +1,4 @@
-package com.android.cityspidey;
+package com.android.itemsActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,7 +13,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -22,7 +21,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
@@ -37,10 +35,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.adapter.RWASearchAdapter;
+import com.android.cityspidey.R;
+import com.bean.ProfileData;
 import com.bean.RegisterData;
 import com.bean.RequestBean;
 import com.bean.RwaSearchData;
@@ -48,10 +49,12 @@ import com.network.NetworkCall;
 import com.parser.MyParser;
 import com.utils.DialogController;
 import com.utils.NetworkRequestName;
+import com.utils.PreferenceHelper;
 import com.utils.Utils;
+import com.utils.PreferenceHelper.PreferenceKey;
 
 
-public class RegisterActivity extends Activity {
+public class EditProfileActivity extends Activity {
 
 	private String mRwaId;
 	private EditText dname;
@@ -64,16 +67,12 @@ public class RegisterActivity extends Activity {
 	private EditText yhno;
 	private EditText yaddrs;
 
-	private CheckBox cb_erwa1;
-	private CheckBox cb_erwa2;
-	private CheckBox cb_headfamily;
-	private CheckBox cb_termscondition;
 	private RwaSearchData mRwaSearchData;
 	private  InputMethodManager inputManager;
 
-	private Button submit;
-	private Button reset;
-	private Button uploadphotoBTN;
+	private Button save;
+	private Button revert;
+	private ImageView uploadphotoBTN;
 	private AutoCompleteTextView rwaNameAutoTV;
 	private RWASearchAdapter mRwaSearchAdapter;
 	private ProgressBar mProgressBar;
@@ -84,20 +83,18 @@ public class RegisterActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_profile);
 
-		setContentView(R.layout.registration);
-
-		dname = (EditText)findViewById(R.id.dnamebox);
-		fname = (EditText)findViewById(R.id.fnamebox);
-		lname = (EditText)findViewById(R.id.lnamebox);
-		password = (EditText)findViewById(R.id.lpasswordbox);
-		mnumber = (EditText)findViewById(R.id.mnumrbox);
-		lnumber = (EditText)findViewById(R.id.landlinenumber);
-		ymail = (EditText)findViewById(R.id.youremail);
-		yhno = (EditText)findViewById(R.id.yourhouseno);
-		yaddrs = (EditText)findViewById(R.id.youraddress);
-		uploadphotoBTN = (Button)findViewById(R.id.uploadphoto);
+		dname = (EditText)findViewById(R.id.et_displayname);
+		fname = (EditText)findViewById(R.id.et_firstname);
+		lname = (EditText)findViewById(R.id.et_lastname);
+		password = (EditText)findViewById(R.id.et_password);
+		mnumber = (EditText)findViewById(R.id.et_mobile);
+		lnumber = (EditText)findViewById(R.id.et_landline);
+		ymail = (EditText)findViewById(R.id.et_email);
+//		yhno = (EditText)findViewById(R.id.yourhouseno);
+		yaddrs = (EditText)findViewById(R.id.et_address);
+		uploadphotoBTN = (ImageView)findViewById(R.id.iv_photo);
 		rwaNameAutoTV = (AutoCompleteTextView) findViewById(R.id.rwaname);
 		mProgressBar = (ProgressBar)findViewById(R.id.progress);
 		//rwaNameAutoTV.setThreshold(2);
@@ -137,23 +134,18 @@ public class RegisterActivity extends Activity {
 			}
 		});
 
-		cb_erwa1 = (CheckBox)findViewById(R.id.rwa1);
-		cb_erwa2 = (CheckBox)findViewById(R.id.rwa2);
-		cb_headfamily = (CheckBox)findViewById(R.id.headfamily);
-		cb_termscondition = (CheckBox)findViewById(R.id.termscondition);
-
-		submit = (Button)findViewById(R.id.submit);
-		reset = (Button)findViewById(R.id.reset);
+		save = (Button)findViewById(R.id.btn_save);
+		revert = (Button)findViewById(R.id.btn_revert);
 
 		uploadphotoBTN.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				DialogController.selectImage(RegisterActivity.this);
+				DialogController.selectImage(EditProfileActivity.this);
 			}
 		});
 
-		submit.setOnClickListener(new View.OnClickListener() {
+		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
@@ -171,52 +163,23 @@ public class RegisterActivity extends Activity {
 					String mobilenumber = String.valueOf(mnumber.getText());
 					String landnumber = String.valueOf(lnumber.getText());
 					String youremail = String.valueOf(ymail.getText());
-					String yourhousenumber = String.valueOf(yhno.getText());
+					//String yourhousenumber = String.valueOf(yhno.getText());
 					String youraddress = String.valueOf(yaddrs.getText());
 
 					
-					int edirectorymob = 1;
-					if(cb_erwa1.isChecked() == true){
-						edirectorymob = 1;
-					}else{
-						edirectorymob = 0;
-					}
-
-					int edirectorylan = 1;
-					if(cb_erwa2.isChecked() == true){
-						edirectorylan = 1;
-					}else{
-						edirectorylan = 0;
-					}
-
-					int headfamily = 1;
-					if(cb_headfamily.isChecked() == true){
-						headfamily = 1;
-					}else{
-						headfamily = 0;
-					}
-
-					int termscon = 1;
-					if(cb_termscondition.isChecked() == true){
-						termscon = 1;
-					}else{
-						termscon = 0;
-					}
 
 					if(mSelectedText.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_rwa, Toast.LENGTH_SHORT).show();
+						Toast.makeText(EditProfileActivity.this, R.string.empaty_rwa, Toast.LENGTH_SHORT).show();
 					}else if(firstname.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_fname, Toast.LENGTH_SHORT).show();
+						Toast.makeText(EditProfileActivity.this, R.string.empaty_fname, Toast.LENGTH_SHORT).show();
 					}else if(lastname.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_lname, Toast.LENGTH_SHORT).show();
+						Toast.makeText(EditProfileActivity.this, R.string.empaty_lname, Toast.LENGTH_SHORT).show();
 					}else if(mobilenumber.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_mnumber, Toast.LENGTH_SHORT).show();
+						Toast.makeText(EditProfileActivity.this, R.string.empaty_mnumber, Toast.LENGTH_SHORT).show();
 					}else if(youremail.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_youremail, Toast.LENGTH_SHORT).show();
-					}else if(yourhousenumber.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_hnumber, Toast.LENGTH_SHORT).show();
+						Toast.makeText(EditProfileActivity.this, R.string.empaty_youremail, Toast.LENGTH_SHORT).show();
 					}else if(passw.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_password, Toast.LENGTH_SHORT).show();
+						Toast.makeText(EditProfileActivity.this, R.string.empaty_password, Toast.LENGTH_SHORT).show();
 					}else{
 
 						jObj.put("name",name);
@@ -228,14 +191,9 @@ public class RegisterActivity extends Activity {
 						jObj.put("email", youremail);
 						jObj.put("email", youremail);
 						jObj.put("profilephoto", imageUrl);
-						jObj.put("streetname", yourhousenumber);
 						jObj.put("locality", youraddress);
-						jObj.put("headoffamily", headfamily);
-						jObj.put("edirectorymobile",edirectorymob);
-						jObj.put("edirectorylandline",edirectorylan);
-						jObj.put("termandcondition",termscon);
 
-						request.setActivity(RegisterActivity.this);
+						request.setActivity(EditProfileActivity.this);
 
 						request.setJsonReq(jObj);
 
@@ -250,7 +208,24 @@ public class RegisterActivity extends Activity {
 				}
 			}
 		});
+		
+		loadProfileData();
 	}
+	
+	protected void loadProfileData() {
+		RequestBean request = new RequestBean();
+		request.setActivity(this);
+		request.setNetworkRequestName(NetworkRequestName.PROFILE);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		NameValuePair valuePair = new BasicNameValuePair("user_id", PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.USER_ID));
+		list.add(valuePair);
+		request.setNamevaluepair(list);
+		request.setCallingClassObject(this);
+		NetworkCall networkCall = new NetworkCall(request);
+		networkCall.execute("");
+	}
+	
+	
 	
 	protected void loadRwaSuggestion(final String suggestion) {
 		mProgressBar.setVisibility(View.VISIBLE);
@@ -281,11 +256,11 @@ public class RegisterActivity extends Activity {
 		if(registerdata!=null){
 			
 			if(registerdata.getError().equalsIgnoreCase("success")){
-				Toast.makeText(RegisterActivity.this, registerdata.getSuccess_msg(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(EditProfileActivity.this, registerdata.getSuccess_msg(), Toast.LENGTH_SHORT).show();
 				setResult(RESULT_OK);
 				finish();
 			}else{
-				Toast.makeText(RegisterActivity.this, registerdata.getError_msg(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(EditProfileActivity.this, registerdata.getError_msg(), Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -314,6 +289,7 @@ public class RegisterActivity extends Activity {
 					e.printStackTrace();
 				}
 				Utils.saveImage(imageUrl, thumbnail);
+				uploadphotoBTN.setImageBitmap(thumbnail);
 			} else if (requestCode == DialogController.SELECT_FILE) {
 				Uri selectedImageUri = data.getData();
 				String[] projection = { MediaColumns.DATA };
@@ -336,9 +312,14 @@ public class RegisterActivity extends Activity {
 				options.inJustDecodeBounds = false;
 				bm = BitmapFactory.decodeFile(selectedImagePath, options);
 				Utils.saveImage(imageUrl, bm);
+				uploadphotoBTN.setImageBitmap(bm);
 			}
 		}
 
+	}
+
+	public void response(ProfileData profileData) {
+		
 	}
 
 	public void response(RwaSearchData rwaSearchData) {
