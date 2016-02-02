@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" >
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:id="@+id/tv_address"
@@ -53,6 +53,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                   android:layout_marginLeft="10dp"
                     android:id="@+id/tv_contact_detail"
                     android:layout_width="0dp"
                     android:textColor="@color/white"

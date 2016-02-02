@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.spideycity"
+    package="com.android.cityspidey"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -92,6 +92,15 @@
             android:name="com.android.itemsActivity.OpinionPollActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoTitle" />
+        <activity
+            android:name="com.android.itemsActivity.OpinionPollDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+        <activity
+            android:name="com.android.itemsActivity.OpinionPollsPostAnswerResponseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoTitle" />
+        
     </application>
 
 </manifest>

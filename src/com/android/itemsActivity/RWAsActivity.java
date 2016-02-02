@@ -45,6 +45,7 @@ public class RWAsActivity extends BaseActivity implements StartActivity{
 		titleTV.setBackgroundResource(R.color.rwacolor);
 
 		mRWAsListView = (ListView)findViewById(R.id.listview_rwa);
+		
 		mRWAsListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

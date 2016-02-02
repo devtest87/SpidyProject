@@ -37,6 +37,13 @@
             android:theme="@style/Theme.NoTitle"
             android:screenOrientation="portrait"
              />
+        
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.NoTitle"
+            android:screenOrientation="portrait"
+             />
+        
         <activity
             android:name="com.android.itemsActivity.RWAsActivity"
             android:screenOrientation="portrait"
