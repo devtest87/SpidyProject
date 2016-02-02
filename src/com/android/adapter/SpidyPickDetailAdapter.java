@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.android.cityspidey.R;
 import com.androidquery.AQuery;
 import com.bean.Comments;
+import com.utils.Utils;
 
 public class SpidyPickDetailAdapter extends BaseAdapter{
 
@@ -60,7 +61,7 @@ public class SpidyPickDetailAdapter extends BaseAdapter{
 		}
 		
 		viewHolder.createrTV.setText(mCommentList.get(position).getCommentby());
-		viewHolder.dateTV.setText(mCommentList.get(position).getCommentby());
+		viewHolder.dateTV.setText(Utils.getTimeRemaining(mCommentList.get(position).getCreatedDate()));
 		viewHolder.commentTV.setText(mCommentList.get(position).getDescrption());
 //		mAQuery.id(viewHolder.createrIV).image(mCommentList.get(position).getProfilephoto());
 		mAQuery.id(viewHolder.createrIV).image(mCommentList.get(position).getProfilephoto(), true, true, 0, R.drawable.profile);

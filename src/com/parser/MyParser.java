@@ -367,6 +367,7 @@ public class MyParser
 				Comments comments = new Comments();
 				comments.setCommentby(jArrRWA.getJSONObject(i).optString("commentby"));
 				comments.setDescrption(jArrRWA.getJSONObject(i).optString("descrption"));
+				comments.setCreatedDate(jArrRWA.getJSONObject(i).optString("created_date"));
 				comments.setProfilephoto(jArrRWA.getJSONObject(i).optString("profilephoto"));
 				groupDetailDataCommentDatasList.add(comments);
 			}
@@ -677,6 +678,7 @@ public class MyParser
 				Comments comments = new Comments();
 				comments.setCommentby(jArrRWA.getJSONObject(i).optString("commentby"));
 				comments.setDescrption(jArrRWA.getJSONObject(i).optString("descrption"));
+				comments.setCreatedDate(jArrRWA.getJSONObject(i).optString("created_date"));
 				comments.setProfilephoto(jArrRWA.getJSONObject(i).optString("profilephoto"));
 				noticeBoardCommentDatasList.add(comments);
 			}
@@ -801,7 +803,7 @@ public class MyParser
 				Comments comments = new Comments();
 				comments.setCommentby(jArrRWA.getJSONObject(i).optString("commentby"));
 				comments.setDescrption(jArrRWA.getJSONObject(i).optString("descrption"));
-				comments.setCreatedDate(jArrRWA.getJSONObject(i).optString("createdDate"));
+				comments.setCreatedDate(jArrRWA.getJSONObject(i).optString("created_date"));
 				comments.setProfilephoto(jArrRWA.getJSONObject(i).optString("profilephoto"));
 				spidyPickItemsCommentDatasList.add(comments);
 			}
