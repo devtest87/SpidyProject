@@ -145,10 +145,13 @@ public class LoginActivity extends Activity {
 				startActivity(i);
 				this.finish();
 				
-    		}
+    		}else{
+        		Toast.makeText(getApplicationContext(), "" + loginData.getError_msg(), Toast.LENGTH_SHORT).
+        		show();
+        	}
     		
     	}else{
-    		Toast.makeText(getApplicationContext(), "" + loginData.getError_msg(), Toast.LENGTH_SHORT).
+    		Toast.makeText(getApplicationContext(), "There is some issue to login with these information", Toast.LENGTH_SHORT).
     		show();
     	}
     }

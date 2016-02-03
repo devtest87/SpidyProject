@@ -1,5 +1,6 @@
 package com.android.itemsActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import com.android.cityspidey.R;
 import com.bean.RequestBean;
 import com.bean.SpidyPickData;
 import com.network.NetworkCall;
+import com.utils.AppConstant;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
@@ -154,7 +156,17 @@ public class SpidyPickActivity extends BaseActivity implements StartActivity{
 	public void startActivity(String url) {
 		Intent intent = new Intent(this, SpidyPickDetailActivity.class);
 		intent.putExtra("url", url);
-		startActivity(intent);
+		startActivityForResult(intent, AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == AppConstant.REQUEST_GROUP_DETAIL_ACTIVITY_CODE && resultCode == RESULT_OK){
+			Intent intent = new Intent();
+			setResult(Activity.RESULT_OK, intent);
+			finish();
+		}
 	}
 
 }

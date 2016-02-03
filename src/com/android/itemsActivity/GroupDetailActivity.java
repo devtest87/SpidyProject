@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.adapter.SpidyPickDetailAdapter;
 import com.android.cityspidey.R;
@@ -173,20 +174,30 @@ public class GroupDetailActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				Comments comments = new Comments();
-				comments.setCommentby(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
-				comments.setDescrption(commentET.getText().toString());
-				comments.setProfilephoto(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
-				groupDetailData.getCommentList().add(comments);
-				if(spidyPickDetailAdapter != null){
-					spidyPickDetailAdapter = new SpidyPickDetailAdapter(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
-					listView.setAdapter(spidyPickDetailAdapter);
+				if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+					String comment = commentET.getText().toString();
+					if(!comment.equalsIgnoreCase("")){
+						Comments comments = new Comments();
+						comments.setCreatedDate(Utils.currentDate());
+						comments.setCommentby(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
+						comments.setDescrption(comment);
+						comments.setProfilephoto(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+						groupDetailData.getCommentList().add(comments);
+						if(spidyPickDetailAdapter != null){
+							spidyPickDetailAdapter = new SpidyPickDetailAdapter(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
+							listView.setAdapter(spidyPickDetailAdapter);
+						}else{
+							spidyPickDetailAdapter.notifyDataSetChanged();
+						}
+						listView.setSelection(groupDetailData.getCommentList().size()-1);
+						comment(comment);
+						commentET.setText("");
+					}else{
+						Toast.makeText(getApplicationContext(), "Please enter text", Toast.LENGTH_SHORT).show();
+					}
 				}else{
-					spidyPickDetailAdapter.notifyDataSetChanged();
+					DialogController.login(GroupDetailActivity.this);
 				}
-				listView.setSelection(groupDetailData.getCommentList().size()-1);
-				comment(commentET.getText().toString());
-				commentET.setText("");
 			}
 		});
 		return view;

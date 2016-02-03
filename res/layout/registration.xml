@@ -37,7 +37,7 @@
                 android:layout_marginBottom="@dimen/regbtmmargin"
                 android:layout_marginTop="@dimen/regbtmmargin" >
 
-                <AutoCompleteTextView
+                <com.customview.DelayAutoCompleteTextView
                     android:id="@+id/rwaname"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -47,7 +47,7 @@
                     android:paddingLeft="@dimen/regleftpadding"
                     android:textColor="@color/black"
                     android:textSize="@dimen/regtextsize" >
-                </AutoCompleteTextView>
+                </com.customview.DelayAutoCompleteTextView>
 
                 <ProgressBar
                     android:id="@+id/progress"
@@ -152,39 +152,6 @@
                     android:background="@drawable/custom_right_rectangle"
                     android:hint="@string/lname"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="@dimen/regleftpadding"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/regtextsize" >
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/regbtmmargin"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/custom_left_rectangle"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/regleftpadding"
-                    android:text="@string/password"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/regtextsize" />
-
-                <EditText
-                    android:id="@+id/lpasswordbox"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/regboxheight"
-                    android:layout_weight="2"
-                    android:background="@drawable/custom_right_rectangle"
-                    android:hint="@string/password"
-                    android:imeOptions="actionNext"
-                    android:inputType="textPassword"
                     android:paddingLeft="@dimen/regleftpadding"
                     android:singleLine="true"
                     android:textColor="@color/black"

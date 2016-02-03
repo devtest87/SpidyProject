@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:label="@string/app_name"
         android:name="com.utils.SpidyCityApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,11 +23,6 @@
             android:name=".LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".EditProfileActivity"
@@ -35,8 +31,13 @@
         <activity
             android:name=".HomeScreen"
             android:theme="@style/Theme.NoTitle"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait">
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         
         <activity
             android:name=".RegisterActivity"

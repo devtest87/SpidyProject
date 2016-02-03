@@ -13,7 +13,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -22,7 +21,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
@@ -33,7 +31,6 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -44,6 +41,7 @@ import com.android.adapter.RWASearchAdapter;
 import com.bean.RegisterData;
 import com.bean.RequestBean;
 import com.bean.RwaSearchData;
+import com.customview.DelayAutoCompleteTextView;
 import com.network.NetworkCall;
 import com.parser.MyParser;
 import com.utils.DialogController;
@@ -57,7 +55,6 @@ public class RegisterActivity extends Activity {
 	private EditText dname;
 	private EditText fname;
 	private EditText lname;
-	private EditText password;
 	private EditText mnumber;
 	private EditText lnumber;
 	private EditText ymail;
@@ -74,7 +71,7 @@ public class RegisterActivity extends Activity {
 	private Button submit;
 	private Button reset;
 	private Button uploadphotoBTN;
-	private AutoCompleteTextView rwaNameAutoTV;
+	private DelayAutoCompleteTextView rwaNameAutoTV;
 	private RWASearchAdapter mRwaSearchAdapter;
 	private ProgressBar mProgressBar;
 	private String mSelectedText = "";
@@ -91,14 +88,13 @@ public class RegisterActivity extends Activity {
 		dname = (EditText)findViewById(R.id.dnamebox);
 		fname = (EditText)findViewById(R.id.fnamebox);
 		lname = (EditText)findViewById(R.id.lnamebox);
-		password = (EditText)findViewById(R.id.lpasswordbox);
 		mnumber = (EditText)findViewById(R.id.mnumrbox);
 		lnumber = (EditText)findViewById(R.id.landlinenumber);
 		ymail = (EditText)findViewById(R.id.youremail);
 		yhno = (EditText)findViewById(R.id.yourhouseno);
 		yaddrs = (EditText)findViewById(R.id.youraddress);
 		uploadphotoBTN = (Button)findViewById(R.id.uploadphoto);
-		rwaNameAutoTV = (AutoCompleteTextView) findViewById(R.id.rwaname);
+		rwaNameAutoTV = (DelayAutoCompleteTextView) findViewById(R.id.rwaname);
 		mProgressBar = (ProgressBar)findViewById(R.id.progress);
 		//rwaNameAutoTV.setThreshold(2);
 		rwaNameAutoTV.addTextChangedListener(new TextWatcher() {
@@ -167,7 +163,6 @@ public class RegisterActivity extends Activity {
 					String name = String.valueOf(dname.getText());
 					String firstname = String.valueOf(fname.getText());
 					String lastname = String.valueOf(lname.getText());
-					String passw = String.valueOf(password.getText());
 					String mobilenumber = String.valueOf(mnumber.getText());
 					String landnumber = String.valueOf(lnumber.getText());
 					String youremail = String.valueOf(ymail.getText());
@@ -215,8 +210,6 @@ public class RegisterActivity extends Activity {
 						Toast.makeText(RegisterActivity.this, R.string.empaty_youremail, Toast.LENGTH_SHORT).show();
 					}else if(yourhousenumber.equalsIgnoreCase("")){
 						Toast.makeText(RegisterActivity.this, R.string.empaty_hnumber, Toast.LENGTH_SHORT).show();
-					}else if(passw.equalsIgnoreCase("")){
-						Toast.makeText(RegisterActivity.this, R.string.empaty_password, Toast.LENGTH_SHORT).show();
 					}else{
 
 						jObj.put("name",name);

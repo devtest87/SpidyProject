@@ -10,20 +10,19 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -67,6 +66,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 	protected AQuery mAQuery;
 	private LinearLayout circleroot;
 	private JSONObject voteJson = new JSONObject();
+	private int mDOtSize, margin;
 
 
 	@Override 
@@ -76,6 +76,8 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.fragment_home);
 
 		mAQuery = new AQuery(getApplicationContext());
+		mDOtSize = convertDpToPixel(8);
+		margin = convertDpToPixel(6);
 		
 		rwaBTN = (Button)findViewById(R.id.btn_rwa);
 		groupsBTN = (Button)findViewById(R.id.btn_groups);
@@ -188,7 +190,7 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		}else if(v.equals(noticeBoardBTN)){ 
 			if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
 				Intent intent = new Intent(HomeScreen.this, NoticeBoardActivity.class); 
-				startActivity(intent); 
+				startActivityForResult(intent, AppConstant.REQUEST_HOME_CODE); 
 			}else{
 				DialogController.login(HomeScreen.this);
 			}
@@ -347,8 +349,8 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 			//setting image resource
 			imageView.setBackgroundResource(R.drawable.graycircle);
 			
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(20, 20);
-			lp.setMargins(10, 0, 0, 0);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(mDOtSize, mDOtSize);
+			lp.setMargins(margin, 0, 0, 0);
 			imageView.setLayoutParams(lp);
 			
 			//adding view to layout
@@ -358,6 +360,13 @@ public class HomeScreen extends BaseActivity implements OnClickListener {
 		changecolor(0);
 			
 	}
+	
+	private int convertDpToPixel(float dp){
+	    Resources resources = getResources();
+	    DisplayMetrics metrics = resources.getDisplayMetrics();
+	    float px = dp * (metrics.densityDpi / 160f);
+	    return (int) px;
+	} 
 
 	
 	public void changecolor(int current){

@@ -13,7 +13,10 @@ import com.android.itemsActivity.DirectoryActivity;
 import com.android.itemsActivity.GroupDetailActivity;
 import com.android.itemsActivity.GroupsActivity;
 import com.android.itemsActivity.NoticeBoardActivity;
+import com.android.itemsActivity.NoticeBoardDetailActivity;
 import com.android.itemsActivity.OpinionPollActivity;
+import com.android.itemsActivity.SpidyPickActivity;
+import com.android.itemsActivity.SpidyPickDetailActivity;
 
 public class DialogController {
 
@@ -57,6 +60,9 @@ public class DialogController {
 				dialog.dismiss();
 				if(activity instanceof GroupsActivity || activity instanceof GroupDetailActivity ||
 						activity instanceof NoticeBoardActivity ||
+						activity instanceof NoticeBoardDetailActivity ||
+						activity instanceof SpidyPickDetailActivity ||
+						activity instanceof SpidyPickActivity ||
 						activity instanceof DirectoryActivity ||
 						activity instanceof BookingActivity ||
 						activity instanceof OpinionPollActivity){
@@ -70,7 +76,7 @@ public class DialogController {
 				}
 			}
 		});
-		builder.setNegativeButton("NO", new OnClickListener() {
+		builder.setNegativeButton("CANCEL", new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

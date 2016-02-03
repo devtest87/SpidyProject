@@ -7,12 +7,14 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.adapter.SpidyPickDetailAdapter;
 import com.android.cityspidey.R;
@@ -21,6 +23,7 @@ import com.bean.Comments;
 import com.bean.RequestBean;
 import com.bean.SpidyPickDetailData;
 import com.network.NetworkCall;
+import com.utils.DialogController;
 import com.utils.NetworkRequestName;
 import com.utils.PreferenceHelper;
 import com.utils.PreferenceHelper.PreferenceKey;
@@ -135,20 +138,30 @@ public class SpidyPickDetailActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				Comments comments = new Comments();
-				comments.setCommentby(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
-				comments.setDescrption(commentET.getText().toString());
-				comments.setProfilephoto(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
-				spidyPickDetailData.getCommentList().add(comments);
-				if(spidyPickDetailAdapter != null){
-					spidyPickDetailAdapter = new SpidyPickDetailAdapter(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
-					listView.setAdapter(spidyPickDetailAdapter);
+				if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
+					String comment = commentET.getText().toString();
+					if(!comment.equalsIgnoreCase("")){
+						Comments comments = new Comments();
+						comments.setCreatedDate(Utils.currentDate());
+						comments.setCommentby(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.NAME));
+						comments.setDescrption(comment);
+						comments.setProfilephoto(PreferenceHelper.getSingleInstance(getApplicationContext()).getString(PreferenceKey.PHOTO));
+						spidyPickDetailData.getCommentList().add(comments);
+						if(spidyPickDetailAdapter != null){
+							spidyPickDetailAdapter = new SpidyPickDetailAdapter(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
+							listView.setAdapter(spidyPickDetailAdapter);
+						}else{
+							spidyPickDetailAdapter.notifyDataSetChanged();
+						}
+						listView.setSelection(spidyPickDetailData.getCommentList().size()-1);
+						comment(comment);
+						commentET.setText("");
+					}else{
+						Toast.makeText(getApplicationContext(), "Please enter text", Toast.LENGTH_SHORT).show();
+					}
 				}else{
-					spidyPickDetailAdapter.notifyDataSetChanged();
+					DialogController.login(SpidyPickDetailActivity.this);
 				}
-				listView.setSelection(spidyPickDetailData.getCommentList().size()-1);
-				comment(commentET.getText().toString());
-				commentET.setText("");
 			}
 		});
 		return view;
@@ -170,8 +183,8 @@ public class SpidyPickDetailActivity extends BaseActivity{
 		noticeBoardByLine.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getByline());
 		tag.setText("TAGS: " + spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTags());
 		noticeBoardTitle.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getTitle());
-		noticeBoardDesc.setText(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getDesc());
-		noticeBoardPostDate.setText(Utils.getTimeRemaining(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getReleaseYear()));
+		noticeBoardDesc.setText(Html.fromHtml(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getDesc()));
+		noticeBoardPostDate.setText("Posted: " + Utils.getTimeRemaining(spidyPickDetailData.getSpidyPickDetailItemsDataList().get(0).getReleaseYear()));
 		return view;
 	}
 	

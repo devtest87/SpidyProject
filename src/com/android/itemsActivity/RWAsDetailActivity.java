@@ -47,7 +47,8 @@ public class RWAsDetailActivity extends BaseActivity{
 
 		TextView titleTV = (TextView)findViewById(R.id.tv_title);
 		//		titleTV.setText(getResources().getString(R.string.rwas));
-		titleTV.setText("RWA");
+		titleTV.setText(getResources().getString(R.string.rwas));
+		titleTV.setTextColor(getResources().getColor(R.color.black));
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_rwas_hint));
 		titleTV.setTextColor(getResources().getColor(R.color.black));
