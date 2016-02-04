@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -154,7 +155,7 @@ public class RWAsDetailActivity extends BaseActivity{
 
 				mAQuery.id(rwaIV).image(rwaDetailData.getRwAsDetailItemData().getImage());
 				addressTitleTV.setText(rwaDetailData.getRwAsDetailItemData().getTitle());
-				descTV.setText(rwaDetailData.getRwAsDetailItemData().getDesc());
+				descTV.setText(Html.fromHtml(rwaDetailData.getRwAsDetailItemData().getDesc()));
 				addressTV.setText(rwaDetailData.getRwAsDetailItemData().getAddress());
 				if(rwaDetailData.getRwAsDetailItemData().getCdetails() != null){
 					JSONObject jobjLabel = rwaDetailData.getRwAsDetailItemData().getCdetailslabel();

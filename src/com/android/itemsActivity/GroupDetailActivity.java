@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.content.CursorLoader;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -143,13 +144,11 @@ public class GroupDetailActivity extends BaseActivity{
 			this.groupDetailData = groupDetailData;
 			View headerView = getHeaderView();
 			View footerView = getFooterView();
-			if(groupDetailData.getCommentList().size() > 0){
-				spidyPickDetailAdapter = new SpidyPickDetailAdapter
-						(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
-				listView.setAdapter(spidyPickDetailAdapter);
-			}
 			listView.addHeaderView(headerView);
 			listView.addFooterView(footerView);
+			spidyPickDetailAdapter = new SpidyPickDetailAdapter
+					(getLayoutInflater(), groupDetailData.getCommentList(), mAQuery);
+			listView.setAdapter(spidyPickDetailAdapter);
 		}
 	}
 	
@@ -217,7 +216,7 @@ public class GroupDetailActivity extends BaseActivity{
 		tv_members.setText("Members: " + groupDetailData.getGroupDetailItemsDataList().get(0).getMembers());
 		createdDAteTV.setText("Created: " + Utils.getTimeRemaining(groupDetailData.getGroupDetailItemsDataList().get(0).getCreatedDate()));
 		groupAdminTV.setText("Group Admin: " + groupDetailData.getGroupDetailItemsDataList().get(0).getCreatedby());
-		descTV.setText(groupDetailData.getGroupDetailItemsDataList().get(0).getDesc());
+		descTV.setText(Html.fromHtml(groupDetailData.getGroupDetailItemsDataList().get(0).getDesc()));
 		joinGroup.setOnClickListener(new OnClickListener() {
 			
 			@Override

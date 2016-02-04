@@ -22,6 +22,8 @@
 
             <ImageView
                 android:id="@+id/iv_opinion"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="250dp" >
             </ImageView>
@@ -29,6 +31,7 @@
             <TextView
                 android:id="@+id/tv_opiniontitle"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="sasasasas"
@@ -37,6 +40,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_vote_options"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -45,6 +49,7 @@
             <TextView
                 android:id="@+id/tv_postandenddate"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/rwa_description_test_size"

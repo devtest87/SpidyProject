@@ -108,15 +108,10 @@ public class SpidyPickDetailActivity extends BaseActivity{
 			this.spidyPickDetailData = spidyPickDetailData;
 			View headerView = getHeaderView();
 			View footerView = getFooterView();
-			if(spidyPickDetailData.getCommentList().size() > 0){
-				spidyPickDetailAdapter = new SpidyPickDetailAdapter
-						(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
-				//			listView.setAdapter(spidyPickDetailAdapter);
-			}
 			listView.addHeaderView(headerView);
 			listView.addFooterView(footerView);
-
-
+				spidyPickDetailAdapter = new SpidyPickDetailAdapter
+						(getLayoutInflater(), spidyPickDetailData.getCommentList(), mAQuery);
 			listView.setAdapter(spidyPickDetailAdapter);
 		}
 	}

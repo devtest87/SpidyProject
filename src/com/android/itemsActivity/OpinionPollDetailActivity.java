@@ -106,7 +106,7 @@ public class OpinionPollDetailActivity extends BaseActivity{
 				mAQuery.id(opinionPollIV).image(getIntent().getStringExtra("image"));
 				titleTV.setText(opinionPollsDetailsData.getTitle());
 				postandendDateTV.setText("Posted " + Utils.getTimeRemaining(getIntent().getStringExtra("postdate"))+
-						"/Voting ends\n " + Utils.formatDate(getIntent().getStringExtra("enddate")));
+						"/\nVoting ends " + Utils.formatDate(getIntent().getStringExtra("enddate")));
 				int size = opinionPollsDetailsData.getOpinionPollsDetailItemsDataList().size();
 				int rowCount  = size / 3;
 				int reminder = size % 3;

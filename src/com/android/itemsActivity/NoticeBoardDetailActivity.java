@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -40,7 +41,7 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 		EditText searchET = (EditText)findViewById(R.id.et_search);
 		searchET.setHint(getResources().getString(R.string.search_noticeboard_hint));
 		titleTV.setText(getResources().getString(R.string.notice_board));
-		titleTV.setTextColor(getResources().getColor(R.color.black));
+		titleTV.setTextColor(getResources().getColor(R.color.white));
 		titleTV.setBackgroundResource(R.color.noticecolor);
 		
 		if(PreferenceHelper.getSingleInstance(getApplicationContext()).getBoolean(PreferenceKey.IS_LOGIN)){
@@ -105,13 +106,11 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 			this.noticeBoardDetailData = noticeBoardDetailData;
 			View headerView = getHeaderView();
 			View footerView = getFooterView();
-			if(noticeBoardDetailData.getCommentList().size() > 0){
-				spidyPickDetailAdapter = new SpidyPickDetailAdapter
-						(getLayoutInflater(), noticeBoardDetailData.getCommentList(), mAQuery);
-				listView.setAdapter(spidyPickDetailAdapter);
-			}
 			listView.addHeaderView(headerView);
 			listView.addFooterView(footerView);
+			spidyPickDetailAdapter = new SpidyPickDetailAdapter
+					(getLayoutInflater(), noticeBoardDetailData.getCommentList(), mAQuery);
+			listView.setAdapter(spidyPickDetailAdapter);
 		}
 
 	}
@@ -179,7 +178,7 @@ public class NoticeBoardDetailActivity extends BaseActivity{
 				mAQuery.id(noticeBoardIV).image(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getImage());
 				mAQuery.id(noticeBoardIcon).image(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getIcon());
 				noticeBoardTitle.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getTitle());
-				noticeBoardDesc.setText(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getDesc());
+				noticeBoardDesc.setText(Html.fromHtml(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getDesc()));
 				noticeBoardPostDate.setText("Posted: " + Utils.getTimeRemaining(noticeBoardDetailData.getNoticeBoardDetailItemsData().get(0).getReleaseYear()));		
 			}
 		}
